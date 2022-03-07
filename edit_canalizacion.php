@@ -190,19 +190,19 @@ if (isset($_POST['edit_canalizacion'])) {
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="edad">Edad</label>
-                            <input type="number" min="1" class="form-control" name="edad" placeholder="Edad" value="<?php echo remove_junk($e_detalle['edad']); ?>">
+                            <input type="number" min="1" max="120" class="form-control" name="edad" placeholder="Edad" value="<?php echo remove_junk($e_detalle['edad']); ?>">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="tel">Teléfono</label>
-                            <input type="text" class="form-control" name="tel" placeholder="Teléfono" value="<?php echo remove_junk($e_detalle['telefono']); ?>">
+                            <input type="text" class="form-control" maxlength="10" name="tel" placeholder="Teléfono" value="<?php echo remove_junk($e_detalle['telefono']); ?>">
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="ext">Ext</label>
-                            <input type="text" class="form-control" name="ext" placeholder="Extensión" value="<?php echo remove_junk($e_detalle['extension']); ?>">
+                            <input type="text" class="form-control" maxlength="3" name="ext" placeholder="Extensión" value="<?php echo remove_junk($e_detalle['extension']); ?>">
                         </div>
                     </div>
                 </div>
@@ -231,7 +231,7 @@ if (isset($_POST['edit_canalizacion'])) {
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="cpostal">Código Postal</label>
-                            <input type="text" class="form-control" name="cpostal" placeholder="Código Postal" value="<?php echo remove_junk($e_detalle['codigo_postal']); ?>">
+                            <input type="text" class="form-control" maxlength="5" name="cpostal" placeholder="Código Postal" value="<?php echo remove_junk($e_detalle['codigo_postal']); ?>">
                         </div>
                     </div>
                 </div>

@@ -143,7 +143,7 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="no_asistentes">No. de asistentes</label>
-                            <input type="number" min="1" class="form-control" name="no_asistentes" required>
+                            <input type="number" min="1" class="form-control" max="1000" name="no_asistentes" required>
                         </div>
                     </div>
                     <div class="col-md-2">

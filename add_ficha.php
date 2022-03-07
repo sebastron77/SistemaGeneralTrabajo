@@ -356,7 +356,7 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-1">
                         <div class="form-group">
                             <label for="edad">Edad</label>
-                            <input type="number" class="form-control" min="1" name="edad" required>
+                            <input type="number" class="form-control" min="1" max="120" name="edad" required>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -365,7 +365,7 @@ include_once('layouts/header.php'); ?>
                             <input type="date" class="form-control" name="fecha_nacimiento" required>
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="sexo">Sexo</label>
                             <select class="form-control" name="sexo">
@@ -394,7 +394,7 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="tutor">Nombre de tutor</label>
                             <input type="text" class="form-control" placeholder="Nombre Completo" name="tutor">
@@ -414,22 +414,24 @@ include_once('layouts/header.php'); ?>
                             <input type="date" class="form-control" name="fecha_intervencion" required>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="hora_lugar">Hora y lugar de Intervención</label>
                             <input type="text" class="form-control" name="hora_lugar">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="actividad_realizada">Actividad realizada</label>
                             <input type="text" class="form-control" name="actividad_realizada">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="observaciones">Observaciones Generales</label>
-                            <textarea type="text" class="form-control" name="observaciones" cols="30" rows="2"></textarea>
+                            <textarea type="text" class="form-control" name="observaciones" cols="50" rows="2"></textarea>
                         </div>
                     </div>
                 </div>

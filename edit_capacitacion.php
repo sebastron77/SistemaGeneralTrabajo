@@ -111,7 +111,7 @@ if (isset($_POST['edit_capacitacion'])) {
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="no_asistentes">No. de asistentes</label>
-                            <input type="number" min="1" class="form-control" name="no_asistentes" value="<?php echo remove_junk($e_detalle['no_asistentes']); ?>">
+                            <input type="number" min="1" max="1000" class="form-control" name="no_asistentes" value="<?php echo remove_junk($e_detalle['no_asistentes']); ?>">
                         </div>
                     </div>
                     <div class="col-md-2">

@@ -334,7 +334,7 @@ if (isset($_POST['edit_ficha'])) {
                     <div class="col-md-1">
                         <div class="form-group">
                             <label for="edad">Edad</label>
-                            <input type="number" class="form-control" min="1" name="edad" value="<?php echo remove_junk($e_ficha['edad']); ?>" required>
+                            <input type="number" class="form-control" min="1" max="120" name="edad" value="<?php echo remove_junk($e_ficha['edad']); ?>" required>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -343,7 +343,7 @@ if (isset($_POST['edit_ficha'])) {
                             <input type="date" class="form-control" name="fecha_nacimiento" value="<?php echo remove_junk($e_ficha['fecha_nacimiento']); ?>" required>
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="sexo">Sexo</label>
                             <select class="form-control" name="sexo">
@@ -372,7 +372,7 @@ if (isset($_POST['edit_ficha'])) {
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="tutor">Nombre de tutor</label>
                             <input type="text" class="form-control" value="<?php echo remove_junk($e_ficha['tutor']); ?>" name="tutor">

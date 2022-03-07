@@ -230,24 +230,24 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="edad">Edad</label>
-                            <input type="number" min="1" class="form-control" name="edad" placeholder="Edad" required>
+                            <input type="number" min="1" max="120" class="form-control" name="edad" placeholder="Edad" required>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="tel">Teléfono</label>
-                            <input type="text" class="form-control" name="tel" placeholder="Teléfono" required>
+                            <input type="text" maxlength="10" class="form-control" name="tel" placeholder="Teléfono" required>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="ext">Ext</label>
-                            <input type="text" class="form-control" name="ext" placeholder="Extensión" required>
+                            <input type="text" maxlength="3" class="form-control" name="ext" placeholder="Extensión" required>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="sexo">Sexo</label>
                             <select class="form-control" name="sexo">
@@ -268,10 +268,10 @@ include_once('layouts/header.php'); ?>
                             <input type="text" class="form-control" name="colonia" placeholder="Colonia" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="cpostal">Código Postal</label>
-                            <input type="text" class="form-control" name="cpostal" placeholder="Código Postal" required>
+                            <input type="text" maxlength="5" class="form-control" name="cpostal" placeholder="Código Postal" required>
                         </div>
                     </div>
                 </div>
