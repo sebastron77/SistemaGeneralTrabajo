@@ -1,0 +1,100 @@
+<?php
+$page_title = 'Datos trabajadores';
+require_once('includes/load.php');
+?>
+<?php
+page_require_level(2);
+$all_detalles = find_all_trabajadores();
+//$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
+$user = current_user();
+$nivel = $user['user_level'];
+?>
+<?php include_once('layouts/header.php'); ?>
+
+<div class="row">
+  <div class="col-md-12">
+    <?php echo display_msg($msg); ?>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <strong>
+          <span class="glyphicon glyphicon-th"></span>
+          <span>Lista de Trabajadores de la CEDH</span>
+        </strong>
+        <a href="add_detalle_usuario.php" class="btn btn-info pull-right">Agregar trabajador</a>
+      </div>
+
+      <div class="panel-body">
+        <table class="datatable table table-bordered table-striped">
+          <thead>
+            <tr style="height: 10px;" class="info">
+              <th style="width: 5%;">ID Trabajador</th>
+              <!--SE PUEDE AGREGAR UN LINK QUE TE LLEVE A EDITAR EL USUARIO, COMO EN EL PANEL DE CONTROL EN ULTIMAS ASIGNACIONES-->
+              <th style="width: 10%;">Nombre(s)</th>
+              <th style="width: 11%;">Apellidos</th>
+              <!-- <th>Sexo</th>
+              <th>CURP</th>
+              <th>RFC</th> -->
+              <th style="width: 15%;">Correo</th>
+              <th style="width: 5%;">Tel. casa</th>
+              <th style="width: 5%;">Celular</th>
+              <th style="width: 17%;">Área y Cargo</th>
+              <th style="width: 3%;">Estatus</th>
+              <th style="width: 12%;" class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($all_detalles as $a_detalle) : ?>
+              <tr>
+                <td><?php echo remove_junk(ucwords($a_detalle['detalleID'])) ?></td>
+                <td><?php echo remove_junk(ucwords($a_detalle['nombre'])) ?></td>
+                <td><?php echo remove_junk(ucwords($a_detalle['apellidos'])) ?></td>
+                <!-- <td><?php echo remove_junk(ucwords($a_detalle['sexo'])) ?></td>
+                <td><?php echo remove_junk(ucwords($a_detalle['curp'])) ?></td>
+                <td><?php echo remove_junk(ucwords($a_detalle['rfc'])) ?></td> -->
+                <td><?php echo remove_junk($a_detalle['correo']) ?></td>
+                <td><?php echo remove_junk(ucwords($a_detalle['telefono_casa'])) ?></td>
+                <td><?php echo remove_junk(ucwords($a_detalle['telefono_celular'])) ?></td>
+                <td><?php echo remove_junk(ucwords($a_detalle['nombre_cargo'])) ?> - <?php echo remove_junk(ucwords($a_detalle['nombre_area'])) ?></td>
+                <td class="text-center">
+                  <?php if ($a_detalle['estatus_detalle'] === '1') : ?>
+                    <span class="label label-success"><?php echo "Activo"; ?></span>
+                  <?php else : ?>
+                    <span class="label label-danger"><?php echo "Inactivo"; ?></span>
+                  <?php endif; ?>
+                </td>
+                <td class="text-center">
+                  <div class="btn-group">
+                    <a href="ver_info_detalle.php?id=<?php echo (int)$a_detalle['detalleID']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
+                      <i class="glyphicon glyphicon-eye-open"></i>
+                    </a>
+                    <?php if ($nivel == 1) : ?>                      
+                      <?php if ($a_detalle['estatus_detalle'] == 0) : ?>
+                        <a href="activate_detalle_usuario.php?id=<?php echo (int)$a_detalle['detalleID']; ?>" class="btn btn-success btn-md" title="Activar" data-toggle="tooltip">
+                          <span class="glyphicon glyphicon-ok"></span>
+                        </a>
+                      <?php else : ?>
+                        <a href="inactivate_detalle_usuario.php?id=<?php echo (int)$a_detalle['detalleID']; ?>" class="btn btn-danger btn-md" title="Inactivar" data-toggle="tooltip">
+                          <span class="glyphicon glyphicon-ban-circle"></span>
+                        </a>
+                      <?php endif; ?>
+                      <a href="delete_detalle_usuario.php?id=<?php echo (int)$a_detalle['detalleID']; ?>" class="btn btn-delete btn-md" title="Eliminar" data-toggle="tooltip" onclick="return confirm('¿Seguro que deseas eliminar este trabajador? También se eliminarán su usuario, asignaciones y resguardos.');">
+                        <span class="glyphicon glyphicon-trash"></span>
+                      </a>
+                    <?php endif; ?>
+                  </div>
+                </td>
+              </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php include_once('layouts/footer.php'); ?>
