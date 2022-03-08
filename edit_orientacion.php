@@ -64,10 +64,10 @@ if (isset($_POST['edit_orientacion'])) {
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
             $session->msg('s', "Información Actualizada ");
-            redirect('edit_orientacion.php?id=' . (int)$e_detalle['id'], false);
+            redirect('orientaciones.php', false);
         } else {
             $session->msg('d', ' Lo siento no se actualizaron los datos.');
-            redirect('edit_orientacion.php?id=' . (int)$e_detalle['id'], false);
+            redirect('orientaciones.php', false);
         }
     } else {
         $session->msg("d", $errors);

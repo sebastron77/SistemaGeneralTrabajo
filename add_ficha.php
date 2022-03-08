@@ -348,7 +348,33 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="parentesco">Parentesco</label>
-                            <input type="text" class="form-control" name="parentesco" placeholder="En caso de ser distinto a quien presenta queja">
+                            <!-- <input type="text" class="form-control" name="parentesco" placeholder="En caso de ser distinto a quien presenta queja"> -->
+                            <select class="form-control" name="parentesco">
+                                <option value="">Elige una opción</option>
+                                <option value="Hijo(a)">Hijo(a)</option>
+                                <option value="Padre">Padre</option>
+                                <option value="Madre">Madre</option>
+                                <option value="Abuelo(a)">Abuelo(a)</option>
+                                <option value="Nieto(a)">Nieto(a)</option>
+                                <option value="Hermano(a)">Hermano(a)</option>
+                                <option value="Bisabuelo(a)">Bisabuelo(a)</option>
+                                <option value="Bisnieto(a)">Bisnieto(a)</option>
+                                <option value="Tío(a)">Tío(a)</option>
+                                <option value="Sobrino(a)">Sobrino(a)</option>
+                                <option value="Tatarabuelo(a)">Tatarabuelo(a)</option>
+                                <option value="Tataranieto(a)">Tataranieto(a)</option>
+                                <option value="Primo(a)">Primo(a)</option>
+                                <option value="Suegro(a)">Suegro(a)</option>
+                                <option value="Yerno">Yerno</option>
+                                <option value="Nuera">Nuera</option>
+                                <option value="Abuelo(a) del cónyugue">Abuelo(a) del cónyugue</option>
+                                <option value="Hermano(a) del cónyugue">Hermano(a) del cónyugue</option>
+                                <option value="Sobrino(a) del cónyugue">Sobrino del cónyugue</option>
+                                <option value="Tío(a) del cónyugue">Tío del cónyugue</option>
+                                <option value="Bisabuelo(a) del cónyugue">Bisabuelo del cónyugue</option>
+                                <option value="Primo(a) del cónyugue">Primo(a) del cónyugue</option>
+                                <option value="Tatarabuelo(a) del cónyugue">tatarabuelo(a) del cónyugue</option>
+                            </select>
                         </div>
                     </div>
                 </div>

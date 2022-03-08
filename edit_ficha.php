@@ -45,10 +45,10 @@ if (isset($_POST['edit_ficha'])) {
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
             $session->msg('s', "Información Actualizada ");
-            redirect('edit_ficha.php?id=' . (int)$e_ficha['id'], false);
+            redirect('fichas.php', false);
         } else {
             $session->msg('d', ' Lo siento no se actualizaron los datos.');
-            redirect('edit_ficha.php?id=' . (int)$e_ficha['id'], false);
+            redirect('edit_fichas', false);
         }
     } else {
         $session->msg("d", $errors);
@@ -326,7 +326,32 @@ if (isset($_POST['edit_ficha'])) {
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="parentesco">Parentesco</label>
-                            <input type="text" class="form-control" name="parentesco" value="<?php echo remove_junk($e_ficha['parentesco']); ?>">
+                            <select class="form-control" name="parentesco">
+                                <option value="">Elige una opción</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Hijo(a)') echo 'selected="selected"'; ?> value="Hijo(a)">Hijo(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Padre') echo 'selected="selected"'; ?> value="Padre">Padre</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Madre') echo 'selected="selected"'; ?> value="Madre">Madre</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Abuelo(a)') echo 'selected="selected"'; ?> value="Abuelo(a)">Abuelo(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Nieto(a)') echo 'selected="selected"'; ?> value="Nieto(a)">Nieto(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Hermano(a)') echo 'selected="selected"'; ?> value="Hermano(a)">Hermano(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Bisabuelo(a)') echo 'selected="selected"'; ?> value="Bisabuelo(a)">Bisabuelo(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Bisnieto(a)') echo 'selected="selected"'; ?> value="Bisnieto(a)">Bisnieto(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Tío(a)') echo 'selected="selected"'; ?> value="Tío(a)">Tío(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Sobrino(a)') echo 'selected="selected"'; ?> value="Sobrino(a)">Sobrino(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Tatarabuelo(a)') echo 'selected="selected"'; ?> value="Tatarabuelo(a)">Tatarabuelo(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Tataranieto(a)') echo 'selected="selected"'; ?> value="Tataranieto(a)">Tataranieto(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Primo(a)') echo 'selected="selected"'; ?> value="Primo(a)">Primo(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Suegro(a)') echo 'selected="selected"'; ?> value="Suegro(a)">Suegro(a)</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Yerno') echo 'selected="selected"'; ?> value="Yerno">Yerno</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Nuera') echo 'selected="selected"'; ?> value="Nuera">Nuera</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Abuelo(a) del cónyugue') echo 'selected="selected"'; ?> value="Abuelo(a) del cónyugue">Abuelo(a) del cónyugue</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Hermano(a) del cónyugue') echo 'selected="selected"'; ?> value="Hermano(a) del cónyugue">Hermano(a) del cónyugue</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Sobrino(a) del cónyugue') echo 'selected="selected"'; ?> value="Sobrino(a) del cónyugue">Sobrino del cónyugue</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Tío(a) del cónyugue') echo 'selected="selected"'; ?> value="Tío(a) del cónyugue">Tío del cónyugue</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Bisabuelo(a) del cónyugue') echo 'selected="selected"'; ?> value="Bisabuelo(a) del cónyugue">Bisabuelo del cónyugue</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Primo(a) del cónyugue') echo 'selected="selected"'; ?> value="Primo(a) del cónyugue">Primo(a) del cónyugue</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Tatarabuelo(a) del cónyugue') echo 'selected="selected"'; ?> value="Tatarabuelo(a) del cónyugue">tatarabuelo(a) del cónyugue</option>
+                            </select>
                         </div>
                     </div>
                 </div>

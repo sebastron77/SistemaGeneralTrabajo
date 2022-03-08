@@ -61,10 +61,10 @@ if (isset($_POST['edit_canalizacion'])) {
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
             $session->msg('s', "Información Actualizada");
-            redirect('edit_canalizacion.php?id=' . (int)$e_detalle['id'], false);
+            redirect('canalizaciones.php', false);
         } else {
             $session->msg('d', 'Lo siento no se actualizaron los datos.');
-            redirect('edit_canalizacion.php?id=' . (int)$e_detalle['id'], false);
+            redirect('canalizaciones.php', false);
         }
     } else {
         $session->msg("d", $errors);
