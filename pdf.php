@@ -1,6 +1,6 @@
 <?php
 include("includes/config.php");
-$page_title = 'Resguardo';
+$page_title = 'Constancia';
 require_once('includes/load.php');
 require_once('dompdf/autoload.inc.php');
 

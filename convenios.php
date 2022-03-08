@@ -48,7 +48,7 @@ $nivel = $user['user_level'];
                                 <td><?php echo remove_junk(ucwords(($a_convenio['fecha_convenio']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_convenio['vigencia']))) ?></td>
                                 <td><?php echo remove_junk((ucwords($a_convenio['institucion']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(utf8_decode($a_convenio['descripcion_convenio']))) ?></td>
+                                <td><?php echo remove_junk(ucwords(($a_convenio['descripcion_convenio']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_convenio['direccion_institucion']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_convenio['telefono']))) ?></td>                                
                                 <td class="text-center">

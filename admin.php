@@ -2,7 +2,7 @@
 $page_title = 'Admin - Página de Inicio';
 require_once('includes/load.php');
 
-page_require_level(1);
+page_require_level(2);
 ?>
 <?php
 $c_user = count_by_id('users');

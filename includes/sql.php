@@ -1903,7 +1903,7 @@ function  monthlyresguardos($year)
 /*----------------------------------------------*/
 function find_all_orientaciones()
 {
-  global $db;  
+  global $db;
   $sql = "SELECT o.id as idor,o.folio,o.correo_electronico,o.nombre_completo,o.nivel_estudios,o.ocupacion,o.edad,o.telefono,o.extension,o.sexo,o.calle_numero,
   o.colonia,o.codigo_postal,o.municipio_localidad,o.entidad,o.nacionalidad,o.tipo_solicitud,o.medio_presentacion,o.observaciones,o.adjunto,
   o.id_creador,u.id,u.id_detalle_user,d.nombre,d.apellidos";
@@ -1919,7 +1919,7 @@ function find_all_orientaciones()
 /*----------------------------------------------*/
 function find_all_canalizaciones()
 {
-  global $db;  
+  global $db;
   $sql = "SELECT o.id as idcan,o.folio,o.correo_electronico,o.nombre_completo,o.nivel_estudios,o.ocupacion,o.edad,o.telefono,o.extension,o.sexo,o.calle_numero,
   o.colonia,o.codigo_postal,o.municipio_localidad,o.entidad,o.nacionalidad,o.tipo_solicitud,o.medio_presentacion,o.observaciones,o.adjunto,
   o.id_creador,u.id,u.id_detalle_user,d.nombre,d.apellidos";
@@ -2005,7 +2005,8 @@ function find_by_id_convenio($id)
 /*------------------------------------------------------------------------------------------------*/
 /* Funcion que encuentra una orientación por id para mostrar todos los detalles de la orientacion */
 /*------------------------------------------------------------------------------------------------*/
-function find_orientacion($id){
+function find_orientacion($id)
+{
   global $db;
   $id = (int)$id;
   $sql = "SELECT o.folio,o.correo_electronico,o.nombre_completo,o.nivel_estudios,o.ocupacion,o.edad,o.telefono,o.extension,o.sexo,o.calle_numero,
@@ -2066,4 +2067,40 @@ function last_id_folios()
   $sql = "SELECT * FROM folios ORDER BY id DESC LIMIT 1";
   $result = find_by_sql($sql);
   return $result;
+}
+
+/* --------------------------------------------------------------------*/
+/* Función para obtener el area a la que pertenece el usuario logueado */
+/* --------------------------------------------------------------------*/
+function area_usuario($id_usuario)
+{
+  global $db;
+  $id_usuario = (int)$id_usuario;
+
+  $sql = $db->query("SELECT a.id FROM users u LEFT JOIN detalles_usuario d ON u.id_detalle_user = d.id LEFT JOIN cargos c ON c.id = d.id_cargo LEFT JOIN area a ON a.id = c.id_area WHERE u.id = '{$db->escape($id_usuario)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+/*----------------------------------------------------------------------*/
+/* Funcion para checar cual nivel de usuario tiene acceso a cada pagina */
+/*----------------------------------------------------------------------*/
+function page_require_area($require_area)
+{
+  global $session;
+  $current_user = current_user();
+  // $id_user = $current_user['id'];
+  $area = area_usuario($current_user['id']);
+  $id_area = $area['id'];
+
+  // Le puse || $id_area==2, para que los que son de sistemas
+  // si puedan ver todos los módulos
+  if (($id_area == $require_area) || ($id_area==2)) {
+    return true;
+  } else {
+    $session->msg("d", "¡Lo siento! tu área no tiene permiso para ver esta página.");
+    redirect('home.php', false);
+  }
 }

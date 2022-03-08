@@ -7,6 +7,7 @@ page_require_level(2);
 $all_fichas = find_all_fichas();
 $user = current_user();
 $nivel = $user['user_level'];
+page_require_area(4);
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -38,10 +39,8 @@ $nivel = $user['user_level'];
                             <th style="width: 5%;">Autoridad</th>
                             <th style="width: 5%;">Presenta</th>
                             <th style="width: 3%;">Grupo Vulnerable</th>
-                            <th style="width: 3%;">Contacto</th>
                             <th style="width: 3%;">Fecha Intervención</th>
                             <th style="width: 3%;">Hora y Lugar</th>
-                            <th style="width: 3%;">Observaciones</th>
                             <th style="width: 5%;" class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -55,10 +54,8 @@ $nivel = $user['user_level'];
                                 <td><?php echo remove_junk(ucwords(($a_ficha['autoridad']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_ficha['quien_presenta']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_ficha['grupo_vulnerable']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_ficha['contacto']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_ficha['fecha_intervencion']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_ficha['hora_lugar']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_ficha['observaciones']))) ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="ver_info_ficha.php?id=<?php echo (int)$a_ficha['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
