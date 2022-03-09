@@ -31,8 +31,8 @@ $nivel = $user['user_level'];
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 10%;">Tipo</th>
-                            <th style="width: 5%;">No. expediente</th>
+                            <th style="width: 3%;">Tipo</th>
+                            <th style="width: 3%;">No. expediente</th>
                             <th style="width: 5%;">Solicitante</th>
                             <th style="width: 1%;">Visitaduria</th>
                             <th style="width: 5%;">Hechos</th>
