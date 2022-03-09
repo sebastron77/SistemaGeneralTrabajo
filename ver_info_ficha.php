@@ -49,8 +49,8 @@ $nivel = $user['user_level'];
                             <td><?php echo remove_junk(ucwords($a_ficha['tipo_solicitud'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_ficha['num_expediente'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_ficha['solicitante'])) ?></td>
-                            <td><?php echo remove_junk(ucwords(($a_ficha['hechos']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['visitaduria']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['hechos']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['autoridad']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['quien_presenta']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['nombre_usuario']))) ?></td>

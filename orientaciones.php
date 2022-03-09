@@ -61,7 +61,7 @@ $nivel = $user['user_level'];
                                     $resultado = str_replace("/", "-", $folio_editar);
                                 ?>
                                 <td><?php echo remove_junk(ucwords($a_orientacion['medio_presentacion'])) ?></td>
-                                <td><a target="_blank" href="uploads/orientacioncanalizacion/orientacion/<?php echo $resultado . '/' . $a_orientacion['adjunto']; ?>"><?php echo $a_orientacion['adjunto']; ?></a></td>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/orientacioncanalizacion/orientacion/<?php echo $resultado . '/' . $a_orientacion['adjunto']; ?>"><?php echo $a_orientacion['adjunto']; ?></a></td>
                                 <td><?php echo remove_junk(ucwords($a_orientacion['correo_electronico'])) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_orientacion['nombre_completo']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_orientacion['ocupacion']))) ?></td>

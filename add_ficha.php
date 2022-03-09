@@ -17,7 +17,7 @@ if (isset($_POST['add_ficha'])) {
         $num_expediente   = remove_junk($db->escape($_POST['num_expediente']));
         $solicitante   = remove_junk($db->escape($_POST['solicitante']));
         $visitaduria   = remove_junk($db->escape($_POST['visitaduria']));
-        $hechos   = remove_junk(upper_case($db->escape($_POST['hechos'])));
+        $hechos   = remove_junk(($db->escape($_POST['hechos'])));
         $autoridad   = remove_junk(($db->escape($_POST['autoridad'])));
         $quien_presenta   = remove_junk($db->escape($_POST['quien_presenta']));
         $nombre_usuario   = remove_junk($db->escape($_POST['nombre_usuario']));
@@ -105,20 +105,20 @@ include_once('layouts/header.php'); ?>
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="correo">Número de expediente</label>
                             <input type="text" class="form-control" name="num_expediente" placeholder="Signado por visitaduria correspondiente" required>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="solicitante">Solicitante</label>
                             <input type="text" class="form-control" name="solicitante" placeholder="Nombre de visitador y/o instancia" required>
                         </div>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="visitaduria">Visitaduria</label>
                             <select class="form-control" name="visitaduria">
@@ -135,14 +135,15 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="hechos">Presuntos hechos violatorios</label>
-                            <textarea type="text" class="form-control" name="hechos" cols="30" rows="2" placeholder="Generales" required></textarea>
+                            <textarea type="text" class="form-control" name="hechos" cols="30" rows="1" placeholder="Generales" required></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="autoridad">Autoridad señalada</label>
@@ -345,6 +346,9 @@ include_once('layouts/header.php'); ?>
                             <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre Completo">
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="parentesco">Parentesco</label>
@@ -377,8 +381,6 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-1">
                         <div class="form-group">
                             <label for="edad">Edad</label>
@@ -400,7 +402,7 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
@@ -420,14 +422,15 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="tutor">Nombre de tutor</label>
                             <input type="text" class="form-control" placeholder="Nombre Completo" name="tutor">
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="contacto">Número de contacto</label>
@@ -443,21 +446,22 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="hora_lugar">Hora y lugar de Intervención</label>
-                            <input type="text" class="form-control" name="hora_lugar">
+                            <textarea type="text" class="form-control" name="hora_lugar" cols="50" rows="1"></textarea>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="actividad_realizada">Actividad realizada</label>
-                            <input type="text" class="form-control" name="actividad_realizada">
-                        </div>
-                    </div>
+
                 </div>
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="actividad_realizada">Actividad realizada</label>
+                            <textarea type="text" class="form-control" name="actividad_realizada" cols="50" rows="1"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="observaciones">Observaciones Generales</label>
-                            <textarea type="text" class="form-control" name="observaciones" cols="50" rows="2"></textarea>
+                            <textarea type="text" class="form-control" name="observaciones" cols="50" rows="1"></textarea>
                         </div>
                     </div>
                 </div>

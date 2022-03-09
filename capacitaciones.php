@@ -60,7 +60,7 @@ page_require_area(2);
                                 $folio_editar = $a_capacitacion['folio'];
                                 $resultado = str_replace("/", "-", $folio_editar);
                                 ?>
-                                <td><a target="_blank" href="uploads/capacitaciones/curriculums/<?php echo $resultado . '/' . $a_capacitacion['curriculum']; ?>"><?php echo $a_capacitacion['curriculum']; ?></a></td>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/capacitaciones/curriculums/<?php echo $resultado . '/' . $a_capacitacion['curriculum']; ?>"><?php echo $a_capacitacion['curriculum']; ?></a></td>
 
                                 <td class="text-center">
                                     <!-- <?php if ($a_capacitacion['constancia'] == '') : ?>
