@@ -4,7 +4,8 @@ $page_title = 'Lista de componentes';
 
 require_once('includes/load.php');
 
-page_require_level(1);
+// page_require_level(1);
+page_require_level(5);
 
 
 ?>

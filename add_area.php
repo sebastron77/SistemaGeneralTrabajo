@@ -2,7 +2,7 @@
 $page_title = 'Agregar área';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(1);
 ?>
 <?php
 if (isset($_POST['add'])) {

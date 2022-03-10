@@ -2,7 +2,7 @@
 $page_title = 'Editar Datos de Trabajador';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(1);
 ?>
 <?php
 $e_detalle = find_by_id('detalles_usuario', (int)$_GET['id']);

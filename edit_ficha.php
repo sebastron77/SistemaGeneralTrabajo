@@ -2,7 +2,7 @@
 $page_title = 'Editar Ficha';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(4);
 ?>
 <?php
 $e_ficha = find_by_id_ficha((int)$_GET['id']);

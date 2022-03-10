@@ -2,7 +2,7 @@
 $page_title = 'Agregar Convenio';
 require_once('includes/load.php');
 $id_folio = last_id_folios();
-page_require_level(2);
+page_require_level(3);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 

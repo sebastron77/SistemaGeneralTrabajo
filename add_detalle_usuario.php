@@ -2,7 +2,7 @@
 $page_title = 'Agregar trabajador';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(1);
 $cargos = find_all('cargos');
 ?>
 <?php header('Content-type: text/html; charset=utf-8');

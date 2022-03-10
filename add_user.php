@@ -2,7 +2,7 @@
 $page_title = 'Agregar usuarios';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(1);
 $groups = find_all('grupo_usuarios');
 $trabajadores = find_all_trabajadores();
 ?>

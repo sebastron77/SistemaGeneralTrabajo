@@ -2,7 +2,7 @@
 $page_title = 'Agregar cargo';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(1);
 $areas = find_all('area');
 ?>
 <?php

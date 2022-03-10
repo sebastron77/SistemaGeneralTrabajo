@@ -1240,6 +1240,30 @@ function page_require_level($require_level)
     redirect('home.php', false);
   endif;
 }
+/*----------------------------------------------------------------------*/
+/* Funcion para checar cual nivel de usuario tiene acceso a cada pagina */
+/*----------------------------------------------------------------------*/
+function page_require_level_exacto($require_level)
+{
+  global $session;
+  $current_user = current_user();
+  $login_level = find_by_groupLevel($current_user['user_level']);
+  //si el usuario no esta logueado
+  if (!$session->isUserLoggedIn(true)) :
+    $session->msg('d', 'Por favor, inicia sesión...');
+    redirect('index.php', false);
+  //si estatus de grupo de usuario esta desactivado
+  elseif (@$login_level['estatus_grupo'] === 0) : //Si se quita el arroba muestra un notice
+    $session->msg('d', 'Este nivel de usuario esta inactivo!');
+    redirect('home.php', false);
+  //checa si el nivel de usuario es menor o igual al requerido
+  elseif ($current_user['user_level'] == (int)$require_level) :
+    return true;
+  else :
+    $session->msg("d", "¡Lo siento! no tienes permiso para ver la página.");
+    redirect('home.php', false);
+  endif;
+}
 /*--------------------------------------------------------------*/
 /* Funcion para encontrar todos los nombres de los componentes
    haciendo JOIN con categorias y media */
@@ -2103,7 +2127,7 @@ function page_require_area($require_area)
 
   // Le puse || $id_area==2, para que los que son de sistemas
   // si puedan ver todos los módulos
-  if (($id_area == $require_area) || ($id_area==2)) {
+  if (($id_area == $require_area) || ($id_area<=2)) {
     return true;
   } else {
     $session->msg("d", "¡Lo siento! tu área no tiene permiso para ver esta página.");

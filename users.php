@@ -9,6 +9,12 @@ page_require_level(2);
 $all_users = find_all_cuentas();
 $user = current_user();
 $nivel = $user['user_level'];
+
+
+$id_usuario = $user['id'];
+$id_user = $user['id'];
+$busca_area = area_usuario($id_usuario);
+$otro = $busca_area['id'];
 ?>
 
 <?php include_once('layouts/header.php'); ?>
@@ -26,7 +32,9 @@ $nivel = $user['user_level'];
           <span class="glyphicon glyphicon-th"></span>
           <span>Lista de Cuentas de Usuarios</span>
         </strong>
-        <a href="add_user.php" class="btn btn-info pull-right">Agregar usuario</a>
+        <?php if ($otro == 1) : ?>
+          <a href="add_user.php" class="btn btn-info pull-right">Agregar usuario</a>
+        <?php endif ?>
       </div>
       <div class="panel-body">
         <table class="datatable table table-bordered table-striped">
@@ -41,7 +49,9 @@ $nivel = $user['user_level'];
               <th class="text-center" style="width: 10%;">Rol de usuario</th>
               <th class="text-center" style="width: 10%;">Estado</th>
               <th style="width: 15%;">Último login</th>
-              <th style="width: 15%;">Acciones</th>
+              <?php if ($otro == 1) : ?>
+                <th style="width: 15%;">Acciones</th>
+              <?php endif ?>
             </tr>
           </thead>
           <tbody>
@@ -61,36 +71,38 @@ $nivel = $user['user_level'];
                   <?php endif; ?>
                 </td>
                 <td><?php echo read_date($a_user['ultimo_login']) ?></td>
-                <td class="text-center">
-                  <div class="btn-group">
-                    <a href="edit_user.php?id=<?php echo (int)$a_user['id']; ?>" class="btn btn-md btn-warning" data-toggle="tooltip" title="Editar">
-                      <i class="glyphicon glyphicon-pencil"></i>
-                    </a>
-                    <?php if ($nivel == 1) : ?>
-                      <?php if ($a_user['status'] == 0) : ?>
-                        <a href="activate_user.php?id=<?php echo (int)$a_user['id']; ?>" class="btn btn-success btn-md" title="Activar" data-toggle="tooltip">
-                          <span class="glyphicon glyphicon-ok"></span>
-                        </a>
-                        <a href="delete_user.php?id=<?php echo (int)$a_user['id']; ?>" class="btn btn-md btn-delete" data-toggle="tooltip" title="Eliminar" onclick="return confirm('¿Seguro que deseas eliminar este usuario?');">
-                          <i class="glyphicon glyphicon-trash"></i>
-                        </a>
-                      <?php else : ?>
-                        <a href="inactivate_user.php?id=<?php echo (int)$a_user['id']; ?>" class="btn btn-md btn-danger" data-toggle="tooltip" title="Inactivar">
-                          <i class="glyphicon glyphicon-ban-circle"></i>
-                        </a>
-                        <a href="delete_user.php?id=<?php echo (int)$a_user['id']; ?>" class="btn btn-md btn-delete" data-toggle="tooltip" title="Eliminar" onclick="return confirm('¿Seguro que deseas eliminar este usuario?');">
-                          <i class="glyphicon glyphicon-trash"></i>
-                        </a>
+                <?php if ($otro == 1) : ?>
+                  <td class="text-center">
+                    <div class="btn-group">
+                      <a href="edit_user.php?id=<?php echo (int)$a_user['id']; ?>" class="btn btn-md btn-warning" data-toggle="tooltip" title="Editar">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                      </a>
+                      <?php if ($nivel == 1) : ?>
+                        <?php if ($a_user['status'] == 0) : ?>
+                          <a href="activate_user.php?id=<?php echo (int)$a_user['id']; ?>" class="btn btn-success btn-md" title="Activar" data-toggle="tooltip">
+                            <span class="glyphicon glyphicon-ok"></span>
+                          </a>
+                          <a href="delete_user.php?id=<?php echo (int)$a_user['id']; ?>" class="btn btn-md btn-delete" data-toggle="tooltip" title="Eliminar" onclick="return confirm('¿Seguro que deseas eliminar este usuario?');">
+                            <i class="glyphicon glyphicon-trash"></i>
+                          </a>
+                        <?php else : ?>
+                          <a href="inactivate_user.php?id=<?php echo (int)$a_user['id']; ?>" class="btn btn-md btn-danger" data-toggle="tooltip" title="Inactivar">
+                            <i class="glyphicon glyphicon-ban-circle"></i>
+                          </a>
+                          <a href="delete_user.php?id=<?php echo (int)$a_user['id']; ?>" class="btn btn-md btn-delete" data-toggle="tooltip" title="Eliminar" onclick="return confirm('¿Seguro que deseas eliminar este usuario?');">
+                            <i class="glyphicon glyphicon-trash"></i>
+                          </a>
+                        <?php endif; ?>
                       <?php endif; ?>
-                    <?php endif; ?>
-                    <!-- <?php if ($nivel == 2) : ?>
+                      <!-- <?php if ($nivel == 2) : ?>
                       <?php if ($a_user['status'] == 0) : ?>
                         <span class="label label-default"><?php echo "Usuario inactivado. Pide al Super Administrador"; ?></span>
                         <span class="label label-default"><?php echo "que lo active para poder editarlo."; ?></span>
                       <?php endif; ?>
                     <?php endif; ?> -->
-                  </div>
-                </td>
+                    </div>
+                  </td>
+                <?php endif ?>
               </tr>
             <?php endforeach; ?>
           </tbody>

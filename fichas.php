@@ -3,7 +3,7 @@ $page_title = 'Fichas Técnicas';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(2);
+page_require_level(4);
 $all_fichas = find_all_fichas();
 $user = current_user();
 $nivel = $user['user_level'];

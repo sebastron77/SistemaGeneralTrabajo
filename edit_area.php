@@ -2,7 +2,7 @@
 $page_title = 'Editar Área';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(1);
 ?>
 <?php
 $e_area = find_by_id('area', (int)$_GET['id']);

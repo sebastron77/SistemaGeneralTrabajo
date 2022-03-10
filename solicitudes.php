@@ -110,7 +110,7 @@ $c_cargos          = count_by_id('cargos');
 <div class="row" style="margin-top: 50px;">
   <?php if (($otro == 5) || ($otro <= 2)) : ?>
     <div class="col-md-3" style="height: 12.5rem;">
-      <a target="_blank" href="quejas.php">
+      <a href="quejas.php">
         <div class="panel panel-box clearfix">
           <div class="panel-icon pull-left" style="background: #114987;">
             <svg style="width:59px;height:58px" viewBox="0 0 24 24">

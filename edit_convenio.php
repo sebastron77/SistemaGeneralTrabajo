@@ -2,7 +2,7 @@
 $page_title = 'Editar Convenio';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(3);
 ?>
 <?php
 $e_detalle = find_by_id_convenio((int)$_GET['id']);

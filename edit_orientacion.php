@@ -2,7 +2,7 @@
 $page_title = 'Editar Orientación';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(5);
 ?>
 <?php
 $e_detalle = find_by_id_orientacion((int)$_GET['id']);

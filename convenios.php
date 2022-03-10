@@ -3,7 +3,7 @@ $page_title = 'Convenios';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(2);
+page_require_level(3);
 $all_convenios = find_all_convenios();
 $user = current_user();
 $nivel = $user['user_level'];

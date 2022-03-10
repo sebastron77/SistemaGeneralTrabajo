@@ -3,13 +3,13 @@ $page_title = 'Capacitaciones';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(2);
+page_require_level(4);
 $all_capacitaciones = find_all_capacitaciones();
 //$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
-page_require_area(2);
+page_require_area(4);
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -42,7 +42,7 @@ page_require_area(2);
                             <th style="width: 5%;">Modalidad</th>
                             <th style="width: 5%;">Capacitador</th>
                             <th style="width: 2%;">Curriculum</th>
-                            <th style="width: 3%;">Constancia</th>
+                            <!-- <th style="width: 3%;">Constancia</th> -->
                             <th style="width: 3%;" class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -62,7 +62,7 @@ page_require_area(2);
                                 ?>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/capacitaciones/curriculums/<?php echo $resultado . '/' . $a_capacitacion['curriculum']; ?>"><?php echo $a_capacitacion['curriculum']; ?></a></td>
 
-                                <td class="text-center">
+                                <!-- <td class="text-center"> -->
                                     <!-- <?php if ($a_capacitacion['constancia'] == '') : ?>
                                         <a href="pdf.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-success btn-md" title="Generar Constancia" data-toggle="tooltip">
                                             <span class="glyphicon glyphicon-ok"></span>
@@ -72,7 +72,7 @@ page_require_area(2);
                                         <a target="_blank" href="uploads/capacitaciones/constancias/<?php echo $resultado . '/' . $a_capacitacion['constancia']; ?>"><?php echo $a_capacitacion['constancia']; ?></a>
                                     <?php endif; ?> -->
 
-                                </td>
+                                <!-- </td> -->
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="ver_info_capacitacion.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">

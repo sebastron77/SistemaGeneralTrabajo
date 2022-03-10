@@ -2,7 +2,7 @@
 $page_title = 'Editar Usuario';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(1);
 ?>
 <?php
 $e_user = find_by_id('users', (int)$_GET['id']);

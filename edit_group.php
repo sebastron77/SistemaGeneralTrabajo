@@ -2,7 +2,7 @@
 $page_title = 'Editar Grupo';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(1);
 ?>
 <?php
 $e_group = find_by_id('grupo_usuarios', (int)$_GET['id']);

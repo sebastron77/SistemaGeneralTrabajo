@@ -3,7 +3,7 @@ $page_title = 'Fichas Técnicas';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(2);
+page_require_level(4);
 $a_ficha = find_by_id('fichas', (int)$_GET['id']);
 $user = current_user();
 $nivel = $user['user_level'];
@@ -31,6 +31,7 @@ $nivel = $user['user_level'];
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
+                            <th style="width: 3%;">Folio</th>
                             <th style="width: 3%;">Tipo</th>
                             <th style="width: 3%;">No. expediente</th>
                             <th style="width: 5%;">Solicitante</th>
@@ -46,6 +47,7 @@ $nivel = $user['user_level'];
                     <tbody>
 
                         <tr>
+                        <td><?php echo remove_junk(ucwords($a_ficha['folio'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_ficha['tipo_solicitud'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_ficha['num_expediente'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_ficha['solicitante'])) ?></td>

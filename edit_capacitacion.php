@@ -2,7 +2,7 @@
 $page_title = 'Editar Capacitación';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(4);
 ?>
 <?php
 $e_detalle = find_by_id_capacitacion((int)$_GET['id']);
@@ -144,12 +144,12 @@ if (isset($_POST['edit_capacitacion'])) {
                             <input type="file" accept="application/pdf" class="form-control" name="curriculum" id="curriculum" value="uploads/curriculums/<?php echo $a_capacitacion['curriculum']; ?>">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class="form-group">
                             <label for="constancia">Constancia</label>
                             <input type="file" accept="application/pdf" class="form-control" name="constancia">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form-group clearfix">
                     <a href="capacitaciones.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">

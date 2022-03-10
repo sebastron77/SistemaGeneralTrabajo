@@ -75,20 +75,24 @@
     </header>
     <div class="sidebar">
       <?php if ($user['user_level'] === '1') : ?>
-        <!-- Super Admin menu -->
+        <!-- Sistemas -->
         <?php include_once('super_admin_menu.php'); ?>
 
       <?php elseif ($user['user_level'] === '2') : ?>
-        <!-- Admin -->
-        <?php include_once('admin_menu.php'); ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('presidencia_secTecnica_menu.php'); ?>
 
       <?php elseif ($user['user_level'] === '3') : ?>
-        <!-- User menu -->
-        <?php include_once('user_menu.php'); ?>
+        <!-- Secretaría Ejecutiva -->
+        <?php include_once('secretaria_ejecutiva.php'); ?>
 
       <?php elseif ($user['user_level'] === '4') : ?>
-        <!-- User menu -->
-        <?php include_once('medica.php'); ?>
+        <!-- Área médica y psicológica -->
+        <?php include_once('area_medica.php'); ?>
+
+      <?php elseif ($user['user_level'] === '5') : ?>
+        <!-- Orientación y quejas -->
+        <?php include_once('quejas_menu.php'); ?>
 
       <?php endif; ?>
 

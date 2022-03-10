@@ -3,13 +3,13 @@ $page_title = 'Capacitaciones';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(2);
+page_require_level(4);
 $a_capacitacion = find_by_id('capacitaciones', (int)$_GET['id']);
 //$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
-page_require_area(2);
+page_require_area(4);
 ?>
 <?php include_once('layouts/header.php'); ?>
 

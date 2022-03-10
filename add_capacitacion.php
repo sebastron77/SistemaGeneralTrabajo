@@ -2,7 +2,7 @@
 $page_title = 'Agregar Capacitación';
 require_once('includes/load.php');
 $id_folio = last_id_folios();
-page_require_level(2);
+page_require_level(4);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 
@@ -179,12 +179,12 @@ include_once('layouts/header.php'); ?>
                             </span>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         <div class="form-group">
                             <label for="constancia">Constancia</label>
                             <input type="file" accept="application/pdf" class="form-control" name="constancia">
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="form-group clearfix">

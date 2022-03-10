@@ -3,7 +3,7 @@ $page_title = 'Canalizaciones';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(2);
+page_require_level(5);
 $all_canalizaciones = find_all_canalizaciones();
 $user = current_user();
 $nivel = $user['user_level'];

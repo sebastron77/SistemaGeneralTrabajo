@@ -3,7 +3,7 @@ $page_title = 'Orientación';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(2);
+page_require_level(5);
 $e_detalle = find_by_id('orientacion_canalizacion', (int)$_GET['id']);
 //$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
 $user = current_user();
