@@ -2077,7 +2077,13 @@ function area_usuario($id_usuario)
   global $db;
   $id_usuario = (int)$id_usuario;
 
-  $sql = $db->query("SELECT a.id FROM users u LEFT JOIN detalles_usuario d ON u.id_detalle_user = d.id LEFT JOIN cargos c ON c.id = d.id_cargo LEFT JOIN area a ON a.id = c.id_area WHERE u.id = '{$db->escape($id_usuario)}' LIMIT 1");
+  $sql = $db->query("SELECT g.id 
+                      FROM  grupo_usuarios g
+                      LEFT JOIN users u ON u.user_level = g.id
+                      LEFT JOIN detalles_usuario d ON u.id_detalle_user = d.id 
+                      LEFT JOIN cargos c ON c.id = d.id_cargo 
+                      LEFT JOIN area a ON a.id = c.id_area 
+                      WHERE u.id = '{$db->escape($id_usuario)}' LIMIT 1");
   if ($result = $db->fetch_assoc($sql))
     return $result;
   else

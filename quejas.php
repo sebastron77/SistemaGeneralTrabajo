@@ -26,7 +26,7 @@ $quejas = quejas();
       <div class="panel-heading clearfix">
         <strong>
           <span class="glyphicon glyphicon-th"></span>
-          <span>Quejas</span>
+          <span>Quejas</span> &nbsp &nbsp | &nbsp &nbsp <a target="_blank" href="http://177.229.209.29/quejas/upload/scp/" class="btn btn-primary">Agregar o ver seguimiento de Queja</a>
         </strong>
       </div>
       <div class="panel-body">

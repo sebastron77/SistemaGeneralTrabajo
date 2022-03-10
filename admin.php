@@ -229,7 +229,7 @@ $c_med_psic = count_by_id_med_psic('fichas');
       </div>
       <div class="panel-value pull-right">
         <h2 class="margin-top"> <?php echo $c_med_psic['total']; ?></h2>
-        <p class="text-muted">Área Médica y Psicología</p>
+        <p class="text-muted">Área Médica y Psicológica</p>
       </div>
     </div>
   </div>

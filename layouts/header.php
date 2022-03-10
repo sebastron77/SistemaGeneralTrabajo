@@ -86,6 +86,10 @@
         <!-- User menu -->
         <?php include_once('user_menu.php'); ?>
 
+      <?php elseif ($user['user_level'] === '4') : ?>
+        <!-- User menu -->
+        <?php include_once('medica.php'); ?>
+
       <?php endif; ?>
 
     </div>
