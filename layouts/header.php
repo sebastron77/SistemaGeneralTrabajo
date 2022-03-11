@@ -5,12 +5,12 @@
 <head>
   <meta charset="UTF-8">
   <title>
-    <?php 
-      if (!empty($page_title))
-        echo remove_junk($page_title);
-      elseif (!empty($user))
-        echo ucfirst($user['username']);
-      else echo "Libro Electrónico"; 
+    <?php
+    if (!empty($page_title))
+      echo remove_junk($page_title);
+    elseif (!empty($user))
+      echo ucfirst($user['username']);
+    else echo "Libro Electrónico";
     ?>
   </title>
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
@@ -94,8 +94,11 @@
         <!-- Orientación y quejas -->
         <?php include_once('quejas_menu.php'); ?>
 
-      <?php endif; ?>
+      <?php elseif ($user['user_level'] === '6') : ?>
+        <!-- Orientación y quejas -->
+        <?php include_once('centro_estudios_menu.php'); ?>
 
+      <?php endif; ?>
     </div>
   <?php endif; ?>
 

@@ -2,7 +2,7 @@
 $page_title = 'Editar Capacitación';
 require_once('includes/load.php');
 
-page_require_level(4);
+// page_require_level(4);
 ?>
 <?php
 $e_detalle = find_by_id_capacitacion((int)$_GET['id']);
@@ -12,6 +12,17 @@ if (!$e_detalle) {
 }
 $user = current_user();
 $nivel = $user['user_level'];
+
+$id_user = $user['id'];
+
+if ($nivel == 4) {
+    page_require_level(4);
+    page_require_area(4);
+}
+if ($nivel == 6){
+    page_require_level(6);
+    page_require_area(6);
+}
 ?>
 
 <?php
@@ -87,7 +98,7 @@ if (isset($_POST['edit_capacitacion'])) {
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="quien_solicita">¿Quién lo solicita?</label>
-                            <input type="text" class="form-control" name="quien_solicita" placeholder="Nombre Completo" value="<?php echo remove_junk(utf8_decode($e_detalle['quien_solicita'])); ?>">
+                            <input type="text" class="form-control" name="quien_solicita" placeholder="Nombre Completo" value="<?php echo remove_junk(($e_detalle['quien_solicita'])); ?>">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -96,6 +107,9 @@ if (isset($_POST['edit_capacitacion'])) {
                             <input type="date" class="form-control" name="fecha" value="<?php echo remove_junk($e_detalle['fecha']); ?>">
                         </div>
                     </div>
+
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="hora">Hora</label><br>
@@ -114,7 +128,7 @@ if (isset($_POST['edit_capacitacion'])) {
                             <input type="number" min="1" max="1000" class="form-control" name="no_asistentes" value="<?php echo remove_junk($e_detalle['no_asistentes']); ?>">
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="modalidad">Modalidad</label>
                             <select class="form-control" name="modalidad">
@@ -124,18 +138,18 @@ if (isset($_POST['edit_capacitacion'])) {
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="depto_org">Departamento/Organización</label>
-                            <input type="text" class="form-control" name="depto_org" value="<?php echo remove_junk(utf8_decode($e_detalle['depto_org'])); ?>">
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label for="depto_org">Departamento/Organización</label>
+                            <input type="text" class="form-control" name="depto_org" value="<?php echo remove_junk(($e_detalle['depto_org'])); ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label for="capacitador">Capacitador</label>
-                            <input type="text" class="form-control" name="capacitador" placeholder="Nombre Completo" value="<?php echo remove_junk(utf8_decode($e_detalle['capacitador'])); ?>">
+                            <input type="text" class="form-control" name="capacitador" placeholder="Nombre Completo" value="<?php echo remove_junk(($e_detalle['capacitador'])); ?>">
                         </div>
                     </div>
                     <div class="col-md-4">

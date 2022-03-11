@@ -3,13 +3,21 @@ $page_title = 'Capacitaciones';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(4);
+
 $all_capacitaciones = find_all_capacitaciones();
 //$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
-page_require_area(4);
+
+if ($nivel == 4) {
+    page_require_level(4);
+    page_require_area(4);
+}
+if ($nivel == 6){
+    page_require_level(6);
+    page_require_area(6);
+}
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -18,6 +26,7 @@ page_require_area(4);
         <?php echo display_msg($msg); ?>
     </div>
 </div>
+<a href="solicitudes.php" class="btn btn-success">Regresar</a><br><br>
 
 <div class="row">
     <div class="col-md-12">
@@ -63,7 +72,7 @@ page_require_area(4);
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/capacitaciones/curriculums/<?php echo $resultado . '/' . $a_capacitacion['curriculum']; ?>"><?php echo $a_capacitacion['curriculum']; ?></a></td>
 
                                 <!-- <td class="text-center"> -->
-                                    <!-- <?php if ($a_capacitacion['constancia'] == '') : ?>
+                                <!-- <?php if ($a_capacitacion['constancia'] == '') : ?>
                                         <a href="pdf.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-success btn-md" title="Generar Constancia" data-toggle="tooltip">
                                             <span class="glyphicon glyphicon-ok"></span>
                                         </a>

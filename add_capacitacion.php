@@ -2,7 +2,19 @@
 $page_title = 'Agregar Capacitación';
 require_once('includes/load.php');
 $id_folio = last_id_folios();
-page_require_level(4);
+$user = current_user();
+$nivel = $user['user_level'];
+$id_user = $user['id'];
+if ($nivel == 4) {
+    page_require_level(4);
+    page_require_area(4);
+}
+if ($nivel == 6){
+    page_require_level(6);
+    page_require_area(6);
+}
+
+// page_require_level(4);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 

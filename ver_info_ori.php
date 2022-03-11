@@ -75,12 +75,12 @@ $nivel = $user['user_level'];
                     </thead>
                     <tbody>
                         <tr>
-                        <td><?php echo remove_junk(ucwords(utf8_encode($e_detalle['colonia']))) ?></td>
+                        <td><?php echo remove_junk(ucwords(($e_detalle['colonia']))) ?></td>
                             <td><?php echo remove_junk(ucwords($e_detalle['codigo_postal'])) ?></td>
-                            <td><?php echo remove_junk(ucwords(utf8_encode($e_detalle['municipio_localidad']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($e_detalle['municipio_localidad']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($e_detalle['entidad']))) ?></td>
                             <td><?php echo remove_junk(ucwords($e_detalle['nacionalidad'])) ?></td>                            
-                            <td><?php echo remove_junk(ucwords(utf8_encode($e_detalle['calle_numero']))) ?></td>                                                        
+                            <td><?php echo remove_junk(ucwords(($e_detalle['calle_numero']))) ?></td>                                                        
                             <td><?php echo remove_junk(ucwords($e_detalle['observaciones'])) ?></td>
                         </tr>
                     </tbody>

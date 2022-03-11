@@ -8,12 +8,14 @@ page_require_level(3);
 
 if (isset($_POST['add_convenio'])) {
 
-    $req_fields = array('fecha_convenio', 'institucion', 'descripcion_convenio', 'vigencia', 'direccion_institucion', 'telefono');
+    $req_fields = array('fecha_convenio', 'institucion', 'ambito_institucion', 'tipo_institucion', 'descripcion_convenio', 'vigencia', 'direccion_institucion', 'telefono');
     validate_fields($req_fields);
 
     if (empty($errors)) {
         $fecha_convenio = remove_junk($db->escape($_POST['fecha_convenio']));
         $institucion   = remove_junk($db->escape($_POST['institucion']));
+        $ambito_institucion   = remove_junk($db->escape($_POST['ambito_institucion']));
+        $tipo_institucion   = remove_junk($db->escape($_POST['tipo_institucion']));
         $descripcion_convenio   = remove_junk($db->escape($_POST['descripcion_convenio']));
         $vigencia   = remove_junk($db->escape($_POST['vigencia']));
         $direccion_institucion   = remove_junk(($db->escape($_POST['direccion_institucion'])));
@@ -34,9 +36,9 @@ if (isset($_POST['add_convenio'])) {
         $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-CONV';
 
         $query = "INSERT INTO convenios (";
-        $query .= "folio_solicitud,fecha_convenio,institucion,descripcion_convenio,vigencia,direccion_institucion,telefono";
+        $query .= "folio_solicitud,fecha_convenio,institucion,ambito_institucion,tipo_institucion,descripcion_convenio,vigencia,direccion_institucion,telefono";
         $query .= ") VALUES (";
-        $query .= " '{$folio}','{$fecha_convenio}','{$institucion}','{$descripcion_convenio}','{$vigencia}','{$direccion_institucion}','{$telefono}'";
+        $query .= " '{$folio}','{$fecha_convenio}','{$institucion}','{$ambito_institucion}','{$tipo_institucion}','{$descripcion_convenio}','{$vigencia}','{$direccion_institucion}','{$telefono}'";
         $query .= ")";
 
         $query2 = "INSERT INTO folios (";
@@ -100,20 +102,42 @@ include_once('layouts/header.php'); ?>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="ambito_institucion">Ámbito institucional</label>
+                            <select class="form-control" name="ambito_institucion">
+                                <option value="">Elige una opción</option>
+                                <option value="Estatal">Estatal</option>
+                                <option value="Nacional">Nacional</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="tipo_institucion">Tipo de institución</label>
+                            <select class="form-control" name="tipo_institucion">
+                                <option value="">Elige una opción</option>
+                                <option value="Instituciones">Instituciones</option>
+                                <option value="Dependencias Gubernamentales">Dependencias Gubernamentales</option>
+                                <option value="ONG y Organismos Públicos de Derechos Humanos">ONG y Organismos Públicos de Derechos Humanos</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="direccion_institucion">Dirección de la institución</label>
                             <input type="text" class="form-control" name="direccion_institucion" required>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="descripcion_convenio">Descripción del convenio</label><br>
-                            <textarea name="descripcion_convenio" class="form-control" id="descripcion_convenio" cols="50" rows="2"></textarea>
+                    </div>                    
+                </div>
+                <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="descripcion_convenio">Descripción del convenio</label><br>
+                                <textarea name="descripcion_convenio" class="form-control" id="descripcion_convenio" cols="50" rows="2"></textarea>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <div class="form-group clearfix">
                     <a href="convenios.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar

@@ -5,6 +5,7 @@ $user = current_user();
 $detalle = $user['id'];
 $id_ori_canal = last_id_oricanal();
 $id_folio = last_id_folios();
+
 page_require_level(5);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');

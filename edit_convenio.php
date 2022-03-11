@@ -16,18 +16,20 @@ $nivel = $user['user_level'];
 
 <?php
 if (isset($_POST['edit_convenio'])) {
-    $req_fields = array('fecha_convenio', 'institucion', 'descripcion_convenio', 'vigencia', 'direccion_institucion', 'telefono');
+    $req_fields = array('fecha_convenio', 'institucion', 'ambito_institucion', 'tipo_institucion', 'descripcion_convenio', 'vigencia', 'direccion_institucion', 'telefono');
     validate_fields($req_fields);
     if (empty($errors)) {
         $id = (int)$e_detalle['id'];
         $fecha_convenio = remove_junk($db->escape($_POST['fecha_convenio']));
         $institucion   = remove_junk($db->escape($_POST['institucion']));
+        $ambito_institucion   = remove_junk($db->escape($_POST['ambito_institucion']));
+        $tipo_institucion   = remove_junk($db->escape($_POST['tipo_institucion']));
         $descripcion_convenio   = remove_junk($db->escape($_POST['descripcion_convenio']));
         $vigencia   = remove_junk($db->escape($_POST['vigencia']));
         $direccion_institucion   = remove_junk(($db->escape($_POST['direccion_institucion'])));
         $telefono   = remove_junk(($db->escape($_POST['telefono'])));
 
-        $sql = "UPDATE convenios SET fecha_convenio='{$fecha_convenio}', institucion='{$institucion}', descripcion_convenio='{$descripcion_convenio}', vigencia='{$vigencia}', direccion_institucion='{$direccion_institucion}', telefono='{$telefono}' WHERE id='{$db->escape($id)}'";
+        $sql = "UPDATE convenios SET fecha_convenio='{$fecha_convenio}', institucion='{$institucion}', ambito_institucion='{$ambito_institucion}', tipo_institucion='{$tipo_institucion}', descripcion_convenio='{$descripcion_convenio}', vigencia='{$vigencia}', direccion_institucion='{$direccion_institucion}', telefono='{$telefono}' WHERE id='{$db->escape($id)}'";
 
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
@@ -81,12 +83,33 @@ if (isset($_POST['edit_convenio'])) {
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="ambito_institucion">Ámbito institucional</label>
+                            <select class="form-control" name="ambito_institucion">
+                                <option <?php if ($e_detalle['ambito_institucion'] === 'Estatal') echo 'selected="selected"'; ?> value="Estatal">Estatal</option>
+                                <option <?php if ($e_detalle['ambito_institucion'] === 'Nacional') echo 'selected="selected"'; ?> value="Nacional">Nacional</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="tipo_institucion">Tipo de institución</label>
+                            <select class="form-control" name="tipo_institucion">
+                                <option <?php if ($e_detalle['tipo_institucion'] === 'Instituciones') echo 'selected="selected"'; ?> value="Instituciones">Instituciones</option>
+                                <option <?php if ($e_detalle['tipo_institucion'] === 'Dependencias Gubernamentales') echo 'selected="selected"'; ?> value="Dependencias Gubernamentales">Dependencias Gubernamentales</option>
+                                <option <?php if ($e_detalle['tipo_institucion'] === 'ONG y Organismos Públicos de Derechos Humanos') echo 'selected="selected"'; ?> value="ONG y Organismos Públicos de Derechos Humanos">ONG y Organismos Públicos de Derechos Humanos</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="direccion_institucion">Dirección Institución</label>
                             <input type="text" class="form-control" name="direccion_institucion" value="<?php echo remove_junk($e_detalle['direccion_institucion']); ?>">
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="descripcion_convenio">Descripción del convenio</label>
@@ -94,7 +117,6 @@ if (isset($_POST['edit_convenio'])) {
                         </div>
                     </div>
                 </div>
-
                 <div class="form-group clearfix">
                     <a href="convenios.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar

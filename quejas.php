@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
-$page_title = 'Lista de componentes';
+$page_title = 'Lista de quejas';
 
 require_once('includes/load.php');
 
@@ -10,7 +10,7 @@ page_require_level(5);
 
 ?>
 <?php include_once('layouts/header.php'); ?>
-
+<a href="solicitudes.php" class="btn btn-success">Regresar</a><br><br>
 <div class="row">
   <div class="col-md-12">
     <?php echo display_msg($msg); ?>

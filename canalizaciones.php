@@ -9,7 +9,7 @@ $user = current_user();
 $nivel = $user['user_level'];
 ?>
 <?php include_once('layouts/header.php'); ?>
-
+<a href="solicitudes.php" class="btn btn-success">Regresar</a><br><br>
 <div class="row">
     <div class="col-md-12">
         <?php echo display_msg($msg); ?>
