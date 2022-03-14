@@ -2,7 +2,7 @@
 $page_title = 'Editar Cuenta';
 require_once('includes/load.php');
 $all_users = find_all_cuentas();
-page_require_level(3);
+page_require_level(20);
 ?>
 <?php
 //actualiza imagen de usuario

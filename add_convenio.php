@@ -2,6 +2,7 @@
 $page_title = 'Agregar Convenio';
 require_once('includes/load.php');
 $id_folio = last_id_folios();
+// $queja = find_by_id_quejas((int)$_GET['id']);
 page_require_level(3);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');

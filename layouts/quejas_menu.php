@@ -22,4 +22,10 @@
       <li><a href="#">Registro de Constancias</a> </li>
     </ul>
   </li>
+  <li>
+    <a href="folios.php">
+      <i class="glyphicon glyphicon-home"></i>
+      <span>Números de Folio Usados</span>
+    </a>
+  </li>
 </ul>

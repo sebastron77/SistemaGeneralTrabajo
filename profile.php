@@ -4,7 +4,7 @@ session_start();
 $page_title = 'Mi perfil';
 require_once('includes/load.php');
 
-page_require_level(3);
+page_require_level(20);
 
 $usuarioid = $_SESSION['user_id'];
 //echo $usuarioid;

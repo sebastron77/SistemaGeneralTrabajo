@@ -12,7 +12,7 @@ if(empty($errors)){
      $session->login($user_id);
     //Actualiza fecha de inicio de sesion
      updateLastLogIn($user_id);
-     $session->msg("s", "Bienvenido al Libro Electrónico.");
+     $session->msg("s", "Bienvenido al Libro Electrónico de la Comisión Estatal de los Derechos Humanos Michoacán.");
      $user = current_user();
      $nivel = $user['user_level'];
      if ($nivel == 1) {

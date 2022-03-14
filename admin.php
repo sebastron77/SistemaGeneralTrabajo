@@ -1,5 +1,5 @@
 <?php
-$page_title = 'Admin - Página de Inicio';
+$page_title = 'Página de Inicio';
 require_once('includes/load.php');
 
 page_require_level(2);
