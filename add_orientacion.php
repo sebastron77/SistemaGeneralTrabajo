@@ -63,7 +63,7 @@ if (isset($_POST['add_orientacion'])) {
         $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-O';
         $carpeta = 'uploads/orientacioncanalizacion/orientacion/' . $folio_carpeta;
 
-        if(!is_dir($carpeta)){
+        if (!is_dir($carpeta)) {
             mkdir($carpeta, 0777, true);
         }
 
@@ -310,6 +310,9 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="medio">Medio de presentación</label>
                             <select class="form-control" name="medio">
+                                <option value="">Escoge una opción</option>
+                                <option value="Asesor Virtual">Asesor Virtual</option>
+                                <option value="Asistente Virtual">Asistente Virtual</option>
                                 <option value="Comparecencia">Comparecencia</option>
                                 <option value="Escrito">Escrito</option>
                                 <option value="Vía telefónica">Vía telefónica</option>

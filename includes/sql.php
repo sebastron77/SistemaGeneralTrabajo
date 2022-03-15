@@ -1976,6 +1976,17 @@ function find_all_fichas()
   $result = find_by_sql($sql);
   return $result;
 }
+/*----------------------------------------------*/
+/* Funcion que encuentra todas las resoluciones */
+/*----------------------------------------------*/
+function find_all_resoluciones()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM resoluciones";
+  $result = find_by_sql($sql);
+  return $result;
+}
 /*--------------------------------------------*/
 /* Funcion que encuentra todos los  convenios */
 /*--------------------------------------------*/
@@ -1995,6 +2006,19 @@ function find_by_id_ficha($id)
   global $db;
   $id = (int)$id;
   $sql = $db->query("SELECT * FROM fichas WHERE id='{$db->escape($id)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+/*----------------------------------------------------------------------------------*/
+/* Funcion que encuentra una ficha técnica por id, que ayudara al momento de editar */
+/*----------------------------------------------------------------------------------*/
+function find_by_id_resolucion($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT * FROM resoluciones WHERE id='{$db->escape($id)}' LIMIT 1");
   if ($result = $db->fetch_assoc($sql))
     return $result;
   else
@@ -2133,4 +2157,14 @@ function page_require_area($require_area)
     $session->msg("d", "¡Lo siento! tu área no tiene permiso para ver esta página.");
     redirect('home.php', false);
   }
+}
+
+/*------------------------------------------------------------------*/
+/* Ver todas las quejas que han sido agregadas al libro electrónico */
+/*------------------------------------------------------------------*/
+function find_all_quejas()
+{
+  $sql = "SELECT * FROM quejas";
+  $result = find_by_sql($sql);
+  return $result;
 }

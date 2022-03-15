@@ -37,7 +37,7 @@ $c_cargos          = count_by_id('cargos');
 <div class="row" style="margin-top: 10px;">
     <?php if (($otro <= 2)) : ?>
         <div class="col-md-3" style="height: 12.5rem;">
-            <a href="">
+            <div>
                 <div class="panel panel-box clearfix">
                     <div class="panel-icon pull-left" style="background: #114987;">
                         <svg style="width:59px;height:58px" viewBox="0 0 24 24">
@@ -46,12 +46,16 @@ $c_cargos          = count_by_id('cargos');
                     </div>
                     <div class="panel-value pull-right">
                         <p style="font-size: 20px; margin-top:20%; color:#333333;">Resoluciones</p>
+                        <div>
+                            <a href="add_resolucion.php" class="btn btn-success">Agregar</a>
+                            <a href="resoluciones.php" class="btn btn-primary">Ver</a>
+                        </div>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
         <div class="col-md-3" style="height: 12.5rem;">
-            <a href="">
+            <div>
                 <div class="panel panel-box clearfix">
                     <div class="panel-icon pull-left" style="background: #114987;">
                         <svg style="width:59px;height:58px" viewBox="0 0 24 24">
@@ -62,7 +66,7 @@ $c_cargos          = count_by_id('cargos');
                         <p style="font-size: 20px; margin-top:20%; color:#333333;">Consejo de la CEDH</p>
                     </div>
                 </div>
-            </a>
+            </div>
         </div>
         <div class="col-md-3" style="height: 12.5rem;">
             <a href="">

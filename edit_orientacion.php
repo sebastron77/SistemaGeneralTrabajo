@@ -254,7 +254,7 @@ if (isset($_POST['edit_orientacion'])) {
                         </div>
                     </div>
                     <div class="col-md-4">
-                    <div class="form-group">
+                        <div class="form-group">
                             <label for="nacionalidad">Nacionalidad</label>
                             <select class="form-control" name="nacionalidad">
                                 <option <?php if ($e_detalle['nacionalidad'] === 'Mexicana') echo 'selected="selected"'; ?> value="Mexicana">Mexicana</option>
@@ -268,6 +268,8 @@ if (isset($_POST['edit_orientacion'])) {
                         <div class="form-group">
                             <label for="medio">Medio de presentación</label>
                             <select class="form-control" name="medio">
+                                <option value="Asesor Virtual" <?php if ($e_detalle['medio_presentacion'] === 'Asesor Virtual') echo 'selected="selected"'; ?>>Asesor Virtual</option>
+                                <option value="Asistente Virtual" <?php if ($e_detalle['medio_presentacion'] === 'Asistente Virtual') echo 'selected="selected"'; ?>>Asistente Virtual</option>
                                 <option value="Comparecencia" <?php if ($e_detalle['medio_presentacion'] === 'Comparecencia') echo 'selected="selected"'; ?>>Comparecencia</option>
                                 <option value="Escrito" <?php if ($e_detalle['medio_presentacion'] === 'Escrito') echo 'selected="selected"'; ?>>Escrito</option>
                                 <option value="Vía telefónica" <?php if ($e_detalle['medio_presentacion'] === 'Vía telefónica') echo 'selected="selected"'; ?>>Vía telefónica</option>

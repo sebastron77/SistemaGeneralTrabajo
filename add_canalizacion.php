@@ -44,7 +44,7 @@ if (isset($_POST['add_canalizacion'])) {
                 $no_folio = sprintf('%04d', (int)$nuevo['id'] + 1);
             }
         }
-        
+
         if (count($id_folio) == 0) {
             $nuevo_id_folio = 1;
             $no_folio1 = sprintf('%04d', 1);
@@ -62,7 +62,7 @@ if (isset($_POST['add_canalizacion'])) {
         $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-C';
         $carpeta = 'uploads/orientacioncanalizacion/canalizacion/' . $folio_carpeta;
 
-        if(!is_dir($carpeta)){
+        if (!is_dir($carpeta)) {
             mkdir($carpeta, 0777, true);
         }
 
@@ -78,18 +78,18 @@ if (isset($_POST['add_canalizacion'])) {
             $query .= "folio,correo_electronico,nombre_completo,nivel_estudios,ocupacion,edad,telefono,extension,sexo,calle_numero,colonia,codigo_postal,municipio_localidad,entidad,nacionalidad,tipo_solicitud,medio_presentacion,observaciones,adjunto,id_creador";
             $query .= ") VALUES (";
             $query .= " '{$folio}','{$correo}','{$nombre}','{$nestudios}','{$ocupacion}','{$edad}','{$tel}','{$ext}','{$sexo}','{$calle}','{$colonia}','{$cpostal}','{$municipio}','{$entidad}','{$nacionalidad}','2','{$medio}','{$observaciones}','{$name}','{$detalle}'";
-            $query .= ")";    
+            $query .= ")";
             $query2 = "INSERT INTO folios (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";
             $query2 .= ")";
-        } else{
+        } else {
             $query = "INSERT INTO orientacion_canalizacion (";
             $query .= "folio,correo_electronico,nombre_completo,nivel_estudios,ocupacion,edad,telefono,extension,sexo,calle_numero,colonia,codigo_postal,municipio_localidad,entidad,nacionalidad,tipo_solicitud,medio_presentacion,observaciones,adjunto,id_creador";
             $query .= ") VALUES (";
             $query .= " '{$folio}','{$correo}','{$nombre}','{$nestudios}','{$ocupacion}','{$edad}','{$tel}','{$ext}','{$sexo}','{$calle}','{$colonia}','{$cpostal}','{$municipio}','{$entidad}','{$nacionalidad}','2','{$medio}','{$observaciones}','{$name}','{$detalle}'";
-            $query .= ")";  
+            $query .= ")";
             $query2 = "INSERT INTO folios (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
@@ -292,7 +292,7 @@ include_once('layouts/header.php'); ?>
                         </div>
                     </div>
                     <div class="col-md-4">
-                    <div class="form-group">
+                        <div class="form-group">
                             <label for="nacionalidad">Nacionalidad</label>
                             <select class="form-control" name="nacionalidad">
                                 <option value="Mexicana">Mexicana</option>
@@ -306,6 +306,9 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="medio">Medio de presentación</label>
                             <select class="form-control" name="medio">
+                                <option value="">Escoge una opción</option>
+                                <option value="Asesor Virtual">Asesor Virtual</option>
+                                <option value="Asistente Virtual">Asistente Virtual</option>
                                 <option value="Comparecencia">Comparecencia</option>
                                 <option value="Escrito">Escrito</option>
                                 <option value="Vía telefónica">Vía telefónica</option>

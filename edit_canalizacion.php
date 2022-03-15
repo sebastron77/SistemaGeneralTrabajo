@@ -38,7 +38,7 @@ if (isset($_POST['edit_canalizacion'])) {
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
         //$name = remove_junk((int)$db->escape($_POST['detalle-user']));
-        
+
         $folio_editar = $e_detalle['folio'];
         $resultado = str_replace("/", "-", $folio_editar);
         $carpeta = 'uploads/orientacioncanalizacion/canalizacion/' . $resultado;
@@ -47,11 +47,11 @@ if (isset($_POST['edit_canalizacion'])) {
         $size = $_FILES['adjunto']['size'];
         $type = $_FILES['adjunto']['type'];
         $temp = $_FILES['adjunto']['tmp_name'];
-        
+
         if (is_dir($carpeta)) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
-        
+
         if ($name != '') {
             $sql = "UPDATE orientacion_canalizacion SET correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', observaciones='{$observaciones}', adjunto='{$name}' WHERE id='{$db->escape($id)}'";
         }
@@ -266,6 +266,8 @@ if (isset($_POST['edit_canalizacion'])) {
                         <div class="form-group">
                             <label for="medio">Medio de presentación</label>
                             <select class="form-control" name="medio">
+                                <option value="Asesor Virtual" <?php if ($e_detalle['medio_presentacion'] === 'Asesor Virtual') echo 'selected="selected"'; ?>>Asesor Virtual</option>
+                                <option value="Asistente Virtual" <?php if ($e_detalle['medio_presentacion'] === 'Asistente Virtual') echo 'selected="selected"'; ?>>Asistente Virtual</option>
                                 <option value="Comparecencia" <?php if ($e_detalle['medio_presentacion'] === 'Comparecencia') echo 'selected="selected"'; ?>>Comparecencia</option>
                                 <option value="Escrito" <?php if ($e_detalle['medio_presentacion'] === 'Escrito') echo 'selected="selected"'; ?>>Escrito</option>
                                 <option value="Vía telefónica" <?php if ($e_detalle['medio_presentacion'] === 'Vía telefónica') echo 'selected="selected"'; ?>>Vía telefónica</option>
