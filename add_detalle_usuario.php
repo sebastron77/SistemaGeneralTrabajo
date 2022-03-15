@@ -47,7 +47,8 @@ if (isset($_POST['add_detalle_usuario'])) {
     }
 }
 ?>
-<?php header('Content-type: text/html; charset=utf-8'); include_once('layouts/header.php'); ?>
+<?php header('Content-type: text/html; charset=utf-8');
+include_once('layouts/header.php'); ?>
 <?php echo display_msg($msg); ?>
 <div class="row">
     <div class="panel panel-default">

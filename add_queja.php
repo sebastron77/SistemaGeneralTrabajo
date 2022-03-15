@@ -1,34 +1,37 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
-$page_title = 'Agregar Queja';
-require_once('includes/load.php');
-page_require_level(5);
-?>
-<?php
 // $queja = find_by_id('ost_ticket',(int)$_GET['id']);
 require_once('includes/load2.php');
 $queja = find_by_id_quejas((int)$_GET['id']);
+
 if (!$queja) {
     $session->msg("d", "Error al agregar.");
     redirect('quejas.php');
 }
+?>
+
+<?php header('Content-type: text/html; charset=utf-8');
+error_reporting(E_ALL ^ E_NOTICE);
+$page_title = 'Agregar Queja';
+require_once('includes/load.php');
+page_require_level(5);
 $user = current_user();
 $nivel = $user['user_level'];
 ?>
 
-<?php
+<?php header('Content-type: text/html; charset=utf-8');
+// ini_set('display_errors', 1);
 if (isset($_POST['add_queja'])) {
+
     $req_fields = array('folio_queja', 'ultima_actualizacion', 'autoridad_responsable', 'creada_por', 'estatus_queja', 'asignada_a');
     validate_fields($req_fields);
+
     if (empty($errors)) {
-        // $id = (int)$queja['id'];
         $folio_queja   = remove_junk($db->escape($_POST['folio_queja']));
         $ultima_actualizacion   = remove_junk($db->escape($_POST['ultima_actualizacion']));
         $autoridad_responsable   = remove_junk($db->escape($_POST['autoridad_responsable']));
         $creada_por   = remove_junk($db->escape($_POST['creada_por']));
         $estatus_queja   = remove_junk($db->escape($_POST['estatus_queja']));
         $asignada_a   = remove_junk(($db->escape($_POST['asignada_a'])));
-        //$name = remove_junk((int)$db->escape($_POST['detalle-user']));
 
         // $folio_editar = $queja['folio'];
         // $resultado = str_replace("/", "-", $folio_editar);
@@ -44,17 +47,14 @@ if (isset($_POST['add_queja'])) {
         // }
 
         // if ($name != '') {
-        $sql = "INSERT INTO quejas (";
-        $sql .= "folio_queja,ultima_actualizacion,autoridad_responsable,creada_por,estatus_queja,asignada_a";
-        $sql .= ") VALUES (";
-        $sql .= " '{$folio_queja}','{$ultima_actualizacion}','{$autoridad_responsable}','{$creada_por}','{$estatus_queja}','{$asignada_a}'";
-        $sql .= ")";
-        // }
-        // if ($name == '') {
-        //     $sql = "UPDATE orientacion_canalizacion SET correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
-        // }
-        $result = $db->query($sql);
-        if ($result && $db->affected_rows() === 1) {
+        $query = "INSERT INTO quejas (";
+        $query .= "folio_queja,ultima_actualizacion,autoridad_responsable,creada_por,estatus_queja,asignada_a";
+        $query .= ") VALUES (";
+        $query .= " '{$folio_queja}','{$ultima_actualizacion}','{$autoridad_responsable}','{$creada_por}','{$estatus_queja}','{$asignada_a}'";
+        $query .= ")";
+        // $result = $db->query($query);
+
+        if ($db->query($query)) {
             $session->msg('s', "Queja guardada en la base de datos.");
             redirect('quejas.php', false);
         } else {
@@ -67,7 +67,8 @@ if (isset($_POST['add_queja'])) {
     }
 }
 ?>
-<?php include_once('layouts/header.php'); ?>
+<?php header('Content-type: text/html; charset=utf-8');
+include_once('layouts/header.php'); ?>
 <?php echo display_msg($msg); ?>
 <div class="row">
     <div class="panel panel-default">
@@ -78,7 +79,7 @@ if (isset($_POST['add_queja'])) {
             </strong>
         </div>
         <div class="panel-body">
-            <form method="post" action="add_queja.php" enctype="multipart/form-data">
+            <form method="post" action="add_queja.php">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -101,23 +102,23 @@ if (isset($_POST['add_queja'])) {
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="creada_por">Creada por</label>
-                            <input type="text" class="form-control" name="creada_por" value="<?php echo remove_junk($queja['Creado_Por']); ?>">
+                            <input type="text" class="form-control" name="creada_por" value="<?php echo remove_junk($queja['Creada_Por']); ?>">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="estatus_queja">Estatus Queja</label>
                             <input type="text" class="form-control" name="estatus_queja" value="<?php if ($queja['isanswered'] == 1) {
-                                                                                                    echo 'Cerrada';
+                                                                                                    echo 'Cerrada' . ' ';
                                                                                                 }
                                                                                                 if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 1)) {
-                                                                                                    echo 'Abierta';
+                                                                                                    echo 'Abierta' . ' ';
                                                                                                 }
                                                                                                 if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 0)) {
-                                                                                                    echo 'Pendiente';
+                                                                                                    echo 'Pendiente' . ' ';
                                                                                                 }
                                                                                                 if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 1)) {
-                                                                                                    echo 'No atendido';
+                                                                                                    echo 'No atendido' . ' ';
                                                                                                 }
                                                                                                 ?>">
                         </div>
@@ -134,7 +135,7 @@ if (isset($_POST['add_queja'])) {
                     <a href="quejas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar
                     </a>
-                    <button type="submit" name="add_queja" class="btn btn-primary" value="subir">Guardar</button>
+                    <button type="submit" name="add_queja" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
         </div>
