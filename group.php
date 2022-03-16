@@ -24,7 +24,7 @@ $nivel = $user['user_level'];
         <a href="add_group.php" class="btn btn-info pull-right btn-md"> Agregar grupo</a>
       </div>
       <div class="panel-body">
-        <table class="table table-bordered table-striped">
+        <table class="datatable table table-bordered table-striped">
           <thead>
             <tr class="info">
               <th class="text-center" style="width: 50px;">#</th>

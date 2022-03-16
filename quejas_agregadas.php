@@ -7,7 +7,10 @@ require_once('includes/load.php');
 // page_require_level(1);
 page_require_level(5);
 $quejas_libro = find_all_quejas();
-
+$id_user = $user['id'];
+$busca_area = area_usuario($id_user);
+$otro = $busca_area['id'];
+page_require_area(5);
 ?>
 <?php include_once('layouts/header.php'); ?>
 <a href="solicitudes_quejas.php" class="btn btn-success">Regresar</a><br><br>

@@ -7,6 +7,13 @@ page_require_level(5);
 $all_canalizaciones = find_all_canalizaciones();
 $user = current_user();
 $nivel = $user['user_level'];
+// $busca_area = area_usuario($id_usuario);
+// $otro = $busca_area['id'];
+// page_require_area(5);
+$id_user = $user['id'];
+$busca_area = area_usuario($id_user);
+$otro = $busca_area['id'];
+page_require_area(5);
 ?>
 <?php include_once('layouts/header.php'); ?>
 <a href="solicitudes.php" class="btn btn-success">Regresar</a><br><br>

@@ -7,6 +7,10 @@ $id_ori_canal = last_id_oricanal();
 $id_folio = last_id_folios();
 
 page_require_level(5);
+$id_user = $user['id'];
+$busca_area = area_usuario($id_user);
+$otro = $busca_area['id'];
+page_require_area(5);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_canalizacion'])) {

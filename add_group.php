@@ -13,10 +13,11 @@ if (isset($_POST['add'])) {
   if (find_by_groupName($_POST['nombre-grupo']) === false) {
     $session->msg('d', '<b>Error!</b> El nombre de grupo realmente existe en la base de datos');
     redirect('add_group.php', false);
-  } elseif (find_by_groupLevel($_POST['nivel-grupo']) === false) {
-    $session->msg('d', '<b>Error!</b> El nombre de grupo realmente existe en la base de datos ');
-    redirect('add_group.php', false);
-  }
+  } 
+  // elseif (find_by_groupLevel($_POST['nivel-grupo']) === false) {
+  //   $session->msg('d', '<b>Error!</b> El nombre de grupo realmente existe en la base de datos ');
+  //   redirect('add_group.php', false);
+  // }
   if (empty($errors)) {
     $name = remove_junk($db->escape($_POST['nombre-grupo']));
     $level = remove_junk($db->escape($_POST['nivel-grupo']));

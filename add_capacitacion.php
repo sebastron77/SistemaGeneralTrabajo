@@ -5,13 +5,19 @@ $id_folio = last_id_folios();
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
+if ($nivel == 3){
+    redirect('home.php');
+}
 if ($nivel == 4) {
     page_require_level(4);
     page_require_area(4);
 }
+if ($nivel == 5){
+    redirect('home.php');
+}
 if ($nivel == 6){
-    page_require_level(6);
     page_require_area(6);
+    page_require_level(6);
 }
 
 // page_require_level(4);

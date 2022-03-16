@@ -63,7 +63,11 @@ $c_cargos          = count_by_id('cargos');
                         </svg>
                     </div>
                     <div class="panel-value pull-right">
-                        <p style="font-size: 20px; margin-top:20%; color:#333333;">Consejo de la CEDH</p>
+                        <p style="font-size: 20px; margin-top:3%; color:#333333;">Consejo de la CEDH</p>
+                        <div>
+                            <a href="add_consejo.php" class="btn btn-success">Agregar</a>
+                            <a href="consejo.php" class="btn btn-primary">Ver</a>
+                        </div>
                     </div>
                 </div>
             </div>

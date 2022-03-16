@@ -5,6 +5,10 @@ $user = current_user();
 $detalle = $user['id'];
 $id_folio = last_id_folios();
 page_require_level(4);
+$id_user = $user['id'];
+$busca_area = area_usuario($id_user);
+$otro = $busca_area['id'];
+page_require_area(4);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_ficha'])) {

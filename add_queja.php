@@ -17,6 +17,10 @@ page_require_level(5);
 $user = current_user();
 $nivel = $user['user_level'];
 $id_folio = last_id_folios();
+$id_user = $user['id'];
+$busca_area = area_usuario($id_user);
+$otro = $busca_area['id'];
+page_require_area(5);
 ?>
 
 <?php header('Content-type: text/html; charset=utf-8');
@@ -92,7 +96,7 @@ include_once('layouts/header.php'); ?>
         <div class="panel-heading">
             <strong>
                 <span class="glyphicon glyphicon-th"></span>
-                <span>Agregar queja</span>
+                <span>Agregar queja a Libro Electrónico</span>
             </strong>
         </div>
         <div class="panel-body">

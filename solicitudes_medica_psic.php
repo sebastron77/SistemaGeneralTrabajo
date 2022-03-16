@@ -9,7 +9,12 @@ $id_user = $user['id'];
 $busca_area = area_usuario($id_usuario);
 $otro = $busca_area['id'];
 
-page_require_level(10);
+page_require_level(4);
+
+$id_user = $user['id'];
+$busca_area = area_usuario($id_user);
+$otro = $busca_area['id'];
+page_require_area(4);
 
 ?>
 

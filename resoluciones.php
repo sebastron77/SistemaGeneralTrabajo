@@ -35,12 +35,12 @@ $nivel = $user['user_level'];
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th style="width: 5%;">Folio</th>
-                            <th style="width: 3%;">Núm. Expediente</th>
-                            <th style="width: 5%;">Visitaduríai</th>
+                            <th style="width: 1%;">Núm. Expediente</th>
+                            <th style="width: 15%;">Visitaduría</th>
                             <th style="width: 5%;">Fecha de Recepción</th>
                             <th style="width: 1%;">Fecha Remite a Proyecto</th>
                             <th style="width: 5%;">Oficio o Caratula de Expediente</th>
-                            <th style="width: 5%;">Observaciones</th>
+                            <th style="width: 15%;">Observaciones</th>
                             <th style="width: 2%;" class="text-center">Acciones</th>
                         </tr>
                     </thead>

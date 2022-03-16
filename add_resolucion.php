@@ -5,7 +5,7 @@ $user = current_user();
 $detalle = $user['id'];
 $id_ori_canal = last_id_oricanal();
 $id_folio = last_id_folios();
-page_require_level(5);
+page_require_level(2);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_resolucion'])) {
@@ -70,7 +70,7 @@ if (isset($_POST['add_resolucion'])) {
             $query = "INSERT INTO resoluciones (";
             $query .= "folio,num_expediente,visitaduria,fecha_recepcion,fecha_remite_proyecto,oficio_caratula,observaciones";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$num_expediente}','{$visitaduria}','{$fecha_recepcion}','{$fecha_remite_proyecto}','{$oficio_caratula}','{$observaciones}'";
+            $query .= " '{$folio}','{$num_expediente}','{$visitaduria}','{$fecha_recepcion}','{$fecha_remite_proyecto}','{$name}','{$observaciones}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios (";

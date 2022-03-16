@@ -1987,6 +1987,17 @@ function find_all_resoluciones()
   $result = find_by_sql($sql);
   return $result;
 }
+/*----------------------------------------------*/
+/* Funcion que encuentra todas las resoluciones */
+/*----------------------------------------------*/
+function find_all_consejo()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM consejo";
+  $result = find_by_sql($sql);
+  return $result;
+}
 /*--------------------------------------------*/
 /* Funcion que encuentra todos los  convenios */
 /*--------------------------------------------*/
@@ -2019,6 +2030,19 @@ function find_by_id_resolucion($id)
   global $db;
   $id = (int)$id;
   $sql = $db->query("SELECT * FROM resoluciones WHERE id='{$db->escape($id)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+/*----------------------------------------------------------------------------------*/
+/* Funcion que encuentra una ficha técnica por id, que ayudara al momento de editar */
+/*----------------------------------------------------------------------------------*/
+function find_by_id_consejo($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT * FROM consejo WHERE id='{$db->escape($id)}' LIMIT 1");
   if ($result = $db->fetch_assoc($sql))
     return $result;
   else

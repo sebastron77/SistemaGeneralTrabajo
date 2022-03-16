@@ -7,6 +7,10 @@ page_require_level(5);
 $all_orientaciones = find_all_orientaciones();
 $user = current_user();
 $nivel = $user['user_level'];
+$id_user = $user['id'];
+$busca_area = area_usuario($id_user);
+$otro = $busca_area['id'];
+page_require_area(5);
 ?>
 <?php include_once('layouts/header.php'); ?>
 <a href="solicitudes.php" class="btn btn-success">Regresar</a><br><br>

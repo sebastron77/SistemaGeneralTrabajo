@@ -46,7 +46,9 @@ $otro = $busca_area['id'];
               <th>Nombre</th>
               <th>Apellidos</th>
               <th style="width: 10%;">Usuario</th>
+              <?php if ($otro == 1) : ?>
               <th class="text-center" style="width: 10%;">Rol de usuario</th>
+              <?php endif ?>
               <th class="text-center" style="width: 10%;">Estado</th>
               <th style="width: 15%;">Último login</th>
               <?php if ($otro == 1) : ?>
@@ -62,7 +64,9 @@ $otro = $busca_area['id'];
                 <td><?php echo remove_junk(ucwords($a_user['nombre'])) ?></td>
                 <td><?php echo remove_junk(ucwords($a_user['apellidos'])) ?></td>
                 <td><?php echo remove_junk($a_user['username']) ?></td>
+                <?php if ($otro == 1) : ?>
                 <td class="text-center"><?php echo remove_junk(ucwords($a_user['nombre_grupo'])) ?></td>
+                <?php endif ?>
                 <td class="text-center">
                   <?php if ($a_user['status'] === '1') : ?>
                     <span class="label label-success"><?php echo "Activo"; ?></span>
