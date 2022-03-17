@@ -3,7 +3,7 @@
   require_once('includes/load.php');
   if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
 ?>
-
+<div class="body2">
 <div class="login-page">
   <div class="text-center">
     <h1>Bienvenido</h1>
@@ -24,5 +24,6 @@
       <button type="submit" class="btn btn-info  pull-right">Entrar</button>
     </div>
   </form>
+</div>
 </div>
 <?php include_once('layouts/header.php'); ?>

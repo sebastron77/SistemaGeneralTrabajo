@@ -1,8 +1,18 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 $page_title = 'Página de Inicio';
 require_once('includes/load.php');
 
-page_require_level(2);
+$user = current_user();
+$nivel_user = $user['user_level'];
+// page_require_area(7);
+if($nivel_user <= 2){
+  page_require_level(2);
+}
+if($nivel_user == 7){
+  page_require_level_exacto(7);
+}
+
 ?>
 <?php
 $c_user = count_by_id('users');

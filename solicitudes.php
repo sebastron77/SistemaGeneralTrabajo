@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 $page_title = 'Áreas';
 require_once('includes/load.php');
 $user = current_user();

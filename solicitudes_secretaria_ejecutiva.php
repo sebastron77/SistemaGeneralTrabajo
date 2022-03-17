@@ -1,18 +1,20 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 $page_title = 'Solicitudes - Secretaría Ejecutiva';
 require_once('includes/load.php');
 $user = current_user();
 $id_usuario = $user['id'];
 
 // $user = current_user();
-$id_user = $user['id'];
-$busca_area = area_usuario($id_usuario);
-$otro = $busca_area['id'];
+// $id_user = $user['id'];
+// $busca_area = area_usuario($id_usuario);
+// $otro = $busca_area['id'];
 
 page_require_level(10);
 $id_user = $user['id'];
 $busca_area = area_usuario($id_user);
 $otro = $busca_area['id'];
+
 page_require_area(3);
 ?>
 

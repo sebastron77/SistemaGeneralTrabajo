@@ -98,6 +98,10 @@
         <!-- Orientación y quejas -->
         <?php include_once('centro_estudios_menu.php'); ?>
 
+      <?php elseif ($user['user_level'] === '7') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('presidencia_secTecnica_menu.php'); ?>
+
       <?php endif; ?>
     </div>
   <?php endif; ?>
