@@ -16,7 +16,12 @@ $nivel = $user['user_level'];
     </div>
 </div>
 
-<a href="solicitudes_secretaria_ejecutiva.php" class="btn btn-success">Regresar</a><br><br>
+<?php if($user['user_level'] <= 2): ?>
+    <a href="solicitudes_presidencia.php" class="btn btn-success">Regresar</a><br><br>
+<?php endif; ?>
+<?php if($user['user_level'] == 3): ?>
+    <a href="solicitudes_secretaria_ejecutiva.php" class="btn btn-success">Regresar</a><br><br>
+<?php endif; ?>
 
 <div class="row">
     <div class="col-md-12">

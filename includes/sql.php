@@ -1988,7 +1988,18 @@ function find_all_resoluciones()
   return $result;
 }
 /*----------------------------------------------*/
-/* Funcion que encuentra todas las resoluciones */
+/* Funcion que encuentra todas las correspondencia */
+/*----------------------------------------------*/
+function find_all_correspondencia()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM correspondencia";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*----------------------------------------------*/
+/* Funcion que encuentra todas las consejo */
 /*----------------------------------------------*/
 function find_all_consejo()
 {
@@ -2023,13 +2034,26 @@ function find_by_id_ficha($id)
     return null;
 }
 /*----------------------------------------------------------------------------------*/
-/* Funcion que encuentra una ficha técnica por id, que ayudara al momento de editar */
+/* Funcion que encuentra una resolucion por id, que ayudara al momento de editar */
 /*----------------------------------------------------------------------------------*/
 function find_by_id_resolucion($id)
 {
   global $db;
   $id = (int)$id;
   $sql = $db->query("SELECT * FROM resoluciones WHERE id='{$db->escape($id)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+/*----------------------------------------------------------------------------------*/
+/* Funcion que encuentra una correspondencia por id, que ayudara al momento de editar */
+/*----------------------------------------------------------------------------------*/
+function find_by_id_correspondencia($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT * FROM correspondencia WHERE id='{$db->escape($id)}' LIMIT 1");
   if ($result = $db->fetch_assoc($sql))
     return $result;
   else

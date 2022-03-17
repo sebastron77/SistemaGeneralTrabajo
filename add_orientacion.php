@@ -22,8 +22,8 @@ if (isset($_POST['add_orientacion'])) {
         $nombre   = remove_junk($db->escape($_POST['nombre']));
         $nestudios   = remove_junk($db->escape($_POST['nestudios']));
         $ocupacion   = remove_junk($db->escape($_POST['ocupacion']));
-        $edad   = remove_junk(upper_case($db->escape($_POST['edad'])));
-        $tel   = remove_junk(upper_case($db->escape($_POST['tel'])));
+        $edad   = remove_junk(($db->escape($_POST['edad'])));
+        $tel   = remove_junk(($db->escape($_POST['tel'])));
         $ext   = remove_junk($db->escape($_POST['ext']));
         $sexo   = remove_junk($db->escape($_POST['sexo']));
         $calle   = remove_junk($db->escape($_POST['calle']));

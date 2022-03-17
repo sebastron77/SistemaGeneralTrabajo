@@ -18,8 +18,8 @@ if (isset($_POST['add_resolucion'])) {
         $visitaduria   = remove_junk($db->escape($_POST['visitaduria']));
         $fecha_recepcion   = remove_junk($db->escape($_POST['fecha_recepcion']));
         $fecha_remite_proyecto   = remove_junk($db->escape($_POST['fecha_remite_proyecto']));
-        $oficio_caratula   = remove_junk(upper_case($db->escape($_POST['oficio_caratula'])));
-        $observaciones   = remove_junk(upper_case($db->escape($_POST['observaciones'])));
+        $oficio_caratula   = remove_junk(($db->escape($_POST['oficio_caratula'])));
+        $observaciones   = remove_junk(($db->escape($_POST['observaciones'])));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
 
         //Suma el valor del id anterior + 1, para generar ese id para el nuevo resguardo

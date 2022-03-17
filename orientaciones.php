@@ -13,7 +13,7 @@ $otro = $busca_area['id'];
 page_require_area(5);
 ?>
 <?php include_once('layouts/header.php'); ?>
-<a href="solicitudes.php" class="btn btn-success">Regresar</a><br><br>
+<a href="solicitudes_quejas.php" class="btn btn-success">Regresar</a><br><br>
 <div class="row">
     <div class="col-md-12">
         <?php echo display_msg($msg); ?>

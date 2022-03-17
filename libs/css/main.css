@@ -300,6 +300,14 @@ table tfoot tr td:first-child{
     color: #fff;
     background-color: #2d4b9c;
     border-color: #2d4b9c;
+}.btn-secondary {
+  color: #fff;
+  background-color: #9941cc;
+  border-color: #9941cc
+}.btn-secondary:hover, .btn-secondary:focus, .btn-secondary.focus, .btn-secondary:active, .btn-secondary.active{
+  color: #fff;
+  background-color: #7e37a7;
+  border-color: #7e37a7;
 }.btn-success{
    background-color:#2cb843;
 }.btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active{

@@ -5,7 +5,7 @@ $user = current_user();
 $detalle = $user['id'];
 $id_ori_canal = last_id_oricanal();
 $id_folio = last_id_folios();
-page_require_level(5);
+page_require_level(2);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_consejo'])) {
@@ -63,18 +63,6 @@ if (isset($_POST['add_consejo'])) {
         $move2 =  move_uploaded_file($temp2, $carpeta . "/" . $name2);
 
         if ($move && $name != '' && $name2 != '') {
-            $query = "INSERT INTO consejo (";
-            $query .= "folio,num_sesion,tipo_sesion,fecha_sesion,hora,lugar,num_asistentes,orden_dia,acta_acuerdos";
-            $query .= ") VALUES (";
-            $query .= " '{$folio}','{$num_sesion}','{$tipo_sesion}','{$fecha_sesion}','{$hora}','{$lugar}','{$num_asistentes}','{$name}','{$name2}'";
-            $query .= ")";
-
-            $query2 = "INSERT INTO folios (";
-            $query2 .= "folio, contador";
-            $query2 .= ") VALUES (";
-            $query2 .= " '{$folio}','{$no_folio1}'";
-            $query2 .= ")";
-        } else {
             $query = "INSERT INTO consejo (";
             $query .= "folio,num_sesion,tipo_sesion,fecha_sesion,hora,lugar,num_asistentes,orden_dia,acta_acuerdos";
             $query .= ") VALUES (";
@@ -156,7 +144,7 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="num_asistentes">Número de asistentes</label>
-                            <input type="number" class="form-control" name="num_asistentes" required>
+                            <input type="number" class="form-control" min="1" name="num_asistentes" required>
                         </div>
                     </div>
                     <div class="col-md-3">

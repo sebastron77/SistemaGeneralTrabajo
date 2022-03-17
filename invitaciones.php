@@ -1,10 +1,10 @@
 <?php
-$page_title = 'Consejo';
+$page_title = 'Invitaciones';
 require_once('includes/load.php');
 ?>
 <?php
 page_require_level(2);
-$all_consejo = find_all_consejo();
+$all_invitacion = find_all('invitaciones');
 $user = current_user();
 $nivel = $user['user_level'];
 // page_require_area(4);
@@ -25,9 +25,9 @@ $nivel = $user['user_level'];
             <div class="panel-heading clearfix">
                 <strong>
                     <span class="glyphicon glyphicon-th"></span>
-                    <span>Consejo</span>
+                    <span>Invitaciones</span>
                 </strong>
-                <a href="add_consejo.php" class="btn btn-info pull-right">Agregar Consejo</a>
+                <a href="add_invitacion.php" class="btn btn-info pull-right">Agregar invitación</a>
             </div>
 
             <div class="panel-body">
@@ -35,36 +35,32 @@ $nivel = $user['user_level'];
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th style="width: 5%;">Folio</th>
-                            <th style="width: 1%;"># Sesión</th>
-                            <th style="width: 15%;">Tipo Sesión</th>
-                            <th style="width: 5%;">Fecha Sesión</th>
+                            <th style="width: 1%;">Nombre Evento</th>
+                            <th style="width: 15%;">Fecha Evento</th>
                             <th style="width: 1%;">Hora</th>
                             <th style="width: 2%;">Lugar</th>
                             <th style="width: 1%;"># Asistentes</th>
-                            <th style="width: 5%;">Orden día</th>
-                            <th style="width: 5%;">Acta acuerdos</th>
+                            <th style="width: 5%;">Adjunto</th>
                             <th style="width: 10%;" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($all_consejo as $a_consejo) : ?>
+                        <?php foreach ($all_invitacion as $a_invitacion) : ?>
                             <?php
-                            $folio_editar = $a_consejo['folio'];
+                            $folio_editar = $a_invitacion['folio'];
                             $resultado = str_replace("/", "-", $folio_editar);
                             ?>
                             <tr>
-                                <td><?php echo remove_junk(ucwords($a_consejo['folio'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_consejo['num_sesion'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_consejo['tipo_sesion'])) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_consejo['fecha_sesion']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_consejo['hora']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_consejo['lugar']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_consejo['num_asistentes']))) ?></td>
-                                <td><a target="_blank" style="color: #23296B;" href="uploads/consejo/<?php echo $resultado . '/' . $a_consejo['orden_dia']; ?>"><?php echo $a_consejo['orden_dia']; ?></a></td>
-                                <td><a target="_blank" style="color: #23296B;" href="uploads/consejo/<?php echo $resultado . '/' . $a_consejo['acta_acuerdos']; ?>"><?php echo $a_consejo['acta_acuerdos']; ?></a></td>
+                                <td><?php echo remove_junk(ucwords($a_invitacion['folio'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_invitacion['nombre_evento'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_invitacion['fecha_evento'])) ?></td>
+                                <td><?php echo remove_junk(ucwords(($a_invitacion['hora']))) ?></td>
+                                <td><?php echo remove_junk(ucwords(($a_invitacion['lugar']))) ?></td>
+                                <td><?php echo remove_junk(ucwords(($a_invitacion['num_asistentes']))) ?></td>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/invitaciones/<?php echo $resultado . '/' . $a_invitacion['adjunto']; ?>"><?php echo $a_invitacion['adjunto']; ?></a></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="edit_consejo.php?id=<?php echo (int)$a_consejo['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
+                                        <a href="edit_invitacion.php?id=<?php echo (int)$a_invitacion['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
                                     </div>
