@@ -8,7 +8,7 @@ $id_folio = last_id_folios();
 page_require_level(2);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
-if (isset($_POST['edit_informe'])) {
+if (isset($_POST['edit_poa'])) {
 
     $req_fields = array('anio_ejercicio', 'fecha_recepcion');
     validate_fields($req_fields);
@@ -56,14 +56,27 @@ if (isset($_POST['edit_informe'])) {
             $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', oficio_recibido='{$name}', poa='{$name2}', fecha_recepcion='{$fecha_recepcion}', oficio_entrega='{$name3}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '' && $name2 == '' && $name3 == '') {
-            $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', oficio_recibido='{$name}', poa='{$name2}', fecha_recepcion='{$fecha_recepcion}', oficio_entrega='{$name3}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', fecha_recepcion='{$fecha_recepcion}' WHERE id='{$db->escape($id)}'";
         }
-        if ($name != '' && $name2 == '') {
-            $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', oficio_recibido='{$name}', poa='{$name2}', fecha_recepcion='{$fecha_recepcion}', oficio_entrega='{$name3}' WHERE id='{$db->escape($id)}'";
+        if ($name != '' && $name2 == '' && $name3 == '') {
+            $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', oficio_recibido='{$name}', fecha_recepcion='{$fecha_recepcion}' WHERE id='{$db->escape($id)}'";
         }
-        if ($name == '' && $name2 != '') {
-            $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', oficio_recibido='{$name}', poa='{$name2}', fecha_recepcion='{$fecha_recepcion}', oficio_entrega='{$name3}' WHERE id='{$db->escape($id)}'";
+        if ($name != '' && $name2 != '' && $name3 == '') {
+            $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', oficio_recibido='{$name}', poa='{$name2}', fecha_recepcion='{$fecha_recepcion}' WHERE id='{$db->escape($id)}'";
         }
+        if ($name != '' && $name2 == '' && $name3 != '') {
+            $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', oficio_recibido='{$name}', fecha_recepcion='{$fecha_recepcion}', oficio_entrega='{$name3}' WHERE id='{$db->escape($id)}'";
+        }
+        if ($name == '' && $name2 != '' && $name3 != '') {
+            $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', poa='{$name2}', fecha_recepcion='{$fecha_recepcion}', oficio_entrega='{$name3}' WHERE id='{$db->escape($id)}'";
+        }
+        if ($name == '' && $name2 != '' && $name3 == '') {
+            $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', poa='{$name2}', fecha_recepcion='{$fecha_recepcion}' WHERE id='{$db->escape($id)}'";
+        }
+        if ($name == '' && $name2 == '' && $name3 != '') {
+            $sql = "UPDATE poa SET anio_ejercicio='{$anio_ejercicio}', fecha_recepcion='{$fecha_recepcion}', oficio_entrega='{$name3}' WHERE id='{$db->escape($id)}'";
+        }
+
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
             //sucess
@@ -88,57 +101,67 @@ include_once('layouts/header.php'); ?>
         <div class="panel-heading">
             <strong>
                 <span class="glyphicon glyphicon-th"></span>
-                <span>Editar informe</span>
+                <span>Editar POA</span>
             </strong>
         </div>
         <div class="panel-body">
-            <form method="post" action="edit_informe.php?id=<?php echo (int)$e_poa['id']; ?>" enctype="multipart/form-data">
+            <form method="post" action="edit_poa.php?id=<?php echo (int)$e_poa['id']; ?>" enctype="multipart/form-data">
             <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <label for="num_informe">Número de Informe</label>
-                            <input type="text" class="form-control" name="num_informe" value="<?php echo remove_junk($e_poa['num_informe']); ?>" required>
+                            <div class="form-group">
+                            <label for="anio_ejercicio">Año o Ejercicio Fiscal</label>
+                            <select class="form-control" name="anio_ejercicio">
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2012') echo 'selected="selected"'; ?> value="2012">2012</option>
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2013') echo 'selected="selected"'; ?> value="2013">2013</option>
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2014') echo 'selected="selected"'; ?> value="2014">2014</option>
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2015') echo 'selected="selected"'; ?> value="2015">2015</option>
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2016') echo 'selected="selected"'; ?> value="2016">2016</option>
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2017') echo 'selected="selected"'; ?> value="2017">2017</option>
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2018') echo 'selected="selected"'; ?> value="2018">2018</option>
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2019') echo 'selected="selected"'; ?> value="2019">2019</option>
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2020') echo 'selected="selected"'; ?> value="2020">2020</option>
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2021') echo 'selected="selected"'; ?> value="2021">2021</option>
+                                <option <?php if ($e_poa['anio_ejercicio'] === '2022') echo 'selected="selected"'; ?> value="2022">2022</option>
+                            </select>
+                        </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="fecha_informe">Fecha del informe</label>
-                            <input type="date" class="form-control" name="fecha_informe" value="<?php echo remove_junk($e_poa['fecha_informe']); ?>" required>
+                            <label for="oficio_recibido">Adjuntar oficio recibido</label><br>
+                            <input type="file" accept="application/pdf" class="form-control" name="oficio_recibido" value="<?php echo remove_junk($e_poa['oficio_recibido']); ?>"  id="oficio_recibido">
+                            <label style="font-size:10px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['oficio_recibido']); ?><?php ?></label>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="fecha_entrega">Fecha del entrega</label>
-                            <input type="date" class="form-control" name="fecha_entrega" value="<?php echo remove_junk($e_poa['fecha_entrega']); ?>" required>
+                            <label for="poa">POA</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="poa" value="<?php echo remove_junk($e_poa['poa']); ?>"  id="poa">
+                            <label style="font-size:10px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['poa']); ?><?php ?></label>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <label for="oficio_entrega_congreso">Adjuntar oficio de entrega Congreso</label>
-                            <input type="file" accept="application/pdf" class="form-control" name="oficio_entrega_congreso" value="<?php echo remove_junk($e_poa['oficio_entrega_congreso']); ?>" id="oficio_entrega_congreso">
+                            <label for="fecha_recepcion">Fecha de Recepción</label>
+                            <input type="date" class="form-control" name="fecha_recepcion" value="<?php echo remove_junk($e_poa['fecha_recepcion']); ?>"  required>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="caratula_informe">Caratula del Informe</label>
-                            <input type="file" accept="application/pdf" class="form-control" name="caratula_informe" value="<?php echo remove_junk($e_poa['caratula_informe']); ?>" id="caratula_informe">
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="liga_url">URL</label>
-                            <input type="text" accept="application/pdf" class="form-control" name="liga_url" id="liga_url" value="<?php echo remove_junk($e_poa['liga_url']); ?>">
+                            <label for="oficio_entrega">Adjuntar Oficio de Entrega</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="oficio_entrega" value="<?php echo remove_junk($e_poa['oficio_entrega']); ?>"  id="oficio_entrega">
+                            <label style="font-size:10px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['oficio_entrega']); ?><?php ?></label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group clearfix">
-                    <a href="informes.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                    <a href="poa.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar
                     </a>
-                    <button type="submit" name="edit_informe" class="btn btn-primary">Guardar</button>
+                    <button type="submit" name="edit_poa" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
         </div>

@@ -34,13 +34,13 @@ $nivel = $user['user_level'];
                 <table class="datatable table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 5%;">Folio</th>
+                            <th style="width: 4%;">Folio</th>
                             <th style="width: 1%;">Año o Ejercicio Fiscal</th>
-                            <th style="width: 1%;">Oficio Recibido</th>
-                            <th style="width: 1%;">POA</th>
-                            <th style="width: 2%;">Fecha de Recepción</th>
-                            <th style="width: 1%;">Oficio de Entrega</th>
-                            <th style="width: 10%;" class="text-center">Acciones</th>
+                            <th style="width: 8%;">Oficio Recibido</th>
+                            <th style="width: 8%;">POA</th>
+                            <th style="width: 1%;">Fecha de Recepción</th>
+                            <th style="width: 8%;">Oficio de Entrega</th>
+                            <th style="width: 1%;" class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
