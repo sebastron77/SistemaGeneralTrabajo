@@ -22,6 +22,12 @@ if ($nivel_user == 5) {
 if ($nivel_user == 7) {
    redirect('home.php');
 }
+if ($nivel_user > 2 && $nivel_user < 5):
+    redirect('home.php');
+endif;
+if ($nivel_user > 5):
+    redirect('home.php');
+endif;
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_orientacion'])) {

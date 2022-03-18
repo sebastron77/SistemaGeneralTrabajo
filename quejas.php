@@ -5,12 +5,32 @@ $page_title = 'Lista de quejas';
 require_once('includes/load.php');
 
 // page_require_level(1);
-page_require_level(5);
+// page_require_level(5);
 $quejas_libro = find_all('quejas');
+$user = current_user();
+$nivel = $user['user_level'];
 $id_user = $user['id'];
-$busca_area = area_usuario($id_usuario);
-$otro = $busca_area['id'];
-page_require_area(5);
+$nivel_user = $user['user_level'];
+
+if ($nivel_user <= 2) {
+  page_require_level(2);
+}
+if ($nivel_user == 5) {
+  page_require_level_exacto(5);
+}
+if ($nivel_user == 7) {
+  page_require_level_exacto(7);
+}
+
+if ($nivel_user > 2 && $nivel_user < 5):
+  redirect('home.php');
+endif;
+if ($nivel_user > 5 && $nivel_user < 7):
+  redirect('home.php');
+endif;
+if ($nivel_user > 7):
+  redirect('home.php');
+endif;
 
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -45,12 +65,15 @@ $quejas = quejas();
               <th style="width: 3%;">Creado por</th>
               <th style="width: 1%;">Estatus Queja</th>
               <th style="width: 3%;">Asignado a</th>
-              <th style="width: 3%;">Agregar a Libro Electrónico</th>
+              <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                <th style="width: 3%;">Agregar a Libro Electrónico</th>
+              <?php endif; ?>
+
             </tr>
           </thead>
           <tbody>
             <?php foreach ($quejas as $queja) : ?>
-              <?php if($quejas_libro[0] != 0):?>
+              <?php if ($quejas_libro[0] != 0) : ?>
                 <?php foreach ($quejas_libro as $queja_libro) : ?>
                   <tr>
                     <!-- <td class="text-center"> <?php echo remove_junk(ucwords($queja['Folio_Queja'])); ?></td> -->
@@ -82,19 +105,20 @@ $quejas = quejas();
                       ?>
                     </td>
                     <td> <?php echo remove_junk(($queja['Asignado_Nombre'])) . " " . ($queja['Asignado_Apellido']); ?></td>
-                    <td class="text-center">
-
-                      <?php if (($queja['Ultima_Actualizacion'] != $queja_libro['ultima_actualizacion']) && ($queja['ticket_id'] != $queja_libro['ticket_id'])) : ?>
-                        <a href="add_queja.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
-                          Agregar
-                        </a>
-                      <?php else : echo 'Queja ya registrada.' ?>
-                      <?php endif; ?>
-                    </td>
+                    <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                      <td class="text-center">
+                        <?php if (($queja['Ultima_Actualizacion'] != $queja_libro['ultima_actualizacion']) && ($queja['ticket_id'] != $queja_libro['ticket_id'])) : ?>
+                          <a href="add_queja.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
+                            Agregar
+                          </a>
+                        <?php else : echo 'Queja ya registrada.' ?>
+                        <?php endif; ?>
+                      </td>
+                    <?php endif; ?>
                   </tr>
                 <?php endforeach; ?>
               <?php endif; ?>
-              <?php if($quejas_libro[0] == 0):?>
+              <?php if ($quejas_libro[0] == 0) : ?>
                 <tr>
                   <!-- <td class="text-center"> <?php echo remove_junk(ucwords($queja['Folio_Queja'])); ?></td> -->
                   <td class="text-center"> <?php echo remove_junk(ucwords($queja['Ultima_Actualizacion'])); ?></td>
@@ -125,15 +149,16 @@ $quejas = quejas();
                     ?>
                   </td>
                   <td> <?php echo remove_junk(($queja['Asignado_Nombre'])) . " " . ($queja['Asignado_Apellido']); ?></td>
-                  <td class="text-center">
-
-                    <?php if (($queja['Ultima_Actualizacion'] != $queja_libro['ultima_actualizacion']) && ($queja['ticket_id'] != $queja_libro['ticket_id'])) : ?>
-                      <a href="add_queja.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
-                        Agregar
-                      </a>
-                    <?php else : echo 'Queja ya registrada.' ?>
-                    <?php endif; ?>
-                  </td>
+                  <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                    <td class="text-center">
+                      <?php if (($queja['Ultima_Actualizacion'] != $queja_libro['ultima_actualizacion']) && ($queja['ticket_id'] != $queja_libro['ticket_id'])) : ?>
+                        <a href="add_queja.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
+                          Agregar
+                        </a>
+                      <?php else : echo 'Queja ya registrada.' ?>
+                      <?php endif; ?>
+                    </td>
+                  <?php endif; ?>
                 </tr>
               <?php endif; ?>
             <?php endforeach; ?>

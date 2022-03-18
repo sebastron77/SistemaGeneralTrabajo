@@ -22,6 +22,15 @@ if ($nivel_user == 4) {
 if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
+if ($nivel_user > 2 && $nivel_user < 4):
+    redirect('home.php');
+endif;
+if ($nivel_user > 4 && $nivel_user < 7):
+    redirect('home.php');
+endif;
+if ($nivel_user > 7):
+    redirect('home.php');
+endif;
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -50,6 +59,7 @@ if ($nivel_user == 7) {
                 <table class="datatable table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
+                            <th style="width: 5%;">Folio</th>
                             <th style="width: 5%;">Tipo</th>
                             <th style="width: 5%;">No. expediente</th>
                             <th style="width: 5%;">Solicitante</th>
@@ -59,12 +69,15 @@ if ($nivel_user == 7) {
                             <th style="width: 3%;">Grupo Vulnerable</th>
                             <th style="width: 3%;">Fecha Intervención</th>
                             <th style="width: 3%;">Hora y Lugar</th>
+                            <?php if(($nivel_user <= 2) || ($nivel_user == 4)):?>
                             <th style="width: 5%;" class="text-center">Acciones</th>
+                            <?php endif;?>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($all_fichas as $a_ficha) : ?>
                             <tr>
+                            <td><?php echo remove_junk(ucwords($a_ficha['folio'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_ficha['tipo_solicitud'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_ficha['num_expediente'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_ficha['solicitante'])) ?></td>
@@ -74,6 +87,7 @@ if ($nivel_user == 7) {
                                 <td><?php echo remove_junk(ucwords(($a_ficha['grupo_vulnerable']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_ficha['fecha_intervencion']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_ficha['hora_lugar']))) ?></td>
+                                <?php if(($nivel_user <= 2) || ($nivel_user == 4)):?>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="ver_info_ficha.php?id=<?php echo (int)$a_ficha['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
@@ -84,6 +98,7 @@ if ($nivel_user == 7) {
                                         </a>
                                     </div>
                                 </td>
+                                <?php endif;?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

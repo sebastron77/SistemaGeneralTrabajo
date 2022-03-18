@@ -5,12 +5,32 @@ $page_title = 'Lista de quejas agregadas';
 require_once('includes/load.php');
 
 // page_require_level(1);
-page_require_level(5);
+// page_require_level(5);
 $quejas_libro = find_all_quejas();
+$user = current_user();
+$nivel = $user['user_level'];
 $id_user = $user['id'];
-$busca_area = area_usuario($id_user);
-$otro = $busca_area['id'];
-page_require_area(5);
+$nivel_user = $user['user_level'];
+
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 5) {
+    page_require_level_exacto(5);
+}
+if ($nivel_user == 7) {
+    page_require_level_exacto(7);
+}
+
+if ($nivel_user > 2 && $nivel_user < 5):
+  redirect('home.php');
+endif;
+if ($nivel_user > 5 && $nivel_user < 7):
+  redirect('home.php');
+endif;
+if ($nivel_user > 7):
+  redirect('home.php');
+endif;
 ?>
 <?php include_once('layouts/header.php'); ?>
 <a href="solicitudes_quejas.php" class="btn btn-success">Regresar</a><br><br>

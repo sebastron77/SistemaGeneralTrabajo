@@ -1257,7 +1257,7 @@ function page_require_level_exacto($require_level)
     $session->msg('d', 'Este nivel de usuario esta inactivo!');
     redirect('home.php', false);
   //checa si el nivel de usuario es menor o igual al requerido
-  elseif ($current_user['user_level'] == (int)$require_level) :
+  elseif ($current_user['user_level'] == $require_level) :
     return true;
   else :
     $session->msg("d", "¡Lo siento! no tienes permiso para ver la página.");

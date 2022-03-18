@@ -26,8 +26,12 @@ if ($nivel_user == 3) {
 if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
-
-
+if ($nivel_user > 3 && $nivel_user < 7):
+    redirect('home.php');
+endif;
+if ($nivel_user > 7):
+    redirect('home.php');
+endif;
 ?>
 
 <?php
@@ -51,7 +55,7 @@ $c_cargos          = count_by_id('cargos');
 </div>
 
 <div class="row" style="margin-top: 10px;">
-    <?php if (($otro <= 3)) : ?>
+    <?php if (($nivel <= 3) || ($nivel_user == 7)) : ?>
         <div href="#" class="col-md-3" style="height: 12.5rem;">
             <div class="panel panel-box clearfix">
                 <div class="panel-icon pull-left" style="background: #5AA82A;">

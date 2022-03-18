@@ -24,6 +24,15 @@ if ($nivel_user == 4) {
 if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
+if ($nivel_user > 2 && $nivel_user < 4):
+    redirect('home.php');
+  endif;
+  if ($nivel_user > 4 && $nivel_user < 7):
+    redirect('home.php');
+  endif;
+  if ($nivel_user > 7):
+    redirect('home.php');
+  endif;
 
 ?>
 

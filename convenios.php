@@ -23,6 +23,13 @@ if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
 
+if ($nivel_user > 3 && $nivel_user < 7):
+    redirect('home.php');
+endif;
+if ($nivel_user > 7):
+    redirect('home.php');
+endif;
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -50,7 +57,7 @@ if ($nivel_user == 7) {
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Convenios</span>
                 </strong>
-                <?php if ($nivel_user <= 2) : ?>
+                <?php if (($nivel_user <= 2) || ($nivel_user == 3)) : ?>
                     <a href="add_convenio.php" class="btn btn-info pull-right">Agregar convenio</a>
                 <?php endif; ?>
             </div>
@@ -64,7 +71,7 @@ if ($nivel_user == 7) {
                             <th style="width: 1%;">Vigencia</th>
                             <th style="width: 5%;">Institución</th>
                             <th style="width: 3%;">Descripción</th>
-                            <?php if ($nivel_user <= 2) : ?>
+                            <?php if ($nivel_user <= 2 || ($nivel_user == 3)) : ?>
                                 <th style="width: 1%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>

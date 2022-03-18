@@ -1,5 +1,5 @@
 <?php
-$page_title = 'Orientación';
+$page_title = 'Canalización';
 require_once('includes/load.php');
 ?>
 <?php

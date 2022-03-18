@@ -1,8 +1,9 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 $page_title = 'Lista de cargos';
 require_once('includes/load.php');
 
-page_require_level(2);
+// page_require_level(2);
 $all_cargos = find_all_cargos('cargos');
 $user = current_user();
 $nivel = $user['user_level'];
@@ -11,7 +12,15 @@ $id_usuario = $user['id'];
 $id_user = $user['id'];
 $busca_area = area_usuario($id_usuario);
 $otro = $busca_area['id'];
+$nivel_user = $user['user_level'];
+//@$level = find_user_level('users', (int)$_GET['id']);
 
+if ($nivel_user > 3 && $nivel_user < 7):
+    redirect('home.php');
+endif;
+if ($nivel_user > 7):
+    redirect('home.php');
+endif;
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="row">

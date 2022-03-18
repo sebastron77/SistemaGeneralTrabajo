@@ -16,6 +16,12 @@ if ($nivel_user <= 2) {
 if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
+if ($nivel_user > 2 && $nivel_user < 7):
+    redirect('home.php');
+endif;
+if ($nivel_user > 7):
+    redirect('home.php');
+endif;
 // page_require_area(4);
 ?>
 <?php include_once('layouts/header.php'); ?>
