@@ -4,11 +4,12 @@ header('Content-type: text/html; charset=utf-8');
 $page_title = 'Agregar Orientación';
 require_once('includes/load.php');
 // $user = current_user();
+$user = current_user();
 $detalle = $user['id'];
 $id_ori_canal = last_id_oricanal();
 $id_folio = last_id_folios();
 
-$user = current_user();
+
 $nivel = $user['user_level'];
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];

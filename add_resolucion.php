@@ -10,7 +10,7 @@ page_require_level(2);
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_resolucion'])) {
 
-    $req_fields = array('num_expediente', 'visitaduria', 'fecha_recepcion', 'fecha_remite_proyecto', 'observaciones');
+    $req_fields = array('num_expediente', 'visitaduria', 'fecha_recepcion', 'fecha_remite_proyecto');
     validate_fields($req_fields);
 
     if (empty($errors)) {
