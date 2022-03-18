@@ -36,6 +36,7 @@ if ($nivel == 7) {
         <?php echo display_msg($msg); ?>
     </div>
 </div>
+
 <a href="solicitudes.php" class="btn btn-success">Regresar</a><br><br>
 
 <div class="row">

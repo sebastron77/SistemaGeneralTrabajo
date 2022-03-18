@@ -3,15 +3,29 @@ $page_title = 'Fichas Técnicas';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(4);
+// page_require_level(4);
 $all_fichas = find_all_fichas();
 $user = current_user();
 $nivel = $user['user_level'];
-page_require_area(4);
+// page_require_area(4);
+$user = current_user();
+$nivel = $user['user_level'];
+$id_user = $user['id'];
+$nivel_user = $user['user_level'];
+
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 4) {
+    page_require_level_exacto(4);
+}
+if ($nivel_user == 7) {
+    page_require_level_exacto(7);
+}
 ?>
 <?php include_once('layouts/header.php'); ?>
 
-<a href="solicitudes.php" class="btn btn-success">Regresar</a><br><br>
+<a href="solicitudes_medica_psic.php" class="btn btn-success">Regresar</a><br><br>
 
 <div class="row">
     <div class="col-md-12">
@@ -27,7 +41,9 @@ page_require_area(4);
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Fichas técnicas</span>
                 </strong>
-                <a href="add_ficha.php" class="btn btn-info pull-right">Agregar ficha</a>
+                <?php if(($nivel_user <= 2) || ($nivel_user == 4)):?>
+                    <a href="add_ficha.php" class="btn btn-info pull-right">Agregar ficha</a>
+                <?php endif; ?>
             </div>
 
             <div class="panel-body">

@@ -2,7 +2,21 @@
 $page_title = 'Editar Orientación';
 require_once('includes/load.php');
 
-page_require_level(5);
+// page_require_level(5);
+$user = current_user();
+$nivel = $user['user_level'];
+$id_user = $user['id'];
+$nivel_user = $user['user_level'];
+
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 5) {
+    page_require_level_exacto(5);
+}
+if ($nivel_user == 7) {
+    redirect('home.php');
+}
 ?>
 <?php
 $e_detalle = find_by_id_orientacion((int)$_GET['id']);
@@ -10,8 +24,8 @@ if (!$e_detalle) {
     $session->msg("d", "id de orientación no encontrado.");
     redirect('orientaciones.php');
 }
-$user = current_user();
-$nivel = $user['user_level'];
+// $user = current_user();
+// $nivel = $user['user_level'];
 ?>
 
 <?php
@@ -284,6 +298,7 @@ if (isset($_POST['edit_orientacion'])) {
                         <div class="form-group">
                             <label for="adjunto">Adjunto</label>
                             <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto" value="uploads/orientacioncanalizacion/<?php echo $e_detalle['adjunto']; ?>">
+                            <label style="font-size:12px; color:#E3054F;" >Archivo Actual: <?php echo remove_junk($e_detalle['adjunto']); ?></label>
                         </div>
                     </div>
                     <div class="col-md-4">

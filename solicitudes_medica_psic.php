@@ -57,7 +57,7 @@ $c_cargos          = count_by_id('cargos');
                     </svg>
                 </div>
                 <div>
-                    <p style="font-size: 20px; margin-top:3%;">Área Médica y <br> Psicológica</p>
+                    <p style="font-size: 20px; margin-top:3%;">Fichas Técnicas</p>
                     <div>
                         <?php if (($nivel <= 2) || ($nivel == 4)) : ?>
                             <a href="add_ficha.php" class="btn btn-success">Agregar</a>

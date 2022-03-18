@@ -5,16 +5,20 @@ require_once('includes/load.php');
 $user = current_user();
 $id_usuario = $user['id'];
 
-// $user = current_user();
-// $id_user = $user['id'];
-// $busca_area = area_usuario($id_usuario);
-// $otro = $busca_area['id'];
-
-page_require_level(10);
+$user = current_user();
+$nivel = $user['user_level'];
 $id_user = $user['id'];
-$busca_area = area_usuario($id_user);
-$otro = $busca_area['id'];
-page_require_area(5);
+$nivel_user = $user['user_level'];
+
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 5) {
+    page_require_level_exacto(5);
+}
+if ($nivel_user == 7) {
+    page_require_level_exacto(7);
+}
 ?>
 
 <?php
@@ -65,7 +69,9 @@ $c_cargos          = count_by_id('cargos');
                 <div>
                     <p style="font-size: 20px; margin-top:5%;">Orientación</p>
                     <div><br>
-                        <a href="add_orientacion.php" class="btn btn-success">Agregar</a>
+                        <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                            <a href="add_orientacion.php" class="btn btn-success">Agregar</a>
+                        <?php endif; ?>
                         <a href="orientaciones.php" class="btn btn-primary">Ver</a>
                     </div>
                 </div>
@@ -82,7 +88,9 @@ $c_cargos          = count_by_id('cargos');
                 <div>
                     <p style="font-size: 20px; margin-top:5%;">Canalización</p>
                     <div><br>
-                        <a href="add_canalizacion.php" class="btn btn-success">Agregar</a>
+                        <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                            <a href="add_canalizacion.php" class="btn btn-success">Agregar</a>
+                        <?php endif; ?>
                         <a href="canalizaciones.php" class="btn btn-primary">Ver</a>
                     </div>
                 </div>

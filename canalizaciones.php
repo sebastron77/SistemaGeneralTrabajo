@@ -3,17 +3,23 @@ $page_title = 'Canalizaciones';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(5);
+// page_require_level(5);
 $all_canalizaciones = find_all_canalizaciones();
+// $user = current_user();
 $user = current_user();
 $nivel = $user['user_level'];
-// $busca_area = area_usuario($id_usuario);
-// $otro = $busca_area['id'];
-// page_require_area(5);
 $id_user = $user['id'];
-$busca_area = area_usuario($id_user);
-$otro = $busca_area['id'];
-page_require_area(5);
+$nivel_user = $user['user_level'];
+
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 5) {
+    page_require_level_exacto(5);
+}
+if ($nivel_user == 7) {
+    page_require_level_exacto(7);
+}
 ?>
 <?php include_once('layouts/header.php'); ?>
 <a href="solicitudes_quejas.php" class="btn btn-success">Regresar</a><br><br>
@@ -31,7 +37,9 @@ page_require_area(5);
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Lista de Canalizaciones</span>
                 </strong>
-                <a href="add_canalizacion.php" class="btn btn-info pull-right">Agregar canalización</a>
+                <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                    <a href="add_canalizacion.php" class="btn btn-info pull-right">Agregar canalización</a>
+                <?php endif; ?>
             </div>
 
             <div class="panel-body">
@@ -47,7 +55,9 @@ page_require_area(5);
                             <th style="width: 5%;">Nombre Completo</th>
                             <th style="width: 5%;">Ocupación</th>
                             <th style="width: 3%;">Creador</th>
-                            <th style="width: 10%;" class="text-center">Acciones</th>
+                            <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                                <th style="width: 10%;" class="text-center">Acciones</th>
+                            <?php endif ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,8 +74,8 @@ page_require_area(5);
                                     ?>
                                 </td>
                                 <?php
-                                    $folio_editar = $a_canalizacion['folio'];
-                                    $resultado = str_replace("/", "-", $folio_editar);
+                                $folio_editar = $a_canalizacion['folio'];
+                                $resultado = str_replace("/", "-", $folio_editar);
                                 ?>
                                 <td><?php echo remove_junk(ucwords($a_canalizacion['medio_presentacion'])) ?></td>
                                 <td><a target="_blank" href="uploads/orientacioncanalizacion/canalizacion/<?php echo $resultado . '/' . $a_canalizacion['adjunto']; ?>"><?php echo $a_canalizacion['adjunto']; ?></a></td>
@@ -73,21 +83,23 @@ page_require_area(5);
                                 <td><?php echo remove_junk(ucwords(($a_canalizacion['nombre_completo']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_canalizacion['ocupacion']))) ?></td>
                                 <td><?php echo remove_junk($a_canalizacion['nombre'] . " " . $a_canalizacion['apellidos']) ?></td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <a href="ver_info_canal.php?id=<?php echo (int)$a_canalizacion['idcan']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
-                                            <i class="glyphicon glyphicon-eye-open"></i>
-                                        </a>
-                                        <a href="edit_canalizacion.php?id=<?php echo (int)$a_canalizacion['idcan']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </a>
-                                        <?php if ($nivel == 1) : ?>
-                                            <!-- <a href="delete_orientacion.php?id=<?php echo (int)$a_canalizacion['id']; ?>" class="btn btn-delete btn-md" title="Eliminar" data-toggle="tooltip" onclick="return confirm('¿Seguro(a) que deseas eliminar esta orientación?');">
+                                <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a href="ver_info_canal.php?id=<?php echo (int)$a_canalizacion['idcan']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
+                                                <i class="glyphicon glyphicon-eye-open"></i>
+                                            </a>
+                                            <a href="edit_canalizacion.php?id=<?php echo (int)$a_canalizacion['idcan']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                            </a>
+                                            <?php if ($nivel == 1) : ?>
+                                                <!-- <a href="delete_orientacion.php?id=<?php echo (int)$a_canalizacion['id']; ?>" class="btn btn-delete btn-md" title="Eliminar" data-toggle="tooltip" onclick="return confirm('¿Seguro(a) que deseas eliminar esta orientación?');">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a> -->
-                                        <?php endif; ?>
-                                    </div>
-                                </td>
+                                            <?php endif; ?>
+                                        </div>
+                                    </td>
+                                <?php endif; ?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
