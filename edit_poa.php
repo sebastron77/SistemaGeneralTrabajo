@@ -131,14 +131,14 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="oficio_recibido">Adjuntar oficio recibido</label><br>
                             <input type="file" accept="application/pdf" class="form-control" name="oficio_recibido" value="<?php echo remove_junk($e_poa['oficio_recibido']); ?>"  id="oficio_recibido">
-                            <label style="font-size:10px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['oficio_recibido']); ?><?php ?></label>
+                            <label style="font-size:12px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['oficio_recibido']); ?><?php ?></label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="poa">POA</label>
                             <input type="file" accept="application/pdf" class="form-control" name="poa" value="<?php echo remove_junk($e_poa['poa']); ?>"  id="poa">
-                            <label style="font-size:10px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['poa']); ?><?php ?></label>
+                            <label style="font-size:12px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['poa']); ?><?php ?></label>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -153,7 +153,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="oficio_entrega">Adjuntar Oficio de Entrega</label>
                             <input type="file" accept="application/pdf" class="form-control" name="oficio_entrega" value="<?php echo remove_junk($e_poa['oficio_entrega']); ?>"  id="oficio_entrega">
-                            <label style="font-size:10px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['oficio_entrega']); ?><?php ?></label>
+                            <label style="font-size:12px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['oficio_entrega']); ?><?php ?></label>
                         </div>
                     </div>
                 </div>

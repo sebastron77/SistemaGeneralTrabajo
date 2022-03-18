@@ -1,11 +1,15 @@
 .body2{
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 400;
   overflow-x: hidden;
   overflow-y: auto;
   background-image: url("../../fondo_login.jpeg");
   height: 100%;
   width: 100%;
+  background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 body{
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -26,7 +30,7 @@ a{
   margin: 7% auto;
   padding: 0 20px;
   background-color: #ffffff;
-  border: 1px solid #f2f2f2cc;
+  border: 1px solid #c0c0c0b7;
   border-radius: 15px;
   box-shadow: 6px 20px 10px rgba(0, 0, 0, 0.082);
 }.login-page .text-center{

@@ -5,17 +5,29 @@ require_once('includes/load.php');
 $user = current_user();
 $id_usuario = $user['id'];
 
-// $user = current_user();
-// $id_user = $user['id'];
-// $busca_area = area_usuario($id_usuario);
-// $otro = $busca_area['id'];
-
-page_require_level(10);
+// page_require_level(10);
 $id_user = $user['id'];
 $busca_area = area_usuario($id_user);
 $otro = $busca_area['id'];
 
-page_require_area(3);
+// page_require_area(3);
+
+$user = current_user();
+$nivel = $user['user_level'];
+$id_user = $user['id'];
+$nivel_user = $user['user_level'];
+
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 3) {
+    page_require_level_exacto(3);
+}
+if ($nivel_user == 7) {
+    page_require_level_exacto(7);
+}
+
+
 ?>
 
 <?php
@@ -50,7 +62,9 @@ $c_cargos          = count_by_id('cargos');
                 <div class="panel-value pull-right">
                     <p style="font-size: 20px; margin-top:8%;">Convenios</p>
                     <div><br>
-                        <a href="add_convenio.php" class="btn btn-success">Agregar</a>
+                        <?php if (($nivel_user <= 2) || ($nivel_user == 3)) : ?>
+                            <a href="add_convenio.php" class="btn btn-success">Agregar</a>
+                        <?php endif; ?>
                         <a href="convenios.php" class="btn btn-primary">Ver</a>
                     </div>
                 </div>

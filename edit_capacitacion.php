@@ -15,13 +15,23 @@ $nivel = $user['user_level'];
 
 $id_user = $user['id'];
 
-if ($nivel == 4) {
-    page_require_level(4);
-    page_require_area(4);
+if ($nivel <= 2) {
+    page_require_level(2);
 }
-if ($nivel == 6){
-    page_require_level(6);
-    page_require_area(6);
+if ($nivel == 3) {
+    redirect('home.php');
+}
+if ($nivel == 4) {
+    page_require_level_exacto(4);
+}
+if ($nivel == 5) {
+    redirect('home.php');
+}
+if ($nivel == 6) {
+    page_require_level_exacto(6);
+}
+if ($nivel == 7) {
+    redirect('home.php');
 }
 ?>
 
@@ -155,7 +165,8 @@ if (isset($_POST['edit_capacitacion'])) {
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="curriculum">Curriculum</label>
-                            <input type="file" accept="application/pdf" class="form-control" name="curriculum" id="curriculum" value="uploads/curriculums/<?php echo $a_capacitacion['curriculum']; ?>">
+                            <input type="file" accept="application/pdf" class="form-control" name="curriculum" id="curriculum" value="uploads/curriculums/<?php echo $e_detalle['curriculum']; ?>">
+                            <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_detalle['curriculum']); ?><?php ?></label>
                         </div>
                     </div>
                     <!-- <div class="col-md-3">

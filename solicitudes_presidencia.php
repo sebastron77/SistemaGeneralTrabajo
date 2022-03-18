@@ -1,5 +1,6 @@
 <?php
-$page_title = 'Solicitudes - Presidencia';
+error_reporting(E_ALL ^ E_NOTICE);
+$page_title = 'Presidencia';
 require_once('includes/load.php');
 $user = current_user();
 $id_usuario = $user['id'];
@@ -53,7 +54,9 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 17px; margin-top:5%; color:#333333;">Resoluciones</p>
                 <div style="margin-top:-4%;">
-                    <a href="add_resolucion.php" class="btn btn-success">Agregar</a>
+                    <?php if ($nivel_user <= 2) : ?>
+                        <a href="add_resolucion.php" class="btn btn-success">Agregar</a>
+                    <?php endif; ?>
                     <a href="resoluciones.php" class="btn btn-primary">Ver</a>
                 </div>
             </div>
@@ -69,7 +72,9 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 17px; margin-top:1%; color:#333333;">Consejo de la CEDH</p>
                 <div style="margin-top:-6%;">
-                    <a href="add_consejo.php" class="btn btn-success">Agregar</a>
+                    <?php if ($nivel_user <= 2) : ?>
+                        <a href="add_consejo.php" class="btn btn-success">Agregar</a>
+                    <?php endif; ?>
                     <a href="consejo.php" class="btn btn-primary">Ver</a>
                 </div>
             </div>
@@ -102,7 +107,9 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 17px; margin-top:5%; color:#333333;">Convenio de Colaboración</p>
                 <div style="margin-top:-6%;">
-                    <a href="add_convenio.php" class="btn btn-success">Agregar</a>
+                    <?php if ($nivel_user <= 2) : ?>
+                        <a href="add_convenio.php" class="btn btn-success">Agregar</a>
+                    <?php endif; ?>
                     <a href="convenios.php" class="btn btn-primary">Ver</a>
                 </div>
             </div>
@@ -144,7 +151,9 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 17px; margin-top:5%; color:#333333;">Informe Anual de Actividades</p>
                 <div style="margin-top:-4%;">
-                    <a href="add_informe.php" class="btn btn-success">Agregar</a>
+                    <?php if ($nivel_user <= 2) : ?>
+                        <a href="add_informe.php" class="btn btn-success">Agregar</a>
+                    <?php endif; ?>
                     <a href="informes.php" class="btn btn-primary">Ver</a>
                 </div>
             </div>
@@ -160,7 +169,9 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 17px; margin-top:10%; color:#333333;">Programa Operativo Anual (POA)</p>
                 <div style="margin-top:-4%;">
-                    <a href="add_poa.php" class="btn btn-success">Agregar</a>
+                    <?php if ($nivel_user <= 2) : ?>
+                        <a href="add_poa.php" class="btn btn-success">Agregar</a>
+                    <?php endif; ?>
                     <a href="poa.php" class="btn btn-primary">Ver</a>
                 </div>
             </div>

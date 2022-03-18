@@ -9,19 +9,24 @@ $all_capacitaciones = find_all_capacitaciones();
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
-if ($nivel == 3){
+
+if ($nivel <= 2) {
+    page_require_level(2);
+}
+if ($nivel == 3) {
     redirect('home.php');
 }
 if ($nivel == 4) {
-    page_require_level(4);
-    page_require_area(4);
+    page_require_level_exacto(4);
 }
-if ($nivel == 5){
+if ($nivel == 5) {
     redirect('home.php');
 }
-if ($nivel == 6){
-    page_require_level(6);
-    page_require_area(6);
+if ($nivel == 6) {
+    page_require_level_exacto(6);
+}
+if ($nivel == 7) {
+    page_require_level_exacto(7);
 }
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -41,7 +46,9 @@ if ($nivel == 6){
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Lista de Capacitaciones</span>
                 </strong>
-                <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a>
+                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                    <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a>
+                <?php endif; ?>
             </div>
 
             <div class="panel-body">
@@ -57,7 +64,9 @@ if ($nivel == 6){
                             <th style="width: 5%;">Capacitador</th>
                             <th style="width: 2%;">Curriculum</th>
                             <!-- <th style="width: 3%;">Constancia</th> -->
-                            <th style="width: 3%;" class="text-center">Acciones</th>
+                            <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                                <th style="width: 3%;" class="text-center">Acciones</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,21 +96,23 @@ if ($nivel == 6){
                                     <?php endif; ?> -->
 
                                 <!-- </td> -->
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <a href="ver_info_capacitacion.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
-                                            <i class="glyphicon glyphicon-eye-open"></i>
-                                        </a>
-                                        <a href="edit_capacitacion.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </a>
-                                        <?php if ($nivel == 1) : ?>
-                                            <!-- <a href="delete_orientacion.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-delete btn-md" title="Eliminar" data-toggle="tooltip" onclick="return confirm('¿Seguro(a) que deseas eliminar esta orientación?');">
+                                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a href="ver_info_capacitacion.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
+                                                <i class="glyphicon glyphicon-eye-open"></i>
+                                            </a>
+                                            <a href="edit_capacitacion.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                            </a>
+                                            <?php if ($nivel == 1) : ?>
+                                                <!-- <a href="delete_orientacion.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-delete btn-md" title="Eliminar" data-toggle="tooltip" onclick="return confirm('¿Seguro(a) que deseas eliminar esta orientación?');">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </a> -->
-                                        <?php endif; ?>
-                                    </div>
-                                </td>
+                                            <?php endif; ?>
+                                        </div>
+                                    </td>
+                                <?php endif; ?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

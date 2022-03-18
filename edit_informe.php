@@ -108,6 +108,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="oficio_entrega_congreso">Adjuntar oficio de entrega Congreso</label>
                             <input type="file" accept="application/pdf" class="form-control" name="oficio_entrega_congreso" value="<?php echo remove_junk($e_informe['oficio_entrega_congreso']); ?>" id="oficio_entrega_congreso">
+                            <label style="font-size:12px; color:#E3054F;" >Archivo Actual: <?php echo remove_junk($e_informe['oficio_entrega_congreso']); ?><?php ?></label>
                         </div>
                     </div>
                 </div>
@@ -116,6 +117,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="caratula_informe">Caratula del Informe</label>
                             <input type="file" accept="application/pdf" class="form-control" name="caratula_informe" value="<?php echo remove_junk($e_informe['caratula_informe']); ?>" id="caratula_informe">
+                            <label style="font-size:12px; color:#E3054F;" >Archivo Actual: <?php echo remove_junk($e_informe['caratula_informe']); ?><?php ?></label>
                         </div>
                     </div>
 

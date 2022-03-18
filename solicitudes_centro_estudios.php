@@ -10,10 +10,21 @@ $id_usuario = $user['id'];
 // $busca_area = area_usuario($id_usuario);
 // $otro = $busca_area['id'];
 
+$user = current_user();
+$nivel = $user['user_level'];
 $id_user = $user['id'];
-$busca_area = area_usuario($id_user);
-$otro = $busca_area['id'];
-page_require_area(6);
+$nivel_user = $user['user_level'];
+
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 6) {
+    page_require_level_exacto(6);
+}
+if ($nivel_user == 7) {
+    page_require_level_exacto(7);
+}
+
 ?>
 
 <?php
@@ -48,7 +59,9 @@ $c_cargos          = count_by_id('cargos');
                 <div class="panel-value pull-right">
                     <p style="font-size: 20px; margin-top:8%;">Capacitación</p>
                     <div><br>
-                        <a href="add_capacitacion.php" class="btn btn-success">Agregar</a>
+                        <?php if (($nivel_user <= 2) || ($nivel_user == 6)) : ?>
+                            <a href="add_capacitacion.php" class="btn btn-success">Agregar</a>
+                        <?php endif; ?>
                         <a href="capacitaciones.php" class="btn btn-primary">Ver</a>
                     </div>
                 </div>

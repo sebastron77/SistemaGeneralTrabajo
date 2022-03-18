@@ -112,6 +112,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="adjunto">Archivo adjunto</label>
                             <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto">
+                            <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_resolucion['oficio_caratula']); ?><?php ?></label>
                         </div>
                     </div>
                     <div class="col-md-6">

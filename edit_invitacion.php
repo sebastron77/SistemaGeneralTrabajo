@@ -108,6 +108,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="adjunto">Adjuntar Fomato</label>
                             <input type="file" accept="application/pdf" class="form-control" name="adjunto" value="<?php echo remove_junk($e_invitacion['adjunto']); ?>" id="adjunto">
+                            <label style="font-size:12px; color:#E3054F;" >Archivo Actual: <?php echo remove_junk($e_invitacion['adjunto']); ?><?php ?></label>
                         </div>
                     </div>
                 </div>

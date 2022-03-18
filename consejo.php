@@ -1,17 +1,31 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 $page_title = 'Consejo';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(2);
+
 $all_consejo = find_all_consejo();
+
 $user = current_user();
 $nivel = $user['user_level'];
+$id_user = $user['id'];
+$nivel_user = $user['user_level'];
+
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 7) {
+    page_require_level_exacto(7);
+}
+
+// page_require_level(2);
+
 // page_require_area(4);
 ?>
 <?php include_once('layouts/header.php'); ?>
 
-<a href="solicitudes_presidencia.php" class="btn btn-success">Regresar</a><br><br>
+<a href="solicitudes.php" class="btn btn-success">Regresar</a><br><br>
 
 <div class="row">
     <div class="col-md-12">
@@ -27,7 +41,9 @@ $nivel = $user['user_level'];
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Consejo</span>
                 </strong>
-                <a href="add_consejo.php" class="btn btn-info pull-right">Agregar Consejo</a>
+                <?php if ($nivel_user <= 2) : ?>
+                    <a href="add_consejo.php" class="btn btn-info pull-right">Agregar Consejo</a>
+                <?php endif; ?>
             </div>
 
             <div class="panel-body">
@@ -43,7 +59,9 @@ $nivel = $user['user_level'];
                             <th style="width: 1%;"># Asistentes</th>
                             <th style="width: 5%;">Orden día</th>
                             <th style="width: 5%;">Acta acuerdos</th>
-                            <th style="width: 10%;" class="text-center">Acciones</th>
+                            <?php if ($nivel_user <= 2) : ?>
+                                <th style="width: 10%;" class="text-center">Acciones</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,13 +80,15 @@ $nivel = $user['user_level'];
                                 <td><?php echo remove_junk(ucwords(($a_consejo['num_asistentes']))) ?></td>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/consejo/<?php echo $resultado . '/' . $a_consejo['orden_dia']; ?>"><?php echo $a_consejo['orden_dia']; ?></a></td>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/consejo/<?php echo $resultado . '/' . $a_consejo['acta_acuerdos']; ?>"><?php echo $a_consejo['acta_acuerdos']; ?></a></td>
-                                <td class="text-center">
-                                    <div class="btn-group">
-                                        <a href="edit_consejo.php?id=<?php echo (int)$a_consejo['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
-                                            <span class="glyphicon glyphicon-edit"></span>
-                                        </a>
-                                    </div>
-                                </td>
+                                <?php if ($nivel_user <= 2) : ?>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a href="edit_consejo.php?id=<?php echo (int)$a_consejo['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
+                                                <span class="glyphicon glyphicon-edit"></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                <?php endif; ?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
