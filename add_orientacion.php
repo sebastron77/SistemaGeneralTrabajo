@@ -341,8 +341,6 @@ include_once('layouts/header.php'); ?>
                                 <option value="Vía telefónica">Vía telefónica</option>
                                 <option value="Vía electrónica">Vía electrónica</option>
                                 <option value="Comisión Nacional de los Derechos Humanos">Comisión Nacional de los Derechos Humanos</option>
-                                <option value="Quejas de oficio">Quejas de oficio</option>
-                                <option value="Quejas remitidas a visitadurias">Quejas remitidas a visitadurias</option>
                             </select>
                         </div>
                     </div>

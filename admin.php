@@ -7,16 +7,16 @@ $user = current_user();
 $nivel_user = $user['user_level'];
 // page_require_area(7);
 
-if($nivel_user <= 2){
+if ($nivel_user <= 2) {
   page_require_level(2);
 }
-if($nivel_user == 7){
+if ($nivel_user == 7) {
   page_require_level_exacto(7);
 }
-if ($nivel_user > 2 && $nivel_user < 7):
+if ($nivel_user > 2 && $nivel_user < 7) :
   redirect('home.php');
 endif;
-if ($nivel_user > 7):
+if ($nivel_user > 7) :
   redirect('home.php');
 endif;
 ?>
@@ -30,6 +30,7 @@ $c_capacitacion = count_by_id('capacitaciones');
 $c_orientacion = count_by_id_orientacion('orientacion_canalizacion');
 $c_canalizacion = count_by_id_canalizacion('orientacion_canalizacion');
 $c_med_psic = count_by_id_med_psic('fichas');
+$c_quejas = count_by_id('quejas');
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -197,14 +198,14 @@ $c_med_psic = count_by_id_med_psic('fichas');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left" style="background: #37B6FE;">
-        <svg style="width:59px;height:59px" viewBox="0 0 24 24">
-          <path fill="white" d="M13 3C16.9 3 20 6.1 20 10C20 12.8 18.4 15.2 16 16.3V21H9V18H8C6.9 18 6 17.1 6 16V13H4.5C4.1 13 3.8 12.5 4.1 12.2L6 9.7C6.2 5.9 9.2 3 13 3M13 1C8.4 1 4.6 4.4 4.1 8.9L2.5 11C1.9 11.7 1.8 12.7 2.2 13.6C2.6 14.3 3.2 14.8 4 15V16C4 17.9 5.3 19.4 7 19.9V23H18V17.5C20.5 15.9 22 13.1 22 10C22 5 18 1 13 1M17 10H14V13H12V10H9V8H12V5H14V8H17V10Z" />
+      <div class="panel-icon pull-left" style="background: #BF4BF5;">
+        <svg style="width:59px;height:58px" viewBox="0 0 24 24">
+          <path fill="white" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
         </svg>
       </div>
       <div class="panel-value pull-right">
-        <h2 class="margin-top"> <?php echo $c_capacitacion['total']; ?> </h2>
-        <p class="text-muted">Capacitaciones</p>
+        <h2 class="margin-top"> <?php echo $c_quejas['total']; ?> </h2>
+        <p class="text-muted">Quejas en Libro Electrónico</p>
       </div>
     </div>
   </div>
@@ -246,6 +247,19 @@ $c_med_psic = count_by_id_med_psic('fichas');
       <div class="panel-value pull-right">
         <h2 class="margin-top"> <?php echo $c_med_psic['total']; ?></h2>
         <p class="text-muted">Área Médica y Psicológica</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3" style="height: 12.5rem;">
+    <div class="panel panel-box clearfix">
+      <div class="panel-icon pull-left" style="background: #37B6FE;">
+        <svg style="width:59px;height:59px" viewBox="0 0 24 24">
+          <path fill="white" d="M13 3C16.9 3 20 6.1 20 10C20 12.8 18.4 15.2 16 16.3V21H9V18H8C6.9 18 6 17.1 6 16V13H4.5C4.1 13 3.8 12.5 4.1 12.2L6 9.7C6.2 5.9 9.2 3 13 3M13 1C8.4 1 4.6 4.4 4.1 8.9L2.5 11C1.9 11.7 1.8 12.7 2.2 13.6C2.6 14.3 3.2 14.8 4 15V16C4 17.9 5.3 19.4 7 19.9V23H18V17.5C20.5 15.9 22 13.1 22 10C22 5 18 1 13 1M17 10H14V13H12V10H9V8H12V5H14V8H17V10Z" />
+        </svg>
+      </div>
+      <div class="panel-value pull-right">
+        <h2 class="margin-top"> <?php echo $c_capacitacion['total']; ?> </h2>
+        <p class="text-muted">Capacitaciones</p>
       </div>
     </div>
   </div>

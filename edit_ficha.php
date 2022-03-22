@@ -39,9 +39,29 @@ if (isset($_POST['edit_ficha'])) {
         $hora_lugar   = remove_junk($db->escape($_POST['hora_lugar']));
         $actividad_realizada   = remove_junk($db->escape($_POST['actividad_realizada']));
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
+        $fecha_entrega_documento   = remove_junk($db->escape($_POST['fecha_entrega_documento']));
+        $adjunto   = remove_junk($db->escape($_POST['adjunto']));
 
-        $sql = "UPDATE fichas SET tipo_solicitud='{$tipo_sol}', num_expediente='{$num_expediente}', solicitante='{$solicitante}', visitaduria='{$visitaduria}', hechos='{$hechos}', autoridad='{$autoridad}', quien_presenta='{$quien_presenta}', nombre_usuario='{$nombre_usuario}', parentesco='{$parentesco}', edad='{$edad}',fecha_nacimiento='{$fecha_nacimiento}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', tutor='{$tutor}', contacto='{$contacto}', fecha_intervencion='{$fecha_intervencion}', hora_lugar='{$hora_lugar}', actividad_realizada='{$actividad_realizada}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
+        $folio_editar = $e_ficha['folio'];
+        $resultado = str_replace("/", "-", $folio_editar);
+        $carpeta = 'uploads/fichastecnicas/' . $resultado;
 
+        $name = $_FILES['adjunto']['name'];
+        $size = $_FILES['adjunto']['size'];
+        $type = $_FILES['adjunto']['type'];
+        $temp = $_FILES['adjunto']['tmp_name'];
+
+        if (is_dir($carpeta)) {
+            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+        } else {
+            mkdir($carpeta, 0777, true);
+        }
+        if ($name != '') {
+            $sql = "UPDATE fichas SET tipo_solicitud='{$tipo_sol}', num_expediente='{$num_expediente}', solicitante='{$solicitante}', visitaduria='{$visitaduria}', hechos='{$hechos}', autoridad='{$autoridad}', quien_presenta='{$quien_presenta}', nombre_usuario='{$nombre_usuario}', parentesco='{$parentesco}', edad='{$edad}',fecha_nacimiento='{$fecha_nacimiento}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', tutor='{$tutor}', contacto='{$contacto}', fecha_intervencion='{$fecha_intervencion}', hora_lugar='{$hora_lugar}', actividad_realizada='{$actividad_realizada}', observaciones='{$observaciones}', fecha_entrega_documento='{$fecha_entrega_documento}', ficha_adjunto='{$name}' WHERE id='{$db->escape($id)}'";
+        }
+        if ($name == '') {
+            $sql = "UPDATE fichas SET tipo_solicitud='{$tipo_sol}', num_expediente='{$num_expediente}', solicitante='{$solicitante}', visitaduria='{$visitaduria}', hechos='{$hechos}', autoridad='{$autoridad}', quien_presenta='{$quien_presenta}', nombre_usuario='{$nombre_usuario}', parentesco='{$parentesco}', edad='{$edad}',fecha_nacimiento='{$fecha_nacimiento}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', tutor='{$tutor}', contacto='{$contacto}', fecha_intervencion='{$fecha_intervencion}', hora_lugar='{$hora_lugar}', actividad_realizada='{$actividad_realizada}', observaciones='{$observaciones}', fecha_entrega_documento='{$fecha_entrega_documento}' WHERE id='{$db->escape($id)}'";
+        }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
             $session->msg('s', "Información Actualizada ");
@@ -399,10 +419,10 @@ if (isset($_POST['edit_ficha'])) {
                             </select>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="row">
-                <div class="col-md-4">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="tutor">Nombre de tutor</label>
                             <input type="text" class="form-control" value="<?php echo remove_junk($e_ficha['tutor']); ?>" name="tutor">
@@ -426,10 +446,10 @@ if (isset($_POST['edit_ficha'])) {
                             <textarea type="text" class="form-control" value="<?php echo remove_junk($e_ficha['hora_lugar']); ?>" name="hora_lugar" cols="50" rows="1"><?php echo remove_junk($e_ficha['hora_lugar']); ?></textarea>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="row">
-                <div class="col-md-6">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="actividad_realizada">Actividad realizada</label>
                             <textarea type="text" class="form-control" value="<?php echo remove_junk($e_ficha['actividad_realizada']); ?>" name="actividad_realizada" cols="50" rows="1"><?php echo remove_junk($e_ficha['actividad_realizada']); ?></textarea>
@@ -439,6 +459,21 @@ if (isset($_POST['edit_ficha'])) {
                         <div class="form-group">
                             <label for="observaciones">Observaciones Generales</label>
                             <textarea type="text" class="form-control" name="observaciones" value="<?php echo remove_junk($e_ficha['observaciones']); ?>" cols="30" rows="1"><?php echo remove_junk($e_ficha['observaciones']); ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="fecha_entrega_documento">Fecha de Entrega de Ficha</label>
+                            <input type="date" class="form-control" name="fecha_entrega_documento" value="<?php echo remove_junk($e_ficha['fecha_entrega_documento']); ?>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="adjunto">Adjuntar Ficha</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto" value="<?php echo remove_junk($e_ficha['ficha_adjunto']); ?>">
+                            <label style="font-size:12px; color:#E3054F;" >Archivo Actual: <?php echo remove_junk($e_ficha['ficha_adjunto']); ?><?php ?></label>
                         </div>
                     </div>
                 </div>

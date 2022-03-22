@@ -36,6 +36,8 @@ if (isset($_POST['add_ficha'])) {
         $hora_lugar   = remove_junk($db->escape($_POST['hora_lugar']));
         $actividad_realizada   = remove_junk($db->escape($_POST['actividad_realizada']));
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
+        $fecha_entrega_documento   = remove_junk($db->escape($_POST['fecha_entrega_documento']));
+        $adjunto   = remove_junk($db->escape($_POST['adjunto']));
 
         if (count($id_folio) == 0) {
             $nuevo_id_folio = 1;
@@ -51,19 +53,44 @@ if (isset($_POST['add_ficha'])) {
         // Se crea el folio de convenio
         $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-FT';
 
+        $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-FT';
+        $carpeta = 'uploads/fichastecnicas/' . $folio_carpeta;
 
-        $query = "INSERT INTO fichas (";
-        $query .= "folio,tipo_solicitud,num_expediente,solicitante,visitaduria,hechos,autoridad,quien_presenta,nombre_usuario,parentesco,edad,fecha_nacimiento,sexo,grupo_vulnerable,tutor,contacto,fecha_intervencion,hora_lugar,actividad_realizada,observaciones";
-        $query .= ") VALUES (";
-        $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$contacto}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}'";
-        $query .= ")";
+        if (!is_dir($carpeta)) {
+            mkdir($carpeta, 0777, true);
+        }
 
-        $query2 = "INSERT INTO folios (";
-        $query2 .= "folio, contador";
-        $query2 .= ") VALUES (";
-        $query2 .= " '{$folio}','{$no_folio1}'";
-        $query2 .= ")";
+        $name = $_FILES['adjunto']['name'];
+        $size = $_FILES['adjunto']['size'];
+        $type = $_FILES['adjunto']['type'];
+        $temp = $_FILES['adjunto']['tmp_name'];
 
+        $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+        if ($move && $name != '') {
+            $query = "INSERT INTO fichas (";
+            $query .= "folio,tipo_solicitud,num_expediente,solicitante,visitaduria,hechos,autoridad,quien_presenta,nombre_usuario,parentesco,edad,fecha_nacimiento,sexo,grupo_vulnerable,tutor,contacto,fecha_intervencion,hora_lugar,actividad_realizada,observaciones,fecha_entrega_documento,ficha_adjunto";
+            $query .= ") VALUES (";
+            $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$contacto}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}','{$name}'";
+            $query .= ")";
+
+            $query2 = "INSERT INTO folios (";
+            $query2 .= "folio, contador";
+            $query2 .= ") VALUES (";
+            $query2 .= " '{$folio}','{$no_folio1}'";
+            $query2 .= ")";
+        } else {
+            $query = "INSERT INTO fichas (";
+            $query .= "folio,tipo_solicitud,num_expediente,solicitante,visitaduria,hechos,autoridad,quien_presenta,nombre_usuario,parentesco,edad,fecha_nacimiento,sexo,grupo_vulnerable,tutor,contacto,fecha_intervencion,hora_lugar,actividad_realizada,observaciones,fecha_entrega_documento";
+            $query .= ") VALUES (";
+            $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$contacto}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}'";
+            $query .= ")";
+
+            $query2 = "INSERT INTO folios (";
+            $query2 .= "folio, contador";
+            $query2 .= ") VALUES (";
+            $query2 .= " '{$folio}','{$no_folio1}'";
+            $query2 .= ")";
+        }
         if ($db->query($query) && $db->query($query2)) {
             //sucess
             $session->msg('s', " La orientación ha sido agregada con éxito.");
@@ -466,6 +493,20 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="observaciones">Observaciones Generales</label>
                             <textarea type="text" class="form-control" name="observaciones" cols="50" rows="1"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="fecha_entrega_documento">Fecha de Entrega de Ficha</label>
+                            <input type="date" class="form-control" name="fecha_entrega_documento" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="adjunto">Adjuntar Ficha</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto">
                         </div>
                     </div>
                 </div>

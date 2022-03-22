@@ -88,7 +88,7 @@ include_once('layouts/header.php'); ?>
         <div class="panel-body">
             <form method="post" action="edit_consejo.php?id=<?php echo (int)$a_consejo['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="num_sesion">Número Sesión</label>
                             <input type="text" class="form-control" name="num_sesion" value="<?php echo remove_junk($a_consejo['num_sesion']); ?>" required>
@@ -109,34 +109,34 @@ include_once('layouts/header.php'); ?>
                             <input type="date" class="form-control" name="fecha_sesion" value="<?php echo remove_junk($a_consejo['fecha_sesion']); ?>" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="hora">Hora</label>
                             <input type="time" class="form-control" name="hora" value="<?php echo remove_junk($a_consejo['hora']); ?>" required>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="lugar">Lugar</label>
-                            <input type="text" class="form-control" name="lugar" value="<?php echo remove_junk($a_consejo['lugar']); ?>" required>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="num_asistentes">Número de asistentes</label>
                             <input type="number" class="form-control" name="num_asistentes" value="<?php echo remove_junk($a_consejo['num_asistentes']); ?>" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lugar">Lugar</label>
+                            <input type="text" class="form-control" name="lugar" value="<?php echo remove_junk($a_consejo['lugar']); ?>" required>
+                        </div>
+                    </div>                    
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="orden_dia">Orden del día</label>
                             <input type="file" accept="application/pdf" class="form-control" name="orden_dia" id="orden_dia" value="<?php echo remove_junk($a_consejo['orden_dia']); ?>">
                             <label style="font-size:12px; color:#E3054F;" >Archivo Actual: <?php echo remove_junk($a_consejo['orden_dia']); ?><?php ?></label>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="acta_acuerdos">Acta de acuerdos (firmada)</label>
                             <input type="file" accept="application/pdf" class="form-control" name="acta_acuerdos" value="<?php echo remove_junk($a_consejo['acta_acuerdos']); ?>" id="acta_acuerdos">

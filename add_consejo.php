@@ -105,7 +105,7 @@ include_once('layouts/header.php'); ?>
         <div class="panel-body">
             <form method="post" action="add_consejo.php" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="num_sesion"># de Sesión</label>
                             <input type="text" class="form-control" name="num_sesion" required>
@@ -127,33 +127,33 @@ include_once('layouts/header.php'); ?>
                             <input type="date" class="form-control" name="fecha_sesion" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="hora">Hora</label>
                             <input type="time" class="form-control" name="hora" required>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="lugar">Lugar</label>
-                            <input type="text" class="form-control" name="lugar" required>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="num_asistentes">Número de asistentes</label>
                             <input type="number" class="form-control" min="1" name="num_asistentes" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lugar">Lugar</label>
+                            <input type="text" class="form-control" name="lugar" required>
+                        </div>
+                    </div>                   
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="orden_dia">Orden del día</label>
                             <input type="file" accept="application/pdf" class="form-control" name="orden_dia" id="orden_dia" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="acta_acuerdos">Acta de acuerdos (firmada)</label>
                             <input type="file" accept="application/pdf" class="form-control" name="acta_acuerdos" id="acta_acuerdos" required>

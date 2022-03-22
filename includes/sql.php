@@ -1006,6 +1006,18 @@ function count_by_id($table)
   }
 }
 /*------------------------------------------------------------------------*/
+/* Funcion para contar los ID de algun campo para saber su cantidad total */
+/*------------------------------------------------------------------------*/
+function count_by_id_quejas($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(id) AS total FROM " . $db->escape($table);
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+/*------------------------------------------------------------------------*/
 /* Funcion para contar los ID de orientacion para saber su cantidad total */
 /*------------------------------------------------------------------------*/
 function count_by_id_orientacion($table)

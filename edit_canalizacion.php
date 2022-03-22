@@ -285,8 +285,6 @@ if (isset($_POST['edit_canalizacion'])) {
                                 <option value="Vía telefónica" <?php if ($e_detalle['medio_presentacion'] === 'Vía telefónica') echo 'selected="selected"'; ?>>Vía telefónica</option>
                                 <option value="Vía electrónica" <?php if ($e_detalle['medio_presentacion'] === 'Vía electrónica') echo 'selected="selected"'; ?>>Vía electrónica</option>
                                 <option value="Comisión Nacional de los Derechos Humanos" <?php if ($e_detalle['medio_presentacion'] === 'Comisión Nacional de los Derechos Humanos') echo 'selected="selected"'; ?>>Comisión Nacional de los Derechos Humanos</option>
-                                <option value="Quejas de oficio" <?php if ($e_detalle['medio_presentacion'] === 'Quejas de oficio') echo 'selected="selected"'; ?>>Quejas de oficio</option>
-                                <option value="Quejas remitidas a visitadurias" <?php if ($e_detalle['medio_presentacion'] === 'Quejas remitidas a visitadurias') echo 'selected="selected"'; ?>>Quejas remitidas a visitadurias</option>
                             </select>
                         </div>
                     </div>

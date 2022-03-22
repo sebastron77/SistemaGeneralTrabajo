@@ -70,6 +70,7 @@ endif;
                             <th style="width: 1%;">Fecha Convenio</th>
                             <th style="width: 1%;">Vigencia</th>
                             <th style="width: 5%;">Institución</th>
+                            <th style="width: 3%;">Convenio</th>
                             <th style="width: 3%;">Descripción</th>
                             <?php if ($nivel_user <= 2 || ($nivel_user == 3)) : ?>
                                 <th style="width: 1%;" class="text-center">Acciones</th>
@@ -83,6 +84,12 @@ endif;
                                 <td><?php echo remove_junk(ucwords(($a_convenio['fecha_convenio']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_convenio['vigencia']))) ?></td>
                                 <td><?php echo remove_junk((ucwords($a_convenio['institucion']))) ?></td>
+                                <?php 
+                                    $folio_editar = $a_convenio['folio_solicitud'];
+                                    $resultado = str_replace("/", "-", $folio_editar); 
+                                ?>
+                                
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/convenios/<?php echo $resultado . '/' . $a_convenio['convenio']; ?>"><?php echo $a_convenio['convenio']; ?></a></td>
                                 <td><?php echo remove_junk(ucwords(($a_convenio['descripcion_convenio']))) ?></td>
                                 <?php if (($nivel_user <= 2) || ($nivel_user == 3)) : ?>
                                     <td class="text-center">

@@ -21,6 +21,7 @@ if (isset($_POST['add_convenio'])) {
         $vigencia   = remove_junk($db->escape($_POST['vigencia']));
         $direccion_institucion   = remove_junk(($db->escape($_POST['direccion_institucion'])));
         $telefono   = remove_junk(($db->escape($_POST['telefono'])));
+        $adjunto   = remove_junk($db->escape($_POST['adjunto']));
 
         if (count($id_folio) == 0) {
             $nuevo_id_folio = 1;
@@ -36,18 +37,45 @@ if (isset($_POST['add_convenio'])) {
         // Se crea el folio de convenio
         $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-CONV';
 
-        $query = "INSERT INTO convenios (";
-        $query .= "folio_solicitud,fecha_convenio,institucion,ambito_institucion,tipo_institucion,descripcion_convenio,vigencia,direccion_institucion,telefono";
-        $query .= ") VALUES (";
-        $query .= " '{$folio}','{$fecha_convenio}','{$institucion}','{$ambito_institucion}','{$tipo_institucion}','{$descripcion_convenio}','{$vigencia}','{$direccion_institucion}','{$telefono}'";
-        $query .= ")";
+        $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-CONV';
+        $carpeta = 'uploads/convenios/' . $folio_carpeta;
 
-        $query2 = "INSERT INTO folios (";
-        $query2 .= "folio, contador";
-        $query2 .= ") VALUES (";
-        $query2 .= " '{$folio}','{$no_folio1}'";
-        $query2 .= ")";
+        if (!is_dir($carpeta)) {
+            mkdir($carpeta, 0777, true);
+        }
 
+        $name = $_FILES['adjunto']['name'];
+        $size = $_FILES['adjunto']['size'];
+        $type = $_FILES['adjunto']['type'];
+        $temp = $_FILES['adjunto']['tmp_name'];
+
+        $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+
+        if ($move && $name != '') {
+            $query = "INSERT INTO convenios (";
+            $query .= "folio_solicitud,fecha_convenio,institucion,ambito_institucion,tipo_institucion,descripcion_convenio,vigencia,direccion_institucion,telefono,convenio";
+            $query .= ") VALUES (";
+            $query .= " '{$folio}','{$fecha_convenio}','{$institucion}','{$ambito_institucion}','{$tipo_institucion}','{$descripcion_convenio}','{$vigencia}','{$direccion_institucion}','{$telefono}','{$name}'";
+            $query .= ")";
+
+            $query2 = "INSERT INTO folios (";
+            $query2 .= "folio, contador";
+            $query2 .= ") VALUES (";
+            $query2 .= " '{$folio}','{$no_folio1}'";
+            $query2 .= ")";
+        }else{
+            $query = "INSERT INTO convenios (";
+            $query .= "folio_solicitud,fecha_convenio,institucion,ambito_institucion,tipo_institucion,descripcion_convenio,vigencia,direccion_institucion,telefono";
+            $query .= ") VALUES (";
+            $query .= " '{$folio}','{$fecha_convenio}','{$institucion}','{$ambito_institucion}','{$tipo_institucion}','{$descripcion_convenio}','{$vigencia}','{$direccion_institucion}','{$telefono}'";
+            $query .= ")";
+
+            $query2 = "INSERT INTO folios (";
+            $query2 .= "folio, contador";
+            $query2 .= ") VALUES (";
+            $query2 .= " '{$folio}','{$no_folio1}'";
+            $query2 .= ")";
+        }
         if ($db->query($query) && $db->query($query2)) {
             //sucess
             $session->msg('s', " El convenio ha sido agregado con éxito.");
@@ -108,8 +136,10 @@ include_once('layouts/header.php'); ?>
                             <label for="ambito_institucion">Ámbito institucional</label>
                             <select class="form-control" name="ambito_institucion">
                                 <option value="">Elige una opción</option>
-                                <option value="Estatal">Estatal</option>
                                 <option value="Nacional">Nacional</option>
+                                <option value="Estatal">Estatal</option>
+                                <option value="Federal">Federal</option>
+                                <option value="Municipal">Municipal</option>
                             </select>
                         </div>
                     </div>
@@ -120,7 +150,8 @@ include_once('layouts/header.php'); ?>
                                 <option value="">Elige una opción</option>
                                 <option value="Instituciones">Instituciones</option>
                                 <option value="Dependencias Gubernamentales">Dependencias Gubernamentales</option>
-                                <option value="ONG y Organismos Públicos de Derechos Humanos">ONG y Organismos Públicos de Derechos Humanos</option>
+                                <option value="ONG y Organismos Públicos de Derechos Humanos">Organismos Públicos de Derechos Humanos</option>
+                                <option value="ONG y Organismos Públicos de Derechos Humanos">ONG</option>
                             </select>
                         </div>
                     </div>
@@ -129,16 +160,22 @@ include_once('layouts/header.php'); ?>
                             <label for="direccion_institucion">Dirección de la institución</label>
                             <input type="text" class="form-control" name="direccion_institucion" required>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
                 <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="descripcion_convenio">Descripción del convenio</label><br>
-                                <textarea name="descripcion_convenio" class="form-control" id="descripcion_convenio" cols="50" rows="2"></textarea>
-                            </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="descripcion_convenio">Descripción del convenio</label><br>
+                            <textarea name="descripcion_convenio" class="form-control" id="descripcion_convenio" cols="50" rows="2"></textarea>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="adjunto">Adjuntar Convenio</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto">
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group clearfix">
                     <a href="convenios.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar

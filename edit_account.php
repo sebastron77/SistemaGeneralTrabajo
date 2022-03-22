@@ -35,7 +35,6 @@ if (isset($_POST['update'])) {
       if (($username == $user['username']) || ($usernameLow == lower_case($user['username'])) || ($usernameUpper == upper_case($user['username'])) || ($usernameUcword == ucwords($user['username']))) {
         $session->msg('d', 'Lo sentimos, el nombre de usuario ya existe.');
         redirect('edit_account.php', false);
-
       } else {
         $sql = "UPDATE users SET username ='{$username}' WHERE id='{$id}'";
       }
@@ -96,16 +95,12 @@ if (isset($_POST['update'])) {
       <div class="panel-body">
         <form method="post" action="edit_account.php?id=<?php echo (int)$user['id']; ?>" class="clearfix">
           <!-- <div class="form-group">
-                  <label for="name" class="control-label">Nombre</label>
-                  <input type="name" class="form-control" name="id_detalle_user" value="<?php echo remove_junk(ucwords($user['id_detalle_user'])); ?>">
-            </div> -->
-          <div class="form-group">
             <label for="username" class="control-label">Nombre de Usuario</label>
             <input type="text" class="form-control" name="username" value="<?php echo remove_junk($user['username']); ?>">
-          </div>
-          <div class="form-group clearfix">
+          </div> -->
+          <div class="form-group clearfix" style=" display: flex; justify-content: center; align-items: center;">
             <a href="change_password.php" title="change password" class="btn btn-danger pull-right">Cambiar contraseña</a>
-            <button type="submit" name="update" class="btn btn-info">Actualizar</button>
+            <!-- <button type="submit" name="update" class="btn btn-info">Actualizar</button> -->
           </div>
         </form>
       </div>
