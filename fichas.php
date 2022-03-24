@@ -61,14 +61,12 @@ endif;
                         <tr style="height: 10px;" class="info">
                             <th style="width: 5%;">Folio</th>
                             <th style="width: 5%;">Tipo</th>
-                            <th style="width: 5%;">No. expediente</th>
+                            <th style="width: 3%;">No. expediente</th>
                             <th style="width: 5%;">Solicitante</th>
                             <th style="width: 1%;">Visitaduria</th>
                             <th style="width: 5%;">Autoridad</th>
                             <th style="width: 5%;">Presenta</th>
-                            <th style="width: 3%;">Grupo Vulnerable</th>
-                            <th style="width: 3%;">Fecha Intervención</th>
-                            <th style="width: 3%;">Hora y Lugar</th>
+                            <th style="width: 3%;">Adjunto</th>
                             <?php if(($nivel_user <= 2) || ($nivel_user == 4)):?>
                             <th style="width: 5%;" class="text-center">Acciones</th>
                             <?php endif;?>
@@ -84,9 +82,11 @@ endif;
                                 <td><?php echo remove_junk(ucwords(($a_ficha['visitaduria']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_ficha['autoridad']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_ficha['quien_presenta']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_ficha['grupo_vulnerable']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_ficha['fecha_intervencion']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_ficha['hora_lugar']))) ?></td>
+                                <?php 
+                                    $folio_editar = $a_ficha['folio'];
+                                    $resultado = str_replace("/", "-", $folio_editar); 
+                                ?>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/fichastecnicas/<?php echo $resultado . '/' . $a_ficha['ficha_adjunto']; ?>"><?php echo $a_ficha['ficha_adjunto']; ?></a></td>
                                 <?php if(($nivel_user <= 2) || ($nivel_user == 4)):?>
                                 <td class="text-center">
                                     <div class="btn-group">

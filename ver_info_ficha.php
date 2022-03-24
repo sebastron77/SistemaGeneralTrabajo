@@ -32,61 +32,76 @@ $nivel = $user['user_level'];
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th style="width: 3%;">Folio</th>
-                            <th style="width: 3%;">Tipo</th>
                             <th style="width: 3%;">No. expediente</th>
+                            <th style="width: 3%;">Tipo</th>
                             <th style="width: 5%;">Solicitante</th>
                             <th style="width: 1%;">Visitaduria</th>
-                            <th style="width: 5%;">Hechos</th>
-                            <th style="width: 5%;">Autoridad</th>
-                            <th style="width: 5%;">Presentante</th>
-                            <th style="width: 3%;">Usuario</th>
-                            <th style="width: 3%;">Parentesco</th>
-
+                            <th style="width: 15%;">Hechos</th>
+                            <th style="width: 10%;">Autoridad</th>
                         </tr>
                     </thead>
                     <tbody>
-
                         <tr>
-                        <td><?php echo remove_junk(ucwords($a_ficha['folio'])) ?></td>
-                            <td><?php echo remove_junk(ucwords($a_ficha['tipo_solicitud'])) ?></td>
+                            <td><?php echo remove_junk(ucwords($a_ficha['folio'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_ficha['num_expediente'])) ?></td>
+                            <td><?php echo remove_junk(ucwords($a_ficha['tipo_solicitud'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_ficha['solicitante'])) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['visitaduria']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['hechos']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['autoridad']))) ?></td>
-                            <td><?php echo remove_junk(ucwords(($a_ficha['quien_presenta']))) ?></td>
-                            <td><?php echo remove_junk(ucwords(($a_ficha['nombre_usuario']))) ?></td>
-                            <td><?php echo remove_junk(ucwords(($a_ficha['parentesco']))) ?></td>
-
                         </tr>
                     </tbody>
                 </table>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 3%;">Edad</th>
-                            <th style="width: 3%;">Fecha Nacimiento</th>
-                            <th style="width: 3%;">Sexo</th>
-                            <th style="width: 3%;">Grupo Vulnerable</th>
-                            <th style="width: 3%;">Tutor</th>
-                            <th style="width: 3%;">Contacto</th>
-                            <th style="width: 3%;">Fecha Intervención</th>
-                            <th style="width: 3%;">Hora y Lugar</th>
-                            <th style="width: 3%;">Actividad realizada</th>
-                            <th style="width: 3%;">Observaciones</th>
+                            <th style="width: 4%;">Presentante</th>
+                            <th style="width: 3%;">Usuario</th>
+                            <th style="width: 2%;">Parentesco</th>
+                            <th style="width: 1%;">Edad</th>
+                            <th style="width: 1%;">Fecha Nacimiento</th>
+                            <th style="width: 1%;">Sexo</th>
+                            <th style="width: 4%;">Grupo Vulnerable</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <td><?php echo remove_junk(ucwords(($a_ficha['quien_presenta']))) ?></td>
+                        <td><?php echo remove_junk(ucwords(($a_ficha['nombre_usuario']))) ?></td>
+                        <td><?php echo remove_junk(ucwords(($a_ficha['parentesco']))) ?></td>
                         <td><?php echo remove_junk(ucwords(($a_ficha['edad']))) ?></td>
                         <td><?php echo remove_junk(ucwords(($a_ficha['fecha_nacimiento']))) ?></td>
                         <td><?php echo remove_junk(ucwords(($a_ficha['sexo']))) ?></td>
                         <td><?php echo remove_junk(ucwords(($a_ficha['grupo_vulnerable']))) ?></td>
-                        <td><?php echo remove_junk(ucwords(($a_ficha['tutor']))) ?></td>
-                        <td><?php echo remove_junk(ucwords(($a_ficha['contacto']))) ?></td>
-                        <td><?php echo remove_junk(ucwords(($a_ficha['fecha_intervencion']))) ?></td>
-                        <td><?php echo remove_junk(ucwords(($a_ficha['hora_lugar']))) ?></td>
-                        <td><?php echo remove_junk(ucwords(($a_ficha['actividad_realizada']))) ?></td>
-                        <td><?php echo remove_junk(ucwords(($a_ficha['observaciones']))) ?></td>
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr style="height: 10px;" class="info">
+                            <th style="width: 3%;">Tutor</th>
+                            <th style="width: 1%;">Contacto</th>
+                            <th style="width: 3%;">Fecha Intervención</th>
+                            <th style="width: 3%;">Hora y Lugar</th>
+                            <th style="width: 3%;">Actividad realizada</th>
+                            <th style="width: 3%;">Observaciones</th>
+                            <th style="width: 3%;">Fecha de Entrega de Documento</th>
+                            <th style="width: 3%;">Ficha-Adjunto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['tutor']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['contacto']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['fecha_intervencion']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['hora_lugar']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['actividad_realizada']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['observaciones']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['fecha_entrega_documento']))) ?></td>
+                            <?php
+                            $folio_editar = $a_ficha['folio'];
+                            $resultado = str_replace("/", "-", $folio_editar);
+                            ?>
+                            <td><a target="_blank" style="color: #23296B;" href="uploads/fichastecnicas/<?php echo $resultado . '/' . $a_ficha['ficha_adjunto']; ?>"><?php echo $a_ficha['ficha_adjunto']; ?></a></td>
+                        </tr>
                     </tbody>
                 </table>
                 <a href="fichas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">

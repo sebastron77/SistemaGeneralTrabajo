@@ -28,7 +28,7 @@ if ($nivel_user == 7) {
 
 <?php
 if (isset($_POST['edit_canalizacion'])) {
-    $req_fields = array('nombre', 'nestudios', 'ocupacion', 'edad', 'tel', 'sexo', 'calle', 'colonia', 'cpostal', 'municipio', 'entidad', 'nacionalidad', 'medio');
+    $req_fields = array('nombre', 'nestudios', 'ocupacion', 'edad', 'tel', 'sexo', 'calle', 'colonia', 'cpostal', 'municipio', 'entidad', 'nacionalidad', 'medio', 'grupo_vulnerable', 'lengua', 'institucion_canaliza');
     validate_fields($req_fields);
     if (empty($errors)) {
         $id = (int)$e_detalle['id'];
@@ -47,6 +47,9 @@ if (isset($_POST['edit_canalizacion'])) {
         $entidad   = remove_junk($db->escape($_POST['entidad']));
         $nacionalidad   = remove_junk($db->escape($_POST['nacionalidad']));
         $medio   = remove_junk($db->escape($_POST['medio']));
+        $grupo_vulnerable   = remove_junk($db->escape($_POST['grupo_vulnerable']));
+        $lengua   = remove_junk($db->escape($_POST['lengua']));
+        $institucion_canaliza   = remove_junk($db->escape($_POST['institucion_canaliza']));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
         //$name = remove_junk((int)$db->escape($_POST['detalle-user']));
@@ -65,10 +68,10 @@ if (isset($_POST['edit_canalizacion'])) {
         }
 
         if ($name != '') {
-            $sql = "UPDATE orientacion_canalizacion SET correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', observaciones='{$observaciones}', adjunto='{$name}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE orientacion_canalizacion SET correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', institucion_canaliza='{$institucion_canaliza}', grupo_vulnerable='{$grupo_vulnerable}', lengua='{$lengua}', observaciones='{$observaciones}', adjunto='{$name}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql = "UPDATE orientacion_canalizacion SET correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE orientacion_canalizacion SET correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', institucion_canaliza='{$institucion_canaliza}', grupo_vulnerable='{$grupo_vulnerable}', lengua='{$lengua}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
@@ -96,19 +99,19 @@ if (isset($_POST['edit_canalizacion'])) {
         <div class="panel-body">
             <form method="post" action="edit_canalizacion.php?id=<?php echo (int)$e_detalle['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="correo">Correo Electrónico</label>
                             <input type="text" class="form-control" name="correo" placeholder="ejemplo@correo.com" value="<?php echo remove_junk($e_detalle['correo_electronico']); ?>">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="nombre">Nombre Completo</label>
                             <input type="text" class="form-control" name="nombre" placeholder="Nombre Completo" value="<?php echo remove_junk($e_detalle['nombre_completo']); ?>">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="nestudios">Nivel de Estudios</label>
                             <select class="form-control" name="nestudios">
@@ -124,7 +127,7 @@ if (isset($_POST['edit_canalizacion'])) {
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="ocupacion">Ocupacion</label>
                             <select class="form-control" name="ocupacion">
@@ -199,13 +202,15 @@ if (isset($_POST['edit_canalizacion'])) {
                             </select>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="edad">Edad</label>
                             <input type="number" min="1" max="120" class="form-control" name="edad" placeholder="Edad" value="<?php echo remove_junk($e_detalle['edad']); ?>">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="tel">Teléfono</label>
                             <input type="text" class="form-control" maxlength="10" name="tel" placeholder="Teléfono" value="<?php echo remove_junk($e_detalle['telefono']); ?>">
@@ -215,6 +220,31 @@ if (isset($_POST['edit_canalizacion'])) {
                         <div class="form-group">
                             <label for="ext">Ext</label>
                             <input type="text" class="form-control" maxlength="3" name="ext" placeholder="Extensión" value="<?php echo remove_junk($e_detalle['extension']); ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="lengua">Dialecto</label>
+                            <input type="text" class="form-control" name="lengua" value="<?php echo remove_junk($e_detalle['lengua']); ?>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="grupo_vulnerable">Grupo Vulnerable</label>
+                            <select class="form-control" name="grupo_vulnerable">
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Comunidad LGBT') echo 'selected="selected"'; ?> value="Comunidad LGBT">Comunidad LGBT</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Derecho de las mujeres') echo 'selected="selected"'; ?> value="Derecho de las mujeres">Derecho de las mujeres</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Niños y adolescentes') echo 'selected="selected"'; ?> value="Niños y adolescentes">Niños y adolecentes</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Personas con discapacidad') echo 'selected="selected"'; ?> value="Personas con discapacidad">Personas con discapacidad</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Personas migrantes') echo 'selected="selected"'; ?> value="Personas migrantes">Personas migrantes</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Personas que viven con VIH SIDA') echo 'selected="selected"'; ?> value="Personas que viven con VIH SIDA">Personas que viven con VIH SIDA</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Grupos indígenas') echo 'selected="selected"'; ?> value="Grupos indígenas">Grupos indígenas</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Periodistas') echo 'selected="selected"'; ?> value="Periodistas">Periodistas</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Defensores de los derechos humanos') echo 'selected="selected"'; ?> value="Defensores de los derechos humanos">Defensores de los derechos humanos</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Adultos mayores') echo 'selected="selected"'; ?> value="Adultos mayores">Adultos mayores</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Internos') echo 'selected="selected"'; ?> value="Internos">Internos</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Otros') echo 'selected="selected"'; ?> value="Otros">Otros</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -248,21 +278,58 @@ if (isset($_POST['edit_canalizacion'])) {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="institucion_canaliza">Institución que se canaliza</label>
+                            <input type="text" class="form-control" name="institucion_canaliza" value="<?php echo remove_junk($e_detalle['institucion_canaliza']); ?>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="municipio">Municipio/Localidad</label>
                             <input type="text" class="form-control" name="municipio" placeholder="Municipio/Localidad" value="<?php echo remove_junk($e_detalle['municipio_localidad']); ?>">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="entidad">Entidad</label>
                             <select class="form-control" name="entidad">
+                                <option <?php if ($e_detalle['entidad'] === 'Aguascalientes') echo 'selected="selected"'; ?> value="Aguascalientes">Aguascalientes</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Baja California') echo 'selected="selected"'; ?> value="Baja California">Baja California</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Baja California Sur') echo 'selected="selected"'; ?> value="Baja California Sur">Baja California Sur</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Campeche') echo 'selected="selected"'; ?> value="Campeche">Campeche</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Chiapas') echo 'selected="selected"'; ?> value="Chiapas">Chiapas</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Chihuahua') echo 'selected="selected"'; ?> value="Chihuahua">Chihuahua</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Ciudad de México') echo 'selected="selected"'; ?> value="Ciudad de México">Ciudad de México</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Coahuila') echo 'selected="selected"'; ?> value="Coahuila">Coahuila</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Colima') echo 'selected="selected"'; ?> value="Colima">Colima</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Durango') echo 'selected="selected"'; ?> value="Durango">Durango</option>                                
+                                <option <?php if ($e_detalle['entidad'] === 'Guanajuato') echo 'selected="selected"'; ?> value="Guanajuato">Guanajuato</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Guerrero') echo 'selected="selected"'; ?> value="Guerrero">Guerrero</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Hidalgo') echo 'selected="selected"'; ?> value="Hidalgo">Hidalgo</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Jalisco') echo 'selected="selected"'; ?> value="Jalisco">Jalisco</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Estado de México') echo 'selected="selected"'; ?> value="Estado de México">Estado de México</option>
                                 <option <?php if ($e_detalle['entidad'] === 'Michoacán') echo 'selected="selected"'; ?> value="Michoacán">Michoacán</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Morelos') echo 'selected="selected"'; ?> value="Morelos">Morelos</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Nayarit') echo 'selected="selected"'; ?> value="Nayarit">Nayarit</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Nuevo León') echo 'selected="selected"'; ?> value="Nuevo León">Nuevo León</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Oaxaca') echo 'selected="selected"'; ?> value="Oaxaca">Oaxaca</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Puebla') echo 'selected="selected"'; ?> value="Puebla">Puebla</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Querétaro') echo 'selected="selected"'; ?> value="Querétaro">Querétaro</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Quintana Roo') echo 'selected="selected"'; ?> value="Quintana Roo">Quintana Roo</option>
+                                <option <?php if ($e_detalle['entidad'] === 'San Luis Potosí') echo 'selected="selected"'; ?> value="San Luis Potosí">San Luis Potosí</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Sinaloa') echo 'selected="selected"'; ?> value="Sinaloa">Sinaloa</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Sonora') echo 'selected="selected"'; ?> value="Sonora">Sonora</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Tabasco') echo 'selected="selected"'; ?> value="Tabasco">Tabasco</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Tamaulipas') echo 'selected="selected"'; ?> value="Tamaulipas">Tamaulipas</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Tlaxcala') echo 'selected="selected"'; ?> value="Tlaxcala">Tlaxcala</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Veracruz') echo 'selected="selected"'; ?> value="Veracruz">Veracruz</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Yucatán') echo 'selected="selected"'; ?> value="Yucatán">Yucatán</option>
+                                <option <?php if ($e_detalle['entidad'] === 'Zacatecas') echo 'selected="selected"'; ?> value="Zacatecas">Zacatecas</option>                                
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="nacionalidad">Nacionalidad</label>
                             <select class="form-control" name="nacionalidad">
@@ -292,7 +359,7 @@ if (isset($_POST['edit_canalizacion'])) {
                         <div class="form-group">
                             <label for="adjunto">Adjunto</label>
                             <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto" value="uploads/orientacioncanalizacion/<?php echo $e_detalle['adjunto']; ?>">
-                            <label style="font-size:12px; color:#E3054F;" >Archivo Actual: <?php echo remove_junk($e_detalle['adjunto']); ?></label>
+                            <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_detalle['adjunto']); ?></label>
                         </div>
                     </div>
                     <div class="col-md-4">

@@ -18,11 +18,11 @@ if ($nivel_user == 5) {
     page_require_level_exacto(5);
 }
 
-if ($nivel_user > 2 && $nivel_user < 5):
+if ($nivel_user > 2 && $nivel_user < 5) :
     redirect('home.php');
 endif;
 
-if ($nivel_user > 5):
+if ($nivel_user > 5) :
     redirect('home.php');
 endif;
 
@@ -30,7 +30,7 @@ endif;
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_canalizacion'])) {
 
-    $req_fields = array('nombre', 'nestudios', 'ocupacion', 'edad', 'tel', 'sexo', 'calle', 'colonia', 'cpostal', 'municipio', 'entidad', 'nacionalidad', 'medio');
+    $req_fields = array('nombre', 'nestudios', 'ocupacion', 'edad', 'tel', 'sexo', 'calle', 'colonia', 'cpostal', 'municipio', 'entidad', 'nacionalidad', 'medio', 'grupo_vulnerable', 'lengua', 'institucion_canaliza');
     validate_fields($req_fields);
 
     if (empty($errors)) {
@@ -49,6 +49,9 @@ if (isset($_POST['add_canalizacion'])) {
         $entidad   = remove_junk($db->escape($_POST['entidad']));
         $nacionalidad   = remove_junk($db->escape($_POST['nacionalidad']));
         $medio   = remove_junk($db->escape($_POST['medio']));
+        $grupo_vulnerable   = remove_junk($db->escape($_POST['grupo_vulnerable']));
+        $lengua   = remove_junk($db->escape($_POST['lengua']));
+        $institucion_canaliza   = remove_junk($db->escape($_POST['institucion_canaliza']));
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
 
@@ -94,9 +97,9 @@ if (isset($_POST['add_canalizacion'])) {
 
         if ($move && $name != '') {
             $query = "INSERT INTO orientacion_canalizacion (";
-            $query .= "folio,correo_electronico,nombre_completo,nivel_estudios,ocupacion,edad,telefono,extension,sexo,calle_numero,colonia,codigo_postal,municipio_localidad,entidad,nacionalidad,tipo_solicitud,medio_presentacion,observaciones,adjunto,id_creador";
+            $query .= "folio,correo_electronico,nombre_completo,nivel_estudios,ocupacion,edad,telefono,extension,sexo,calle_numero,colonia,codigo_postal,municipio_localidad,entidad,nacionalidad,tipo_solicitud,medio_presentacion,institucion_canaliza,grupo_vulnerable,lengua,observaciones,adjunto,id_creador";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$correo}','{$nombre}','{$nestudios}','{$ocupacion}','{$edad}','{$tel}','{$ext}','{$sexo}','{$calle}','{$colonia}','{$cpostal}','{$municipio}','{$entidad}','{$nacionalidad}','2','{$medio}','{$observaciones}','{$name}','{$detalle}'";
+            $query .= " '{$folio}','{$correo}','{$nombre}','{$nestudios}','{$ocupacion}','{$edad}','{$tel}','{$ext}','{$sexo}','{$calle}','{$colonia}','{$cpostal}','{$municipio}','{$entidad}','{$nacionalidad}','2','{$medio}','{$institucion_canaliza}','{$grupo_vulnerable}','{$lengua}','{$observaciones}','{$name}','{$detalle}'";
             $query .= ")";
             $query2 = "INSERT INTO folios (";
             $query2 .= "folio, contador";
@@ -105,9 +108,9 @@ if (isset($_POST['add_canalizacion'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO orientacion_canalizacion (";
-            $query .= "folio,correo_electronico,nombre_completo,nivel_estudios,ocupacion,edad,telefono,extension,sexo,calle_numero,colonia,codigo_postal,municipio_localidad,entidad,nacionalidad,tipo_solicitud,medio_presentacion,observaciones,adjunto,id_creador";
+            $query .= "folio,correo_electronico,nombre_completo,nivel_estudios,ocupacion,edad,telefono,extension,sexo,calle_numero,colonia,codigo_postal,municipio_localidad,entidad,nacionalidad,tipo_solicitud,medio_presentacion,institucion_canaliza,grupo_vulnerable,lengua,observaciones,adjunto,id_creador";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$correo}','{$nombre}','{$nestudios}','{$ocupacion}','{$edad}','{$tel}','{$ext}','{$sexo}','{$calle}','{$colonia}','{$cpostal}','{$municipio}','{$entidad}','{$nacionalidad}','2','{$medio}','{$observaciones}','{$name}','{$detalle}'";
+            $query .= " '{$folio}','{$correo}','{$nombre}','{$nestudios}','{$ocupacion}','{$edad}','{$tel}','{$ext}','{$sexo}','{$calle}','{$colonia}','{$cpostal}','{$municipio}','{$entidad}','{$nacionalidad}','2','{$medio}','{$institucion_canaliza}','{$grupo_vulnerable}','{$lengua}','{$observaciones}','{$name}','{$detalle}'";
             $query .= ")";
             $query2 = "INSERT INTO folios (";
             $query2 .= "folio, contador";
@@ -144,19 +147,19 @@ include_once('layouts/header.php'); ?>
         <div class="panel-body">
             <form method="post" action="add_canalizacion.php" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="correo">Correo Electrónico</label>
                             <input type="text" class="form-control" name="correo" placeholder="ejemplo@correo.com" required>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="nombre">Nombre Completo</label>
                             <input type="text" class="form-control" name="nombre" placeholder="Nombre Completo" required>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="nestudios">Nivel de Estudios</label>
                             <select class="form-control" name="nestudios">
@@ -172,7 +175,7 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="ocupacion">Ocupacion</label>
                             <select class="form-control" name="ocupacion">
@@ -247,13 +250,15 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="edad">Edad</label>
                             <input type="number" min="1" max="120" class="form-control" name="edad" placeholder="Edad" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="tel">Teléfono</label>
                             <input type="text" maxlength="10" class="form-control" name="tel" placeholder="Teléfono" required>
@@ -262,7 +267,33 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="ext">Ext</label>
-                            <input type="text" maxlength="3" class="form-control" name="ext" placeholder="Extensión" required>
+                            <input type="text" maxlength="3" class="form-control" name="ext" placeholder="Extensión">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="lengua">Dialecto</label>
+                            <input type="text" class="form-control" name="lengua" placeholder="Lengua hablada" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="grupo_vulnerable">Grupo Vulnerable</label>
+                            <select class="form-control" name="grupo_vulnerable">
+                                <option value="">Elige una opción</option>
+                                <option value="Comunidad LGBT">Comunidad LGBT</option>
+                                <option value="Derecho de las mujeres">Derecho de las mujeres</option>
+                                <option value="Niños y adolescentes">Niños y adolecentes</option>
+                                <option value="Personas con discapacidad">Personas con discapacidad</option>
+                                <option value="Personas migrantes">Personas migrantes</option>
+                                <option value="Personas que viven con VIH SIDA">Personas que viven con VIH SIDA</option>
+                                <option value="Grupos indígenas">Grupos indígenas</option>
+                                <option value="Periodistas">Periodistas</option>
+                                <option value="Defensores de los derechos humanos">Defensores de los derechos humanos</option>
+                                <option value="Adultos mayores">Adultos mayores</option>
+                                <option value="Internos">Internos</option>
+                                <option value="Otros">Otros</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -296,21 +327,59 @@ include_once('layouts/header.php'); ?>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="institucion_canaliza">Institución que se canaliza</label>
+                            <input type="text" class="form-control" name="institucion_canaliza" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="municipio">Municipio/Localidad</label>
                             <input type="text" class="form-control" name="municipio" placeholder="Municipio/Localidad" required>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="entidad">Entidad</label>
                             <select class="form-control" name="entidad">
+                                <option value="">Escoge una opción</option>
+                                <option value="Aguascalientes">Aguascalientes</option>
+                                <option value="Baja California">Baja California</option>
+                                <option value="Baja California Sur">Baja California Sur</option>
+                                <option value="Campeche">Campeche</option>
+                                <option value="Chiapas">Chiapas</option>
+                                <option value="Chihuahua">Chihuahua</option>
+                                <option value="Ciudad de México">Ciudad de México</option>
+                                <option value="Coahuila">Coahuila</option>
+                                <option value="Colima">Colima</option>
+                                <option value="Durango">Durango</option>                                
+                                <option value="Guanajuato">Guanajuato</option>
+                                <option value="Guerrero">Guerrero</option>
+                                <option value="Hidalgo">Hidalgo</option>
+                                <option value="Jalisco">Jalisco</option>
+                                <option value="Estado de México">Estado de México</option>
                                 <option value="Michoacán">Michoacán</option>
+                                <option value="Morelos">Morelos</option>
+                                <option value="Nayarit">Nayarit</option>
+                                <option value="Nuevo León">Nuevo León</option>
+                                <option value="Oaxaca">Oaxaca</option>
+                                <option value="Puebla">Puebla</option>
+                                <option value="Querétaro">Querétaro</option>
+                                <option value="Quintana Roo">Quintana Roo</option>
+                                <option value="San Luis Potosí">San Luis Potosí</option>
+                                <option value="Sinaloa">Sinaloa</option>
+                                <option value="Sonora">Sonora</option>
+                                <option value="Tabasco">Tabasco</option>
+                                <option value="Tamaulipas">Tamaulipas</option>
+                                <option value="Tlaxcala">Tlaxcala</option>
+                                <option value="Veracruz">Veracruz</option>
+                                <option value="Yucatán">Yucatán</option>
+                                <option value="Zacatecas">Zacatecas</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="nacionalidad">Nacionalidad</label>
                             <select class="form-control" name="nacionalidad">

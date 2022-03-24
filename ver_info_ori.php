@@ -23,7 +23,7 @@ $nivel = $user['user_level'];
             <div class="panel-heading clearfix">
                 <strong>
                     <span class="glyphicon glyphicon-th"></span>
-                    <span>Lista de Orientaciones</span>
+                    <span>Información de Orientación</span>
                 </strong>
             </div>
 
@@ -64,10 +64,12 @@ $nivel = $user['user_level'];
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th style="width: 3%;">Grupo Vulnerable</th>
+                            <th style="width: 3%;">Lengua</th>
                             <th style="width: 5%;">Colonia</th>
-                            <th style="width: 3%;">Código Postal</th>
+                            <th style="width: 1%;">Código Postal</th>
                             <th style="width: 2%;">Municipio</th>
-                            <th style="width: 3%;">Entidad</th>
+                            <th style="width: 2%;">Entidad</th>
                             <th style="width: 1%;">Nacionalidad</th>                            
                             <th style="width: 5%;">Calle-Num.</th>
                             <th style="width: 5%;">Observaciones</th>
@@ -75,7 +77,9 @@ $nivel = $user['user_level'];
                     </thead>
                     <tbody>
                         <tr>
-                        <td><?php echo remove_junk(ucwords(($e_detalle['colonia']))) ?></td>
+                            <td><?php echo remove_junk(ucwords($e_detalle['grupo_vulnerable'])) ?></td>
+                            <td><?php echo remove_junk(ucwords($e_detalle['lengua'])) ?></td>
+                            <td><?php echo remove_junk(ucwords(($e_detalle['colonia']))) ?></td>
                             <td><?php echo remove_junk(ucwords($e_detalle['codigo_postal'])) ?></td>
                             <td><?php echo remove_junk(ucwords(($e_detalle['municipio_localidad']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($e_detalle['entidad']))) ?></td>
