@@ -88,7 +88,7 @@ endif;
                                 $resultado = str_replace("/", "-", $folio_editar);
                                 ?>
                                 <td><?php echo remove_junk(ucwords($a_canalizacion['medio_presentacion'])) ?></td>
-                                <td><a target="_blank" href="uploads/orientacioncanalizacion/canalizacion/<?php echo $resultado . '/' . $a_canalizacion['adjunto']; ?>"><?php echo $a_canalizacion['adjunto']; ?></a></td>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/orientacioncanalizacion/canalizacion/<?php echo $resultado . '/' . $a_canalizacion['adjunto']; ?>"><?php echo $a_canalizacion['adjunto']; ?></a></td>
                                 <td><?php echo remove_junk(ucwords($a_canalizacion['correo_electronico'])) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_canalizacion['nombre_completo']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_canalizacion['ocupacion']))) ?></td>
