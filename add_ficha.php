@@ -93,11 +93,11 @@ if (isset($_POST['add_ficha'])) {
         }
         if ($db->query($query) && $db->query($query2)) {
             //sucess
-            $session->msg('s', " La orientación ha sido agregada con éxito.");
+            $session->msg('s', " La ficha ha sido agregada con éxito.");
             redirect('fichas.php', false);
         } else {
             //failed
-            $session->msg('d', ' No se pudo agregar la orientación.');
+            $session->msg('d', ' No se pudo agregar la ficha.');
             redirect('add_ficha.php', false);
         }
     } else {
@@ -430,6 +430,7 @@ include_once('layouts/header.php'); ?>
                             <select class="form-control" name="sexo">
                                 <option value="Mujer">Mujer</option>
                                 <option value="Hombre">Hombre</option>
+                                <option value="LGBT">LGBT</option>
                             </select>
                         </div>
                     </div>

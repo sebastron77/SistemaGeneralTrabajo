@@ -18,7 +18,7 @@ $otro = $busca_area['id'];
 $nivel_user = $user['user_level'];
 //@$level = find_user_level('users', (int)$_GET['id']);
 
-if ($nivel_user > 3 && $nivel_user < 7):
+if ($nivel_user > 2 && $nivel_user < 7):
     redirect('home.php');
 endif;
 if ($nivel_user > 7):

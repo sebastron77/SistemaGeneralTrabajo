@@ -304,6 +304,7 @@ include_once('layouts/header.php'); ?>
                             <select class="form-control" name="sexo">
                                 <option value="M">Mujer</option>
                                 <option value="H">Hombre</option>
+                                <option value="LGBT">LGBT</option>
                             </select>
                         </div>
                     </div>
@@ -407,7 +408,7 @@ include_once('layouts/header.php'); ?>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="adjunto">Archivo adjunto (si es necesario)</label>
+                            <label for="adjunto">Subir acta de canalización (si es necesario)</label>
                             <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto">
                         </div>
                     </div>

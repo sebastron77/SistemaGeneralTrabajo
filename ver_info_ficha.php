@@ -1,12 +1,32 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 $page_title = 'Fichas Técnicas';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(4);
 $a_ficha = find_by_id('fichas', (int)$_GET['id']);
 $user = current_user();
 $nivel = $user['user_level'];
+
+if ($nivel <= 2) {
+    page_require_level(2);
+}
+if ($nivel == 3) {
+    redirect('home.php');
+}
+if ($nivel == 4) {
+    page_require_level(4);
+}
+if ($nivel == 5) {
+    redirect('home.php');
+}
+if ($nivel == 6) {
+    redirect('home.php');
+}
+if ($nivel == 7) {
+    redirect('home.php');
+}
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -24,7 +44,7 @@ $nivel = $user['user_level'];
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Fichas técnicas</span>
                 </strong>
-                <a href="add_ficha.php" class="btn btn-info pull-right">Agregar ficha</a>
+                <!-- <a href="add_ficha.php" class="btn btn-info pull-right">Agregar ficha</a> -->
             </div>
 
             <div class="panel-body">

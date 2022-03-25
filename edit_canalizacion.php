@@ -18,8 +18,17 @@ $nivel_user = $user['user_level'];
 if ($nivel_user <= 2) {
     page_require_level(2);
 }
+if ($nivel_user == 3) {
+    redirect('home.php');
+}
+if ($nivel_user == 4) {
+    redirect('home.php');
+}
 if ($nivel_user == 5) {
     page_require_level_exacto(5);
+}
+if ($nivel_user == 6) {
+    redirect('home.php');
 }
 if ($nivel_user == 7) {
     redirect('home.php');
@@ -255,6 +264,7 @@ if (isset($_POST['edit_canalizacion'])) {
                             <select class="form-control" name="sexo">
                                 <option <?php if ($e_detalle['sexo'] === 'M') echo 'selected="selected"'; ?> value="M">Mujer</option>
                                 <option <?php if ($e_detalle['sexo'] === 'H') echo 'selected="selected"'; ?> value="H">Hombre</option>
+                                <option <?php if ($e_detalle['sexo'] === 'LGBT') echo 'selected="selected"'; ?> value="LGBT">LGBT</option>
                             </select>
                         </div>
                     </div>
@@ -357,7 +367,7 @@ if (isset($_POST['edit_canalizacion'])) {
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="adjunto">Adjunto</label>
+                            <label for="adjunto">Acta de Canalización</label>
                             <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto" value="uploads/orientacioncanalizacion/<?php echo $e_detalle['adjunto']; ?>">
                             <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_detalle['adjunto']); ?></label>
                         </div>

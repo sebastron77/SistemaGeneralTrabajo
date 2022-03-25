@@ -1,13 +1,33 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 $page_title = 'Orientación';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(5);
 $e_detalle = find_by_id('orientacion_canalizacion', (int)$_GET['id']);
 //$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
 $user = current_user();
 $nivel = $user['user_level'];
+
+if ($nivel <= 2) {
+    page_require_level(2);
+}
+if ($nivel == 3) {
+    redirect('home.php');
+}
+if ($nivel == 4) {
+    redirect('home.php');
+}
+if ($nivel == 5) {
+    page_require_level(5);
+}
+if ($nivel == 6) {
+    redirect('home.php');
+}
+if ($nivel == 7) {
+    redirect('home.php');
+}
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -73,6 +93,7 @@ $nivel = $user['user_level'];
                             <th style="width: 1%;">Nacionalidad</th>                            
                             <th style="width: 5%;">Calle-Num.</th>
                             <th style="width: 5%;">Observaciones</th>
+                            <th style="width: 5%;">Adjunto</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,6 +107,11 @@ $nivel = $user['user_level'];
                             <td><?php echo remove_junk(ucwords($e_detalle['nacionalidad'])) ?></td>                            
                             <td><?php echo remove_junk(ucwords(($e_detalle['calle_numero']))) ?></td>                                                        
                             <td><?php echo remove_junk(ucwords($e_detalle['observaciones'])) ?></td>
+                            <?php
+                                $folio_editar = $e_detalle['folio'];
+                                $resultado = str_replace("/", "-", $folio_editar);
+                            ?>
+                            <td><a target="_blank" href="uploads/orientacioncanalizacion/orientacion/<?php echo $resultado . '/' . $e_detalle['adjunto']; ?>"><?php echo $e_detalle['adjunto']; ?></a></td>
                         </tr>
                     </tbody>
                 </table>

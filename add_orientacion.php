@@ -311,6 +311,7 @@ include_once('layouts/header.php'); ?>
                             <select class="form-control" name="sexo">
                                 <option value="M">Mujer</option>
                                 <option value="H">Hombre</option>
+                                <option value="LGBT">LGBT</option>
                             </select>
                         </div>
                     </div>

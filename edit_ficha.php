@@ -1,8 +1,6 @@
 <?php
 $page_title = 'Editar Ficha';
 require_once('includes/load.php');
-
-page_require_level(4);
 ?>
 <?php
 $e_ficha = find_by_id_ficha((int)$_GET['id']);
@@ -12,6 +10,24 @@ if (!$e_ficha) {
 }
 $user = current_user();
 $nivel = $user['user_level'];
+if ($nivel <= 2) {
+    page_require_level(2);
+}
+if ($nivel == 3) {
+    redirect('home.php');
+}
+if ($nivel == 4) {
+    page_require_level(4);
+}
+if ($nivel == 5) {
+    redirect('home.php');
+}
+if ($nivel == 6) {
+    redirect('home.php');
+}
+if ($nivel == 7) {
+    redirect('home.php');
+}
 ?>
 
 <?php
@@ -396,6 +412,7 @@ if (isset($_POST['edit_ficha'])) {
                             <select class="form-control" name="sexo">
                                 <option <?php if ($e_ficha['sexo'] === 'Mujer') echo 'selected="selected"'; ?> value="Mujer">Mujer</option>
                                 <option <?php if ($e_ficha['sexo'] === 'Hombre') echo 'selected="selected"'; ?> value="Hombre">Hombre</option>
+                                <option <?php if ($e_ficha['sexo'] === 'LGBT') echo 'selected="selected"'; ?> value="LGBT">LGBT</option>
                             </select>
                         </div>
                     </div>
