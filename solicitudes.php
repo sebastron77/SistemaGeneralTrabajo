@@ -136,7 +136,7 @@ $c_cargos          = count_by_id('cargos');
           </svg>
         </div>
         <div class="panel-value pull-right">
-          <p style="font-size: 20px; margin-top:8%; color:black;">Orientación Legal, Quejas y Seguimiento</p>
+          <p style="font-size: 20px; margin-top:8%; color:black;">Registro de Quejas y Seguimiento</p>
           <div><br>
             <!-- <a href="add_convenio.php" class="btn btn-success">Agregar</a>
           <a href="convenios.php" class="btn btn-primary">Ver</a> -->

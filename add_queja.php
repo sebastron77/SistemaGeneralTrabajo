@@ -2,11 +2,11 @@
 // $queja = find_by_id('ost_ticket',(int)$_GET['id']);
 require_once('includes/load2.php');
 $queja = find_by_id_quejas((int)$_GET['id']);
-
-if (!$queja) {
-    $session->msg("d", "Error al agregar.");
-    redirect('quejas.php');
-}
+/* Si se descomenta esta línea causa el error al agregar la queja al Libro Electrónico */
+// if (!$queja) {
+//     $session->msg("d", "Error al agregar.");
+//     redirect('quejas.php');
+// }
 ?>
 
 <?php header('Content-type: text/html; charset=utf-8');
@@ -37,6 +37,7 @@ if (isset($_POST['add_queja'])) {
         $creada_por   = remove_junk($db->escape($_POST['creada_por']));
         $estatus_queja   = remove_junk($db->escape($_POST['estatus_queja']));
         $asignada_a   = remove_junk(($db->escape($_POST['asignada_a'])));
+        $ticket_id   = remove_junk(($db->escape($_POST['ticket_id'])));
 
         if (count($id_folio) == 0) {
             $nuevo_id_folio = 1;
@@ -63,9 +64,9 @@ if (isset($_POST['add_queja'])) {
 
         // if ($name != '') {
         $query = "INSERT INTO quejas (";
-        $query .= "folio_queja,ultima_actualizacion,autoridad_responsable,creada_por,estatus_queja,asignada_a";
+        $query .= "folio_queja,ultima_actualizacion,autoridad_responsable,creada_por,estatus_queja,asignada_a,ticket_id";
         $query .= ") VALUES (";
-        $query .= " '{$folio}','{$ultima_actualizacion}','{$autoridad_responsable}','{$creada_por}','{$estatus_queja}','{$asignada_a}'";
+        $query .= " '{$folio}','{$ultima_actualizacion}','{$autoridad_responsable}','{$creada_por}','{$estatus_queja}','{$asignada_a}','{$ticket_id}'";
         $query .= ")";
 
         $query2 = "INSERT INTO folios (";
@@ -117,12 +118,12 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="autoridad_responsable">Autoridad Responsable</label>
-                            <input type="text" class="form-control" name="autoridad_responsable" value="<?php echo remove_junk($queja['Autoridad_Responsable']); ?>" readonly>
+                            <input type="text" class="form-control" name="autoridad_responsable" value="<?php echo remove_junk($queja['n_autoridad']); ?>" readonly>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="creada_por">Creada por</label>
+                            <label for="creada_por">Agreaviado</label>
                             <input type="text" class="form-control" name="creada_por" value="<?php echo remove_junk($queja['Creada_Por']); ?>" readonly>
                         </div>
                     </div>
@@ -148,6 +149,12 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="asignada_a">Asignada a</label>
                             <input type="text" class="form-control" name="asignada_a" value="<?php echo remove_junk($queja['Asignado_Nombre'] . " " . $queja['Asignado_Apellido']); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ticket_id">Id de Ticket</label>
+                            <input type="text" class="form-control" name="ticket_id" value="<?php echo remove_junk($queja['ticket_id']); ?>" readonly>
                         </div>
                     </div>
                 </div>

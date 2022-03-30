@@ -43,6 +43,7 @@ if (isset($_POST['edit_capacitacion'])) {
         $id = (int)$e_detalle['id'];
         $nombre   = remove_junk($db->escape($_POST['nombre_capacitacion']));
         $solicita   = remove_junk($db->escape($_POST['quien_solicita']));
+        $tipo_evento   = remove_junk($db->escape($_POST['tipo_evento']));
         $fecha   = remove_junk($db->escape($_POST['fecha']));
         $hora   = remove_junk($db->escape($_POST['hora']));
         $lugar   = remove_junk(($db->escape($_POST['lugar'])));
@@ -69,10 +70,10 @@ if (isset($_POST['edit_capacitacion'])) {
         }
 
         if ($name != '') {
-            $sql = "UPDATE capacitaciones SET nombre_capacitacion='{$nombre}', quien_solicita='{$solicita}', fecha='{$fecha}', hora='{$hora}', lugar='{$lugar}', no_asistentes='{$asistentes}', modalidad='{$modalidad}', depto_org='{$depto}', capacitador='{$capacitador}', curriculum='{$name}', constancia='{$constancia}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE capacitaciones SET nombre_capacitacion='{$nombre}', tipo_evento='{$tipo_evento}', quien_solicita='{$solicita}', fecha='{$fecha}', hora='{$hora}', lugar='{$lugar}', no_asistentes='{$asistentes}', modalidad='{$modalidad}', depto_org='{$depto}', capacitador='{$capacitador}', curriculum='{$name}', constancia='{$constancia}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql = "UPDATE capacitaciones SET nombre_capacitacion='{$nombre}', quien_solicita='{$solicita}', fecha='{$fecha}', hora='{$hora}', lugar='{$lugar}', no_asistentes='{$asistentes}', modalidad='{$modalidad}', depto_org='{$depto}', capacitador='{$capacitador}', constancia='{$constancia}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE capacitaciones SET nombre_capacitacion='{$nombre}', tipo_evento='{$tipo_evento}', quien_solicita='{$solicita}', fecha='{$fecha}', hora='{$hora}', lugar='{$lugar}', no_asistentes='{$asistentes}', modalidad='{$modalidad}', depto_org='{$depto}', capacitador='{$capacitador}', constancia='{$constancia}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
@@ -100,10 +101,24 @@ if (isset($_POST['edit_capacitacion'])) {
         <div class="panel-body">
             <form method="post" action="edit_capacitacion.php?id=<?php echo (int)$e_detalle['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="nombre_capacitacion">Nombre de la capacitación</label>
                             <input type="text" class="form-control" name="nombre_capacitacion" value="<?php echo remove_junk($e_detalle['nombre_capacitacion']); ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="tipo_evento">Tipo de evento</label>
+                            <select class="form-control" name="tipo_evento">
+                                <option value="Capacitación">Capacitación</option>
+                                <option value="Conferencia">Conferencia</option>
+                                <option value="Curso">Curso</option>
+                                <option value="Taller">Taller</option>
+                                <option value="Plática">Plática</option>
+                                <option value="Diplomado">Diplomado</option>
+                                <option value="Foro">Foro</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -112,7 +127,7 @@ if (isset($_POST['edit_capacitacion'])) {
                             <input type="text" class="form-control" name="quien_solicita" placeholder="Nombre Completo" value="<?php echo remove_junk(($e_detalle['quien_solicita'])); ?>">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="fecha">Fecha</label><br>
                             <input type="date" class="form-control" name="fecha" value="<?php echo remove_junk($e_detalle['fecha']); ?>">
@@ -121,13 +136,13 @@ if (isset($_POST['edit_capacitacion'])) {
 
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="hora">Hora</label><br>
                             <input type="time" class="form-control" name="hora" value="<?php echo remove_junk($e_detalle['hora']); ?>">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="lugar">Lugar</label>
                             <input type="text" class="form-control" name="lugar" value="<?php echo remove_junk($e_detalle['lugar']); ?>">
@@ -139,7 +154,7 @@ if (isset($_POST['edit_capacitacion'])) {
                             <input type="number" min="1" max="1000" class="form-control" name="no_asistentes" value="<?php echo remove_junk($e_detalle['no_asistentes']); ?>">
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="modalidad">Modalidad</label>
                             <select class="form-control" name="modalidad">
@@ -149,14 +164,15 @@ if (isset($_POST['edit_capacitacion'])) {
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="depto_org">Departamento/Organización</label>
                             <input type="text" class="form-control" name="depto_org" value="<?php echo remove_junk(($e_detalle['depto_org'])); ?>">
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="capacitador">Capacitador</label>

@@ -80,7 +80,7 @@ if ($nivel == 7) {
                             <th style="width: 2%;">Parentesco</th>
                             <th style="width: 1%;">Edad</th>
                             <th style="width: 1%;">Fecha Nacimiento</th>
-                            <th style="width: 1%;">Sexo</th>
+                            <th style="width: 1%;">Género</th>
                             <th style="width: 4%;">Grupo Vulnerable</th>
                         </tr>
                     </thead>

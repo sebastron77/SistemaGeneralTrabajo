@@ -117,6 +117,20 @@ function find_by_id_detalle($id)
 /*--------------------------------------------------------------*/
 /*  Funcion para encontrar datos por su id en una tabla
 /*--------------------------------------------------------------*/
+function find_by_id_queja($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT * FROM quejas WHERE id = '{$db->escape($id)}'");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+/*--------------------------------------------------------------*/
+/*  Funcion para encontrar datos por su id en una tabla
+/*--------------------------------------------------------------*/
 function find_by_id_detalle_vehiculo($id)
 {
   global $db;
@@ -1164,6 +1178,17 @@ function find_all_cargos()
   $result = find_by_sql($sql);
   return $result;
 }
+function find_all_cargos2()
+{
+  global $db;
+  $results = array();
+  // SELECT c.id, c.nombre_cargo, a.id, a.nombre_area FROM cargos as c LEFT JOIN area as a ON c.id_area = a.id;
+  $sql = "SELECT c.id, c.nombre_cargo, a.id, a.nombre_area ";
+  $sql .= "FROM cargos as c LEFT JOIN area as a ON c.id_area = a.id ";
+  $sql .= "ORDER BY c.nombre_cargo ";
+  $result = find_by_sql($sql);
+  return $result;
+}
 /*----------------------------------------------*/
 /* Funcion que encuentra todos los trabajadores */
 /*----------------------------------------------*/
@@ -1977,6 +2002,18 @@ function find_all_capacitaciones()
   return $result;
 }
 
+/*----------------------------------------------*/
+/* Funcion que encuentra todas las orientaciones */
+/*----------------------------------------------*/
+function find_all_acuerdos()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM acuerdos";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
 /*-------------------------------------------------*/
 /* Funcion que encuentra todas las fichas técnicas */
 /*-------------------------------------------------*/
@@ -2154,13 +2191,37 @@ function find_by_id_capacitacion($id)
 }
 
 /*------------------------------------------------------------------*/
-/* Funcion para encontrar el ultimo id de orientaciones y canalizaciones
-   para despues sumarle uno y que el nuevo registro tome ese valor */
+/* Funcion para encontrar el ultimo id de folios para despues
+   sumarle uno y que el nuevo registro tome ese valor */
 /*------------------------------------------------------------------*/
 function last_id_oricanal()
 {
   global $db;
   $sql = "SELECT * FROM orientacion_canalizacion ORDER BY id DESC LIMIT 1";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
+/*------------------------------------------------------------------*/
+/* Funcion para encontrar el ultimo id de folios de acuerdos para 
+   despues sumarle uno y que el nuevo registro tome ese valor */
+/*------------------------------------------------------------------*/
+function last_id_folios_acuerdos()
+{
+  global $db;
+  $sql = "SELECT * FROM folios_acuerdos ORDER BY id DESC LIMIT 1";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
+/*------------------------------------------------------------------*/
+/* Funcion para encontrar el ultimo id de folios de recomendaciones
+    para despues sumarle uno y que el nuevo registro tome ese valor */
+/*------------------------------------------------------------------*/
+function last_id_folios_recomendaciones()
+{
+  global $db;
+  $sql = "SELECT * FROM folios_recomendaciones ORDER BY id DESC LIMIT 1";
   $result = find_by_sql($sql);
   return $result;
 }

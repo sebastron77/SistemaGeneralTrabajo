@@ -408,7 +408,7 @@ if (isset($_POST['edit_ficha'])) {
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="sexo">Sexo</label>
+                            <label for="sexo">Género</label>
                             <select class="form-control" name="sexo">
                                 <option <?php if ($e_ficha['sexo'] === 'Mujer') echo 'selected="selected"'; ?> value="Mujer">Mujer</option>
                                 <option <?php if ($e_ficha['sexo'] === 'Hombre') echo 'selected="selected"'; ?> value="Hombre">Hombre</option>

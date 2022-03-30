@@ -40,8 +40,8 @@ $c_cargos          = count_by_id('cargos');
 
 <?php include_once('layouts/header.php'); ?>
 
-<a href="solicitudes.php" class="btn btn-info">Regresar a Áreas</a>
-<h1>Solicitudes de Orientación Legal, Quejas y Seguimiento</h1>
+<a href="solicitudes.php" class="btn btn-info">Regresar a Áreas</a><br><br>
+<!-- <h1>Solicitudes de Orientación Legal, Quejas y Seguimiento</h1> -->
 
 
 <div class="row">
@@ -105,7 +105,40 @@ $c_cargos          = count_by_id('cargos');
                 </div>
             </div>
         </div>
+
+        <div class="col-md-3" style="height: 12.5rem;">
+            <div class="panel panel-box clearfix">
+                <div class="panel-icon pull-left" style="background: #FFD31A;">
+                    <svg style="width:59px;height:58px" viewBox="0 0 24 24">
+                        <path fill="white" d="M8,14V18L2,12L8,6V10H16V6L22,12L16,18V14H8Z" />
+                    </svg>
+                </div>
+                <div>
+                    <p style="font-size: 20px; margin-top:1%;">Acuerdos de No Violación</p>
+                    <div>
+                        <a href="acuerdos_no_violacion.php" class="btn btn-primary">Ver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     <?php endif ?>
+</div><br>
+<div class="row">
+    <div class="col-md-3" style="height: 12.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: #FFD31A;">
+                <svg style="width:59px;height:58px" viewBox="0 0 24 24">
+                    <path fill="white" d="M8,14V18L2,12L8,6V10H16V6L22,12L16,18V14H8Z" />
+                </svg>
+            </div>
+            <div>
+                <p style="font-size: 18px; margin-top:5%;">Recomendaciones</p>
+                <div>
+                    <a href="recomendaciones.php" class="btn btn-primary">Ver</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php include_once('layouts/footer.php'); ?>

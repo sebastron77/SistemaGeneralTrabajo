@@ -3,7 +3,7 @@ $page_title = 'Agregar trabajador';
 require_once('includes/load.php');
 
 page_require_level(1);
-$cargos = find_all('cargos');
+$cargos = find_all_cargos2();
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_detalle_usuario'])) {
@@ -78,7 +78,7 @@ include_once('layouts/header.php'); ?>
                             <label for="level">Cargo</label>
                             <select class="form-control" name="cargo">
                                 <?php foreach ($cargos as $cargo) : ?>
-                                    <option value="<?php echo $cargo['id']; ?>"><?php echo ucwords($cargo['nombre_cargo']); ?></option>
+                                    <option value="<?php echo $cargo['id']; ?>"><?php echo ucwords($cargo['nombre_cargo']." | ".$cargo['nombre_area']); ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

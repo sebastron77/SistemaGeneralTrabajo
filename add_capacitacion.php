@@ -30,12 +30,13 @@ if ($nivel == 7) {
 
 if (isset($_POST['add_capacitacion'])) {
 
-    $req_fields = array('nombre_capacitacion', 'quien_solicita', 'fecha', 'hora', 'lugar', 'no_asistentes', 'modalidad', 'depto_org', 'capacitador');
+    $req_fields = array('nombre_capacitacion', 'tipo_evento', 'quien_solicita', 'fecha', 'hora', 'lugar', 'no_asistentes', 'modalidad', 'depto_org', 'capacitador');
     validate_fields($req_fields);
 
     if (empty($errors)) {
         $nombre   = remove_junk($db->escape($_POST['nombre_capacitacion']));
         $solicita   = remove_junk($db->escape($_POST['quien_solicita']));
+        $tipo_evento   = remove_junk($db->escape($_POST['tipo_evento']));
         $fecha   = remove_junk($db->escape($_POST['fecha']));
         $hora   = remove_junk($db->escape($_POST['hora']));
         $lugar   = remove_junk(($db->escape($_POST['lugar'])));
@@ -76,9 +77,9 @@ if (isset($_POST['add_capacitacion'])) {
 
         if ($move && $name != '') {
             $query = "INSERT INTO capacitaciones (";
-            $query .= "nombre_capacitacion,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,capacitador,curriculum,constancia,folio";
+            $query .= "nombre_capacitacion,tipo_evento,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,capacitador,curriculum,constancia,folio";
             $query .= ") VALUES (";
-            $query .= " '{$nombre}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$capacitador}','{$name}','{$constancia}','{$folio}'";
+            $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$capacitador}','{$name}','{$constancia}','{$folio}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios (";
@@ -88,9 +89,9 @@ if (isset($_POST['add_capacitacion'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO capacitaciones (";
-            $query .= "nombre_capacitacion,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,capacitador,curriculum,constancia,folio";
+            $query .= "nombre_capacitacion,tipo_evento,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,capacitador,curriculum,constancia,folio";
             $query .= ") VALUES (";
-            $query .= " '{$nombre}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$capacitador}','{$name}','{$constancia}','{$folio}'";
+            $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$capacitador}','{$name}','{$constancia}','{$folio}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios (";
@@ -135,6 +136,20 @@ include_once('layouts/header.php'); ?>
                             <input type="text" class="form-control" name="nombre_capacitacion" required>
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="tipo_evento">Tipo de evento</label>
+                            <select class="form-control" name="tipo_evento">
+                                <option value="Capacitación">Capacitación</option>
+                                <option value="Conferencia">Conferencia</option>
+                                <option value="Curso">Curso</option>
+                                <option value="Taller">Taller</option>
+                                <option value="Plática">Plática</option>
+                                <option value="Diplomado">Diplomado</option>
+                                <option value="Foro">Foro</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="quien_solicita">¿Quién lo solicita?</label>
@@ -146,17 +161,17 @@ include_once('layouts/header.php'); ?>
                             <label for="fecha">Fecha</label><br>
                             <input type="date" class="form-control" name="fecha">
                         </div>
-                    </div>
-                    <div class="col-md-2">
+                    </div>                    
+                </div>
+
+                <div class="row">
+                <div class="col-md-2">
                         <div class="form-group">
                             <label for="hora">Hora</label><br>
                             <input type="time" class="form-control" name="hora">
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="lugar">Lugar</label>
                             <input type="text" class="form-control" name="lugar" required>
@@ -178,7 +193,7 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="depto_org">Departamento/Organización</label>
                             <input type="text" class="form-control" name="depto_org" required>

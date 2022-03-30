@@ -61,7 +61,7 @@ if ($nivel == 7) {
                             <th style="width: 1%;">Edad</th>
                             <th style="width: 1%;">Telefono</th>
                             <th style="width: 1%;">Extensión</th>
-                            <th style="width: 1%;">Sexo</th>
+                            <th style="width: 1%;">Género</th>
                         </tr>
                     </thead>
                     <tbody>

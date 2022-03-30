@@ -300,7 +300,7 @@ include_once('layouts/header.php'); ?>
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="sexo">Sexo</label>
+                            <label for="sexo">Género</label>
                             <select class="form-control" name="sexo">
                                 <option value="M">Mujer</option>
                                 <option value="H">Hombre</option>

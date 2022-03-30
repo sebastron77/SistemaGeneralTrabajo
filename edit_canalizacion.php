@@ -260,7 +260,7 @@ if (isset($_POST['edit_canalizacion'])) {
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label for="sexo">Sexo</label>
+                            <label for="sexo">Género</label>
                             <select class="form-control" name="sexo">
                                 <option <?php if ($e_detalle['sexo'] === 'M') echo 'selected="selected"'; ?> value="M">Mujer</option>
                                 <option <?php if ($e_detalle['sexo'] === 'H') echo 'selected="selected"'; ?> value="H">Hombre</option>

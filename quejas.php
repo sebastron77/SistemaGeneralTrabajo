@@ -22,13 +22,13 @@ if ($nivel_user == 7) {
   page_require_level_exacto(7);
 }
 
-if ($nivel_user > 2 && $nivel_user < 5):
+if ($nivel_user > 2 && $nivel_user < 5) :
   redirect('home.php');
 endif;
-if ($nivel_user > 5 && $nivel_user < 7):
+if ($nivel_user > 5 && $nivel_user < 7) :
   redirect('home.php');
 endif;
-if ($nivel_user > 7):
+if ($nivel_user > 7) :
   redirect('home.php');
 endif;
 
@@ -62,7 +62,7 @@ $quejas = quejas();
               <!-- <th class="text-center" style="width: 1%;">Folio / Queja</th> -->
               <th style="width: 1%;">Última Actualización</th>
               <th style="width: 3%;">Autoridad Responsable</th>
-              <th style="width: 3%;">Creado por</th>
+              <th style="width: 3%;">Agraviado</th>
               <th style="width: 1%;">Estatus Queja</th>
               <th style="width: 3%;">Asignado a</th>
               <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
@@ -78,8 +78,8 @@ $quejas = quejas();
                   <tr>
                     <!-- <td class="text-center"> <?php echo remove_junk(ucwords($queja['Folio_Queja'])); ?></td> -->
                     <td class="text-center"> <?php echo remove_junk(ucwords($queja['Ultima_Actualizacion'])); ?></td>
-                    <td> <?php echo remove_junk(($queja['Autoridad_Responsable'])); ?></td>
-                    <td> <?php echo remove_junk(($queja['Creado_Por'])); ?></td>
+                    <td> <?php echo remove_junk(($queja['n_autoridad'])); ?></td>
+                    <td> <?php echo remove_junk(($queja['Creado_Por'])); ?></td> <!-- Es el agraviado -->
                     <td class="text-center">
                       <?php
                       if ($queja['isanswered'] == 1) {
@@ -122,7 +122,7 @@ $quejas = quejas();
                 <tr>
                   <!-- <td class="text-center"> <?php echo remove_junk(ucwords($queja['Folio_Queja'])); ?></td> -->
                   <td class="text-center"> <?php echo remove_junk(ucwords($queja['Ultima_Actualizacion'])); ?></td>
-                  <td> <?php echo remove_junk(($queja['Autoridad_Responsable'])); ?></td>
+                  <td> <?php echo remove_junk(($queja['n_autoridad'])); ?></td>
                   <td> <?php echo remove_junk(($queja['Creado_Por'])); ?></td>
                   <td class="text-center">
                     <?php

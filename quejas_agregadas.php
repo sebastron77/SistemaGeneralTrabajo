@@ -13,22 +13,22 @@ $id_user = $user['id'];
 $nivel_user = $user['user_level'];
 
 if ($nivel_user <= 2) {
-    page_require_level(2);
+  page_require_level(2);
 }
 if ($nivel_user == 5) {
-    page_require_level_exacto(5);
+  page_require_level_exacto(5);
 }
 if ($nivel_user == 7) {
-    page_require_level_exacto(7);
+  page_require_level_exacto(7);
 }
 
-if ($nivel_user > 2 && $nivel_user < 5):
+if ($nivel_user > 2 && $nivel_user < 5) :
   redirect('home.php');
 endif;
-if ($nivel_user > 5 && $nivel_user < 7):
+if ($nivel_user > 5 && $nivel_user < 7) :
   redirect('home.php');
 endif;
-if ($nivel_user > 7):
+if ($nivel_user > 7) :
   redirect('home.php');
 endif;
 ?>
@@ -60,21 +60,30 @@ $quejas = quejas();
               <th class="text-center" style="width: 1%;">Folio Queja</th>
               <th style="width: 1%;">Última Actualización</th>
               <th style="width: 3%;">Autoridad Responsable</th>
-              <th style="width: 3%;">Creado por</th>
+              <th style="width: 3%;">Agraviado</th>
               <th style="width: 1%;">Estatus Queja</th>
               <th style="width: 3%;">Asignado a</th>
+              <th class="text-center" style="width: 5%;">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <?php foreach ($quejas_libro as $queja) : ?>              
+            <?php foreach ($quejas_libro as $queja) : ?>
               <tr>
                 <td class="text-center"> <?php echo remove_junk(ucwords($queja['folio_queja'])); ?></td>
                 <td class="text-center"> <?php echo remove_junk(ucwords($queja['ultima_actualizacion'])); ?></td>
                 <td> <?php echo remove_junk(($queja['autoridad_responsable'])); ?></td>
                 <td> <?php echo remove_junk(($queja['creada_por'])); ?></td>
-                <td class="text-center"> <?php echo remove_junk(($queja['estatus_queja'])); ?> </td>                
+                <td class="text-center"> <?php echo remove_junk(($queja['estatus_queja'])); ?> </td>
                 <td> <?php echo remove_junk($queja['asignada_a']); ?></td>
-                </tr>                
+                <td>
+                  <a href="add_acuerdo_no_violacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
+                    Acuerdos
+                  </a>
+                  <a href="add_recomendacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
+                    Recomendaciones
+                  </a>
+                </td>
+              </tr>
             <?php endforeach; ?>
           </tbody>
         </table>

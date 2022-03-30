@@ -68,6 +68,7 @@ if ($nivel == 7) {
                         <tr style="height: 10px;" class="info">
                             <th style="width: 3%;">Folio</th>
                             <th style="width: 10%;">Nombre de la Capacitación</th>
+                            <th style="width: 8%;">Tipo Evento</th>
                             <th style="width: 8%;">Solicita</th>
                             <th style="width: 4%;">Fecha</th>
                             <th style="width: 1%;">Hora</th>
@@ -79,6 +80,7 @@ if ($nivel == 7) {
                         <tr>
                             <td><?php echo remove_junk(ucwords($a_capacitacion['folio'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_capacitacion['nombre_capacitacion'])) ?></td>
+                            <td><?php echo remove_junk(ucwords($a_capacitacion['tipo_evento'])) ?></td>
                             <td><?php echo remove_junk((ucwords($a_capacitacion['quien_solicita']))) ?></td>
                             <td><?php echo remove_junk(ucwords($a_capacitacion['fecha'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_capacitacion['hora'])) ?></td>
