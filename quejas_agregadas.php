@@ -63,7 +63,9 @@ $quejas = quejas();
               <th style="width: 3%;">Agraviado</th>
               <th style="width: 1%;">Estatus Queja</th>
               <th style="width: 3%;">Asignado a</th>
-              <th class="text-center" style="width: 5%;">Acciones</th>
+              <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                <th class="text-center" style="width: 5%;">Acciones</th>
+              <?php endif; ?>
             </tr>
           </thead>
           <tbody>
@@ -75,14 +77,16 @@ $quejas = quejas();
                 <td> <?php echo remove_junk(($queja['creada_por'])); ?></td>
                 <td class="text-center"> <?php echo remove_junk(($queja['estatus_queja'])); ?> </td>
                 <td> <?php echo remove_junk($queja['asignada_a']); ?></td>
-                <td>
-                  <a href="add_acuerdo_no_violacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
-                    Acuerdos
-                  </a>
-                  <a href="add_recomendacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
-                    Recomendaciones
-                  </a>
-                </td>
+                <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                  <td>
+                    <a href="add_acuerdo_no_violacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
+                      Acuerdos
+                    </a>
+                    <a href="add_recomendacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
+                      Recomendaciones
+                    </a>
+                  </td>
+                <?php endif; ?>
               </tr>
             <?php endforeach; ?>
           </tbody>

@@ -1,10 +1,10 @@
 <?php
-$page_title = 'Acuerdos de No Violación';
+$page_title = 'Recomendaciones';
 require_once('includes/load.php');
 ?>
 <?php
 
-$all_acuerdos = find_all_acuerdos();
+$all_recomendaciones = find_all_recomendaciones();
 //$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
 $user = current_user();
 $nivel = $user['user_level'];
@@ -49,10 +49,10 @@ if ($nivel == 7) {
             <div class="panel-heading clearfix">
                 <strong>
                     <span class="glyphicon glyphicon-th"></span>
-                    <span>Acuerdos de No Violación</span>
+                    <span>Recomendaciones</span>
                 </strong>
-                <!-- <?php if (($nivel <= 2) || ($nivel == 5) || ($nivel == 7)) : ?>
-                    <a href="quejas_agregadas.php" class="btn btn-info pull-right">Agregar Acuerdo de No Violación</a>
+                <!-- <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                    <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a>
                 <?php endif; ?> -->
             </div>
 
@@ -60,38 +60,37 @@ if ($nivel == 7) {
                 <table class="datatable table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 10%;">Folio Acuerdo</th>
+                            <th style="width: 10%;">Folio Recomendación</th>
                             <th style="width: 10%;">Folio Queja</th>
                             <th style="width: 7%;">Autoridad Responsable</th>
                             <th style="width: 5%;">Servidor Público</th>
-                            <th style="width: 5%;">Fecha de Acuerdo</th>
+                            <th style="width: 5%;">Fecha de Recomendación</th>
                             <th style="width: 2%;">Observaciones</th>
-                            <th style="width: 5%;">Acuerdo adjunto</th>
-                            <!-- <th style="width: 3%;">Constancia</th> -->
-                            <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                            <th style="width: 5%;">Recomendación adjunto</th>
+                            <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                                 <th style="width: 3%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($all_acuerdos as $a_acuerdo) : ?>
+                        <?php foreach ($all_recomendaciones as $a_recomendacion) : ?>
                             <tr>
-                                <td><?php echo remove_junk(ucwords($a_acuerdo['folio_acuerdo'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_acuerdo['folio_queja'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_acuerdo['autoridad_responsable'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_acuerdo['servidor_publico'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_acuerdo['fecha_acuerdo'])) ?></td>
-                                <td class="text-center"><?php echo remove_junk(ucwords($a_acuerdo['observaciones'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_recomendacion['folio_recomendacion'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_recomendacion['folio_queja'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_recomendacion['autoridad_responsable'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_recomendacion['servidor_publico'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_recomendacion['fecha_recomendacion'])) ?></td>
+                                <td class="text-center"><?php echo remove_junk(ucwords($a_recomendacion['observaciones'])) ?></td>
                                 <?php
-                                $folio_editar = $a_acuerdo['folio_queja'];
+                                $folio_editar = $a_recomendacion['folio_queja'];
                                 $resultado = str_replace("/", "-", $folio_editar);
                                 ?>
-                                <td><a target="_blank" style="color: #23296B;" href="uploads/quejas/<?php echo $resultado . '/' . 'acuerdosNoViolacion/' . $a_acuerdo['acuerdo_adjunto']; ?>"><?php echo $a_acuerdo['acuerdo_adjunto']; ?></a></td>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/quejas/<?php echo $resultado . '/' . 'recomendacion/' . $a_recomendacion['recomendacion_adjunto']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto']; ?></a></td>
 
-                                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                                <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            <a href="edit_acuerdo_no_violacion.php?id=<?php echo (int)$a_acuerdo['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
+                                            <a href="edit_recomendacion.php?id=<?php echo (int)$a_recomendacion['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
                                                 <span class="glyphicon glyphicon-edit"></span>
                                             </a>
                                         </div>

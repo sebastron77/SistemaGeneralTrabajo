@@ -2002,14 +2002,26 @@ function find_all_capacitaciones()
   return $result;
 }
 
-/*----------------------------------------------*/
-/* Funcion que encuentra todas las orientaciones */
-/*----------------------------------------------*/
+/*----------------------------------------------------------*/
+/* Funcion que encuentra todos los acuerdos de no violacion */
+/*----------------------------------------------------------*/
 function find_all_acuerdos()
 {
   global $db;
   $results = array();
   $sql = "SELECT * FROM acuerdos";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
+/*-------------------------------------------------*/
+/* Funcion que encuentra todas las recomendaciones */
+/*-------------------------------------------------*/
+function find_all_recomendaciones()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM recomendaciones";
   $result = find_by_sql($sql);
   return $result;
 }
