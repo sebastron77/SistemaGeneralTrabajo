@@ -38,7 +38,7 @@ if ($nivel == 7) {
 </div>
 
 <a href="solicitudes_quejas.php" class="btn btn-success">Regresar a solicitudes</a> 
-<?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+<?php if (($nivel <= 2) || ($nivel == 5) || ($nivel == 7)) : ?>
     <a href="quejas_agregadas.php" class="btn btn-success">Regresar a quejas agregadas</a>
 <?php endif; ?>
 <br><br>

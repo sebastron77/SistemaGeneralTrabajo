@@ -33,7 +33,7 @@ if ($nivel_user > 7) :
 endif;
 ?>
 <?php include_once('layouts/header.php'); ?>
-<a href="solicitudes_quejas.php" class="btn btn-success">Regresar</a><br><br>
+<a href="quejas.php" class="btn btn-success">Regresar</a><br><br>
 <div class="row">
   <div class="col-md-12">
     <?php echo display_msg($msg); ?>
@@ -78,7 +78,7 @@ $quejas = quejas();
                 <td class="text-center"> <?php echo remove_junk(($queja['estatus_queja'])); ?> </td>
                 <td> <?php echo remove_junk($queja['asignada_a']); ?></td>
                 <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
-                  <td>
+                  <td class="text-center" >
                     <a href="add_acuerdo_no_violacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
                       Acuerdos
                     </a>

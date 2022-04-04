@@ -37,8 +37,8 @@ if ($nivel == 7) {
     </div>
 </div>
 
-<a href="solicitudes_quejas.php" class="btn btn-success">Regresar a solicitudes</a> 
-<?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+<a href="solicitudes_quejas.php" class="btn btn-success">Regresar a solicitudes</a>
+<?php if (($nivel <= 2) || ($nivel == 5) || ($nivel == 7)) : ?>
     <a href="quejas_agregadas.php" class="btn btn-success">Regresar a quejas agregadas</a>
 <?php endif; ?>
 <br><br>
@@ -51,7 +51,7 @@ if ($nivel == 7) {
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Acuerdos de No Violación</span>
                 </strong>
-                <!-- <?php if (($nivel <= 2) || ($nivel == 5) || ($nivel == 7)) : ?>
+                <!-- <?php if (($nivel <= 1) || ($nivel == 5)) : ?>
                     <a href="quejas_agregadas.php" class="btn btn-info pull-right">Agregar Acuerdo de No Violación</a>
                 <?php endif; ?> -->
             </div>
@@ -68,7 +68,7 @@ if ($nivel == 7) {
                             <th style="width: 2%;">Observaciones</th>
                             <th style="width: 5%;">Acuerdo adjunto</th>
                             <!-- <th style="width: 3%;">Constancia</th> -->
-                            <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                            <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                                 <th style="width: 3%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
@@ -88,7 +88,7 @@ if ($nivel == 7) {
                                 ?>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/quejas/<?php echo $resultado . '/' . 'acuerdosNoViolacion/' . $a_acuerdo['acuerdo_adjunto']; ?>"><?php echo $a_acuerdo['acuerdo_adjunto']; ?></a></td>
 
-                                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                                <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="edit_acuerdo_no_violacion.php?id=<?php echo (int)$a_acuerdo['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">

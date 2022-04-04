@@ -74,7 +74,7 @@ $quejas = quejas();
           <tbody>
             <?php foreach ($quejas as $queja) : ?>
               <?php if ($quejas_libro[0] != 0) : ?>
-                <?php foreach ($quejas_libro as $queja_libro) : ?>
+                <?php //foreach ($quejas_libro as $queja_libro) : ?>
                   <tr>
                     <!-- <td class="text-center"> <?php echo remove_junk(ucwords($queja['Folio_Queja'])); ?></td> -->
                     <td class="text-center"> <?php echo remove_junk(ucwords($queja['Ultima_Actualizacion'])); ?></td>
@@ -116,7 +116,7 @@ $quejas = quejas();
                       </td>
                     <?php endif; ?>
                   </tr>
-                <?php endforeach; ?>
+                <?php //endforeach; ?>
               <?php endif; ?>
               <?php if ($quejas_libro[0] == 0) : ?>
                 <tr>
