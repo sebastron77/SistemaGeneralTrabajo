@@ -395,3 +395,19 @@ input[type=file]{
 .datatable tfoot .filter-column {
   width: 100% !important;
 }
+
+.boton4 {
+  color: rgba(255, 255, 255) !important;
+  font-size: 15px;
+  font-weight: 10;
+  padding: 0.5em 1.2em;
+  background: #075E9A;
+  border: 1px solid;
+  border-color: #075E9A;
+  position: relative;
+}
+.boton4:hover {
+  color: rgba(255, 255, 255) !important;
+  box-shadow: 0 1px 10px rgb(4, 62, 102);
+  transition: all 0.1s ease;
+}

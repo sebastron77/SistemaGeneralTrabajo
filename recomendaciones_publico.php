@@ -23,12 +23,12 @@
     <nav class="navbar navbar-default" style="background: #075E9A;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#" style="color: #FFFFEF;">Libro Electrónico de la CEDH</a>
+                <a class="navbar-brand" href="principal.php" style="color: #FFFFEF;">Libro Electrónico de la CEDH</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="acuerdos_publico.php" style="color: #FFFFEF">Acuerdos de No Violación</a></li>
-                    <li><a href="recomendaciones_publico.php" style="color: #FFFFEF">Recomendaciones</a></li>
+                    <li><a class="boton4" href="acuerdos_publico.php" style="color: #FFFFEF">Acuerdos de No Violación</a></li>
+                    <li><a class="boton4" href="recomendaciones_publico.php" style="color: #FFFFEF">Recomendaciones</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index.php" style="color: #FFFFEF">Iniciar Sesión</a></li>
@@ -45,9 +45,6 @@
                         <span class="glyphicon glyphicon-th"></span>
                         <span>Recomendaciones</span>
                     </strong>
-                    <!-- <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
-                    <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a>
-                <?php endif; ?> -->
                 </div>
 
                 <div class="panel-body">
@@ -61,7 +58,6 @@
                                 <th class="text-center" style="width: 4%;">Fecha de Recomendación</th>
                                 <th class="text-center" style="width: 5%;">Observaciones</th>
                                 <th class="text-center" style="width: 5%;">Recomendación adjunto</th>
-                                <th class="text-center" style="width: 3%;" class="text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,14 +74,6 @@
                                     $resultado = str_replace("/", "-", $folio_editar);
                                     ?>
                                     <td><a target="_blank" style="color: #23296B;" href="uploads/quejas/<?php echo $resultado . '/' . 'recomendacion/' . $a_recomendacion['recomendacion_adjunto']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto']; ?></a></td>
-
-                                    <td class="text-center">
-                                        <div class="btn-group">
-                                            <a href="edit_recomendacion.php?id=<?php echo (int)$a_recomendacion['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
-                                                <span class="glyphicon glyphicon-edit"></span>
-                                            </a>
-                                        </div>
-                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

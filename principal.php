@@ -23,12 +23,12 @@
     <nav class="navbar navbar-default" style="background: #075E9A;">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#" style="color: #FFFFEF;">Libro Electrónico de la CEDH</a>
+                <a class="navbar-brand" href="principal.php" style="color: #FFFFEF;">Libro Electrónico de la CEDH</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="acuerdos_publico.php" style="color: #FFFFEF">Acuerdos de No Violación</a></li>
-                    <li><a href="recomendaciones_publico.php" style="color: #FFFFEF">Recomendaciones</a></li>
+                    <li><a class="boton4" href="acuerdos_publico.php" style="color: #FFFFEF">Acuerdos de No Violación</a></li>
+                    <li><a class="boton4" href="recomendaciones_publico.php" style="color: #FFFFEF">Recomendaciones</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="index.php" style="color: #FFFFEF">Iniciar Sesión</a></li>
