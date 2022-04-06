@@ -7,6 +7,7 @@ require_once('includes/load.php');
 // page_require_level(1);
 // page_require_level(5);
 $quejas_libro = find_all('quejas');
+
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
@@ -59,7 +60,6 @@ $quejas = quejas();
         <table class="datatable table table-bordered table-striped">
           <thead>
             <tr class="info">
-              <!-- <th class="text-center" style="width: 1%;">Folio / Queja</th> -->
               <th style="width: 1%;">Última Actualización</th>
               <th style="width: 3%;">Autoridad Responsable</th>
               <th style="width: 3%;">Agraviado</th>
@@ -73,57 +73,69 @@ $quejas = quejas();
           </thead>
           <tbody>
             <?php foreach ($quejas as $queja) : ?>
-              <?php if ($quejas_libro[0] != 0) : ?>
+              <?php $a = count($quejas_libro) ?>
+              <?php if ($a != 0) : ?>
+                <?php $c = 0; ?>
                 <?php foreach ($quejas_libro as $queja_libro) : ?>
-                  <?php //if ($queja['ticket_id'] != $queja_libro['ticket_id']) : ?>
-                    <tr>
-                      <!-- <td class="text-center"> <?php echo remove_junk(ucwords($queja['Folio_Queja'])); ?></td> -->
-                      <td class="text-center"> <?php echo remove_junk(ucwords($queja['Ultima_Actualizacion'])); ?></td>
-                      <td> <?php echo remove_junk(($queja['n_autoridad'])); ?></td>
-                      <td> <?php echo remove_junk(($queja['Creado_Por'])); ?></td> <!-- Es el agraviado -->
-                      <td class="text-center">
-                        <?php
-                        if ($queja['isanswered'] == 1) {
-                          echo '<strong><div style="color:#00B023">';
-                          echo 'Cerrada';
-                          echo '</div></strong>';
-                        }
-                        if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 1)) {
-                          echo '<strong><div style="color:#2268FE">';
-                          echo 'Abierta';
-                          echo '</div></strong>';
-                        }
-                        if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 0)) {
-                          echo '<strong><div style="color:orange">';
-                          echo 'Pendiente';
-                          echo '</div></strong>';
-                        }
-                        if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 1)) {
-                          echo '<strong><div style="color:#FE3B29">';
-                          echo 'No atendido';
-                          echo '</div></strong>';
-                        }
-                        ?>
-                      </td>
-                      <td> <?php echo remove_junk(($queja['Asignado_Nombre'])) . " " . ($queja['Asignado_Apellido']); ?></td>
-                      <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                  <?php if ($queja['ticket_id'] != $queja_libro['ticket_id']) : ?>
+                    <?php $c = $c + 1; ?>
+                    <?php if (($c <= 1)) : ?>
+                      <tr>
+                        <td class="text-center"> <?php echo remove_junk(ucwords($queja['Ultima_Actualizacion'])); ?></td>
+                        <td> <?php echo remove_junk(($queja['n_autoridad'])); ?></td>
+                        <td> <?php echo remove_junk(($queja['Creado_Por'])); ?></td> <!-- Es el agraviado -->
                         <td class="text-center">
-                          <?php if (($queja['Ultima_Actualizacion'] != $queja_libro['ultima_actualizacion']) && ($queja['ticket_id'] != $queja_libro['ticket_id'])) : ?>
-                            <a href="add_queja.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
-                              Agregar
-                            </a>
-                          <?php else : echo 'Queja ya registrada.' ?>
-                          <?php endif; ?>
+                          <?php
+                          if ($queja['isanswered'] == 1) {
+                            echo '<strong><div style="color:#00B023">';
+                            echo 'Cerrada';
+                            echo '</div></strong>';
+                          }
+                          if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 1)) {
+                            echo '<strong><div style="color:#2268FE">';
+                            echo 'Abierta';
+                            echo '</div></strong>';
+                          }
+                          if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 0)) {
+                            echo '<strong><div style="color:orange">';
+                            echo 'Pendiente';
+                            echo '</div></strong>';
+                          }
+                          if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 1)) {
+                            echo '<strong><div style="color:#FE3B29">';
+                            echo 'No atendido';
+                            echo '</div></strong>';
+                          }
+                          ?>
                         </td>
-                      <?php endif; ?>
-                    </tr>
-                  <?php //endif; ?>
+                        <td> <?php echo remove_junk(($queja['Asignado_Nombre'])) . " " . ($queja['Asignado_Apellido']); ?></td>
+                        <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+                          <td class="text-center">
+                            <?php
+                              // $busca = find_by_ticket_id('quejas',$queja['ticket_id']); 
+                              $enlace = mysqli_connect('localhost', 'root', '');
+                              mysqli_select_db($enlace,'libro_electronico2');
+                              $sql = "SELECT * FROM quejas WHERE ticket_id = '{$queja['ticket_id']}'";
+                              $resultado = mysqli_query($enlace,$sql);
+                              $row = mysqli_fetch_array($resultado);
+                            ?>
+                            <?php if (($queja['ticket_id'] != $row['ticket_id'])) : ?>
+                              <a href="add_queja.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
+                                Agregar
+                              </a>
+                              <?php //echo $row['ticket_id'];?>
+                            <?php else : echo 'Queja ya registrada.' ?>
+                            <?php endif; ?>
+                          </td>
+                        <?php endif; ?>
+                      </tr>
+                    <?php endif; ?>
+                  <?php endif; ?>
                 <?php endforeach; ?>
               <?php endif; ?>
-              <?php if ($quejas_libro[0] == 0) : ?>
-                <?php //if ($queja['ticket_id'] != $queja_libro['ticket_id']) : ?>
+              <?php if ($a == 0) : ?>
+                <?php if (($queja['ticket_id'] != $queja_libro['ticket_id'])) : ?>
                   <tr>
-                    <!-- <td class="text-center"> <?php echo remove_junk(ucwords($queja['Folio_Queja'])); ?></td> -->
                     <td class="text-center"> <?php echo remove_junk(ucwords($queja['Ultima_Actualizacion'])); ?></td>
                     <td> <?php echo remove_junk(($queja['n_autoridad'])); ?></td>
                     <td> <?php echo remove_junk(($queja['Creado_Por'])); ?></td>
@@ -154,7 +166,7 @@ $quejas = quejas();
                     <td> <?php echo remove_junk(($queja['Asignado_Nombre'])) . " " . ($queja['Asignado_Apellido']); ?></td>
                     <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                       <td class="text-center">
-                        <?php if (($queja['Ultima_Actualizacion'] != $queja_libro['ultima_actualizacion']) && ($queja['ticket_id'] != $queja_libro['ticket_id'])) : ?>
+                        <?php if (($queja['ticket_id'] != $queja_libro['ticket_id'])) : ?>
                           <a href="add_queja.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
                             Agregar
                           </a>
@@ -163,7 +175,7 @@ $quejas = quejas();
                       </td>
                     <?php endif; ?>
                   </tr>
-                <?php //endif; ?>
+                <?php endif; ?>
               <?php endif; ?>
             <?php endforeach; ?>
           </tbody>

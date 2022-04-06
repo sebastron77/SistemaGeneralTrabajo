@@ -142,7 +142,7 @@ include_once('layouts/header.php'); ?>
                                                                                                 if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 1)) {
                                                                                                     echo 'No atendido' . ' ';
                                                                                                 }
-                                                                                                ?>" readonly>
+                            ?>" readonly>
                         </div>
                     </div>
                     <div class="col-md-4">
