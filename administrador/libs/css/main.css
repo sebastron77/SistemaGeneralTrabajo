@@ -326,7 +326,13 @@ table tfoot tr td:first-child{
    background-color:#2cb843;
 }.btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active{
   background-color:#23a048;
-}.btn-excel{
+}.btn-queja{
+  background-color:#FEB93A;
+  color: #000000;
+}.btn-queja:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active{
+ background-color:#d49b30;
+}
+.btn-excel{
   background-color:#2f9b5c;
   color: #fff;
 }.btn-excel:hover, .btn-excel:focus, .btn-excel.focus, .btn-excel:active, .btn-excel.active{
@@ -410,4 +416,18 @@ input[type=file]{
   color: rgba(255, 255, 255) !important;
   box-shadow: 0 1px 10px rgb(4, 62, 102);
   transition: all 0.1s ease;
+}
+
+.bodyPublico{
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-image: url("../../fondo_login.jpeg");
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-attachment: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

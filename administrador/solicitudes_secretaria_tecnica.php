@@ -17,7 +17,7 @@ if ($nivel_user <= 2) {
 if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
-if ($nivel_user > 2 && $nivel_user < 7):
+if ($nivel_user > 2 && $nivel_user < 7) :
     redirect('home.php');
 endif;
 
@@ -46,7 +46,7 @@ $c_cargos          = count_by_id('cargos');
 
 
 <div class="row" style="margin-top: 10px;">
-    <div class="col-md-3" style="height: 13.5rem;">
+    <!-- <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987;">
                 <svg style="width:40px;height:68px" viewBox="0 0 24 24">
@@ -63,8 +63,8 @@ $c_cargos          = count_by_id('cargos');
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3" style="height: 13.5rem;">
+    </div> -->
+    <!-- <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987;">
                 <svg style="width:40px;height:68px" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@ $c_cargos          = count_by_id('cargos');
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987;">
@@ -114,32 +114,6 @@ $c_cargos          = count_by_id('cargos');
                     <?php endif; ?>
                     <a href="convenios.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row" style="margin-top: 10px;">
-    <div class="col-md-3" style="height: 13.5rem;">
-        <div class="panel panel-box clearfix">
-            <div class="panel-icon pull-left" style="background: #114987;">
-                <svg style="width:40px;height:68px" viewBox="0 0 24 24">
-                    <path fill="white" d="M19,11H13V5H19M19,19H13V13H19M11,11H5V5H11M11,19H5V13H11M3,21H21V3H3V21Z" />
-                </svg>
-            </div>
-            <div class="panel-value pull-right">
-                <p style="font-size: 16px; margin-top:15%; color:#333333;">Unidad de Gestión de Recursos</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3" style="height: 13.5rem;">
-        <div class="panel panel-box clearfix">
-            <div class="panel-icon pull-left" style="background: #114987;">
-                <svg style="width:40px;height:68px" viewBox="0 0 24 24">
-                    <path fill="white" d="M2.3,20.28L11.9,10.68L10.5,9.26L9.78,9.97C9.39,10.36 8.76,10.36 8.37,9.97L7.66,9.26C7.27,8.87 7.27,8.24 7.66,7.85L13.32,2.19C13.71,1.8 14.34,1.8 14.73,2.19L15.44,2.9C15.83,3.29 15.83,3.92 15.44,4.31L14.73,5L16.15,6.43C16.54,6.04 17.17,6.04 17.56,6.43C17.95,6.82 17.95,7.46 17.56,7.85L18.97,9.26L19.68,8.55C20.07,8.16 20.71,8.16 21.1,8.55L21.8,9.26C22.19,9.65 22.19,10.29 21.8,10.68L16.15,16.33C15.76,16.72 15.12,16.72 14.73,16.33L14.03,15.63C13.63,15.24 13.63,14.6 14.03,14.21L14.73,13.5L13.32,12.09L3.71,21.7C3.32,22.09 2.69,22.09 2.3,21.7C1.91,21.31 1.91,20.67 2.3,20.28M20,19A2,2 0 0,1 22,21V22H12V21A2,2 0 0,1 14,19H20Z" />
-                </svg>
-            </div>
-            <div class="panel-value pull-right">
-                <p style="font-size: 16px; margin-top:5%; color:#333333;">Gestiones Jurisdiccionales</p>
             </div>
         </div>
     </div>
@@ -185,6 +159,51 @@ $c_cargos          = count_by_id('cargos');
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987;">
                 <svg style="width:40px;height:68px" viewBox="0 0 24 24">
+                    <path fill="white" d="M16 9C22 9 22 13 22 13V15H16V13C16 13 16 11.31 14.85 9.8C14.68 9.57 14.47 9.35 14.25 9.14C14.77 9.06 15.34 9 16 9M8 11C11.5 11 11.94 12.56 12 13H4C4.06 12.56 4.5 11 8 11M8 9C2 9 2 13 2 13V15H14V13C14 13 14 9 8 9M9 17V19H15V17L18 20L15 23V21H9V23L6 20L9 17M8 3C8.55 3 9 3.45 9 4S8.55 5 8 5 7 4.55 7 4 7.45 3 8 3M8 1C6.34 1 5 2.34 5 4S6.34 7 8 7 11 5.66 11 4 9.66 1 8 1M16 1C14.34 1 13 2.34 13 4S14.34 7 16 7 19 5.66 19 4 17.66 1 16 1Z" />
+                </svg>
+            </div>
+            <div class="panel-value pull-right">
+                <p style="font-size: 16px; margin-top:5%; color:#333333;">Eventos</p>
+                <div style="margin-top:-3%;">
+                    <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
+                        <a href="add_evento.php" class="btn btn-success btn-sm">Agregar</a>
+                    <?php endif; ?>
+                    <a href="eventos.php" class="btn btn-primary btn-sm">Ver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-md-3" style="height: 13.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: #114987;">
+                <svg style="width:40px;height:68px" viewBox="0 0 24 24">
+                    <path fill="white" d="M19,11H13V5H19M19,19H13V13H19M11,11H5V5H11M11,19H5V13H11M3,21H21V3H3V21Z" />
+                </svg>
+            </div>
+            <div class="panel-value pull-right">
+                <p style="font-size: 16px; margin-top:15%; color:#333333;">Unidad de Gestión de Recursos</p>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="col-md-3" style="height: 13.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: #114987;">
+                <svg style="width:40px;height:68px" viewBox="0 0 24 24">
+                    <path fill="white" d="M2.3,20.28L11.9,10.68L10.5,9.26L9.78,9.97C9.39,10.36 8.76,10.36 8.37,9.97L7.66,9.26C7.27,8.87 7.27,8.24 7.66,7.85L13.32,2.19C13.71,1.8 14.34,1.8 14.73,2.19L15.44,2.9C15.83,3.29 15.83,3.92 15.44,4.31L14.73,5L16.15,6.43C16.54,6.04 17.17,6.04 17.56,6.43C17.95,6.82 17.95,7.46 17.56,7.85L18.97,9.26L19.68,8.55C20.07,8.16 20.71,8.16 21.1,8.55L21.8,9.26C22.19,9.65 22.19,10.29 21.8,10.68L16.15,16.33C15.76,16.72 15.12,16.72 14.73,16.33L14.03,15.63C13.63,15.24 13.63,14.6 14.03,14.21L14.73,13.5L13.32,12.09L3.71,21.7C3.32,22.09 2.69,22.09 2.3,21.7C1.91,21.31 1.91,20.67 2.3,20.28M20,19A2,2 0 0,1 22,21V22H12V21A2,2 0 0,1 14,19H20Z" />
+                </svg>
+            </div>
+            <div class="panel-value pull-right">
+                <p style="font-size: 16px; margin-top:5%; color:#333333;">Gestiones Jurisdiccionales</p>
+            </div>
+        </div>
+    </div> -->
+
+</div>
+<div class="row" style="margin-top: 10px;">
+    <!-- <div class="col-md-3" style="height: 13.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: #114987;">
+                <svg style="width:40px;height:68px" viewBox="0 0 24 24">
                     <path fill="white" d="M9.05,9H7.06V6H9.05V4.03H7.06V3.03C7.06,1.92 7.95,1.04 9.05,1.04H15.03V8L17.5,6.5L20,8V1.04H21C22.05,1.04 23,2 23,3.03V17C23,18.03 22.05,19 21,19H9.05C8,19 7.06,18.05 7.06,17V16H9.05V14H7.06V11H9.05V9M1,18H3V15H1V13H3V10H1V8H3V5H5V8H3V10H5V13H3V15H5V18H3V20H5V21H21V23H5A2,2 0 0,1 3,21V20H1V18Z" />
                 </svg>
             </div>
@@ -192,7 +211,7 @@ $c_cargos          = count_by_id('cargos');
                 <p style="font-size: 16px; margin-top:5%; color:#333333;">Plan estratégico Institucional</p>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <?php include_once('layouts/footer.php'); ?>

@@ -1,4 +1,4 @@
-<?php require_once('includes/load.php'); ?>
+<?php require_once('administrador/includes/load.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,16 +10,74 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
-    <link rel="stylesheet" href="libs/css/main.css" />
+    <link rel="stylesheet" href="administrador/libs/css/main.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript" src="libs/js/functions.js"></script>
+    <script type="text/javascript" src="administrador/libs/js/functions.js"></script>
 </head>
+<style>
+    .rectangulo {
+        width: 90%;
+        height: 100%;
+        border: 3px solid #D6D6D6;
+        border-radius: 5px;
+        background: #F9F9F9;
+        margin: 0 auto;
+        display: grid;
+        margin-top: 2%;
+    }
 
-<body>
+    .boton1 {
+        text-decoration: none;
+        width: 200px;
+        height: 50px;
+        border: 2px solid #075E9A;
+        border-radius: 5px;
+        background: #075E9A;
+        color: white;
+        text-align: center;
+        line-height: 45px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .boton1:hover {
+        text-decoration: none;
+        color: white;
+        box-shadow: 0 1px 5px rgb(7, 94, 154);
+        transition: all 0.1s ease;
+    }
+
+    .boton2 {
+        text-decoration: none;
+        width: 200px;
+        height: 50px;
+        border: 2px solid #075E9A;
+        border-radius: 5px;
+        background: #075E9A;
+        color: white;
+        text-align: center;
+        line-height: 45px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .boton2:hover {
+        text-decoration: none;
+        color: white;
+        box-shadow: 0 1px 5px rgb(7, 94, 154);
+        transition: all 0.1s ease;
+    }
+</style>
+
+<body class="bodyPublico">
     <nav class="navbar navbar-default" style="background: #075E9A;">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -30,12 +88,23 @@
                     <li><a class="boton4" href="acuerdos_publico.php" style="color: #FFFFEF">Acuerdos de No Violación</a></li>
                     <li><a class="boton4" href="recomendaciones_publico.php" style="color: #FFFFEF">Recomendaciones</a></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="index.php" style="color: #FFFFEF">Iniciar Sesión</a></li>
-                </ul>
             </div>
         </div>
     </nav>
+
+    <div class="rectangulo">
+        <div class="row">
+            <h1 style="text-align: center; margin-top: 5%;">Comisión Estatal de los Derechos Humanos Michoacán</h1><br>
+        </div><br><br>
+        <div class="row" style="display:inline;">
+            <!-- <div class="col"> -->
+                <a href="acuerdos_publico.php" class="boton1">Acuerdos de No Violación</a><br><br>
+            <!-- </div> -->
+            <!-- <div class="col"> -->
+                <a href="recomendaciones_publico.php" class="boton2">Recomendaciones</a><br><br>
+            <!-- </div><br><br><br><br><br><br> -->
+        </div>
+    </div>
 </body>
 
 </html>

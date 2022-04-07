@@ -1,5 +1,5 @@
 <?php
-require_once('includes/load2.php');
+require_once('load2.php');
 /*--------------------------------------------------------------*/
 /* Funcion para llevar a cabo queries
 /*--------------------------------------------------------------*/

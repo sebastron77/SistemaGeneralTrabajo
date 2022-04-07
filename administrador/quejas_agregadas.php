@@ -57,14 +57,14 @@ $quejas = quejas();
         <table class="datatable table table-bordered table-striped">
           <thead>
             <tr class="info">
-              <th class="text-center" style="width: 1%;">Folio Queja</th>
+              <th class="text-center" style="width: 2%;">Folio Queja</th>
               <th style="width: 1%;">Última Actualización</th>
               <th style="width: 3%;">Autoridad Responsable</th>
               <th style="width: 3%;">Agraviado</th>
               <th style="width: 1%;">Estatus Queja</th>
               <th style="width: 3%;">Asignado a</th>
               <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
-                <th class="text-center" style="width: 5%;">Acciones</th>
+                <th class="text-center" style="width: 15%;">Acciones</th>
               <?php endif; ?>
             </tr>
           </thead>
@@ -79,11 +79,14 @@ $quejas = quejas();
                 <td> <?php echo remove_junk($queja['asignada_a']); ?></td>
                 <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                   <td class="text-center" >
-                    <a href="add_acuerdo_no_violacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
-                      Acuerdos
+                    <a href="add_acuerdo_no_violacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip" title="Agregar un Acuerdo de No Violación">
+                      Acuerdo
                     </a>
-                    <a href="add_recomendacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">
-                      Recomendaciones
+                    <a href="add_recomendacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip" title="Agregar una Recomendación">
+                      Recomendación
+                    </a>
+                    <a  href="http://177.229.209.29/quejas/upload/scp/tickets.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-queja btn-sm" data-toggle="tooltip" title="Ver en Sistema de Quejas">
+                      Ver Queja
                     </a>
                   </td>
                 <?php endif; ?>

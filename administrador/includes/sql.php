@@ -1,5 +1,5 @@
 <?php
-require_once('includes/load.php');
+require_once('load.php');
 
 /*--------------------------------------------------------------*/
 /* Funcion para encontrar en una tabla toda la informacion
@@ -2298,6 +2298,15 @@ function page_require_area($require_area)
 function find_all_quejas()
 {
   $sql = "SELECT * FROM quejas";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*------------------------------------------------------------------*/
+/* Ver todas las quejas que han sido agregadas al libro electrónico */
+/*------------------------------------------------------------------*/
+function find_all_eventos()
+{
+  $sql = "SELECT * FROM eventos";
   $result = find_by_sql($sql);
   return $result;
 }
