@@ -202,7 +202,7 @@ include_once('layouts/header.php'); ?>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="quien_asiste">¿Quién asiste?</label>
+                            <label for="quien_asiste">¿Quién asiste? (separado por comas)</label>
                             <textarea name="quien_asiste" class="form-control" id="quien_asiste" cols="30" rows="10"></textarea>
                         </div>
                     </div>
