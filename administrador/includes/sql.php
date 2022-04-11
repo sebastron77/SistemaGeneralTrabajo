@@ -2225,7 +2225,17 @@ function last_id_folios_acuerdos()
   $result = find_by_sql($sql);
   return $result;
 }
-
+/*------------------------------------------------------------------*/
+/* Funcion para encontrar el ultimo id de folios de acuerdos para 
+   despues sumarle uno y que el nuevo registro tome ese valor */
+/*------------------------------------------------------------------*/
+function last_id_folios_actividades_sistemas()
+{
+  global $db;
+  $sql = "SELECT * FROM folios_informe_sistemas ORDER BY id DESC LIMIT 1";
+  $result = find_by_sql($sql);
+  return $result;
+}
 /*------------------------------------------------------------------*/
 /* Funcion para encontrar el ultimo id de folios de recomendaciones
     para despues sumarle uno y que el nuevo registro tome ese valor */

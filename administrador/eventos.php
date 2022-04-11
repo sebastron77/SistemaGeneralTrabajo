@@ -48,7 +48,7 @@ if ($nivel == 7) {
                     <span>Lista de Eventos</span>
                 </strong>
                 <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
-                    <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar evento</a>
+                    <a href="add_evento.php" class="btn btn-info pull-right">Agregar evento</a>
                 <?php endif; ?>
             </div>
 

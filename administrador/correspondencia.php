@@ -44,7 +44,7 @@ endif;
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Correspondencia</span>
                 </strong>
-                <?php if ($nivel_user <= 2) : ?>
+                <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                     <a href="add_correspondencia.php" class="btn btn-info pull-right">Agregar Correspondencia</a>
                 <?php endif; ?>
             </div>
@@ -62,7 +62,7 @@ endif;
                             <th style="width: 15%;">Medio de Recepción</th>
                             <th style="width: 15%;">Seguimiento</th>
                             <th style="width: 15%;">Medio de Entrega</th>
-                            <?php if ($nivel_user <= 2) : ?>
+                            <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                                 <th style="width: 2%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
@@ -83,7 +83,7 @@ endif;
                                 <td><?php echo remove_junk(ucwords(($a_correspondencia['medio_recepcion']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_correspondencia['seguimiento']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_correspondencia['medio_entrega']))) ?></td>
-                                <?php if ($nivel_user <= 2) : ?>
+                                <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="ver_info_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">

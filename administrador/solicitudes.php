@@ -100,8 +100,6 @@ $c_cargos          = count_by_id('cargos');
         <div class="panel-value pull-right">
           <p style="font-size: 20px; margin-top:8%; color:black;">Centro de Estudios</p>
           <div><br>
-            <!-- <a href="add_convenio.php" class="btn btn-success">Agregar</a>
-          <a href="convenios.php" class="btn btn-primary">Ver</a> -->
           </div>
         </div>
       </div>
@@ -120,8 +118,6 @@ $c_cargos          = count_by_id('cargos');
         <div class="panel-value pull-right">
           <p style="font-size: 20px; margin-top:8%; color:black;">Área Médica y Psicológica</p>
           <div><br>
-            <!-- <a href="add_convenio.php" class="btn btn-success">Agregar</a>
-          <a href="convenios.php" class="btn btn-primary">Ver</a> -->
           </div>
         </div>
       </div>
@@ -138,8 +134,22 @@ $c_cargos          = count_by_id('cargos');
         <div class="panel-value pull-right">
           <p style="font-size: 20px; margin-top:8%; color:black;">Registro de Quejas y Seguimiento</p>
           <div><br>
-            <!-- <a href="add_convenio.php" class="btn btn-success">Agregar</a>
-          <a href="convenios.php" class="btn btn-primary">Ver</a> -->
+          </div>
+        </div>
+      </div>
+    </a>
+  <?php endif ?>
+  <?php if (($otro == 8) || ($otro <= 2)) : ?>
+    <a href="solicitudes_sistemas.php" class="col-md-3" style="height: 12.5rem;">
+      <div class="panel panel-box clearfix">
+        <div class="panel-icon pull-left" style="background: #5243DE;">
+          <svg style="width:59px;height:58px" viewBox="0 0 24 24">
+            <path fill="white" d="M6,2C4.89,2 4,2.89 4,4V12C4,13.11 4.89,14 6,14H18C19.11,14 20,13.11 20,12V4C20,2.89 19.11,2 18,2H6M6,4H18V12H6V4M4,15C2.89,15 2,15.89 2,17V20C2,21.11 2.89,22 4,22H20C21.11,22 22,21.11 22,20V17C22,15.89 21.11,15 20,15H4M8,17H20V20H8V17M9,17.75V19.25H13V17.75H9M15,17.75V19.25H19V17.75H15Z" />
+          </svg>
+        </div>
+        <div class="panel-value pull-right">
+          <p style="font-size: 20px; margin-top:8%; color:black;">Coordinación de Sistemas de Informática</p>
+          <div><br>
           </div>
         </div>
       </div>

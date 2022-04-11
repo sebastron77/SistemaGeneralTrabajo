@@ -45,7 +45,7 @@ endif;
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Invitaciones</span>
                 </strong>
-                <?php if ($nivel_user <= 2) : ?>
+                <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                     <a href="add_invitacion.php" class="btn btn-info pull-right">Agregar invitación</a>
                 <?php endif; ?>
             </div>
@@ -61,7 +61,7 @@ endif;
                             <th style="width: 2%;">Lugar</th>
                             <th style="width: 1%;"># Asistentes</th>
                             <th style="width: 5%;">Adjunto</th>
-                            <?php if ($nivel_user <= 2) : ?>
+                            <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                                 <th style="width: 10%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
@@ -80,7 +80,7 @@ endif;
                                 <td><?php echo remove_junk(ucwords(($a_invitacion['lugar']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_invitacion['num_asistentes']))) ?></td>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/invitaciones/<?php echo $resultado . '/' . $a_invitacion['adjunto']; ?>"><?php echo $a_invitacion['adjunto']; ?></a></td>
-                                <?php if ($nivel_user <= 2) : ?>
+                                <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="edit_invitacion.php?id=<?php echo (int)$a_invitacion['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">

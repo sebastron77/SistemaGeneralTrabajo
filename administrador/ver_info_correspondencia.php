@@ -3,11 +3,26 @@ $page_title = 'Correspondencia';
 require_once('includes/load.php');
 ?>
 <?php
-page_require_level(2);
+// page_require_level(2);
 $a_correspondencia = find_by_id('correspondencia', (int)$_GET['id']);
 $user = current_user();
 $nivel = $user['user_level'];
-// page_require_area(4);
+$id_user = $user['id'];
+$nivel_user = $user['user_level'];
+
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 7) {
+    page_require_level_exacto(7);
+}
+
+if ($nivel_user > 2 && $nivel_user < 7):
+    redirect('home.php');
+endif;
+if ($nivel_user > 7):
+    redirect('home.php');
+endif;
 ?>
 <?php include_once('layouts/header.php'); ?>
 
