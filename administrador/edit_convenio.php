@@ -2,7 +2,7 @@
 $page_title = 'Editar Convenio';
 require_once('includes/load.php');
 
-page_require_level(3);
+// page_require_level(3);
 
 ?>
 <?php
@@ -14,6 +14,28 @@ if (!$e_detalle) {
 $user = current_user();
 $nivel = $user['user_level'];
 $id_folio = last_id_folios();
+$user = current_user();
+$nivel = $user['user_level'];
+$id_user = $user['id'];
+
+if ($nivel <= 2) {
+    page_require_level(2);
+}
+if ($nivel == 3) {
+    page_require_level(3);
+}
+if ($nivel == 4) {
+    redirect('home.php');
+}
+if ($nivel == 5) {
+    redirect('home.php');    
+}
+if ($nivel == 6) {
+    redirect('home.php');
+}
+if ($nivel == 7) {
+    page_require_level(7);
+}
 ?>
 
 <?php

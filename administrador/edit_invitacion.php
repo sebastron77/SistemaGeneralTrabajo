@@ -5,7 +5,28 @@ $user = current_user();
 $detalle = $user['id'];
 $e_invitacion = find_by_id('invitaciones', (int)$_GET['id']);
 $id_folio = last_id_folios();
-page_require_level(2);
+$user = current_user();
+$nivel = $user['user_level'];
+$id_user = $user['id'];
+
+if ($nivel <= 2) {
+    page_require_level(2);
+}
+if ($nivel == 3) {
+    redirect('home.php');
+}
+if ($nivel == 4) {
+    redirect('home.php');
+}
+if ($nivel == 5) {
+    redirect('home.php');    
+}
+if ($nivel == 6) {
+    redirect('home.php');
+}
+if ($nivel == 7) {
+    page_require_level(7);
+}
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['edit_invitacion'])) {

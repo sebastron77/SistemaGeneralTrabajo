@@ -57,7 +57,7 @@ endif;
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Convenios</span>
                 </strong>
-                <?php if (($nivel_user <= 2) || ($nivel_user == 3)) : ?>
+                <?php if (($nivel_user <= 2) || ($nivel_user == 3) || ($nivel_user == 7)) : ?>
                     <a href="add_convenio.php" class="btn btn-info pull-right">Agregar convenio</a>
                 <?php endif; ?>
             </div>
@@ -72,7 +72,7 @@ endif;
                             <th style="width: 5%;">Institución</th>
                             <th style="width: 3%;">Convenio</th>
                             <th style="width: 3%;">Descripción</th>
-                            <?php if ($nivel_user <= 2 || ($nivel_user == 3)) : ?>
+                            <?php if ($nivel_user <= 2 || ($nivel_user == 3) || ($nivel_user == 7)) : ?>
                                 <th style="width: 1%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
@@ -91,7 +91,7 @@ endif;
                                 
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/convenios/<?php echo $resultado . '/' . $a_convenio['convenio']; ?>"><?php echo $a_convenio['convenio']; ?></a></td>
                                 <td><?php echo remove_junk(ucwords(($a_convenio['descripcion_convenio']))) ?></td>
-                                <?php if (($nivel_user <= 2) || ($nivel_user == 3)) : ?>
+                                <?php if (($nivel_user <= 2) || ($nivel_user == 3) || ($nivel_user == 7)) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="ver_info_conv.php?id=<?php echo (int)$a_convenio['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información completa">

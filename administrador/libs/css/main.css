@@ -329,7 +329,7 @@ table tfoot tr td:first-child{
 }.btn-queja{
   background-color:#FEB93A;
   color: #000000;
-}.btn-queja:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active{
+}.btn-queja:hover, .btn-queja:focus, .btn-queja.focus, .btn-queja:active, .btn-queja.active{
  background-color:#d49b30;
 }
 .btn-excel{

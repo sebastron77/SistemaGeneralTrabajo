@@ -3,7 +3,28 @@ $page_title = 'Agregar Convenio';
 require_once('includes/load.php');
 $id_folio = last_id_folios();
 // $queja = find_by_id_quejas((int)$_GET['id']);
-page_require_level(3);
+$user = current_user();
+$nivel = $user['user_level'];
+$id_user = $user['id'];
+
+if ($nivel <= 2) {
+    page_require_level(2);
+}
+if ($nivel == 3) {
+    page_require_level(3);
+}
+if ($nivel == 4) {
+    redirect('home.php');
+}
+if ($nivel == 5) {
+    redirect('home.php');    
+}
+if ($nivel == 6) {
+    redirect('home.php');
+}
+if ($nivel == 7) {
+    page_require_level(7);
+}
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 
