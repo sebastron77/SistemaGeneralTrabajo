@@ -5,7 +5,24 @@ $user = current_user();
 $detalle = $user['id'];
 $e_informe = find_by_id('informes', (int)$_GET['id']);
 $id_folio = last_id_folios();
-page_require_level(2);
+// page_require_level(2);
+$user = current_user();
+$nivel = $user['user_level'];
+$id_user = $user['id'];
+$nivel_user = $user['user_level'];
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 7) {
+    page_require_level_exacto(7);
+};
+// page_require_area(4);
+if ($nivel_user > 2 && $nivel_user < 7):
+    redirect('home.php');
+endif;
+if ($nivel_user > 7):
+    redirect('home.php');
+endif;
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['edit_informe'])) {

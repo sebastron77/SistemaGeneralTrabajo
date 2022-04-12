@@ -112,12 +112,36 @@ $quejas = quejas();
                         <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                           <td class="text-center">
                             <?php
+                              // ----------------------------------------- OPCION DE CONEXION 1 -----------------------------------------
+                              // $dbhost = "localhost";
+                              // $dbuser = "root";
+                              // $dbpass = "";
+                              // $dbname = "libro_electronico2";
+                              
+                              // $obj_conexion = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+
+                              //   if(!$obj_conexion)
+                              //     {
+                              //       echo "Existe un problema con la conexión a la base de datos";
+                              //     }
+                              //     else
+                              //     {
+                              //       $link = mysqli_connect($dbhost, $dbuser, $dbpass) or die ("Conection Error: " . mysqli_error());
+                              //         mysqli_select_db($link,$dbname) or die("Error conecting to db.");
+                              //     }
+                              // --------------------------------------------------------------------------------------------------------
+                              
+                              
+                              // ----------------------------------------- OPCION DE CONEXION 2 -----------------------------------------                              
+
                               // $busca = find_by_ticket_id('quejas',$queja['ticket_id']); 
-                              $enlace = mysqli_connect('localhost', 'root', '');
-                              mysqli_select_db($enlace,'libro_electronico2');
+                              $link = mysqli_connect('localhost', 'root', '', 'libro_electronico2');
+                              // mysqli_select_db($link,'libro_electronico2');
                               $sql = "SELECT * FROM quejas WHERE ticket_id = '{$queja['ticket_id']}'";
-                              $resultado = mysqli_query($enlace,$sql);
+                              // En la linea de abajpo para que funcione con la otra forma de conexion, en lugar de $link es $obj_conexion
+                              $resultado = mysqli_query($link, $sql); //or die(mysqli_error($link));
                               $row = mysqli_fetch_array($resultado);
+                              // --------------------------------------------------------------------------------------------------------
                             ?>
                             <?php if (($queja['ticket_id'] != $row['ticket_id'])) : ?>
                               <a href="add_queja.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip">

@@ -42,7 +42,7 @@ endif;
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Informes</span>
                 </strong>
-                <?php if ($nivel_user <= 2) : ?>
+                <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                     <a href="add_informe.php" class="btn btn-info pull-right">Agregar informe</a>
                 <?php endif; ?>
             </div>
@@ -51,15 +51,15 @@ endif;
                 <table class="datatable table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 5%;">Folio</th>
+                            <th style="width: 3%;">Folio</th>
                             <th style="width: 1%;"># Informe</th>
                             <th style="width: 1%;">Fecha Informe</th>
                             <th style="width: 1%;">Fecha de Entrega</th>
-                            <th style="width: 2%;">Oficio de Entrega a Congreso</th>
-                            <th style="width: 1%;">Caratula de Informe</th>
-                            <th style="width: 15%;">URL</th>
-                            <?php if ($nivel_user <= 2) : ?>
-                                <th style="width: 10%;" class="text-center">Acciones</th>
+                            <th style="width: 5%;">Oficio de Entrega a Congreso</th>
+                            <th style="width: 5%;">Caratula de Informe</th>
+                            <th style="width: 10%;">URL</th>
+                            <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
+                                <th style="width: 1%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
                     </thead>
@@ -77,7 +77,7 @@ endif;
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/informes/<?php echo $resultado . '/' . $a_informe['oficio_entrega_congreso']; ?>"><?php echo $a_informe['oficio_entrega_congreso']; ?></a></td>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/informes/<?php echo $resultado . '/' . $a_informe['caratula_informe']; ?>"><?php echo $a_informe['caratula_informe']; ?></a></td>
                                 <td><?php echo remove_junk(ucwords(($a_informe['liga_url']))) ?></td>
-                                <?php if ($nivel_user <= 2) : ?>
+                                <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="edit_informe.php?id=<?php echo (int)$a_informe['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">

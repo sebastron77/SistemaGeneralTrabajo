@@ -61,10 +61,10 @@ $quejas = quejas();
               <th style="width: 1%;">Última Actualización</th>
               <th style="width: 3%;">Autoridad Responsable</th>
               <th style="width: 3%;">Agraviado</th>
-              <th style="width: 1%;">Estatus Queja</th>
+              <th style="width: 1%;">Estatus</th>
               <th style="width: 3%;">Asignado a</th>
               <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
-                <th class="text-center" style="width: 15%;">Acciones</th>
+                <th class="text-center" style="width: 25%;">Acciones</th>
               <?php endif; ?>
             </tr>
           </thead>
@@ -78,16 +78,21 @@ $quejas = quejas();
                 <td class="text-center"> <?php echo remove_junk(($queja['estatus_queja'])); ?> </td>
                 <td> <?php echo remove_junk($queja['asignada_a']); ?></td>
                 <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
-                  <td class="text-center" >
+                  <td class="text-center">
                     <a href="add_acuerdo_no_violacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip" title="Agregar un Acuerdo de No Violación">
                       Acuerdo
                     </a>
                     <a href="add_recomendacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip" title="Agregar una Recomendación">
                       Recomendación
                     </a>
-                    <a  href="http://177.229.209.29/quejas/upload/scp/tickets.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-queja btn-sm" data-toggle="tooltip" title="Ver en Sistema de Quejas">
+                    <a href="http://177.229.209.29/quejas/upload/scp/tickets.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-queja btn-sm" data-toggle="tooltip" title="Ver en Sistema de Quejas">
                       Ver Queja
                     </a>
+                    <div class="btn-group">
+                      <a href="edit_queja.php?id=<?php echo (int)$queja['id']; ?>" style="color: black" class="btn btn-warning btn-sm" title="Editar en Libro Electrónico" data-toggle="tooltip">
+                        Editar
+                      </a>
+                    </div>
                   </td>
                 <?php endif; ?>
               </tr>

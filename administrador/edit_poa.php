@@ -5,7 +5,30 @@ $user = current_user();
 $detalle = $user['id'];
 $e_poa = find_by_id('poa', (int)$_GET['id']);
 $id_folio = last_id_folios();
-page_require_level(2);
+// page_require_level(2);
+
+$user = current_user();
+$nivel = $user['user_level'];
+$id_user = $user['id'];
+
+if ($nivel <= 2) {
+    page_require_level(2);
+}
+if ($nivel == 3) {
+    redirect('home.php');
+}
+if ($nivel == 4) {
+    redirect('home.php');
+}
+if ($nivel == 5) {
+    redirect('home.php');    
+}
+if ($nivel == 6) {
+    redirect('home.php');
+}
+if ($nivel == 7) {
+    page_require_level(7);
+}
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['edit_poa'])) {
@@ -23,7 +46,7 @@ if (isset($_POST['edit_poa'])) {
 
         $folio_editar = $e_poa['folio'];
         $resultado = str_replace("/", "-", $folio_editar);
-        $carpeta = 'uploads/informes/' . $resultado;
+        $carpeta = 'uploads/poa/' . $resultado;
 
         $name = $_FILES['oficio_recibido']['name'];
         $size = $_FILES['oficio_recibido']['size'];
@@ -138,7 +161,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="poa">POA</label>
                             <input type="file" accept="application/pdf" class="form-control" name="poa" value="<?php echo remove_junk($e_poa['poa']); ?>"  id="poa">
-                            <label style="font-size:12px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['poa']); ?><?php ?></label>
+                            <label style="font-size:12px; color:#E3054F;" for="poa">Archivo Actual: <?php echo remove_junk($e_poa['poa']); ?><?php ?></label>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -153,7 +176,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="oficio_entrega">Adjuntar Oficio de Entrega</label>
                             <input type="file" accept="application/pdf" class="form-control" name="oficio_entrega" value="<?php echo remove_junk($e_poa['oficio_entrega']); ?>"  id="oficio_entrega">
-                            <label style="font-size:12px; color:#E3054F;" for="oficio_recibido">Archivo Actual: <?php echo remove_junk($e_poa['oficio_entrega']); ?><?php ?></label>
+                            <label style="font-size:12px; color:#E3054F;" for="oficio_entrega">Archivo Actual: <?php echo remove_junk($e_poa['oficio_entrega']); ?><?php ?></label>
                         </div>
                     </div>
                 </div>

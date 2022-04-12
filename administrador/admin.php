@@ -37,6 +37,7 @@ $c_correspondencia = count_by_id('correspondencia');
 $c_invitaciones = count_by_id('invitaciones');
 $c_acuerdos = count_by_id('acuerdos');
 $c_recomendaciones = count_by_id('recomendaciones');
+$c_eventos = count_by_id('eventos');
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -48,7 +49,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
 <div class="row">
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-green">
+      <div class="panel-icon pull-left bg-violet">
         <i class="large material-icons">account_circle</i>
       </div>
       <div class="panel-value pull-right">
@@ -70,7 +71,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left" style="background: #6852F2;">
+      <div class="panel-icon pull-left bg-violet"">
         <i class="large material-icons">business</i>
       </div>
       <div class="panel-value pull-right">
@@ -81,7 +82,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-green2">
+      <div class="panel-icon pull-left bg-violet">
         <i class="large material-icons">business_center</i>
       </div>
       <div class="panel-value pull-right">
@@ -191,7 +192,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
 <div class="row" style="margin-top: 5px;">
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-green">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px;" viewBox="0 0 24 24">
           <path fill="white" d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2M18 20H6V4H13V9H18V20M9.5 18L10.2 15.2L8 13.3L10.9 13.1L12 10.4L13.1 13L16 13.2L13.8 15.1L14.5 17.9L12 16.5L9.5 18Z" />
         </svg>
@@ -204,7 +205,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left  bg-violet">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:58px" viewBox="0 0 24 24">
           <path fill="white" d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
         </svg>
@@ -217,7 +218,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left" style="background: #6852F2;">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px" viewBox="0 0 24 24">
           <path fill="white" d="M16.75 4.36C18.77 6.56 18.77 9.61 16.75 11.63L15.07 9.94C15.91 8.76 15.91 7.23 15.07 6.05L16.75 4.36M20.06 1C24 5.05 23.96 11.11 20.06 15L18.43 13.37C21.2 10.19 21.2 5.65 18.43 2.63L20.06 1M9 4C11.2 4 13 5.79 13 8S11.2 12 9 12 5 10.21 5 8 6.79 4 9 4M13 14.54C13 15.6 12.71 18.07 10.8 20.83L10 16L10.93 14.12C10.31 14.05 9.66 14 9 14S7.67 14.05 7.05 14.12L8 16L7.18 20.83C5.27 18.07 5 15.6 5 14.54C2.6 15.24 .994 16.5 .994 18V22H17V18C17 16.5 15.39 15.24 13 14.54Z" />
         </svg>
@@ -230,7 +231,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-green2">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px" viewBox="0 0 24 24">
           <path fill="white" d="M8,14V18L2,12L8,6V10H16V6L22,12L16,18V14H8Z" />
         </svg>
@@ -245,7 +246,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
 <div class="row" style="margin-top: 5px;">
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-green">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px" viewBox="0 0 24 24">
           <path fill="white" d="M8,14V18L2,12L8,6V10H16V6L22,12L16,18V14H8Z" />
         </svg>
@@ -271,7 +272,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left" style="background: #6852F2;">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px" viewBox="0 0 24 24">
           <path fill="white" d="M18,14H14V18H10V14H6V10H10V6H14V10H18M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z" />
         </svg>
@@ -284,7 +285,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-green2">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px" viewBox="0 0 24 24">
           <path fill="white" d="M13 3C16.9 3 20 6.1 20 10C20 12.8 18.4 15.2 16 16.3V21H9V18H8C6.9 18 6 17.1 6 16V13H4.5C4.1 13 3.8 12.5 4.1 12.2L6 9.7C6.2 5.9 9.2 3 13 3M13 1C8.4 1 4.6 4.4 4.1 8.9L2.5 11C1.9 11.7 1.8 12.7 2.2 13.6C2.6 14.3 3.2 14.8 4 15V16C4 17.9 5.3 19.4 7 19.9V23H18V17.5C20.5 15.9 22 13.1 22 10C22 5 18 1 13 1M17 10H14V13H12V10H9V8H12V5H14V8H17V10Z" />
         </svg>
@@ -296,10 +297,10 @@ $c_recomendaciones = count_by_id('recomendaciones');
     </div>
   </div>
 </div>
-<div class="row" style="margin-top: 5px;">  
+<div class="row" style="margin-top: 5px;">
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-green">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px" viewBox="0 0 24 24">
           <path fill="white" d="M7.5,5.6L5,7L6.4,4.5L5,2L7.5,3.4L10,2L8.6,4.5L10,7L7.5,5.6M19.5,15.4L22,14L20.6,16.5L22,19L19.5,17.6L17,19L18.4,16.5L17,14L19.5,15.4M22,2L20.6,4.5L22,7L19.5,5.6L17,7L18.4,4.5L17,2L19.5,3.4L22,2M13.34,12.78L15.78,10.34L13.66,8.22L11.22,10.66L13.34,12.78M14.37,7.29L16.71,9.63C17.1,10 17.1,10.65 16.71,11.04L5.04,22.71C4.65,23.1 4,23.1 3.63,22.71L1.29,20.37C0.9,20 0.9,19.35 1.29,18.96L12.96,7.29C13.35,6.9 14,6.9 14.37,7.29Z" />
         </svg>
@@ -325,7 +326,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left" style="background: #6852F2;">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px" viewBox="0 0 24 24">
           <path fill="white" d="M17,4H7A5,5 0 0,0 2,9V20H20A2,2 0 0,0 22,18V9A5,5 0 0,0 17,4M10,18H4V9A3,3 0 0,1 7,6A3,3 0 0,1 10,9V18M19,15H17V13H13V11H19V15M9,11H5V9H9V11Z" />
         </svg>
@@ -338,7 +339,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-green2">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px" viewBox="0 0 24 24">
           <path fill="white" d="M22,3H2A2,2 0 0,0 0,5V19A2,2 0 0,0 2,21H22A2,2 0 0,0 24,19V5A2,2 0 0,0 22,3M22,19H2V5H22V19M21,6H14V11H21V6M20,8L17.5,9.75L15,8V7L17.5,8.75L20,7V8M9,12A3,3 0 0,0 12,9A3,3 0 0,0 9,6A3,3 0 0,0 6,9A3,3 0 0,0 9,12M9,8A1,1 0 0,1 10,9A1,1 0 0,1 9,10A1,1 0 0,1 8,9A1,1 0 0,1 9,8M15,16.59C15,14.09 11.03,13 9,13C6.97,13 3,14.09 3,16.59V18H15V16.59M5.5,16C6.22,15.5 7.7,15 9,15C10.3,15 11.77,15.5 12.5,16H5.5Z" />
         </svg>
@@ -350,10 +351,10 @@ $c_recomendaciones = count_by_id('recomendaciones');
     </div>
   </div>
 </div>
-<div class="row" style="margin-top: 5px;">  
+<div class="row" style="margin-top: 5px;">
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-green">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px" viewBox="0 0 24 24">
           <path fill="white" d="M16 9C22 9 22 13 22 13V15H16V13C16 13 16 11.31 14.85 9.8C14.68 9.57 14.47 9.35 14.25 9.14C14.77 9.06 15.34 9 16 9M8 11C11.5 11 11.94 12.56 12 13H4C4.06 12.56 4.5 11 8 11M8 9C2 9 2 13 2 13V15H14V13C14 13 14 9 8 9M9 17V19H15V17L18 20L15 23V21H9V23L6 20L9 17M8 3C8.55 3 9 3.45 9 4S8.55 5 8 5 7 4.55 7 4 7.45 3 8 3M8 1C6.34 1 5 2.34 5 4S6.34 7 8 7 11 5.66 11 4 9.66 1 8 1M16 1C14.34 1 13 2.34 13 4S14.34 7 16 7 19 5.66 19 4 17.66 1 16 1Z" />
         </svg>
@@ -379,7 +380,7 @@ $c_recomendaciones = count_by_id('recomendaciones');
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left" style="background: #6852F2;">
+      <div class="panel-icon pull-left bg-violet">
         <svg style="width:59px;height:59px" viewBox="0 0 24 24">
           <path fill="white" d="M19 1L14 6V17L19 12.5V1M21 5V18.5C19.9 18.15 18.7 18 17.5 18C15.8 18 13.35 18.65 12 19.5V6C10.55 4.9 8.45 4.5 6.5 4.5C4.55 4.5 2.45 4.9 1 6V20.65C1 20.9 1.25 21.15 1.5 21.15C1.6 21.15 1.65 21.1 1.75 21.1C3.1 20.45 5.05 20 6.5 20C8.45 20 10.55 20.4 12 21.5C13.35 20.65 15.8 20 17.5 20C19.15 20 20.85 20.3 22.25 21.05C22.35 21.1 22.4 21.1 22.5 21.1C22.75 21.1 23 20.85 23 20.6V6C22.4 5.55 21.75 5.25 21 5M10 18.41C8.75 18.09 7.5 18 6.5 18C5.44 18 4.18 18.19 3 18.5V7.13C3.91 6.73 5.14 6.5 6.5 6.5C7.86 6.5 9.09 6.73 10 7.13V18.41Z" />
         </svg>
@@ -387,6 +388,19 @@ $c_recomendaciones = count_by_id('recomendaciones');
       <div class="panel-value pull-right">
         <h2 class="margin-top"> <?php echo $c_invitaciones['total']; ?> </h2>
         <p class="text-muted">Programa Operativo Anual</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3" style="height: 12.5rem;">
+    <div class="panel panel-box clearfix">
+      <div class="panel-icon pull-left bg-violet">
+        <svg style="width:59px;height:58px" viewBox="0 0 24 24">
+          <path fill="white" d="M19,20H5V9H19M16,2V4H8V2H6V4H5A2,2 0 0,0 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4H18V2M10.88,13H7.27L10.19,15.11L9.08,18.56L12,16.43L14.92,18.56L13.8,15.12L16.72,13H13.12L12,9.56L10.88,13Z" />
+        </svg>
+      </div>
+      <div class="panel-value pull-right">
+        <h2 class="margin-top"> <?php echo $c_eventos['total']; ?> </h2>
+        <p class="text-muted">Eventos</p>
       </div>
     </div>
   </div>

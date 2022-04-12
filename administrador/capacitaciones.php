@@ -47,7 +47,7 @@ if ($nivel == 7) {
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Lista de Capacitaciones</span>
                 </strong>
-                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6) || ($nivel == 7)) : ?>
                     <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a>
                 <?php endif; ?>
             </div>
@@ -66,7 +66,7 @@ if ($nivel == 7) {
                             <th style="width: 5%;">Capacitador</th>
                             <th style="width: 2%;">Curriculum</th>
                             <!-- <th style="width: 3%;">Constancia</th> -->
-                            <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                            <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6) || ($nivel == 7)) : ?>
                                 <th style="width: 3%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
@@ -99,7 +99,7 @@ if ($nivel == 7) {
                                     <?php endif; ?> -->
 
                                 <!-- </td> -->
-                                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6) || ($nivel == 7)) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="ver_info_capacitacion.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">

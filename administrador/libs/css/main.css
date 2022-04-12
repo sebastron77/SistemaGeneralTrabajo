@@ -327,10 +327,11 @@ table tfoot tr td:first-child{
 }.btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active{
   background-color:#23a048;
 }.btn-queja{
-  background-color:#FEB93A;
-  color: #000000;
+  background-color:#3ab6fe;
+  color: #ffffff;
 }.btn-queja:hover, .btn-queja:focus, .btn-queja.focus, .btn-queja:active, .btn-queja.active{
- background-color:#d49b30;
+ background-color:#2e95d1;
+ color: #ffffff;
 }
 .btn-excel{
   background-color:#2f9b5c;

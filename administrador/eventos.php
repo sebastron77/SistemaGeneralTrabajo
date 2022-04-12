@@ -47,7 +47,7 @@ if ($nivel == 7) {
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Lista de Eventos</span>
                 </strong>
-                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
+                <?php if (($nivel <= 2) || ($nivel == 7)) : ?>
                     <a href="add_evento.php" class="btn btn-info pull-right">Agregar evento</a>
                 <?php endif; ?>
             </div>

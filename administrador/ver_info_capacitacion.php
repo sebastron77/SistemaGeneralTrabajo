@@ -40,7 +40,7 @@ if ($nivel == 6) {
     page_require_area(6);
 }
 if ($nivel == 7) {
-    redirect('home.php');
+    page_require_level_exacto(7);
 }
 ?>
 <?php include_once('layouts/header.php'); ?>

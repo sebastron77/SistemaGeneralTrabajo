@@ -22,7 +22,7 @@ if ($nivel == 4) {
     redirect('home.php');
 }
 if ($nivel == 5) {
-    redirect('home.php');    
+    redirect('home.php');
 }
 if ($nivel == 6) {
     redirect('home.php');
@@ -54,15 +54,12 @@ if ($nivel == 7) {
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 4%;">Folio</th>
-                            <th style="width: 1%;">Fecha Convenio</th>
-                            <th style="width: 1%;">Vigencia</th>
+                            <th style="width: 3%;">Folio</th>
+                            <th style="width: 3%;">Fecha Convenio</th>
+                            <th style="width: 3%;">Vigencia</th>
                             <th style="width: 5%;">Institución</th>
                             <th style="width: 5%;">Ámbito Institucional</th>
                             <th style="width: 5%;">Tipo de Institución</th>
-                            <th style="width: 3%;">Descripción del Convenio</th>
-                            <th style="width: 5%;">Dirección Institución</th>
-                            <th style="width: 1%;">Teléfono</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,9 +70,30 @@ if ($nivel == 7) {
                             <td><?php echo remove_junk(ucwords($a_convenio['institucion'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_convenio['ambito_institucion'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_convenio['tipo_institucion'])) ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr style="height: 10px;" class="info">
+                            <th style="width: 5%;">Tipo de Institución</th>
+                            <th style="width: 3%;">Descripción del Convenio</th>
+                            <th style="width: 5%;">Dirección Institución</th>
+                            <th style="width: 1%;">Teléfono</th>
+                            <th style="width: 1%;">Convenio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?php echo remove_junk(ucwords($a_convenio['tipo_institucion'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_convenio['descripcion_convenio'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_convenio['direccion_institucion'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_convenio['telefono'])) ?></td>
+                            <?php
+                            $folio_editar = $a_convenio['folio_solicitud'];
+                            $resultado = str_replace("/", "-", $folio_editar);
+                            ?>
+                            <td><a target="_blank" style="color: #075E9A" href="uploads/convenios/<?php echo $resultado . '/' . $a_convenio['convenio']; ?>"><?php echo $a_convenio['convenio']; ?></a></td>
                         </tr>
                     </tbody>
                 </table>
