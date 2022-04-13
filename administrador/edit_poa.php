@@ -55,6 +55,9 @@ if (isset($_POST['edit_poa'])) {
 
         if (is_dir($carpeta)) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+        } else{
+            mkdir($carpeta, 0777, true);
+            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
 
         $name2 = $_FILES['poa']['name'];
@@ -64,6 +67,9 @@ if (isset($_POST['edit_poa'])) {
 
         if (is_dir($carpeta)) {
             $move2 =  move_uploaded_file($temp2, $carpeta . "/" . $name2);
+        } else{
+            mkdir($carpeta, 0777, true);
+            $move2 =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
 
         $name3 = $_FILES['oficio_entrega']['name'];
@@ -73,6 +79,9 @@ if (isset($_POST['edit_poa'])) {
 
         if (is_dir($carpeta)) {
             $move3 =  move_uploaded_file($temp3, $carpeta . "/" . $name3);
+        } else{
+            mkdir($carpeta, 0777, true);
+            $move3 =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
 
         if ($name != '' && $name2 != '' && $name3 != '') {

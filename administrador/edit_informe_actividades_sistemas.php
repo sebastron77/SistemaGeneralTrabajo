@@ -33,6 +33,9 @@ if (isset($_POST['edit_informe_actividades_sistemas'])) {
 
         if (is_dir($carpeta)) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+        } else{
+            mkdir($carpeta, 0777, true);
+            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
 
         $name2 = $_FILES['informe_adjunto']['name'];
@@ -42,6 +45,9 @@ if (isset($_POST['edit_informe_actividades_sistemas'])) {
 
         if (is_dir($carpeta)) {
             $move2 =  move_uploaded_file($temp2, $carpeta . "/" . $name2);
+        } else{
+            mkdir($carpeta, 0777, true);
+            $move2 =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
 
         if ($name != '' && $name2 != '') {

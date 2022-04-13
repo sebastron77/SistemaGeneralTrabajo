@@ -58,6 +58,8 @@ if (isset($_POST['edit_recomendacion'])) {
 
         //Verificamos que exista la carpeta y si sí, guardamos el pdf
         if (is_dir($carpeta)) {
+            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+        } else{
             mkdir($carpeta, 0777, true);
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }

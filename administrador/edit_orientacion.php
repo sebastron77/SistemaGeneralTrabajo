@@ -76,6 +76,9 @@ if (isset($_POST['edit_orientacion'])) {
 
         if (is_dir($carpeta)) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+        } else{
+            mkdir($carpeta, 0777, true);
+            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
 
         // $move =  move_uploaded_file($temp, "uploads/orientacioncanalizacion/" . $name);

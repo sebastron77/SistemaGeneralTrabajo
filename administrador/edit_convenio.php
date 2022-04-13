@@ -67,9 +67,9 @@ if (isset($_POST['edit_convenio'])) {
 
         if (is_dir($carpeta)) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
-        }
-        else {
+        } else{
             mkdir($carpeta, 0777, true);
+            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
 
         if ($name != '') {

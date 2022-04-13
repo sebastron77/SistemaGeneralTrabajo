@@ -69,9 +69,11 @@ if (isset($_POST['edit_ficha'])) {
 
         if (is_dir($carpeta)) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
-        } else {
+        } else{
             mkdir($carpeta, 0777, true);
+            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
+        
         if ($name != '') {
             $sql = "UPDATE fichas SET tipo_solicitud='{$tipo_sol}', num_expediente='{$num_expediente}', solicitante='{$solicitante}', visitaduria='{$visitaduria}', hechos='{$hechos}', autoridad='{$autoridad}', quien_presenta='{$quien_presenta}', nombre_usuario='{$nombre_usuario}', parentesco='{$parentesco}', edad='{$edad}',fecha_nacimiento='{$fecha_nacimiento}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', tutor='{$tutor}', contacto='{$contacto}', fecha_intervencion='{$fecha_intervencion}', hora_lugar='{$hora_lugar}', actividad_realizada='{$actividad_realizada}', observaciones='{$observaciones}', fecha_entrega_documento='{$fecha_entrega_documento}', ficha_adjunto='{$name}' WHERE id='{$db->escape($id)}'";
         }
