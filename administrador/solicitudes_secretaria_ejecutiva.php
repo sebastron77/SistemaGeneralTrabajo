@@ -59,17 +59,17 @@ $c_cargos          = count_by_id('cargos');
         <div href="#" class="col-md-3" style="height: 12.5rem;">
             <div class="panel panel-box clearfix">
                 <div class="panel-icon pull-left" style="background: #114987;">
-                    <svg style="width:59px;height:58px" viewBox="0 0 24 24">
+                    <svg style="width:40px;height:58px" viewBox="0 0 24 24">
                         <path fill="white" d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2M18 20H6V4H13V9H18V20M9.5 18L10.2 15.2L8 13.3L10.9 13.1L12 10.4L13.1 13L16 13.2L13.8 15.1L14.5 17.9L12 16.5L9.5 18Z" />
                     </svg>
                 </div>
                 <div class="panel-value pull-right">
-                    <p style="font-size: 20px; margin-top:8%;">Convenios</p>
-                    <div><br>
+                    <p style="font-size: 16px; margin-top:8%;">Convenios</p>
+                    <div>
                         <?php if (($nivel_user <= 2) || ($nivel_user == 3)) : ?>
-                            <a href="add_convenio.php" class="btn btn-success">Agregar</a>
+                            <a href="add_convenio.php" class="btn btn-success btn-sm">Agregar</a>
                         <?php endif; ?>
-                        <a href="convenios.php" class="btn btn-primary">Ver</a>
+                        <a href="convenios.php" class="btn btn-primary btn-sm">Ver</a>
                     </div>
                 </div>
             </div>
