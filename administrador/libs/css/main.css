@@ -99,9 +99,10 @@ a{
   height: 100%;
   text-align: center;
   border: 1px solid rgb(212, 212, 212);
-  border-radius: 12px 12px 12px 12px;
+  border-radius: 10px 10px 10px 10px;
 }.panel-value{
   width: 60%;
+  line-height: 14pt; 
 }.panel-icon{
   padding: 30px;
   width: 40%;
@@ -109,7 +110,7 @@ a{
 }.panel-icon{
   -webkit-border-radius: 3px 0 0 3px;
   -moz-border-radius: 3px 0 0 3px;
-  border-radius: 12px 12px 12px 12px;
+  border-radius: 10px 10px 10px 10px;
 }.panel-value{
   -webkit-border-radius: 0 3px 3px 0;
   -moz-border-radius: 0 3px 3px 0;
@@ -118,7 +119,10 @@ a{
   margin-top: 30px;
 }
 .panel-icon i{
-  line-height:65px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:63px;
   font-size: 40px;
   color: #fff;
 }

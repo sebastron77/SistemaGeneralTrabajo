@@ -60,8 +60,8 @@ $c_cargos          = count_by_id('cargos');
     <?php if (($otro == 4) || ($otro <= 2)) : ?>
         <div class="col-md-3" style="height: 12.5rem;">
             <div class="panel panel-box clearfix">
-                <div class="panel-icon pull-left" style="background: #114987;">
-                    <svg style="width:40px;height:58px" viewBox="0 0 24 24">
+                <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+                    <svg style="width:40px;height:63px" viewBox="0 0 24 24">
                         <path fill="white" d="M18,14H14V18H10V14H6V10H10V6H14V10H18M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z" />
                     </svg>
                 </div>
@@ -78,8 +78,8 @@ $c_cargos          = count_by_id('cargos');
         </div>
         <div class="col-md-3" style="height: 12.5rem;">
             <div class="panel panel-box clearfix">
-                <div class="panel-icon pull-left" style="background: #114987;">
-                    <svg style="width:40px;height:58px" viewBox="0 0 24 24">
+                <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+                    <svg style="width:40px;height:63px" viewBox="0 0 24 24">
                         <path fill="white" d="M13 3C16.9 3 20 6.1 20 10C20 12.8 18.4 15.2 16 16.3V21H9V18H8C6.9 18 6 17.1 6 16V13H4.5C4.1 13 3.8 12.5 4.1 12.2L6 9.7C6.2 5.9 9.2 3 13 3M13 1C8.4 1 4.6 4.4 4.1 8.9L2.5 11C1.9 11.7 1.8 12.7 2.2 13.6C2.6 14.3 3.2 14.8 4 15V16C4 17.9 5.3 19.4 7 19.9V23H18V17.5C20.5 15.9 22 13.1 22 10C22 5 18 1 13 1M17 10H14V13H12V10H9V8H12V5H14V8H17V10Z" />
                     </svg>
                 </div>
