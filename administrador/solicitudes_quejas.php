@@ -77,11 +77,11 @@ $c_cargos          = count_by_id('cargos');
                 </div>
                 <div>
                     <p style="font-size: 17px; margin-top:2%;">Orientación</p>
-                    <div style="margin-top:4%;">
+                    <div style="margin-top:-5%;">
                         <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
-                            <a href="add_orientacion.php" class="btn btn-success btn-sm">Agregar</a>
+                            <a style="margin-top:5%;" href="add_orientacion.php" class="btn btn-success btn-sm">Agregar</a>
                         <?php endif; ?>
-                        <a href="orientaciones.php" class="btn btn-primary btn-sm">Ver</a>
+                        <a style="margin-top:5%;" href="orientaciones.php" class="btn btn-primary btn-sm">Ver</a>
                     </div>
                 </div>
             </div>
@@ -96,11 +96,11 @@ $c_cargos          = count_by_id('cargos');
                 </div>
                 <div>
                     <p style="font-size: 16px; margin-top:2%;">Canalización</p>
-                    <div style="margin-top:-4%;"><br>
+                    <div style="margin-top:-8%;"><br>
                         <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
-                            <a href="add_canalizacion.php" class="btn btn-success btn-sm">Agregar</a>
+                            <a style="margin-top:5%;" href="add_canalizacion.php" class="btn btn-success btn-sm">Agregar</a>
                         <?php endif; ?>
-                        <a href="canalizaciones.php" class="btn btn-primary btn-sm">Ver</a>
+                        <a style="margin-top:5%;" href="canalizaciones.php" class="btn btn-primary btn-sm">Ver</a>
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@ $c_cargos          = count_by_id('cargos');
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
                 <svg style="width:40px;height:62px" viewBox="0 0 24 24">
-                    <path fill="white" d="M16.75 4.36C18.77 6.56 18.77 9.61 16.75 11.63L15.07 9.94C15.91 8.76 15.91 7.23 15.07 6.05L16.75 4.36M20.06 1C24 5.05 23.96 11.11 20.06 15L18.43 13.37C21.2 10.19 21.2 5.65 18.43 2.63L20.06 1M9 4C11.2 4 13 5.79 13 8S11.2 12 9 12 5 10.21 5 8 6.79 4 9 4M13 14.54C13 15.6 12.71 18.07 10.8 20.83L10 16L10.93 14.12C10.31 14.05 9.66 14 9 14S7.67 14.05 7.05 14.12L8 16L7.18 20.83C5.27 18.07 5 15.6 5 14.54C2.6 15.24 .994 16.5 .994 18V22H17V18C17 16.5 15.39 15.24 13 14.54Z" />
+                    <path fill="white" d="M21,5C19.89,4.65 18.67,4.5 17.5,4.5C15.55,4.5 13.45,4.9 12,6C10.55,4.9 8.45,4.5 6.5,4.5C4.55,4.5 2.45,4.9 1,6V20.65C1,20.9 1.25,21.15 1.5,21.15C1.6,21.15 1.65,21.1 1.75,21.1C3.1,20.45 5.05,20 6.5,20C8.45,20 10.55,20.4 12,21.5C13.35,20.65 15.8,20 17.5,20C19.15,20 20.85,20.3 22.25,21.05C22.35,21.1 22.4,21.1 22.5,21.1C22.75,21.1 23,20.85 23,20.6V6C22.4,5.55 21.75,5.25 21,5M21,18.5C19.9,18.15 18.7,18 17.5,18C15.8,18 13.35,18.65 12,19.5V8C13.35,7.15 15.8,6.5 17.5,6.5C18.7,6.5 19.9,6.65 21,7V18.5Z" />
                 </svg>
             </div>
             <div>

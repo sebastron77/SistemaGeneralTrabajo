@@ -57,9 +57,9 @@ $c_cargos          = count_by_id('cargos');
                 <p style="font-size: 16px; margin-top:8%;">Capacitación</p>
                 <div>
                     <?php if (($nivel_user <= 2)) : ?>
-                        <a href="add_capacitacion.php" class="btn btn-success btn-sm"">Agregar</a>
+                        <a style="margin-top:5%;" href="add_capacitacion.php" class="btn btn-success btn-sm"">Agregar</a>
                     <?php endif; ?>
-                    <a style="margin-top:5%;"  href="capacitaciones.php" class="btn btn-primary btn-sm"">Ver</a>
+                    <a style="margin-top:5%;" href="capacitaciones.php" class="btn btn-primary btn-sm"">Ver</a>
                 </div>
             </div>
         </div>

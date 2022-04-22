@@ -77,7 +77,7 @@
     }
 </style>
 
-<body class="bodyPublico">
+<body class="bodyPublico container">
     <nav class="navbar navbar-default" style="background: #075E9A;">
         <div class="container-fluid">
             <div class="navbar-header">

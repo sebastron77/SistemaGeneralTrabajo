@@ -64,11 +64,11 @@ $c_cargos          = count_by_id('cargos');
                 </div>
                 <div class="panel-value pull-right">
                     <p style="font-size: 16px; margin-top:8%;">Capacitación</p>
-                    <div>
+                    <div style="margin-top:-7%;">
                         <?php if (($nivel_user <= 2) || ($nivel_user == 6)) : ?>
-                            <a href="add_capacitacion.php" class="btn btn-success btn-sm">Agregar</a>
+                            <a style="margin-top:5%;" href="add_capacitacion.php" class="btn btn-success btn-sm">Agregar</a>
                         <?php endif; ?>
-                        <a href="capacitaciones.php" class="btn btn-primary btn-sm">Ver</a>
+                        <a style="margin-top:5%;" href="capacitaciones.php" class="btn btn-primary btn-sm">Ver</a>
                     </div>
                 </div>
             </div>
