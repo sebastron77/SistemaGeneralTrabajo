@@ -65,7 +65,7 @@
       <span>Estadísticas</span>
     </a>
     <ul class="nav submenu">
-      <li><a href="#">Medida Cautelar</a></li>
+      <li><a href="estadistica_orientaciones.php">Medida Cautelar</a></li>
       <li><a href="#">Orientaciones</a></li>
       <li><a href="#">Canalizaciones</a></li>
       <li><a href="#">Gestiones</a></li>

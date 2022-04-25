@@ -55,16 +55,16 @@ endif;
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th style="width: 5%;">Folio</th>
-                            <th style="width: 1%;"># Sesión</th>
-                            <th style="width: 15%;">Tipo Sesión</th>
+                            <th style="width: 1%;">No. Sesión</th>
+                            <th style="width: 10%;">Tipo Sesión</th>
                             <th style="width: 5%;">Fecha Sesión</th>
                             <th style="width: 1%;">Hora</th>
                             <th style="width: 2%;">Lugar</th>
-                            <th style="width: 1%;"># Asistentes</th>
-                            <th style="width: 5%;">Orden día</th>
+                            <th style="width: 1%;">No. Asistentes</th>
+                            <th style="width: 5%;">Orden del día</th>
                             <th style="width: 5%;">Acta acuerdos</th>
                             <?php if ($nivel_user <= 2) : ?>
-                                <th style="width: 10%;" class="text-center">Acciones</th>
+                                <th style="width: 5%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
                     </thead>

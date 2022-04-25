@@ -2336,7 +2336,36 @@ function find_by_ticket_id($table, $id)
   }
 }
 
-
+/*------------------------------------------------------------------------*/
+/* Funcion para contar todas la orientaciones que son de mujeres */
+/*------------------------------------------------------------------------*/
+function count_by_id_mujer($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'M' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_id_hombre($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'H' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_id_lgbt($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'LGBT' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
 // global $db;
 //   $id = (int)$id;
 //   $sql = $db->query("SELECT COUNT(*) FROM quejas WHERE ticket_id = '{$db->escape($id)}'");

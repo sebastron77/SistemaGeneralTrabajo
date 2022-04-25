@@ -55,14 +55,14 @@ endif;
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th style="width: 5%;">Folio</th>
-                            <th style="width: 1%;">Nombre Evento</th>
-                            <th style="width: 15%;">Fecha Evento</th>
+                            <th style="width: 5%;">Nombre Evento</th>
+                            <th style="width: 4%;">Fecha Evento</th>
                             <th style="width: 1%;">Hora</th>
-                            <th style="width: 2%;">Lugar</th>
-                            <th style="width: 1%;"># Asistentes</th>
-                            <th style="width: 5%;">Adjunto</th>
+                            <th style="width: 5%;">Lugar</th>
+                            <th style="width: 1%;">No. Asistentes</th>
+                            <th style="width: 3%;">Adjunto</th>
                             <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
-                                <th style="width: 10%;" class="text-center">Acciones</th>
+                                <th style="width: 1%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
                     </thead>
