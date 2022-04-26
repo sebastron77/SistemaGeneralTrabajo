@@ -261,6 +261,7 @@ if (isset($_POST['edit_orientacion'])) {
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Adultos mayores') echo 'selected="selected"'; ?> value="Adultos mayores">Adultos mayores</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Internos') echo 'selected="selected"'; ?> value="Internos">Internos</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Otros') echo 'selected="selected"'; ?> value="Otros">Otros</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'No Aplica') echo 'selected="selected"'; ?> value="No Aplica">No Aplica</option>
                             </select>
                         </div>
                     </div>    

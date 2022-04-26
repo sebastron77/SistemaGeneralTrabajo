@@ -2336,153 +2336,219 @@ function find_by_ticket_id($table, $id)
   }
 }
 
-/*------------------------------------------------------------------------*/
-/* Funcion para contar todas la orientaciones que son de mujeres */
-/*------------------------------------------------------------------------*/
-function count_by_id_mujer($table)
+// -------------------------------------------------------------------------------- Contar por genero --------------------------------------------------------------------------------
+function count_by_id_mujer($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'M' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'M' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_id_hombre($table)
+function count_by_id_hombre($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'H' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'H' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_id_lgbt($table)
+function count_by_id_lgbt($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'LGBTTTIQA' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'LGBTTTIQA' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_comLg($table)
+
+// ------------------------------------------------------------------------- Contar por grupo vulnerable -------------------------------------------------------------------------
+function count_by_comLg($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Comunidad LGBTTTIQA' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Comunidad LGBTTTIQA' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_derMuj($table)
+function count_by_derMuj($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Derecho de las mujeres' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Derecho de las mujeres' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_nna($table)
+function count_by_nna($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Niñas, niños y adolescentes' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Niñas, niños y adolescentes' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_disc($table)
+function count_by_disc($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Personas con discapacidad' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Personas con discapacidad' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_mig($table)
+function count_by_mig($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Personas migrantes' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Personas migrantes' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_vih($table)
+function count_by_vih($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Personas que viven con VIH SIDA' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Personas que viven con VIH SIDA' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_gi($table)
+function count_by_gi($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Grupos indígenas' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Grupos indígenas' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_perio($table)
+function count_by_perio($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Periodistas' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Periodistas' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_ddh($table)
+function count_by_ddh($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Defensores de los derechos humanos' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Defensores de los derechos humanos' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_am($table)
+function count_by_am($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Adultos mayores' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Adultos mayores' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_int($table)
+function count_by_int($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Internos' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Internos' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_otros($table)
+function count_by_otros($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Otros' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Otros' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
-function count_by_na($table)
+function count_by_na($table, $tipo)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'No Aplica' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'No Aplica' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
 }
+
+// --------------------------------------------------------------------- Contar por medio de presentación ---------------------------------------------------------------------
+function count_by_asesorv($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(medio_presentacion) AS total FROM " . $db->escape($table) . " WHERE medio_presentacion = 'Asesor Virtual' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_asistentev($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(medio_presentacion) AS total FROM " . $db->escape($table) . " WHERE medio_presentacion = 'Asistente Virtual' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_comp($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(medio_presentacion) AS total FROM " . $db->escape($table) . " WHERE medio_presentacion = 'Comparecencia' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_escrito($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(medio_presentacion) AS total FROM " . $db->escape($table) . " WHERE medio_presentacion = 'Escrito' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_vt($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(medio_presentacion) AS total FROM " . $db->escape($table) . " WHERE medio_presentacion = 'Vía telefónica' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_ve($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(medio_presentacion) AS total FROM " . $db->escape($table) . " WHERE medio_presentacion = 'Vía electrónica' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cndh($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(medio_presentacion) AS total FROM " . $db->escape($table) . " WHERE medio_presentacion = 'Comisión Nacional de los Derechos Humanos' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+
 // global $db;
 //   $id = (int)$id;
 //   $sql = $db->query("SELECT COUNT(*) FROM quejas WHERE ticket_id = '{$db->escape($id)}'");

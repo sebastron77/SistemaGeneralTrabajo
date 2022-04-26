@@ -143,6 +143,7 @@ if (isset($_POST['edit_canalizacion'])) {
                         <div class="form-group">
                             <label for="ocupacion">Ocupacion</label>
                             <select class="form-control" name="ocupacion">
+                                <option <?php if ($e_detalle['ocupacion'] === 'Otro') echo 'selected="selected"'; ?> value="Otro">Otro</option>
                                 <option <?php if ($e_detalle['ocupacion'] === 'Agricultor(a)') echo 'selected="selected"'; ?> value="Agricultor(a)">Agricultor</option>
                                 <option <?php if ($e_detalle['ocupacion'] === 'Albañil') echo 'selected="selected"'; ?> value="Albañil">Albañil</option>
                                 <option <?php if ($e_detalle['ocupacion'] === 'Ama de Casa') echo 'selected="selected"'; ?> value="Ama de Casa">Ama de Casa</option>
@@ -246,7 +247,7 @@ if (isset($_POST['edit_canalizacion'])) {
                             <select class="form-control" name="grupo_vulnerable">
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Comunidad LGBT') echo 'selected="selected"'; ?> value="Comunidad LGBT">Comunidad LGBT</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Derecho de las mujeres') echo 'selected="selected"'; ?> value="Derecho de las mujeres">Derecho de las mujeres</option>
-                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Niños y adolescentes') echo 'selected="selected"'; ?> value="Niños y adolescentes">Niños y adolecentes</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Niñas, niños y adolescentes') echo 'selected="selected"'; ?> value="Niñas, niños y adolescentes">Niñas, niños y adolecentes</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Personas con discapacidad') echo 'selected="selected"'; ?> value="Personas con discapacidad">Personas con discapacidad</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Personas migrantes') echo 'selected="selected"'; ?> value="Personas migrantes">Personas migrantes</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Personas que viven con VIH SIDA') echo 'selected="selected"'; ?> value="Personas que viven con VIH SIDA">Personas que viven con VIH SIDA</option>
@@ -256,6 +257,7 @@ if (isset($_POST['edit_canalizacion'])) {
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Adultos mayores') echo 'selected="selected"'; ?> value="Adultos mayores">Adultos mayores</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Internos') echo 'selected="selected"'; ?> value="Internos">Internos</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Otros') echo 'selected="selected"'; ?> value="Otros">Otros</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'No Aplica') echo 'selected="selected"'; ?> value="No Aplica">No Aplica</option>
                             </select>
                         </div>
                     </div>
