@@ -120,7 +120,7 @@ include_once('layouts/header.php'); ?>
         <div class="panel-body">
             <form method="post" action="add_ficha.php" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="tipo_sol">Tipo de ficha</label>
                             <select class="form-control" name="tipo_sol">
@@ -128,15 +128,15 @@ include_once('layouts/header.php'); ?>
                                 <option value="Dictamen">Dictamen</option>
                                 <option value="Certificado">Certificado</option>
                                 <option value="Valoración">Valoración</option>
-                                <option value="Contención">Contención</option>
-                                <option value="Psicológica">Psicológica</option>
+                                <option value="Contención">Contención Psicológica</option>
+                                <!-- <option value="Psicológica">Psicológica</option> -->
                                 <option value="Inspección">Inspección</option>
                                 <option value="Orientación médica">Orientación médica</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="correo">Número de expediente</label>
                             <input type="text" class="form-control" name="num_expediente" placeholder="Signado por visitaduria correspondiente" required>
@@ -180,6 +180,7 @@ include_once('layouts/header.php'); ?>
                             <label for="autoridad">Autoridad señalada</label>
                             <select class="form-control" name="autoridad">
                                 <option value="">Elige una opción</option>
+                                <option value="Otra">Otra</option>
                                 <option value="Secretaría de Seguridad Pública">Secretaría de Seguridad Pública</option>
                                 <option value="Fiscalía General en el Estado">Fiscalía General en el Estado</option>
                                 <option value="Aeropuerto de Morelia">Aeropuerto de Morelia</option>
@@ -373,7 +374,7 @@ include_once('layouts/header.php'); ?>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="nombre_usuario">Nombre del usuario</label>
+                            <label for="nombre_usuario">Nombre del agraviado</label>
                             <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre Completo">
                         </div>
                     </div>
@@ -408,7 +409,7 @@ include_once('layouts/header.php'); ?>
                                 <option value="Tío(a) del cónyugue">Tío del cónyugue</option>
                                 <option value="Bisabuelo(a) del cónyugue">Bisabuelo del cónyugue</option>
                                 <option value="Primo(a) del cónyugue">Primo(a) del cónyugue</option>
-                                <option value="Tatarabuelo(a) del cónyugue">tatarabuelo(a) del cónyugue</option>
+                                <option value="Tatarabuelo(a) del cónyugue">Tatarabuelo(a) del cónyugue</option>
                             </select>
                         </div>
                     </div>
@@ -430,7 +431,7 @@ include_once('layouts/header.php'); ?>
                             <select class="form-control" name="sexo">
                                 <option value="Mujer">Mujer</option>
                                 <option value="Hombre">Hombre</option>
-                                <option value="LGBT">LGBT</option>
+                                <option value="LGBT">LGBTTTIQA</option>
                             </select>
                         </div>
                     </div>
@@ -439,9 +440,9 @@ include_once('layouts/header.php'); ?>
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
                                 <option value="">Elige una opción</option>
-                                <option value="Comunidad LGBT">Comunidad LGBT</option>
+                                <option value="Comunidad LGBT">Comunidad LGBTTTIQA</option>
                                 <option value="Derecho de las mujeres">Derecho de las mujeres</option>
-                                <option value="Niños y adolescentes">Niños y adolecentes</option>
+                                <option value="Niñas, niños y adolescentes">Niñas, niños y adolescentes</option>
                                 <option value="Personas con discapacidad">Personas con discapacidad</option>
                                 <option value="Personas migrantes">Personas migrantes</option>
                                 <option value="Personas que viven con VIH SIDA">Personas que viven con VIH SIDA</option>
@@ -451,6 +452,7 @@ include_once('layouts/header.php'); ?>
                                 <option value="Adultos mayores">Adultos mayores</option>
                                 <option value="Internos">Internos</option>
                                 <option value="Otros">Otros</option>
+                                <option value="No Aplica">No Aplica</option>
                             </select>
                         </div>
                     </div>
@@ -500,7 +502,7 @@ include_once('layouts/header.php'); ?>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fecha_entrega_documento">Fecha de Entrega de Ficha</label>
+                            <label for="fecha_entrega_documento">Fecha de realización de Ficha</label>
                             <input type="date" class="form-control" name="fecha_entrega_documento" required>
                         </div>
                     </div>

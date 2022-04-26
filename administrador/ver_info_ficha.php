@@ -76,7 +76,7 @@ if ($nivel == 7) {
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th style="width: 4%;">Presentante</th>
-                            <th style="width: 3%;">Usuario</th>
+                            <th style="width: 3%;">Agraviado</th>
                             <th style="width: 2%;">Parentesco</th>
                             <th style="width: 1%;">Edad</th>
                             <th style="width: 1%;">Fecha Nacimiento</th>

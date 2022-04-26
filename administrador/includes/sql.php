@@ -2361,7 +2361,124 @@ function count_by_id_lgbt($table)
 {
   global $db;
   if (tableExists($table)) {
-    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'LGBT' and tipo_solicitud = 1";
+    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'LGBTTTIQA' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_comLg($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Comunidad LGBTTTIQA' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_derMuj($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Derecho de las mujeres' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_nna($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Niñas, niños y adolescentes' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_disc($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Personas con discapacidad' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_mig($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Personas migrantes' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_vih($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Personas que viven con VIH SIDA' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_gi($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Grupos indígenas' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_perio($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Periodistas' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_ddh($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Defensores de los derechos humanos' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_am($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Adultos mayores' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_int($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Internos' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_otros($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Otros' and tipo_solicitud = 1";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_na($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'No Aplica' and tipo_solicitud = 1";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }

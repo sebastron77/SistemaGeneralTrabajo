@@ -147,7 +147,8 @@ if (isset($_POST['edit_orientacion'])) {
                         <div class="form-group">
                             <label for="ocupacion">Ocupacion</label>
                             <select class="form-control" name="ocupacion">
-                                <option <?php if ($e_detalle['ocupacion'] === 'Agricultor(a)') echo 'selected="selected"'; ?> value="Agricultor(a)">Agricultor</option>
+                                <option <?php if ($e_detalle['ocupacion'] === 'Otro') echo 'selected="selected"'; ?> value="Otro">Otro</option>
+                                <option <?php if ($e_detalle['ocupacion'] === 'Agricultor(a)') echo 'selected="selected"'; ?> value="Agricultor(a)">Agricultor(a)</option>
                                 <option <?php if ($e_detalle['ocupacion'] === 'Albañil') echo 'selected="selected"'; ?> value="Albañil">Albañil</option>
                                 <option <?php if ($e_detalle['ocupacion'] === 'Ama de Casa') echo 'selected="selected"'; ?> value="Ama de Casa">Ama de Casa</option>
                                 <option <?php if ($e_detalle['ocupacion'] === 'Artista') echo 'selected="selected"'; ?> value="Artista">Artista</option>
@@ -248,9 +249,9 @@ if (isset($_POST['edit_orientacion'])) {
                         <div class="form-group">
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
-                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Comunidad LGBT') echo 'selected="selected"'; ?> value="Comunidad LGBT">Comunidad LGBT</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Comunidad LGBTTTIQA') echo 'selected="selected"'; ?> value="Comunidad LGBTTTIQA">Comunidad LGBTTTIQA</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Derecho de las mujeres') echo 'selected="selected"'; ?> value="Derecho de las mujeres">Derecho de las mujeres</option>
-                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Niños y adolescentes') echo 'selected="selected"'; ?> value="Niños y adolescentes">Niños y adolecentes</option>
+                                <option <?php if ($e_detalle['grupo_vulnerable'] === 'Niñas, niños y adolescentes') echo 'selected="selected"'; ?> value="Niñas, niños y adolescentes">Niñas, niños y adolecentes</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Personas con discapacidad') echo 'selected="selected"'; ?> value="Personas con discapacidad">Personas con discapacidad</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Personas migrantes') echo 'selected="selected"'; ?> value="Personas migrantes">Personas migrantes</option>
                                 <option <?php if ($e_detalle['grupo_vulnerable'] === 'Personas que viven con VIH SIDA') echo 'selected="selected"'; ?> value="Personas que viven con VIH SIDA">Personas que viven con VIH SIDA</option>
@@ -271,7 +272,7 @@ if (isset($_POST['edit_orientacion'])) {
                             <select class="form-control" name="sexo">
                                 <option <?php if ($e_detalle['sexo'] === 'M') echo 'selected="selected"'; ?> value="M">Mujer</option>
                                 <option <?php if ($e_detalle['sexo'] === 'H') echo 'selected="selected"'; ?> value="H">Hombre</option>
-                                <option <?php if ($e_detalle['sexo'] === 'LGBT') echo 'selected="selected"'; ?> value="LGBT">LGBT</option>
+                                <option <?php if ($e_detalle['sexo'] === 'LGBTTTIQA') echo 'selected="selected"'; ?> value="LGBTTTIQA">LGBTTTIQA</option>
                             </select>
                         </div>
                     </div>

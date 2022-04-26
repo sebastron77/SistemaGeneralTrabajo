@@ -106,7 +106,7 @@ if (isset($_POST['edit_ficha'])) {
         <div class="panel-body">
             <form method="post" action="edit_ficha.php?id=<?php echo (int)$e_ficha['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="tipo_sol">Tipo de ficha</label>
                             <select class="form-control" name="tipo_sol">
@@ -114,15 +114,15 @@ if (isset($_POST['edit_ficha'])) {
                                 <option <?php if ($e_ficha['tipo_solicitud'] === 'Dictamen') echo 'selected="selected"'; ?> value="Dictamen">Dictamen</option>
                                 <option <?php if ($e_ficha['tipo_solicitud'] === 'Certificado') echo 'selected="selected"'; ?> value="Certificado">Certificado</option>
                                 <option <?php if ($e_ficha['tipo_solicitud'] === 'Valoración') echo 'selected="selected"'; ?> value="Valoración">Valoración</option>
-                                <option <?php if ($e_ficha['tipo_solicitud'] === 'Contención') echo 'selected="selected"'; ?> value="Contención">Contención</option>
-                                <option <?php if ($e_ficha['tipo_solicitud'] === 'Psicológica') echo 'selected="selected"'; ?> value="Psicológica">Psicológica</option>
+                                <option <?php if ($e_ficha['tipo_solicitud'] === 'Contención Psicológica') echo 'selected="selected"'; ?> value="Contención Psicológica">Contención Psicológica</option>
+                                <!-- <option <?php if ($e_ficha['tipo_solicitud'] === 'Psicológica') echo 'selected="selected"'; ?> value="Psicológica">Psicológica</option> -->
                                 <option <?php if ($e_ficha['tipo_solicitud'] === 'Inspección') echo 'selected="selected"'; ?> value="Inspección">Inspección</option>
                                 <option <?php if ($e_ficha['tipo_solicitud'] === 'Orientación') echo 'selected="selected"'; ?> value="Orientación médica">Orientación médica</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="correo">Número de expediente</label>
                             <input type="text" class="form-control" name="num_expediente" value="<?php echo remove_junk($e_ficha['num_expediente']); ?>" required>
@@ -165,6 +165,7 @@ if (isset($_POST['edit_ficha'])) {
                         <div class="form-group">
                             <label for="autoridad">Autoridad señalada</label>
                             <select class="form-control" name="autoridad">
+                                <option <?php if ($e_ficha['autoridad'] === 'Otra') echo 'selected="selected"'; ?> value="Otra">Otra</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Secretaría de Seguridad Pública') echo 'selected="selected"'; ?> value="Secretaría de Seguridad Pública">Secretaría de Seguridad Pública</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Fiscalía General en el Estado') echo 'selected="selected"'; ?> value="Fiscalía General en el Estado">Fiscalía General en el Estado</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Aeropuerto de Morelia') echo 'selected="selected"'; ?> value="Aeropuerto de Morelia">Aeropuerto de Morelia</option>
@@ -358,7 +359,7 @@ if (isset($_POST['edit_ficha'])) {
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="nombre_usuario">Nombre del usuario</label>
+                            <label for="nombre_usuario">Nombre del agraviado</label>
                             <input type="text" class="form-control" name="nombre_usuario" value="<?php echo remove_junk($e_ficha['nombre_usuario']); ?>">
                         </div>
                     </div>
@@ -392,7 +393,7 @@ if (isset($_POST['edit_ficha'])) {
                                 <option <?php if ($e_ficha['parentesco'] === 'Tío(a) del cónyugue') echo 'selected="selected"'; ?> value="Tío(a) del cónyugue">Tío del cónyugue</option>
                                 <option <?php if ($e_ficha['parentesco'] === 'Bisabuelo(a) del cónyugue') echo 'selected="selected"'; ?> value="Bisabuelo(a) del cónyugue">Bisabuelo del cónyugue</option>
                                 <option <?php if ($e_ficha['parentesco'] === 'Primo(a) del cónyugue') echo 'selected="selected"'; ?> value="Primo(a) del cónyugue">Primo(a) del cónyugue</option>
-                                <option <?php if ($e_ficha['parentesco'] === 'Tatarabuelo(a) del cónyugue') echo 'selected="selected"'; ?> value="Tatarabuelo(a) del cónyugue">tatarabuelo(a) del cónyugue</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Tatarabuelo(a) del cónyugue') echo 'selected="selected"'; ?> value="Tatarabuelo(a) del cónyugue">Tatarabuelo(a) del cónyugue</option>
                             </select>
                         </div>
                     </div>
@@ -414,7 +415,7 @@ if (isset($_POST['edit_ficha'])) {
                             <select class="form-control" name="sexo">
                                 <option <?php if ($e_ficha['sexo'] === 'Mujer') echo 'selected="selected"'; ?> value="Mujer">Mujer</option>
                                 <option <?php if ($e_ficha['sexo'] === 'Hombre') echo 'selected="selected"'; ?> value="Hombre">Hombre</option>
-                                <option <?php if ($e_ficha['sexo'] === 'LGBT') echo 'selected="selected"'; ?> value="LGBT">LGBT</option>
+                                <option <?php if ($e_ficha['sexo'] === 'LGBTTTIQA') echo 'selected="selected"'; ?> value="LGBTTTIQA">LGBTTTIQA</option>
                             </select>
                         </div>
                     </div>
@@ -423,9 +424,9 @@ if (isset($_POST['edit_ficha'])) {
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
                                 <option value="">Elige una opción</option>
-                                <option <?php if ($e_ficha['grupo_vulnerable'] === 'Comunidad LGBT') echo 'selected="selected"'; ?> value="Comunidad LGBT">Comunidad LGBT</option>
+                                <option <?php if ($e_ficha['grupo_vulnerable'] === 'Comunidad LGBTTTIQA') echo 'selected="selected"'; ?> value="Comunidad LGBTTTIQA">Comunidad LGBTTTIQA</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Derecho de las mujeres') echo 'selected="selected"'; ?> value="Derecho de las mujeres">Derecho de las mujeres</option>
-                                <option <?php if ($e_ficha['grupo_vulnerable'] === 'Niños y adolescentes') echo 'selected="selected"'; ?> value="Niños y adolescentes">Niños y adolecentes</option>
+                                <option <?php if ($e_ficha['grupo_vulnerable'] === 'Niñas, niños y adolescentes') echo 'selected="selected"'; ?> value="Niñas, niños y adolescentes">Niñas, niños y adolecentes</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Personas con discapacidad') echo 'selected="selected"'; ?> value="Personas con discapacidad">Personas con discapacidad</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Personas migrantes') echo 'selected="selected"'; ?> value="Personas migrantes">Personas migrantes</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Personas que viven con VIH SIDA') echo 'selected="selected"'; ?> value="Personas que viven con VIH SIDA">Personas que viven con VIH SIDA</option>
@@ -435,6 +436,7 @@ if (isset($_POST['edit_ficha'])) {
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Adultos mayores') echo 'selected="selected"'; ?> value="Adultos mayores">Adultos mayores</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Internos') echo 'selected="selected"'; ?> value="Internos">Internos</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Otros') echo 'selected="selected"'; ?> value="Otros">Otros</option>
+                                <option <?php if ($e_ficha['grupo_vulnerable'] === 'No Aplica') echo 'selected="selected"'; ?> value="No Aplica">No Aplica</option>
                             </select>
                         </div>
                     </div>
@@ -484,7 +486,7 @@ if (isset($_POST['edit_ficha'])) {
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fecha_entrega_documento">Fecha de Entrega de Ficha</label>
+                            <label for="fecha_entrega_documento">Fecha de realización de Ficha</label>
                             <input type="date" class="form-control" name="fecha_entrega_documento" value="<?php echo remove_junk($e_ficha['fecha_entrega_documento']); ?>" required>
                         </div>
                     </div>

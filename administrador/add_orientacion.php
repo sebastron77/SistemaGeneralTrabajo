@@ -186,6 +186,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="ocupacion">Ocupacion</label>
                             <select class="form-control" name="ocupacion">
+                                <option value="Otro">Otro</option>
                                 <option value="Agricultor(a)">Agricultor</option>
                                 <option value="Albañil">Albañil</option>
                                 <option value="Ama de Casa">Ama de Casa</option>
@@ -288,9 +289,9 @@ include_once('layouts/header.php'); ?>
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
                                 <option value="">Elige una opción</option>
-                                <option value="Comunidad LGBT">Comunidad LGBT</option>
+                                <option value="Comunidad LGBTTTIQA">Comunidad LGBTTTIQA</option>
                                 <option value="Derecho de las mujeres">Derecho de las mujeres</option>
-                                <option value="Niños y adolescentes">Niños y adolecentes</option>
+                                <option value="Niños y adolescentes">Niñas, niños y adolecentes</option>
                                 <option value="Personas con discapacidad">Personas con discapacidad</option>
                                 <option value="Personas migrantes">Personas migrantes</option>
                                 <option value="Personas que viven con VIH SIDA">Personas que viven con VIH SIDA</option>
@@ -300,6 +301,7 @@ include_once('layouts/header.php'); ?>
                                 <option value="Adultos mayores">Adultos mayores</option>
                                 <option value="Internos">Internos</option>
                                 <option value="Otros">Otros</option>
+                                <option value="No Aplica">No Aplica</option>
                             </select>
                         </div>
                     </div>
@@ -311,7 +313,7 @@ include_once('layouts/header.php'); ?>
                             <select class="form-control" name="sexo">
                                 <option value="M">Mujer</option>
                                 <option value="H">Hombre</option>
-                                <option value="LGBT">LGBT</option>
+                                <option value="LGBTTTIQA">LGBTTTIQA</option>
                             </select>
                         </div>
                     </div>
