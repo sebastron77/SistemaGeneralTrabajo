@@ -13,7 +13,7 @@ page_require_area(4);
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_ficha'])) {
 
-    $req_fields = array('tipo_sol', 'num_expediente', 'solicitante', 'visitaduria', 'hechos', 'autoridad', 'quien_presenta', 'edad', 'fecha_nacimiento', 'sexo', 'grupo_vulnerable', 'contacto', 'fecha_intervencion', 'hora_lugar', 'actividad_realizada');
+    $req_fields = array('tipo_sol', 'num_expediente', 'solicitante', 'visitaduria', 'hechos', 'autoridad', 'quien_presenta', 'edad', 'fecha_nacimiento', 'sexo', 'grupo_vulnerable', 'fecha_intervencion', 'hora_lugar', 'actividad_realizada', 'medio_solicita');
     validate_fields($req_fields);
 
     if (empty($errors)) {
@@ -31,13 +31,17 @@ if (isset($_POST['add_ficha'])) {
         $sexo   = remove_junk($db->escape($_POST['sexo']));
         $grupo_vulnerable   = remove_junk($db->escape($_POST['grupo_vulnerable']));
         $tutor   = remove_junk($db->escape($_POST['tutor']));
-        $contacto   = remove_junk($db->escape($_POST['contacto']));
+        // $contacto   = remove_junk($db->escape($_POST['contacto']));
         $fecha_intervencion   = remove_junk($db->escape($_POST['fecha_intervencion']));
         $hora_lugar   = remove_junk($db->escape($_POST['hora_lugar']));
         $actividad_realizada   = remove_junk($db->escape($_POST['actividad_realizada']));
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
         $fecha_entrega_documento   = remove_junk($db->escape($_POST['fecha_entrega_documento']));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
+        $medio_solicita   = remove_junk($db->escape($_POST['medio_solicita']));
+        $num_oficio_designacion   = remove_junk($db->escape($_POST['num_oficio_designacion']));
+        $protocolo_estambul   = remove_junk($db->escape($_POST['protocolo_estambul']));
+        $documento_entregado   = remove_junk($db->escape($_POST['documento_entregado']));
 
         if (count($id_folio) == 0) {
             $nuevo_id_folio = 1;
@@ -68,9 +72,9 @@ if (isset($_POST['add_ficha'])) {
         $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         if ($move && $name != '') {
             $query = "INSERT INTO fichas (";
-            $query .= "folio,tipo_solicitud,num_expediente,solicitante,visitaduria,hechos,autoridad,quien_presenta,nombre_usuario,parentesco,edad,fecha_nacimiento,sexo,grupo_vulnerable,tutor,contacto,fecha_intervencion,hora_lugar,actividad_realizada,observaciones,fecha_entrega_documento,ficha_adjunto";
+            $query .= "folio,tipo_solicitud,num_expediente,solicitante,visitaduria,hechos,autoridad,quien_presenta,nombre_usuario,parentesco,edad,fecha_nacimiento,sexo,grupo_vulnerable,tutor,fecha_intervencion,hora_lugar,actividad_realizada,observaciones,fecha_entrega_documento,ficha_adjunto,medio_solicita,num_oficio_designacion,protocolo_estambul,documento_entregado";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$contacto}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}','{$name}'";
+            $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}','{$name}','$medio_solicita','$num_oficio_designacion','$protocolo_estambul','$documento_entregado'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios (";
@@ -80,9 +84,9 @@ if (isset($_POST['add_ficha'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO fichas (";
-            $query .= "folio,tipo_solicitud,num_expediente,solicitante,visitaduria,hechos,autoridad,quien_presenta,nombre_usuario,parentesco,edad,fecha_nacimiento,sexo,grupo_vulnerable,tutor,contacto,fecha_intervencion,hora_lugar,actividad_realizada,observaciones,fecha_entrega_documento";
+            $query .= "folio,tipo_solicitud,num_expediente,solicitante,visitaduria,hechos,autoridad,quien_presenta,nombre_usuario,parentesco,edad,fecha_nacimiento,sexo,grupo_vulnerable,tutor,fecha_intervencion,hora_lugar,actividad_realizada,observaciones,fecha_entrega_documento,medio_solicita,num_oficio_designacion,protocolo_estambul,documento_entregado";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$contacto}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}'";
+            $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}','$medio_solicita','$num_oficio_designacion','$protocolo_estambul','$documento_entregado'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios (";
@@ -120,6 +124,12 @@ include_once('layouts/header.php'); ?>
         <div class="panel-body">
             <form method="post" action="add_ficha.php" enctype="multipart/form-data">
                 <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="num_oficio_designacion">No. oficio designación</label>
+                            <input type="text" class="form-control" name="num_oficio_designacion" required>
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="tipo_sol">Tipo de ficha</label>
@@ -136,7 +146,7 @@ include_once('layouts/header.php'); ?>
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="correo">Número de expediente</label>
                             <input type="text" class="form-control" name="num_expediente" placeholder="Signado por visitaduria correspondiente" required>
@@ -148,7 +158,8 @@ include_once('layouts/header.php'); ?>
                             <input type="text" class="form-control" name="solicitante" placeholder="Nombre de visitador y/o instancia" required>
                         </div>
                     </div>
-
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="visitaduria">Visitaduria</label>
@@ -166,9 +177,6 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="hechos">Presuntos hechos violatorios</label>
@@ -372,16 +380,15 @@ include_once('layouts/header.php'); ?>
                             <input type="text" class="form-control" name="quien_presenta" placeholder="Nombre Completo" required>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="nombre_usuario">Nombre del agraviado</label>
                             <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre Completo">
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="parentesco">Parentesco</label>
                             <!-- <input type="text" class="form-control" name="parentesco" placeholder="En caso de ser distinto a quien presenta queja"> -->
@@ -431,7 +438,19 @@ include_once('layouts/header.php'); ?>
                             <select class="form-control" name="sexo">
                                 <option value="Mujer">Mujer</option>
                                 <option value="Hombre">Hombre</option>
-                                <option value="LGBT">LGBTTTIQA</option>
+                                <option value="LGBTIQ+">LGBTIQ+</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="medio_solicita">Medio por el que se solicita</label>
+                            <select class="form-control" name="medio_solicita">
+                                <option value="Escoge una opción">Escoge una opción</option>
+                                <option value="Solicitud Verbal">Solicitud Verbal</option>
+                                <option value="Oficio">Oficio</option>
                             </select>
                         </div>
                     </div>
@@ -440,7 +459,7 @@ include_once('layouts/header.php'); ?>
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
                                 <option value="">Elige una opción</option>
-                                <option value="Comunidad LGBT">Comunidad LGBTTTIQA</option>
+                                <option value="Comunidad LGBTIQ+">Comunidad LGBTIQ+</option>
                                 <option value="Derecho de las mujeres">Derecho de las mujeres</option>
                                 <option value="Niñas, niños y adolescentes">Niñas, niños y adolescentes</option>
                                 <option value="Personas con discapacidad">Personas con discapacidad</option>
@@ -456,25 +475,46 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="tutor">Nombre de tutor</label>
                             <input type="text" class="form-control" placeholder="Nombre Completo" name="tutor">
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                         <div class="form-group">
                             <label for="contacto">Número de contacto</label>
                             <input type="text" class="form-control" maxlength="10" name="contacto">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="fecha_intervencion">Fecha de Intervención</label>
                             <input type="date" class="form-control" name="fecha_intervencion" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="protocolo_estambul">Protocolo de Estambul</label>
+                            <select class="form-control" name="protocolo_estambul">
+                                <option value="Escoge una opción">Escoge una opción</option>
+                                <option value="Sí">Sí</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="documento_entregado">Documento Entregado</label>
+                            <select class="form-control" name="documento_entregado">
+                                <option value="Escoge una opción">Escoge una opción</option>
+                                <option value="Dictamen Pericial Psicológico">Dictamen Pericial Psicológico</option>
+                                <option value="Opinión Médica">Opinión Médica</option>
+                                <option value="Certificado de Lesiones">Certificado de Lesiones</option>
+                                <option value="Informe Psicológico">Informe Psicológico</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -483,30 +523,29 @@ include_once('layouts/header.php'); ?>
                             <textarea type="text" class="form-control" name="hora_lugar" cols="50" rows="1"></textarea>
                         </div>
                     </div>
-
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="row">                    
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="actividad_realizada">Actividad realizada</label>
                             <textarea type="text" class="form-control" name="actividad_realizada" cols="50" rows="1"></textarea>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="observaciones">Observaciones Generales</label>
                             <textarea type="text" class="form-control" name="observaciones" cols="50" rows="1"></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="fecha_entrega_documento">Fecha de realización de Ficha</label>
+                            <label for="fecha_entrega_documento">Fecha de entrega del documento</label>
                             <input type="date" class="form-control" name="fecha_entrega_documento" required>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                </div>
+                <div class="row">                    
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="adjunto">Adjuntar Ficha</label>
                             <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto">

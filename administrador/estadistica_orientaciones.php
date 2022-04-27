@@ -70,14 +70,14 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
               label: 'Orientaciones por Género',
               data: yValues,
               backgroundColor: [
-                '#D1282E',
-                '#138BD1',
-                '#EDEA2D'
+                '#2AB5BD',
+                '#5643FA',
+                '#2ABD71'
               ],
               borderColor: [
-                '#82191D',
-                '#0C5782',
-                '#ADAB21'
+                '#1A7378',
+                '#322791',
+                '#197043'
               ],
               borderWidth: 2
             }]
@@ -117,9 +117,9 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
             datasets: [{
               data: yValues,
               backgroundColor: [
-                '#D1282E',
-                '#138BD1',
-                '#EDEA2D'
+                '#2AB5BD',
+                '#5643FA',
+                '#2ABD71'
               ],
               hoverOffset: 4
             }]
@@ -181,10 +181,10 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
               label: 'Orientaciones por Grupo Vulnerable',
               data: yValues,
               backgroundColor: [
-                '#75FE58', '#0147EB', '#FFC000', '#7D58FB', '#4FE396', '#FA8865', '#FA57D5', '#E3C644', '#FE4C2D', '#7972E7', '#00DDEA', '#FF1C01', '#4473E3'
+                '#99FEA3', '#3E75EA', '#FFDC57', '#584DB3', '#6084EB', '#FA8865', '#E66DFB', '#D0EB5A', '#FF5846', '#7972E7', '#00DDEA', '#E0293F', '#427085'
               ],
               borderColor: [
-                '#4BA339', '#001D61', '#A87E00', '#4D3699', '#339161', '#A85B43', '#A3398A', '#A89332', '#B83821', '#5852A8', '#00A0A8', '#A61100', '#2D4D96'
+                '#63A66A', '#234387', '#A87E00', '#3C357A', '#425BA1', '#A85B43', '#91449E', '#9AAD42', '#963429', '#5852A8', '#00A0A8', '#8A1926', '#253F4A'
               ],
               borderWidth: 2
             }]
@@ -229,7 +229,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
             datasets: [{
               data: yValues,
               backgroundColor: [
-                '#75FE58', '#0147EB', '#FFC000', '#7D58FB', '#4FE396', '#FA8865', '#FA57D5', '#E3C644', '#FE4C2D', '#7972E7', '#00DDEA', '#FF1C01', '#4473E3'
+                '#99FEA3', '#3E75EA', '#FFDC57', '#584DB3', '#6084EB', '#FA8865', '#E66DFB', '#D0EB5A', '#FF5846', '#7972E7', '#00DDEA', '#E0293F', '#427085'
               ],
               hoverOffset: 4
             }]
@@ -277,7 +277,6 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
         var yValues = [<?php echo $total_asesorv['total']; ?>, <?php echo $total_asistentev['total']; ?>, <?php echo $total_comp['total']; ?>, <?php echo $total_escrito['total']; ?>,
           <?php echo $total_vt['total']; ?>, <?php echo $total_ve['total']; ?>, <?php echo $total_cndh['total']; ?>
         ];
-
         const ctx5 = document.getElementById('mPresentacion');
         const mPresentacion = new Chart(ctx5, {
           type: 'bar',
@@ -287,10 +286,10 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
               label: 'Orientaciones por Medio de Presentación',
               data: yValues,
               backgroundColor: [
-                '#07B072', '#D1322F', '#AE65BC', '#FEE05A', '#39EBCF', '#3C71FE', '#E66E27'
+                '#155A7D', '#BA323B', '#AE65BC', '#FEE05A', '#39EBCF', '#3C71FE', '#E66E27'
               ],
               borderColor: [
-                '#045E3D', '#6E1A18', '#683D70', '#A39039', '#27A18E', '#234091', '#A14D23'
+                '#0D354A', '#631B20', '#683D70', '#A39039', '#27A18E', '#234091', '#A14D23'
               ],
               borderWidth: 2
             }]
@@ -305,7 +304,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
               max: 10000,
               stepSize: 10
             },
-
+            responsive:true
           }
         });
       </script>
@@ -332,7 +331,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
             datasets: [{
               data: yValues,
               backgroundColor: [
-                '#07B072', '#D1322F', '#AE65BC', '#FEE05A', '#39EBCF', '#3C71FE', '#E66E27'
+                '#155A7D', '#BA323B', '#AE65BC', '#FEE05A', '#39EBCF', '#3C71FE', '#E66E27'
               ],
               hoverOffset: 4
             }]
