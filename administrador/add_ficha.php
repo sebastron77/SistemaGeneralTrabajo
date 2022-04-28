@@ -13,7 +13,7 @@ page_require_area(4);
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_ficha'])) {
 
-    $req_fields = array('tipo_sol', 'num_expediente', 'solicitante', 'visitaduria', 'hechos', 'autoridad', 'quien_presenta', 'edad', 'fecha_nacimiento', 'sexo', 'grupo_vulnerable', 'fecha_intervencion', 'hora_lugar', 'actividad_realizada', 'medio_solicita');
+    $req_fields = array('tipo_sol', 'num_expediente', 'solicitante', 'visitaduria', 'hechos', 'autoridad', 'quien_presenta', 'edad', 'fecha_nacimiento', 'sexo', 'grupo_vulnerable', 'fecha_intervencion', 'hora_lugar', 'actividad_realizada', 'medio_solicita', 'fecha_entrega_documento','medio_solicita','num_oficio_designacion','protocolo_estambul','documento_entregado');
     validate_fields($req_fields);
 
     if (empty($errors)) {
@@ -74,7 +74,7 @@ if (isset($_POST['add_ficha'])) {
             $query = "INSERT INTO fichas (";
             $query .= "folio,tipo_solicitud,num_expediente,solicitante,visitaduria,hechos,autoridad,quien_presenta,nombre_usuario,parentesco,edad,fecha_nacimiento,sexo,grupo_vulnerable,tutor,fecha_intervencion,hora_lugar,actividad_realizada,observaciones,fecha_entrega_documento,ficha_adjunto,medio_solicita,num_oficio_designacion,protocolo_estambul,documento_entregado";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}','{$name}','$medio_solicita','$num_oficio_designacion','$protocolo_estambul','$documento_entregado'";
+            $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}','{$name}','{$medio_solicita}','{$num_oficio_designacion}','{$protocolo_estambul}','{$documento_entregado}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios (";
@@ -86,7 +86,7 @@ if (isset($_POST['add_ficha'])) {
             $query = "INSERT INTO fichas (";
             $query .= "folio,tipo_solicitud,num_expediente,solicitante,visitaduria,hechos,autoridad,quien_presenta,nombre_usuario,parentesco,edad,fecha_nacimiento,sexo,grupo_vulnerable,tutor,fecha_intervencion,hora_lugar,actividad_realizada,observaciones,fecha_entrega_documento,medio_solicita,num_oficio_designacion,protocolo_estambul,documento_entregado";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}','$medio_solicita','$num_oficio_designacion','$protocolo_estambul','$documento_entregado'";
+            $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}','{$medio_solicita}','{$num_oficio_designacion}','{$protocolo_estambul}','{$documento_entregado}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios (";
@@ -138,7 +138,7 @@ include_once('layouts/header.php'); ?>
                                 <option value="Dictamen">Dictamen</option>
                                 <option value="Certificado">Certificado</option>
                                 <option value="Valoración">Valoración</option>
-                                <option value="Contención">Contención Psicológica</option>
+                                <option value="Contención Psicológica">Contención Psicológica</option>
                                 <!-- <option value="Psicológica">Psicológica</option> -->
                                 <option value="Inspección">Inspección</option>
                                 <option value="Orientación médica">Orientación médica</option>
@@ -208,7 +208,7 @@ include_once('layouts/header.php'); ?>
                                 <option value="Coordinación de Comunicación Social">Coordinación de Comunicación Social</option>
                                 <option value="Coordinación del Sistema Penitenciario del Estado de Michoacán">Coordinación del Sistema Penitenciario del Estado de Michoacán</option>
                                 <option value="Defensoría Publica Federal">Defensoría Publica Federal</option>
-                                <option value="Despacho del C Gobernador">Despacho del C Gobernador</option>
+                                <option value="Despacho del C. Gobernador">Despacho del C. Gobernador</option>
                                 <option value="Dirección de Registro Civil">Dirección de Registro Civil</option>
                                 <option value="Dirección de Trabajo y Previsión Social">Dirección de Trabajo y Previsión Social</option>
                                 <option value="Dirección General de Educación Tecnológica Industrial DGTI">Dirección General de Educación Tecnológica Industrial DGTI</option>
@@ -270,8 +270,8 @@ include_once('layouts/header.php'); ?>
                                 <option value="Presidencia Municipal de Jiquilpan">Presidencia Municipal de Jiquilpan</option>
                                 <option value="Presidencia Municipal de José Sixto Verduzco">Presidencia Municipal de José Sixto Verduzco</option>
                                 <option value="Presidencia Municipal de Jungapeo">Presidencia Municipal de Jungapeo</option>
-                                <option value="Presidencia Municipal de la Huacana">Presidencia Municipal de la Huacana</option>
-                                <option value="Presidencia Municipal de la Piedad">Presidencia Municipal de la Piedad</option>
+                                <option value="Presidencia Municipal de La Huacana">Presidencia Municipal de La Huacana</option>
+                                <option value="Presidencia Municipal de La Piedad">Presidencia Municipal de La Piedad</option>
                                 <option value="Presidencia Municipal de Lagunillas">Presidencia Municipal de Lagunillas</option>
                                 <option value="Presidencia Municipal de Lázaro Cárdenas">Presidencia Municipal de Lázaro Cárdenas</option>
                                 <option value="Presidencia Municipal de Los Reyes">Presidencia Municipal de los Reyes</option>
@@ -385,7 +385,7 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="nombre_usuario">Nombre del agraviado</label>
-                            <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre Completo">
+                            <input type="text" class="form-control" name="nombre_usuario" placeholder="Nombre Completo" required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -412,9 +412,9 @@ include_once('layouts/header.php'); ?>
                                 <option value="Nuera">Nuera</option>
                                 <option value="Abuelo(a) del cónyugue">Abuelo(a) del cónyugue</option>
                                 <option value="Hermano(a) del cónyugue">Hermano(a) del cónyugue</option>
-                                <option value="Sobrino(a) del cónyugue">Sobrino del cónyugue</option>
-                                <option value="Tío(a) del cónyugue">Tío del cónyugue</option>
-                                <option value="Bisabuelo(a) del cónyugue">Bisabuelo del cónyugue</option>
+                                <option value="Sobrino(a) del cónyugue">Sobrino(a) del cónyugue</option>
+                                <option value="Tío(a) del cónyugue">Tío(a) del cónyugue</option>
+                                <option value="Bisabuelo(a) del cónyugue">Bisabuelo(a) del cónyugue</option>
                                 <option value="Primo(a) del cónyugue">Primo(a) del cónyugue</option>
                                 <option value="Tatarabuelo(a) del cónyugue">Tatarabuelo(a) del cónyugue</option>
                             </select>
@@ -448,7 +448,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="medio_solicita">Medio por el que se solicita</label>
                             <select class="form-control" name="medio_solicita">
-                                <option value="Escoge una opción">Escoge una opción</option>
+                                <option value="">Elige una opción</option>
                                 <option value="Solicitud Verbal">Solicitud Verbal</option>
                                 <option value="Oficio">Oficio</option>
                             </select>
@@ -495,11 +495,17 @@ include_once('layouts/header.php'); ?>
                     </div>
                 </div>
                 <div class="row">
+                <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="hora_lugar">Hora y lugar de Intervención</label>
+                            <textarea type="text" class="form-control" name="hora_lugar" cols="50" rows="1"></textarea>
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="protocolo_estambul">Protocolo de Estambul</label>
                             <select class="form-control" name="protocolo_estambul">
-                                <option value="Escoge una opción">Escoge una opción</option>
+                                <option value="">Elige una opción</option>
                                 <option value="Sí">Sí</option>
                                 <option value="No">No</option>
                             </select>
@@ -509,7 +515,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="documento_entregado">Documento Entregado</label>
                             <select class="form-control" name="documento_entregado">
-                                <option value="Escoge una opción">Escoge una opción</option>
+                                <option value="">Elige una opción</option>
                                 <option value="Dictamen Pericial Psicológico">Dictamen Pericial Psicológico</option>
                                 <option value="Opinión Médica">Opinión Médica</option>
                                 <option value="Certificado de Lesiones">Certificado de Lesiones</option>
@@ -517,12 +523,7 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="hora_lugar">Hora y lugar de Intervención</label>
-                            <textarea type="text" class="form-control" name="hora_lugar" cols="50" rows="1"></textarea>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="row">                    
                     <div class="col-md-4">

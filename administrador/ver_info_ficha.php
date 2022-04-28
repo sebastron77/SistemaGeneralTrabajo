@@ -51,19 +51,21 @@ if ($nivel == 7) {
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 3%;">Folio</th>
-                            <th style="width: 3%;">No. expediente</th>
+                            <th style="width: 7%;">Folio</th>
+                            <th style="width: 1%;">No. expediente</th>
+                            <th style="width: 3%;">No. Oficio Designación</th>
                             <th style="width: 3%;">Tipo</th>
                             <th style="width: 5%;">Solicitante</th>
-                            <th style="width: 1%;">Visitaduria</th>
+                            <th style="width: 5%;">Visitaduria</th>
                             <th style="width: 15%;">Hechos</th>
-                            <th style="width: 10%;">Autoridad</th>
+                            <th style="width: 15%;">Autoridad</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><?php echo remove_junk(ucwords($a_ficha['folio'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_ficha['num_expediente'])) ?></td>
+                            <td><?php echo remove_junk(ucwords($a_ficha['num_oficio_designacion'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_ficha['tipo_solicitud'])) ?></td>
                             <td><?php echo remove_junk(ucwords($a_ficha['solicitante'])) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['visitaduria']))) ?></td>
@@ -75,12 +77,13 @@ if ($nivel == 7) {
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 4%;">Presentante</th>
+                            <th style="width: 3%;">Presentante</th>
                             <th style="width: 3%;">Agraviado</th>
                             <th style="width: 2%;">Parentesco</th>
                             <th style="width: 1%;">Edad</th>
                             <th style="width: 1%;">Fecha Nacimiento</th>
                             <th style="width: 1%;">Género</th>
+                            <th style="width: 3%;">Medio por el que se solicita</th>
                             <th style="width: 4%;">Grupo Vulnerable</th>
                         </tr>
                     </thead>
@@ -91,6 +94,7 @@ if ($nivel == 7) {
                         <td><?php echo remove_junk(ucwords(($a_ficha['edad']))) ?></td>
                         <td><?php echo remove_junk(ucwords(($a_ficha['fecha_nacimiento']))) ?></td>
                         <td><?php echo remove_junk(ucwords(($a_ficha['sexo']))) ?></td>
+                        <td><?php echo remove_junk(ucwords(($a_ficha['medio_solicita']))) ?></td>
                         <td><?php echo remove_junk(ucwords(($a_ficha['grupo_vulnerable']))) ?></td>
                     </tbody>
                 </table>
@@ -98,9 +102,11 @@ if ($nivel == 7) {
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th style="width: 3%;">Tutor</th>
-                            <th style="width: 1%;">Contacto</th>
+                            <!-- <th style="width: 1%;">Contacto</th> -->
                             <th style="width: 3%;">Fecha Intervención</th>
-                            <th style="width: 3%;">Hora y Lugar</th>
+                            <th style="width: 3%;">Hora y Lugar de intervención</th>
+                            <th style="width: 1%;">Protocolo Estambul</th>
+                            <th style="width: 1%">Documento Entregado</th>
                             <th style="width: 3%;">Actividad realizada</th>
                             <th style="width: 3%;">Observaciones</th>
                             <th style="width: 3%;">Fecha de Entrega de Documento</th>
@@ -110,9 +116,11 @@ if ($nivel == 7) {
                     <tbody>
                         <tr>
                             <td><?php echo remove_junk(ucwords(($a_ficha['tutor']))) ?></td>
-                            <td><?php echo remove_junk(ucwords(($a_ficha['contacto']))) ?></td>
+                            <!-- <td><?php echo remove_junk(ucwords(($a_ficha['contacto']))) ?></td> -->
                             <td><?php echo remove_junk(ucwords(($a_ficha['fecha_intervencion']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['hora_lugar']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['protocolo_estambul']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['documento_entregado'])))?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['actividad_realizada']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['observaciones']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['fecha_entrega_documento']))) ?></td>

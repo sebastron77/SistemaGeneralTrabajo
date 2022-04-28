@@ -3,11 +3,6 @@ $page_title = 'Editar Ficha';
 require_once('includes/load.php');
 ?>
 <?php
-$e_ficha = find_by_id_ficha((int)$_GET['id']);
-if (!$e_ficha) {
-    $session->msg("d", "id de ficha no encontrado.");
-    redirect('fichas.php');
-}
 $user = current_user();
 $nivel = $user['user_level'];
 if ($nivel <= 2) {
@@ -29,10 +24,16 @@ if ($nivel == 7) {
     redirect('home.php');
 }
 ?>
-
+<?php
+$e_ficha = find_by_id_ficha((int)$_GET['id']);
+if (!$e_ficha) {
+    $session->msg("d", "id de ficha no encontrado.");
+    redirect('fichas.php');
+}
+?>
 <?php
 if (isset($_POST['edit_ficha'])) {
-    $req_fields = array('tipo_sol', 'num_expediente', 'solicitante', 'visitaduria', 'hechos', 'autoridad', 'quien_presenta', 'edad', 'fecha_nacimiento', 'sexo', 'grupo_vulnerable', 'contacto', 'fecha_intervencion', 'hora_lugar', 'actividad_realizada');
+    $req_fields = array('tipo_sol', 'num_expediente', 'solicitante', 'visitaduria', 'hechos', 'autoridad', 'quien_presenta', 'edad', 'fecha_nacimiento', 'sexo', 'grupo_vulnerable', 'fecha_intervencion', 'hora_lugar', 'actividad_realizada', 'medio_solicita');
     validate_fields($req_fields);
     if (empty($errors)) {
         $id = (int)$e_ficha['id'];
@@ -50,13 +51,18 @@ if (isset($_POST['edit_ficha'])) {
         $sexo   = remove_junk($db->escape($_POST['sexo']));
         $grupo_vulnerable   = remove_junk($db->escape($_POST['grupo_vulnerable']));
         $tutor   = remove_junk($db->escape($_POST['tutor']));
-        $contacto   = remove_junk($db->escape($_POST['contacto']));
+        // $contacto   = remove_junk($db->escape($_POST['contacto']));
         $fecha_intervencion   = remove_junk($db->escape($_POST['fecha_intervencion']));
         $hora_lugar   = remove_junk($db->escape($_POST['hora_lugar']));
         $actividad_realizada   = remove_junk($db->escape($_POST['actividad_realizada']));
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
         $fecha_entrega_documento   = remove_junk($db->escape($_POST['fecha_entrega_documento']));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
+        $medio_solicita   = remove_junk($db->escape($_POST['medio_solicita']));
+        $num_oficio_designacion   = remove_junk($db->escape($_POST['num_oficio_designacion']));
+        $protocolo_estambul   = remove_junk($db->escape($_POST['protocolo_estambul']));
+        $documento_entregado   = remove_junk($db->escape($_POST['documento_entregado']));
+        // $adjunto   = remove_junk($db->escape($_POST['adjunto']));
 
         $folio_editar = $e_ficha['folio'];
         $resultado = str_replace("/", "-", $folio_editar);
@@ -69,16 +75,16 @@ if (isset($_POST['edit_ficha'])) {
 
         if (is_dir($carpeta)) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
-        } else{
+        } else {
             mkdir($carpeta, 0777, true);
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
-        
+
         if ($name != '') {
-            $sql = "UPDATE fichas SET tipo_solicitud='{$tipo_sol}', num_expediente='{$num_expediente}', solicitante='{$solicitante}', visitaduria='{$visitaduria}', hechos='{$hechos}', autoridad='{$autoridad}', quien_presenta='{$quien_presenta}', nombre_usuario='{$nombre_usuario}', parentesco='{$parentesco}', edad='{$edad}',fecha_nacimiento='{$fecha_nacimiento}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', tutor='{$tutor}', contacto='{$contacto}', fecha_intervencion='{$fecha_intervencion}', hora_lugar='{$hora_lugar}', actividad_realizada='{$actividad_realizada}', observaciones='{$observaciones}', fecha_entrega_documento='{$fecha_entrega_documento}', ficha_adjunto='{$name}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE fichas SET tipo_solicitud='{$tipo_sol}', num_expediente='{$num_expediente}', solicitante='{$solicitante}', visitaduria='{$visitaduria}', hechos='{$hechos}', autoridad='{$autoridad}', quien_presenta='{$quien_presenta}', nombre_usuario='{$nombre_usuario}', parentesco='{$parentesco}', edad='{$edad}',fecha_nacimiento='{$fecha_nacimiento}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', tutor='{$tutor}', fecha_intervencion='{$fecha_intervencion}', hora_lugar='{$hora_lugar}', actividad_realizada='{$actividad_realizada}', observaciones='{$observaciones}', fecha_entrega_documento='{$fecha_entrega_documento}', ficha_adjunto='{$name}', medio_solicita='{$medio_solicita}', num_oficio_designacion='{$num_oficio_designacion}', protocolo_estambul='{$protocolo_estambul}', documento_entregado='{$documento_entregado}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql = "UPDATE fichas SET tipo_solicitud='{$tipo_sol}', num_expediente='{$num_expediente}', solicitante='{$solicitante}', visitaduria='{$visitaduria}', hechos='{$hechos}', autoridad='{$autoridad}', quien_presenta='{$quien_presenta}', nombre_usuario='{$nombre_usuario}', parentesco='{$parentesco}', edad='{$edad}',fecha_nacimiento='{$fecha_nacimiento}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', tutor='{$tutor}', contacto='{$contacto}', fecha_intervencion='{$fecha_intervencion}', hora_lugar='{$hora_lugar}', actividad_realizada='{$actividad_realizada}', observaciones='{$observaciones}', fecha_entrega_documento='{$fecha_entrega_documento}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE fichas SET tipo_solicitud='{$tipo_sol}', num_expediente='{$num_expediente}', solicitante='{$solicitante}', visitaduria='{$visitaduria}', hechos='{$hechos}', autoridad='{$autoridad}', quien_presenta='{$quien_presenta}', nombre_usuario='{$nombre_usuario}', parentesco='{$parentesco}', edad='{$edad}',fecha_nacimiento='{$fecha_nacimiento}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', tutor='{$tutor}', fecha_intervencion='{$fecha_intervencion}', hora_lugar='{$hora_lugar}', actividad_realizada='{$actividad_realizada}', observaciones='{$observaciones}', fecha_entrega_documento='{$fecha_entrega_documento}', medio_solicita='{$medio_solicita}', num_oficio_designacion='{$num_oficio_designacion}', protocolo_estambul='{$protocolo_estambul}', documento_entregado='{$documento_entregado}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
@@ -86,7 +92,7 @@ if (isset($_POST['edit_ficha'])) {
             redirect('fichas.php', false);
         } else {
             $session->msg('d', ' Lo siento no se actualizaron los datos.');
-            redirect('edit_fichas', false);
+            redirect('fichas.php', false);
         }
     } else {
         $session->msg("d", $errors);
@@ -106,6 +112,12 @@ if (isset($_POST['edit_ficha'])) {
         <div class="panel-body">
             <form method="post" action="edit_ficha.php?id=<?php echo (int)$e_ficha['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="num_oficio_designacion">No. oficio designación</label>
+                            <input type="text" class="form-control" value="<?php echo remove_junk($e_ficha['num_oficio_designacion']); ?>" name="num_oficio_designacion" required>
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="tipo_sol">Tipo de ficha</label>
@@ -117,12 +129,12 @@ if (isset($_POST['edit_ficha'])) {
                                 <option <?php if ($e_ficha['tipo_solicitud'] === 'Contención Psicológica') echo 'selected="selected"'; ?> value="Contención Psicológica">Contención Psicológica</option>
                                 <!-- <option <?php if ($e_ficha['tipo_solicitud'] === 'Psicológica') echo 'selected="selected"'; ?> value="Psicológica">Psicológica</option> -->
                                 <option <?php if ($e_ficha['tipo_solicitud'] === 'Inspección') echo 'selected="selected"'; ?> value="Inspección">Inspección</option>
-                                <option <?php if ($e_ficha['tipo_solicitud'] === 'Orientación') echo 'selected="selected"'; ?> value="Orientación médica">Orientación médica</option>
+                                <option <?php if ($e_ficha['tipo_solicitud'] === 'Orientación médica') echo 'selected="selected"'; ?> value="Orientación médica">Orientación médica</option>
                             </select>
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="correo">Número de expediente</label>
                             <input type="text" class="form-control" name="num_expediente" value="<?php echo remove_junk($e_ficha['num_expediente']); ?>" required>
@@ -134,7 +146,8 @@ if (isset($_POST['edit_ficha'])) {
                             <input type="text" class="form-control" name="solicitante" value="<?php echo remove_junk($e_ficha['solicitante']); ?>" required>
                         </div>
                     </div>
-
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="visitaduria">Visitaduria</label>
@@ -152,9 +165,6 @@ if (isset($_POST['edit_ficha'])) {
                             </select>
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="hechos">Presuntos hechos violatorios</label>
@@ -182,10 +192,10 @@ if (isset($_POST['edit_ficha'])) {
                                 <option <?php if ($e_ficha['autoridad'] === 'Comisión Para la Regularización de la Tenencia de la Tierra CORETT') echo 'selected="selected"'; ?> value="Comisión Para la Regularización de la Tenencia de la Tierra CORETT">Comisión Para la Regularización de la Tenencia de la Tierra CORETT</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Consejería Jurídica del Ejecutivo del Estado') echo 'selected="selected"'; ?> value="Consejería Jurídica del Ejecutivo del Estado">Consejería Jurídica del Ejecutivo del Estado</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Consejo Nacional Para Prevenir la Discriminación') echo 'selected="selected"'; ?> value="Consejo Nacional Para Prevenir la Discriminación">Consejo Nacional Para Prevenir la Discriminación</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Coordinación de Comunicación Socia') echo 'selected="selected"'; ?> value="Coordinación de Comunicación Social">Coordinación de Comunicación Social</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Coordinación de Comunicación Social') echo 'selected="selected"'; ?> value="Coordinación de Comunicación Social">Coordinación de Comunicación Social</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Coordinación del Sistema Penitenciario del Estado de Michoacán') echo 'selected="selected"'; ?> value="Coordinación del Sistema Penitenciario del Estado de Michoacán">Coordinación del Sistema Penitenciario del Estado de Michoacán</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Defensoría Publica Federal') echo 'selected="selected"'; ?> value="Defensoría Publica Federal">Defensoría Publica Federal</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Despacho del C Gobernador') echo 'selected="selected"'; ?> value="Despacho del C Gobernador">Despacho del C Gobernador</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Despacho del C. Gobernador') echo 'selected="selected"'; ?> value="Despacho del C. Gobernador">Despacho del C. Gobernador</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Dirección de Registro Civil') echo 'selected="selected"'; ?> value="Dirección de Registro Civil">Dirección de Registro Civil</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Dirección de Trabajo y Previsión Social') echo 'selected="selected"'; ?> value="Dirección de Trabajo y Previsión Social">Dirección de Trabajo y Previsión Social</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Dirección General de Educación Tecnológica Industrial DGTI') echo 'selected="selected"'; ?> value="Dirección General de Educación Tecnológica Industrial DGTI">Dirección General de Educación Tecnológica Industrial DGTI</option>
@@ -207,14 +217,14 @@ if (isset($_POST['edit_ficha'])) {
                                 <option <?php if ($e_ficha['autoridad'] === 'Junta de Caminos del Estado de Michoacán') echo 'selected="selected"'; ?> value="Junta de Caminos del Estado de Michoacán">Junta de Caminos del Estado de Michoacán</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Junta Local de Conciliación y Arbitraje') echo 'selected="selected"'; ?> value="Junta Local de Conciliación y Arbitraje">Junta Local de Conciliación y Arbitraje</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Parque Zoológico Benito Juárez') echo 'selected="selected"'; ?> value="Parque Zoológico Benito Juárez">Parque Zoológico Benito Juárez</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Pensiones Civiles del Estad') echo 'selected="selected"'; ?> value="Pensiones Civiles del Estado">Pensiones Civiles del Estado</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Pensiones Civiles del Estado') echo 'selected="selected"'; ?> value="Pensiones Civiles del Estado">Pensiones Civiles del Estado</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Acuitzio') echo 'selected="selected"'; ?> value="Presidencia Municipal de Acuitzio">Presidencia Municipal de Acuitzio</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Aguililla') echo 'selected="selected"'; ?> value="Presidencia Municipal de Aguililla">Presidencia Municipal de Aguililla</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Álvaro Obregó') echo 'selected="selected"'; ?> value="Presidencia Municipal de Álvaro Obregón">Presidencia Municipal de Álvaro Obregón</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Álvaro Obregón') echo 'selected="selected"'; ?> value="Presidencia Municipal de Álvaro Obregón">Presidencia Municipal de Álvaro Obregón</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Angamacutiro') echo 'selected="selected"'; ?> value="Presidencia Municipal de Angamacutiro">Presidencia Municipal de Angamacutiro</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Angangue') echo 'selected="selected"'; ?> value="Presidencia Municipal de Angangueo">Presidencia Municipal de Angangueo</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Angangueo') echo 'selected="selected"'; ?> value="Presidencia Municipal de Angangueo">Presidencia Municipal de Angangueo</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Apatzingán') echo 'selected="selected"'; ?> value="Presidencia Municipal de Apatzingán">Presidencia Municipal de Apatzingán</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Aquil') echo 'selected="selected"'; ?> value="Presidencia Municipal de Aquila">Presidencia Municipal de Aquila</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Aquila') echo 'selected="selected"'; ?> value="Presidencia Municipal de Aquila">Presidencia Municipal de Aquila</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Ario') echo 'selected="selected"'; ?> value="Presidencia Municipal de Ario">Presidencia Municipal de Ario</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Arteaga') echo 'selected="selected"'; ?> value="Presidencia Municipal de Arteaga">Presidencia Municipal de Arteaga</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Briseñas') echo 'selected="selected"'; ?> value="Presidencia Municipal de Briseñas">Presidencia Municipal de Briseñas</option>
@@ -247,8 +257,8 @@ if (isset($_POST['edit_ficha'])) {
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Jiquilpan') echo 'selected="selected"'; ?> value="Presidencia Municipal de Jiquilpan">Presidencia Municipal de Jiquilpan</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de José Sixto Verduzco') echo 'selected="selected"'; ?> value="Presidencia Municipal de José Sixto Verduzco">Presidencia Municipal de José Sixto Verduzco</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Jungapeo') echo 'selected="selected"'; ?> value="Presidencia Municipal de Jungapeo">Presidencia Municipal de Jungapeo</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de La Huacana') echo 'selected="selected"'; ?> value="Presidencia Municipal de La Huacana">Presidencia Municipal de la Huacana</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de La Piedad') echo 'selected="selected"'; ?> value="Presidencia Municipal de La Piedad">Presidencia Municipal de la Piedad</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de La Huacana') echo 'selected="selected"'; ?> value="Presidencia Municipal de La Huacana">Presidencia Municipal de La Huacana</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de La Piedad') echo 'selected="selected"'; ?> value="Presidencia Municipal de La Piedad">Presidencia Municipal de La Piedad</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Lagunillas') echo 'selected="selected"'; ?> value="Presidencia Municipal de Lagunillas">Presidencia Municipal de Lagunillas</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Lázaro Cárdenas') echo 'selected="selected"'; ?> value="Presidencia Municipal de Lázaro Cárdenas">Presidencia Municipal de Lázaro Cárdenas</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Presidencia Municipal de Los Reyes') echo 'selected="selected"'; ?> value="Presidencia Municipal de Los Reyes">Presidencia Municipal de los Reyes</option>
@@ -312,14 +322,14 @@ if (isset($_POST['edit_ficha'])) {
                                 <option <?php if ($e_ficha['autoridad'] === 'Procuraduría Federal del Consumidor PROFECO') echo 'selected="selected"'; ?> value="Procuraduría Federal del Consumidor PROFECO">Procuraduría Federal del Consumidor PROFECO</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Quejas Sin Autoridad Señalada Como Responsable') echo 'selected="selected"'; ?> value="Quejas Sin Autoridad Señalada Como Responsable">Quejas Sin Autoridad Señalada Como Responsable</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Contraloría del Estado') echo 'selected="selected"'; ?> value="Secretaria de Contraloría del Estado">Secretaria de Contraloría del Estado</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Secretaría de Secretaría de Bienesta') echo 'selected="selected"'; ?> value="Secretaría de Bienestar">Secretaría de Bienestar</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Secretaria de Comunicaciones y Obras Publicas') echo 'selected="selected"'; ?> value="Secretaria de Comunicaciones y Obras Publicas">Secretaria de Comunicaciones y Obras Publicas</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Secretaria de Comunicaciones y Transportes SCT') echo 'selected="selected"'; ?> value="Secretaria de Comunicaciones y Transportes SCT">Secretaria de Comunicaciones y Transportes SCT</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Secretaría de Bienestar') echo 'selected="selected"'; ?> value="Secretaría de Bienestar">Secretaría de Bienestar</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Comunicaciones y Obras Publicas') echo 'selected="selected"'; ?> value="Secretaria de Comunicaciones y Obras Publicas">Secretaria de Comunicaciones y Obras Publicas</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Comunicaciones y Transportes SCT') echo 'selected="selected"'; ?> value="Secretaria de Comunicaciones y Transportes SCT">Secretaria de Comunicaciones y Transportes SCT</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Cultura en el Estado') echo 'selected="selected"'; ?> value="Secretaria de Cultura en el Estado">Secretaria de Cultura en el Estado</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Desarrollo Económico') echo 'selected="selected"'; ?> value="Secretaria de Desarrollo Económico">Secretaria de Desarrollo Económico</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Desarrollo Rural y Agroalimentario') echo 'selected="selected"'; ?> value="Secretaria de Desarrollo Rural y Agroalimentario">Secretaria de Desarrollo Rural y Agroalimentario</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Secretaría de Desarrollo Social y Humano') echo 'selected="selected"'; ?> value="Secretaría de Desarrollo Social y Humano">Secretaría de Desarrollo Social y Humano</option>
-                                <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Secretaria de Desarrollo Territorial Urbano y Movilidad') echo 'selected="selected"'; ?> value="Secretaria de Desarrollo Territorial Urbano y Movilidad">Secretaria de Desarrollo Territorial Urbano y Movilidad</option>
+                                <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Desarrollo Territorial Urbano y Movilidad') echo 'selected="selected"'; ?> value="Secretaria de Desarrollo Territorial Urbano y Movilidad">Secretaria de Desarrollo Territorial Urbano y Movilidad</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Educación del Estado') echo 'selected="selected"'; ?> value="Secretaria de Educación del Estado">Secretaria de Educación del Estado</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Educación Pública Federal') echo 'selected="selected"'; ?> value="Secretaria de Educación Pública Federal">Secretaria de Educación Pública Federal</option>
                                 <option <?php if ($e_ficha['autoridad'] === 'Secretaria de Finanzas y Administración') echo 'selected="selected"'; ?> value="Secretaria de Finanzas y Administración">Secretaria de Finanzas y Administración</option>
@@ -363,10 +373,7 @@ if (isset($_POST['edit_ficha'])) {
                             <input type="text" class="form-control" name="nombre_usuario" value="<?php echo remove_junk($e_ficha['nombre_usuario']); ?>">
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="parentesco">Parentesco</label>
                             <select class="form-control" name="parentesco">
@@ -389,9 +396,9 @@ if (isset($_POST['edit_ficha'])) {
                                 <option <?php if ($e_ficha['parentesco'] === 'Nuera') echo 'selected="selected"'; ?> value="Nuera">Nuera</option>
                                 <option <?php if ($e_ficha['parentesco'] === 'Abuelo(a) del cónyugue') echo 'selected="selected"'; ?> value="Abuelo(a) del cónyugue">Abuelo(a) del cónyugue</option>
                                 <option <?php if ($e_ficha['parentesco'] === 'Hermano(a) del cónyugue') echo 'selected="selected"'; ?> value="Hermano(a) del cónyugue">Hermano(a) del cónyugue</option>
-                                <option <?php if ($e_ficha['parentesco'] === 'Sobrino(a) del cónyugue') echo 'selected="selected"'; ?> value="Sobrino(a) del cónyugue">Sobrino del cónyugue</option>
-                                <option <?php if ($e_ficha['parentesco'] === 'Tío(a) del cónyugue') echo 'selected="selected"'; ?> value="Tío(a) del cónyugue">Tío del cónyugue</option>
-                                <option <?php if ($e_ficha['parentesco'] === 'Bisabuelo(a) del cónyugue') echo 'selected="selected"'; ?> value="Bisabuelo(a) del cónyugue">Bisabuelo del cónyugue</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Sobrino(a) del cónyugue') echo 'selected="selected"'; ?> value="Sobrino(a) del cónyugue">Sobrino(a) del cónyugue</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Tío(a) del cónyugue') echo 'selected="selected"'; ?> value="Tío(a) del cónyugue">Tío(a) del cónyugue</option>
+                                <option <?php if ($e_ficha['parentesco'] === 'Bisabuelo(a) del cónyugue') echo 'selected="selected"'; ?> value="Bisabuelo(a) del cónyugue">Bisabuelo(a) del cónyugue</option>
                                 <option <?php if ($e_ficha['parentesco'] === 'Primo(a) del cónyugue') echo 'selected="selected"'; ?> value="Primo(a) del cónyugue">Primo(a) del cónyugue</option>
                                 <option <?php if ($e_ficha['parentesco'] === 'Tatarabuelo(a) del cónyugue') echo 'selected="selected"'; ?> value="Tatarabuelo(a) del cónyugue">Tatarabuelo(a) del cónyugue</option>
                             </select>
@@ -415,7 +422,18 @@ if (isset($_POST['edit_ficha'])) {
                             <select class="form-control" name="sexo">
                                 <option <?php if ($e_ficha['sexo'] === 'Mujer') echo 'selected="selected"'; ?> value="Mujer">Mujer</option>
                                 <option <?php if ($e_ficha['sexo'] === 'Hombre') echo 'selected="selected"'; ?> value="Hombre">Hombre</option>
-                                <option <?php if ($e_ficha['sexo'] === 'LGBTTTIQA') echo 'selected="selected"'; ?> value="LGBTTTIQA">LGBTTTIQA</option>
+                                <option <?php if ($e_ficha['sexo'] === 'LGBTIQ+') echo 'selected="selected"'; ?> value="LGBTIQ+">LGBTIQ+</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="medio_solicita">Medio por el que se solicita</label>
+                            <select class="form-control" name="medio_solicita">
+                                <option <?php if ($e_ficha['medio_solicita'] === 'Solicitud Verbal') echo 'selected="selected"'; ?> value="Solicitud Verbal">Solicitud Verbal</option>
+                                <option <?php if ($e_ficha['medio_solicita'] === 'Oficio') echo 'selected="selected"'; ?> value="Oficio">Oficio</option>
                             </select>
                         </div>
                     </div>
@@ -424,9 +442,9 @@ if (isset($_POST['edit_ficha'])) {
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
                                 <option value="">Elige una opción</option>
-                                <option <?php if ($e_ficha['grupo_vulnerable'] === 'Comunidad LGBTTTIQA') echo 'selected="selected"'; ?> value="Comunidad LGBTTTIQA">Comunidad LGBTTTIQA</option>
+                                <option <?php if ($e_ficha['grupo_vulnerable'] === 'Comunidad LGBTIQ+') echo 'selected="selected"'; ?> value="Comunidad LGBTIQ+">Comunidad LGBTIQ+</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Derecho de las mujeres') echo 'selected="selected"'; ?> value="Derecho de las mujeres">Derecho de las mujeres</option>
-                                <option <?php if ($e_ficha['grupo_vulnerable'] === 'Niñas, niños y adolescentes') echo 'selected="selected"'; ?> value="Niñas, niños y adolescentes">Niñas, niños y adolecentes</option>
+                                <option <?php if ($e_ficha['grupo_vulnerable'] === 'Niñas, niños y adolescentes') echo 'selected="selected"'; ?> value="Niñas, niños y adolescentes">Niñas, niños y adolescentes</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Personas con discapacidad') echo 'selected="selected"'; ?> value="Personas con discapacidad">Personas con discapacidad</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Personas migrantes') echo 'selected="selected"'; ?> value="Personas migrantes">Personas migrantes</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Personas que viven con VIH SIDA') echo 'selected="selected"'; ?> value="Personas que viven con VIH SIDA">Personas que viven con VIH SIDA</option>
@@ -440,61 +458,81 @@ if (isset($_POST['edit_ficha'])) {
                             </select>
                         </div>
                     </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="tutor">Nombre de tutor</label>
                             <input type="text" class="form-control" value="<?php echo remove_junk($e_ficha['tutor']); ?>" name="tutor">
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <!-- <div class="col-md-2">
                         <div class="form-group">
                             <label for="contacto">Número de contacto</label>
                             <input type="text" class="form-control" maxlength="10" value="<?php echo remove_junk($e_ficha['contacto']); ?>" name="contacto">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="fecha_intervencion">Fecha de Intervención</label>
                             <input type="date" class="form-control" value="<?php echo remove_junk($e_ficha['fecha_intervencion']); ?>" name="fecha_intervencion" required>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="hora_lugar">Hora y lugar de Intervención</label>
                             <textarea type="text" class="form-control" value="<?php echo remove_junk($e_ficha['hora_lugar']); ?>" name="hora_lugar" cols="50" rows="1"><?php echo remove_junk($e_ficha['hora_lugar']); ?></textarea>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="protocolo_estambul">Protocolo de Estambul</label>
+                            <select class="form-control" name="protocolo_estambul">
+                                <option <?php if ($e_ficha['protocolo_estambul'] === 'Sí') echo 'selected="selected"'; ?> value="Sí">Sí</option>
+                                <option <?php if ($e_ficha['protocolo_estambul'] === 'No') echo 'selected="selected"'; ?> value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="documento_entregado">Documento Entregado</label>
+                            <select class="form-control" name="documento_entregado">
+                                <option <?php if ($e_ficha['documento_entregado'] === 'Dictamen Pericial Psicológico') echo 'selected="selected"'; ?> value="Dictamen Pericial Psicológico">Dictamen Pericial Psicológico</option>
+                                <option <?php if ($e_ficha['documento_entregado'] === 'Opinión Médica') echo 'selected="selected"'; ?> value="Opinión Médica">Opinión Médica</option>
+                                <option <?php if ($e_ficha['documento_entregado'] === 'Certificado de Lesiones') echo 'selected="selected"'; ?> value="Certificado de Lesiones">Certificado de Lesiones</option>
+                                <option <?php if ($e_ficha['documento_entregado'] === 'Informe Psicológico') echo 'selected="selected"'; ?> value="Informe Psicológico">Informe Psicológico</option>
+                            </select>
+                        </div>
+                    </div>
+
 
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="actividad_realizada">Actividad realizada</label>
                             <textarea type="text" class="form-control" value="<?php echo remove_junk($e_ficha['actividad_realizada']); ?>" name="actividad_realizada" cols="50" rows="1"><?php echo remove_junk($e_ficha['actividad_realizada']); ?></textarea>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="observaciones">Observaciones Generales</label>
                             <textarea type="text" class="form-control" name="observaciones" value="<?php echo remove_junk($e_ficha['observaciones']); ?>" cols="30" rows="1"><?php echo remove_junk($e_ficha['observaciones']); ?></textarea>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="fecha_entrega_documento">Fecha de realización de Ficha</label>
+                            <label for="fecha_entrega_documento">Fecha de entrega del documento</label>
                             <input type="date" class="form-control" name="fecha_entrega_documento" value="<?php echo remove_junk($e_ficha['fecha_entrega_documento']); ?>" required>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="adjunto">Adjuntar Ficha</label>
-                            <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto" value="<?php echo remove_junk($e_ficha['ficha_adjunto']); ?>">
-                            <label style="font-size:12px; color:#E3054F;" >Archivo Actual: <?php echo remove_junk($e_ficha['ficha_adjunto']); ?><?php ?></label>
+                            <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto" value="uploads/fichastecnicas/<?php echo $e_ficha['ficha_adjunto']; ?>">
+                            <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_ficha['ficha_adjunto']); ?><?php ?></label>
                         </div>
                     </div>
                 </div>
