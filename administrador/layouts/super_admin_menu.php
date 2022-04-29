@@ -75,10 +75,10 @@
     <ul class="nav submenu">
       <li><a href="#">Medida Cautelar</a></li>
       <li><a href="estadistica_orientaciones.php">Orientaciones</a></li>
-      <li><a href="#">Canalizaciones</a></li>
+      <li><a href="estadistica_canalizacion.php">Canalizaciones</a></li>
       <li><a href="#">Gestiones</a></li>
       <li><a href="#">Solicitud de información</a></li>
-      <li><a href="#">Capacitaciones</a></li>
+      <li><a href="estadistica_capacitacion.php">Capacitaciones</a></li>
       <li><a href="#">Quejas</a></li>
     </ul>
   </li>

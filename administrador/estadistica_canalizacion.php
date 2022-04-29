@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
-$page_title = 'Estadísticas de Orientaciones';
+$page_title = 'Estadísticas de Canalizaciones';
 require_once('includes/load.php');
 
 $user = current_user();
@@ -18,38 +18,38 @@ endif;
 if ($nivel_user > 7) :
   redirect('home.php');
 endif;
-$total_orien_mujer = count_by_id_mujer('orientacion_canalizacion', 1);
-$total_orien_hombre = count_by_id_hombre('orientacion_canalizacion', 1);
-$total_orien_lgbt = count_by_id_lgbt('orientacion_canalizacion', 1);
+$total_orien_mujer = count_by_id_mujerC('orientacion_canalizacion', 2);
+$total_orien_hombre = count_by_id_hombreC('orientacion_canalizacion', 2);
+$total_orien_lgbt = count_by_id_lgbtC('orientacion_canalizacion', 2);
 
-$total_gv_lgbt = count_by_comLg('orientacion_canalizacion', 1);
-$total_der_mujer = count_by_derMuj('orientacion_canalizacion', 1);
-$total_nna = count_by_nna('orientacion_canalizacion', 1);
-$total_disc = count_by_disc('orientacion_canalizacion', 1);
-$total_mig = count_by_mig('orientacion_canalizacion', 1);
-$total_vih = count_by_vih('orientacion_canalizacion', 1);
-$total_gi = count_by_gi('orientacion_canalizacion', 1);
-$total_perio = count_by_perio('orientacion_canalizacion', 1);
-$total_ddh = count_by_ddh('orientacion_canalizacion', 1);
-$total_am = count_by_am('orientacion_canalizacion', 1);
-$total_int = count_by_int('orientacion_canalizacion', 1);
-$total_otros = count_by_otros('orientacion_canalizacion', 1);
-$total_na = count_by_na('orientacion_canalizacion', 1);
+$total_gv_lgbt = count_by_comLgC('orientacion_canalizacion', 2);
+$total_der_mujer = count_by_derMujC('orientacion_canalizacion', 2);
+$total_nna = count_by_nnaC('orientacion_canalizacion', 2);
+$total_disc = count_by_discC('orientacion_canalizacion', 2);
+$total_mig = count_by_migC('orientacion_canalizacion', 2);
+$total_vih = count_by_vihC('orientacion_canalizacion', 2);
+$total_gi = count_by_giC('orientacion_canalizacion', 2);
+$total_perio = count_by_perioC('orientacion_canalizacion', 2);
+$total_ddh = count_by_ddhC('orientacion_canalizacion', 2);
+$total_am = count_by_amC('orientacion_canalizacion', 2);
+$total_int = count_by_intC('orientacion_canalizacion', 2);
+$total_otros = count_by_otrosC('orientacion_canalizacion', 2);
+$total_na = count_by_naC('orientacion_canalizacion', 2);
 
-$total_asesorv = count_by_asesorv('orientacion_canalizacion', 1);
-$total_asistentev = count_by_asistentev('orientacion_canalizacion', 1);
-$total_comp = count_by_comp('orientacion_canalizacion', 1);
-$total_escrito = count_by_escrito('orientacion_canalizacion', 1);
-$total_vt = count_by_vt('orientacion_canalizacion', 1);
-$total_ve = count_by_ve('orientacion_canalizacion', 1);
-$total_cndh = count_by_cndh('orientacion_canalizacion', 1);
+$total_asesorv = count_by_asesorvC('orientacion_canalizacion', 2);
+$total_asistentev = count_by_asistentevC('orientacion_canalizacion', 2);
+$total_comp = count_by_compC('orientacion_canalizacion', 2);
+$total_escrito = count_by_escritoC('orientacion_canalizacion', 2);
+$total_vt = count_by_vtC('orientacion_canalizacion', 2);
+$total_ve = count_by_veC('orientacion_canalizacion', 2);
+$total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
 ?>
 
 <?php include_once('layouts/header.php'); ?>
 
 <!-- Debemos de tener Canvas en la página -->
 <center>
-  <h2 style="margin-top: -10px;">Estadística de Orientaciones (Por género)</h2>
+  <h2 style="margin-top: -10px;">Estadística de Canalizaciones (Por género)</h2>
   <div class="row">
     <div class="col-md-6" style="width: 40%; height: 20%;">
       <canvas id="myChart"></canvas>
@@ -70,14 +70,14 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
               label: 'Orientaciones por Género',
               data: yValues,
               backgroundColor: [
-                '#2AB5BD',
-                '#5643FA',
-                '#2ABD71'
+                '#F05E32',
+                '#1F914D',
+                '#3446FA'
               ],
               borderColor: [
-                '#1A7378',
-                '#322791',
-                '#197043'
+                '#91391F',
+                '#166937',
+                '#1F2891'
               ],
               borderWidth: 2
             }]
@@ -117,9 +117,9 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
             datasets: [{
               data: yValues,
               backgroundColor: [
-                '#2AB5BD',
-                '#5643FA',
-                '#2ABD71'
+                '#F05E32',
+                '#1F914D',
+                '#3446FA'
               ],
               hoverOffset: 4
             }]
@@ -155,7 +155,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
 
 
 <center>
-  <h2 style="margin-top: -10px;">Estadística de Orientaciones (Por grupo vulnerable)</h2>
+  <h2 style="margin-top: -10px;">Estadística de Canalizaciones (Por grupo vulnerable)</h2>
   <div class="row">
     <div class="col-md-6" style="width: 50%; height: 20%;">
       <canvas id="gVulnerableB"></canvas>
@@ -181,10 +181,10 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
               label: 'Orientaciones por Grupo Vulnerable',
               data: yValues,
               backgroundColor: [
-                '#99FEA3', '#3E75EA', '#FFDC57', '#584DB3', '#6084EB', '#FA8865', '#E66DFB', '#D0EB5A', '#FF5846', '#7972E7', '#00DDEA', '#E0293F', '#427085'
+                '#584DB3', '#FFDC57', '#3E75EA', '#99FEA3', '#427085', '#FA8865', '#E0293F', '#D0EB5A', '#FF5846', '#7972E7', '#00DDEA', '#E66DFB', '#6084EB'
               ],
               borderColor: [
-                '#63A66A', '#234387', '#A87E00', '#3C357A', '#425BA1', '#A85B43', '#91449E', '#9AAD42', '#963429', '#5852A8', '#00A0A8', '#8A1926', '#253F4A'
+                '#3C357A', '#A87E00', '#234387', '#63A66A', '#425BA1', '#A85B43', '#91449E', '#9AAD42', '#963429', '#5852A8', '#00A0A8', '#8A1926', '#253F4A'
               ],
               borderWidth: 2
             }]
@@ -264,7 +264,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
 
 
 <center>
-  <h2 style="margin-top: -10px;">Estadística de Orientaciones (Por medio de presentación)</h2>
+  <h2 style="margin-top: -10px;">Estadística de Canalizaciones (Por medio de presentación)</h2>
   <div class="row">
     <div class="col-md-6" style="width: 50%; height: 20%;">
       <canvas id="mPresentacion"></canvas>

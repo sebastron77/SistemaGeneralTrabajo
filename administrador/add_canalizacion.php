@@ -185,8 +185,8 @@ include_once('layouts/header.php'); ?>
                                 <option value="Albañil">Albañil</option>
                                 <option value="Ama de Casa">Ama de Casa</option>
                                 <option value="Artista">Artista</option>
-                                <option value="Artesano(a)">Artesano</option>
-                                <option value="Pescador(a)">Pescador</option>
+                                <option value="Artesano(a)">Artesano(a)</option>
+                                <option value="Pescador(a)">Pescador(a)</option>
                                 <option value="Camionero(a)">Camionero(a)</option>
                                 <option value="Carpintero(a)">Carpintero(a)</option>
                                 <option value="Cocinero(a)">Cocinero(a)</option>
@@ -241,7 +241,7 @@ include_once('layouts/header.php'); ?>
                                 <option value="Servicios de protección y vigilancia">Servicios de protección y vigilancia</option>
                                 <option value="Armada, ejercito y fuerza aérea">Armada, ejercito y fuerza aérea</option>
                                 <option value="Actividades agrícolas y ganaderas">Actividades agrícolas y ganaderas</option>
-                                <option value="Actividades pesqueras, forestales, caza y similares ">Actividades pesqueras, forestales, caza y similares</option>
+                                <option value="Actividades pesqueras, forestales, caza y similares">Actividades pesqueras, forestales, caza y similares</option>
                                 <option value="Operador(a) de maquinaria pesada">Operador(a) de maquinaria pesada</option>
                                 <option value="Extracción y edificador de construcciones">Extracción y edificador de construcciones</option>
                                 <option value="Ensamblador(a)">Ensamblador(a)</option>
@@ -283,9 +283,9 @@ include_once('layouts/header.php'); ?>
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
                                 <option value="">Elige una opción</option>
-                                <option value="Comunidad LGBTTTIQA">Comunidad LGBTTTIQA</option>
+                                <option value="Comunidad LGBTIQ+">Comunidad LGBTIQ+</option>
                                 <option value="Derecho de las mujeres">Derecho de las mujeres</option>
-                                <option value="Niñas, niños y adolescentes">Niñas, niños y adolecentes</option>
+                                <option value="Niñas, niños y adolescentes">Niñas, niños y adolescentes</option>
                                 <option value="Personas con discapacidad">Personas con discapacidad</option>
                                 <option value="Personas migrantes">Personas migrantes</option>
                                 <option value="Personas que viven con VIH SIDA">Personas que viven con VIH SIDA</option>
@@ -307,7 +307,7 @@ include_once('layouts/header.php'); ?>
                             <select class="form-control" name="sexo">
                                 <option value="M">Mujer</option>
                                 <option value="H">Hombre</option>
-                                <option value="LGBTTTIQA">LGBTTTIQA</option>
+                                <option value="LGBTIQ+">LGBTIQ+</option>
                             </select>
                         </div>
                     </div>
