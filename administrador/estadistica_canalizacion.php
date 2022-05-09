@@ -50,8 +50,9 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
 <!-- Debemos de tener Canvas en la página -->
 <center>
   <h2 style="margin-top: -10px;">Estadística de Canalizaciones (Por género)</h2>
-  <div class="row">
-    <div class="col-md-6" style="width: 40%; height: 20%;">
+  <div class="row" style="display: flex; justify-content: center; align-items: center;">
+    <div style="width:40%; float:left;">
+      <!-- <div class="col-md-6" style="width: 40%; height: 20%;"> -->
       <canvas id="myChart"></canvas>
       <!-- Incluímos Chart.js -->
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -70,14 +71,14 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
               label: 'Orientaciones por Género',
               data: yValues,
               backgroundColor: [
-                '#F05E32',
-                '#1F914D',
-                '#3446FA'
+                '#8C142A',
+                '#654033',
+                '#5C0E13'
               ],
               borderColor: [
-                '#91391F',
-                '#166937',
-                '#1F2891'
+                '#630E1E',
+                '#4F3228',
+                '#3B090C'
               ],
               borderWidth: 2
             }]
@@ -96,10 +97,11 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
           }
         });
       </script>
-
     </div>
+    <!-- </div> -->
 
-    <div class="col-md-6" style="width: 250px; height: 100px;">
+    <!-- <div class="col-md-6" style="width: 250px; height: 100px;"> -->
+    <div style="width:40%; float:right;">
       <!-- Debemos de tener Canvas en la página -->
       <canvas id="miGrafo"></canvas>
 
@@ -117,9 +119,9 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
             datasets: [{
               data: yValues,
               backgroundColor: [
-                '#F05E32',
-                '#1F914D',
-                '#3446FA'
+                '#8C142A',
+                '#654033',
+                '#5C0E13'
               ],
               hoverOffset: 4
             }]
@@ -146,6 +148,7 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
         );
       </script>
     </div>
+    <!-- </div> -->
   </div>
 </center>
 <!-- <div style="margin-top: 120px;"> -->
@@ -156,7 +159,7 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
 
 <center>
   <h2 style="margin-top: -10px;">Estadística de Canalizaciones (Por grupo vulnerable)</h2>
-  <div class="row">
+  <div class="row" style="display: flex; justify-content: center; align-items: center;">
     <div class="col-md-6" style="width: 50%; height: 20%;">
       <canvas id="gVulnerableB"></canvas>
       <!-- Incluímos Chart.js -->
@@ -181,10 +184,10 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
               label: 'Orientaciones por Grupo Vulnerable',
               data: yValues,
               backgroundColor: [
-                '#584DB3', '#FFDC57', '#3E75EA', '#99FEA3', '#427085', '#FA8865', '#E0293F', '#D0EB5A', '#FF5846', '#7972E7', '#00DDEA', '#E66DFB', '#6084EB'
+                '#638BBF', '#8BB4D9', '#022607', '#6AA673', '#498C4D', '#8C888C', '#3588A9', '#2BB79A', '#5D6754', '#1E402A', '#487357', '#65736A', '#3C5282'
               ],
               borderColor: [
-                '#3C357A', '#A87E00', '#234387', '#63A66A', '#425BA1', '#A85B43', '#91449E', '#9AAD42', '#963429', '#5852A8', '#00A0A8', '#8A1926', '#253F4A'
+                '#3E5778', '#5A758C', '#011704', '#4E7A55', '#36693A', '#595759', '#245E75', '#1E8570', '#41473B', '#142B1C', '#324F3C', '#48524B', '#2A3A5C'
               ],
               borderWidth: 2
             }]
@@ -229,7 +232,7 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
             datasets: [{
               data: yValues,
               backgroundColor: [
-                '#99FEA3', '#3E75EA', '#FFDC57', '#584DB3', '#6084EB', '#FA8865', '#E66DFB', '#D0EB5A', '#FF5846', '#7972E7', '#00DDEA', '#E0293F', '#427085'
+                '#638BBF', '#8BB4D9', '#022607', '#6AA673', '#498C4D', '#8C888C', '#3588A9', '#2BB79A', '#5D6754', '#1E402A', '#487357', '#65736A', '#3C5282'
               ],
               hoverOffset: 4
             }]
@@ -265,7 +268,7 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
 
 <center>
   <h2 style="margin-top: -10px;">Estadística de Canalizaciones (Por medio de presentación)</h2>
-  <div class="row">
+  <div class="row" style="display: flex; justify-content: center; align-items: center;">
     <div class="col-md-6" style="width: 50%; height: 20%;">
       <canvas id="mPresentacion"></canvas>
       <!-- Incluímos Chart.js -->
@@ -286,10 +289,10 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
               label: 'Orientaciones por Medio de Presentación',
               data: yValues,
               backgroundColor: [
-                '#155A7D', '#BA323B', '#AE65BC', '#FEE05A', '#39EBCF', '#3C71FE', '#E66E27'
+                '#06314F', '#0B588F', '#02465B', '#01133B', '#023E73', '#6EC0DB', '#7A9FBF'
               ],
               borderColor: [
-                '#0D354A', '#631B20', '#683D70', '#A39039', '#27A18E', '#234091', '#A14D23'
+                '#042136', '#07395C', '#012936', '#011030', '#022F57', '#467B8C', '#50687D'
               ],
               borderWidth: 2
             }]
@@ -304,7 +307,7 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
               max: 10000,
               stepSize: 10
             },
-            responsive:true
+            responsive: true
           }
         });
       </script>
@@ -331,7 +334,7 @@ $total_cndh = count_by_cndhC('orientacion_canalizacion', 2);
             datasets: [{
               data: yValues,
               backgroundColor: [
-                '#155A7D', '#BA323B', '#AE65BC', '#FEE05A', '#39EBCF', '#3C71FE', '#E66E27'
+                '#06314F', '#0B588F', '#02465B', '#01133B', '#023E73', '#6EC0DB', '#7A9FBF'
               ],
               hoverOffset: 4
             }]

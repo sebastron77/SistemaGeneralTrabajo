@@ -26,14 +26,12 @@ $total_platica = count_by_platica('capacitaciones');
 $total_diplomado = count_by_diplomado('capacitaciones');
 $total_foro = count_by_foro('capacitaciones');
 
-$total_presencial = count_by_presencial('capacitaciones');
-$total_en_linea = count_by_en_linea('capacitaciones');
-$total_hibrido = count_by_hibrido('capacitaciones');
-
 ?>
 
 <?php include_once('layouts/header.php'); ?>
-
+<a href="tabla_estadistica_capacitacion.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+  Regresar
+</a><br><br>
 <!-- Debemos de tener Canvas en la página -->
 <center>
   <h2 style="margin-top: -10px;">Estadística de Capacitaciones (Por tipo de evento)</h2>
@@ -149,109 +147,6 @@ $total_hibrido = count_by_hibrido('capacitaciones');
     </div>
   </div>
 </center>
-<!-- <div style="margin-top: 120px;"> -->
-<hr style="margin-top: 120px; height:2px;border-width:0;background-color:#aaaaaa">
 <!-- </div> -->
-
-
-
-<center>
-  <h2 style="margin-top: -10px;">Estadística de Capacitaciones (Por modalidad)</h2>
-  <div class="row" style="display: flex; justify-content: center; align-items: center;">
-    <div class="col-md-6" style="width: 50%; height: 20%;">
-      <canvas id="gVulnerableB"></canvas>
-      <!-- Incluímos Chart.js -->
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-      <!-- Añadimos el script a la página -->
-
-      <script>
-        var yValues = [<?php echo $total_presencial['total']; ?>, <?php echo $total_en_linea['total']; ?>, <?php echo $total_hibrido['total']; ?>];
-
-        const ctx3 = document.getElementById('gVulnerableB');
-        const gVulnerableB = new Chart(ctx3, {
-          type: 'bar',
-          data: {
-            labels: ['Presencial', 'En línea', 'Híbrido'],
-            datasets: [{
-              label: 'Capacitaciones por modalidad',
-              data: yValues,
-              backgroundColor: [
-                '#143C8C', '#398CBF', '#1F598C'
-              ],
-              borderColor: [
-                '#0D285E', '#2C6A91', '#174269'
-              ],
-              borderWidth: 2
-            }]
-          },
-          options: {
-            legend: {
-              display: false
-            },
-            // El salto entre cada valor de Y
-            ticks: {
-              min: 0,
-              max: 10000,
-              stepSize: 10
-            },
-
-          }
-        });
-      </script>
-
-    </div>
-
-    <div class="col-md-6" style="width: 420px; height: 250px;">
-      <!-- Debemos de tener Canvas en la página -->
-      <canvas id="gVulnerableC"></canvas>
-
-      <!-- Incluímos Chart.js -->
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-      <!-- Añadimos el script a la página -->
-      <script>
-        var yValues = [<?php echo $total_presencial['total']; ?>, <?php echo $total_en_linea['total']; ?>, <?php echo $total_hibrido['total']; ?>];
-
-        const ctx4 = document.getElementById('gVulnerableC');
-        const gVulnerableC = new Chart(ctx4, {
-          type: 'pie',
-          data: {
-            labels: ['Presencial', 'En línea', 'Híbrido'],
-
-            datasets: [{
-              data: yValues,
-              backgroundColor: [
-                '#143C8C', '#398CBF', '#1F598C'
-              ],
-              hoverOffset: 4
-            }]
-          },
-          options: {
-            legend: {
-              display: false
-            },
-            // El salto entre cada valor de Y
-            ticks: {
-              min: 0,
-              max: 6000,
-              stepSize: 1
-            },
-          }
-        });
-      </script>
-
-      <!-- Renderizamos la gráfica -->
-      <script>
-        const miGrafo = new Chart(
-          document.getElementById('miGrafo'),
-          config
-        );
-      </script>
-    </div>
-  </div>
-</center>
-
-<hr style="margin-top: 140px; height:2px;border-width:0;background-color:#aaaaaa">
 
 <?php include_once('layouts/footer.php'); ?>

@@ -12,6 +12,14 @@ function find_all($table)
   }
 }
 
+function find_all_cargo_orden($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    return find_by_sql("SELECT * FROM " . $db->escape($table) . " ORDER BY nombre_cargo");
+  }
+}
+
 /*--------------------------------------------------------------*/
 /* Funcion para encontrar en una tabla toda la informacion
 /*--------------------------------------------------------------*/
