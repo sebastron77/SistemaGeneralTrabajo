@@ -123,13 +123,13 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="seguimiento">Seguimiento</label><br>
-                            <input type="text" class="form-control" name="seguimiento" value="<?php echo remove_junk($e_correspondencia['seguimiento']); ?>" required>
+                            <input type="text" class="form-control" name="seguimiento" value="<?php echo remove_junk($e_correspondencia['seguimiento']); ?>">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="medio_entrega">Medio de Entrega</label><br>
-                            <input type="text" class="form-control" name="medio_entrega" value="<?php echo remove_junk($e_correspondencia['medio_entrega']); ?>" required>
+                            <input type="text" class="form-control" name="medio_entrega" value="<?php echo remove_junk($e_correspondencia['medio_entrega']); ?>">
                         </div>
                     </div>
                 </div>

@@ -16,6 +16,18 @@ $id_user = $user['id'];
 if ($nivel <= 2) {
     page_require_level(2);
 }
+if ($nivel == 3) {
+    redirect('home.php');
+}
+if ($nivel == 4) {
+    redirect('home.php');
+}
+if ($nivel == 5) {
+    redirect('home.php');    
+}
+if ($nivel == 6) {
+    redirect('home.php');
+}
 if ($nivel == 7) {
     page_require_level_exacto(7);
 }
@@ -48,7 +60,6 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
 
 ?>
 <?php include_once('layouts/header.php'); ?>
-
 
 <div class="row">
     <div class="col-md-12">

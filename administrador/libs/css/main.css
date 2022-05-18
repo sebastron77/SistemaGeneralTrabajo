@@ -436,3 +436,47 @@ input[type=file]{
   right: 0;
   bottom: 0;
 }
+
+.ventana{
+  background: rgb(241, 241, 241);
+  width: 30%;
+  height: 20%;
+  color: black;
+  font-size: 18px;
+  text-align: center;
+  padding: 33px;
+  min-height: 250px;
+  border-radius: 22px;
+  position: absolute;
+  left: 40%;
+  top: 20%;
+  display: none; /* Para que no se muestre la ventana */
+}
+
+#cerrar{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.ventana2{
+  background: rgb(241, 241, 241);
+  width: 30%;
+  height: 20%;
+  color: black;
+  font-size: 18px;
+  text-align: center;
+  padding: 33px;
+  min-height: 250px;
+  border-radius: 22px;
+  position: absolute;
+  left: 40%;
+  top: 20%;
+  display: none; /* Para que no se muestre la ventana */
+}
+
+#cerrar2{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}

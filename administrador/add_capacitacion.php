@@ -1,7 +1,7 @@
 <?php header('Content-type: text/html; charset=utf-8');
 $page_title = 'Agregar Capacitación';
 require_once('includes/load.php');
-$id_folio = last_id_folios();
+$id_folio = last_id_folios_general();
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
@@ -82,7 +82,7 @@ if (isset($_POST['add_capacitacion'])) {
             $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$capacitador}','{$name}','{$constancia}','{$folio}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";
@@ -94,7 +94,7 @@ if (isset($_POST['add_capacitacion'])) {
             $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$capacitador}','{$name}','{$constancia}','{$folio}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";

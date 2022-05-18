@@ -35,7 +35,6 @@ $total_hibrido = count_by_hibrido('capacitaciones');
 ?>
 <?php include_once('layouts/header.php'); ?>
 
-
 <div class="row">
     <div class="col-md-12">
         <?php echo display_msg($msg); ?>
@@ -56,7 +55,11 @@ $total_hibrido = count_by_hibrido('capacitaciones');
                 <table class="table table-bordered table-striped">
                     <a href="estadistica_capacitacion_te.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
-                    </a><br><br>
+                    </a>
+
+                    <a href="javascript:abrir()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
+                    <br><br>
+
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th class="text-center" style="width: 70%;">Tipo de Evento</th>
@@ -119,7 +122,9 @@ $total_hibrido = count_by_hibrido('capacitaciones');
                 <table class="table table-bordered table-striped">
                     <a href="estadistica_capacitacion_mod.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
-                    </a><br><br>
+                    </a>
+                    <a href="javascript:abrir2()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
+                    <br><br>
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th class="text-center" style="width: 70%;">Grupo Vulnerable</th>
@@ -151,5 +156,66 @@ $total_hibrido = count_by_hibrido('capacitaciones');
         </div>
     </div>
 </div>
+
+<div class="ventana" id="vent">
+    <div id="cerrar">
+        <a href="javascript:cerrar()"><img src="cerrar.png" height="25px" width="25px"></a>
+    </div>
+    <span></span>
+    <h4 style="margin-top: 5%;">Selecciona el rango a graficar</h4>
+
+    <form class="clearfix" method="post" action="grafica_fecha_tipo_evento.php">
+        <div class="form-group">
+            <label class="form-label">Rango de fechas</label>
+            <div class="input-group">
+                <input type="text" class="datepicker form-control" name="start-date" placeholder="Desde">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
+                <input type="text" class="datepicker form-control" name="end-date" placeholder="Hasta">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-primary">Generar gráfica</button>
+        </div>
+    </form>
+</div>
+
+<div class="ventana2" id="vent2">
+    <div id="cerrar2">
+        <a href="javascript:cerrar2()"><img src="cerrar.png" height="25px" width="25px"></a>
+    </div>
+    <span></span>
+    <h4 style="margin-top: 5%;">Selecciona el rango a graficar</h4>
+
+    <form class="clearfix" method="post" action="grafica_fecha_modalidad.php">
+        <div class="form-group">
+            <label class="form-label">Rango de fechas</label>
+            <div class="input-group">
+                <input type="text" class="datepicker form-control" name="start-date" placeholder="Desde">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
+                <input type="text" class="datepicker form-control" name="end-date" placeholder="Hasta">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-primary">Generar gráfica</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function abrir() {
+        document.getElementById("vent2").style.display = "block";
+    }
+
+    function cerrar() {
+        document.getElementById("vent2").style.display = "none"
+    }
+    function abrir2() {
+        document.getElementById("vent2").style.display = "block";
+    }
+
+    function cerrar2() {
+        document.getElementById("vent2").style.display = "none"
+    }
+</script>
 
 <?php include_once('layouts/footer.php'); ?>

@@ -113,13 +113,13 @@ if (isset($_POST['edit_evento'])) {
                         <div class="form-group">
                             <label for="tipo_evento">Tipo de evento</label>
                             <select class="form-control" name="tipo_evento">
-                                <option value="Capacitación" <?php if ($e_evento['modalidad'] === 'Capacitación') echo 'selected="selected"'; ?>>Capacitación</option>
-                                <option value="Conferencia" <?php if ($e_evento['modalidad'] === 'Conferencia') echo 'selected="selected"'; ?>>Conferencia</option>
-                                <option value="Curso" <?php if ($e_evento['modalidad'] === 'Curso') echo 'selected="selected"'; ?>>Curso</option>
-                                <option value="Taller" <?php if ($e_evento['modalidad'] === 'Taller') echo 'selected="selected"'; ?>>Taller</option>
-                                <option value="Plática" <?php if ($e_evento['modalidad'] === 'Plática') echo 'selected="selected"'; ?>>Plática</option>
-                                <option value="Diplomado" <?php if ($e_evento['modalidad'] === 'Diplomado') echo 'selected="selected"'; ?>>Diplomado</option>
-                                <option value="Foro" <?php if ($e_evento['modalidad'] === 'Foro') echo 'selected="selected"'; ?>>Foro</option>
+                                <option value="Capacitación" <?php if ($e_evento['tipo_evento'] === 'Capacitación') echo 'selected="selected"'; ?>>Capacitación</option>
+                                <option value="Conferencia" <?php if ($e_evento['tipo_evento'] === 'Conferencia') echo 'selected="selected"'; ?>>Conferencia</option>
+                                <option value="Curso" <?php if ($e_evento['tipo_evento'] === 'Curso') echo 'selected="selected"'; ?>>Curso</option>
+                                <option value="Taller" <?php if ($e_evento['tipo_evento'] === 'Taller') echo 'selected="selected"'; ?>>Taller</option>
+                                <option value="Plática" <?php if ($e_evento['tipo_evento'] === 'Plática') echo 'selected="selected"'; ?>>Plática</option>
+                                <option value="Diplomado" <?php if ($e_evento['tipo_evento'] === 'Diplomado') echo 'selected="selected"'; ?>>Diplomado</option>
+                                <option value="Foro" <?php if ($e_evento['tipo_evento'] === 'Foro') echo 'selected="selected"'; ?>>Foro</option>
                             </select>
                         </div>
                     </div>

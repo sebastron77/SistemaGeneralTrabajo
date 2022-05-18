@@ -4,7 +4,7 @@ require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
 $e_resolucion = find_by_id_resolucion((int)$_GET['id']);
-$id_folio = last_id_folios();
+$id_folio = last_id_folios_general();
 page_require_level(2);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');

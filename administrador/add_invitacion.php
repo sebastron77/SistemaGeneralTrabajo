@@ -4,7 +4,7 @@ require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
 $id_ori_canal = last_id_oricanal();
-$id_folio = last_id_folios();
+$id_folio = last_id_folios_general();
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
@@ -81,7 +81,7 @@ if (isset($_POST['add_invitacion'])) {
             $query .= " '{$folio}','{$nombre_evento}','{$fecha_evento}','{$hora}','{$lugar}','{$num_asistentes}','{$name}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";
@@ -93,7 +93,7 @@ if (isset($_POST['add_invitacion'])) {
             $query .= " '{$folio}','{$nombre_evento}','{$fecha_evento}','{$hora}','{$lugar}','{$num_asistentes}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";

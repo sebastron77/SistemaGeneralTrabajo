@@ -4,7 +4,7 @@ require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
 $id_ori_canal = last_id_oricanal();
-$id_folio = last_id_folios();
+$id_folio = last_id_folios_general();
 // page_require_level(2);
 
 $user = current_user();
@@ -96,7 +96,7 @@ if (isset($_POST['add_poa'])) {
             $query .= " '{$folio}','{$anio_ejercicio}','{$name}','{$name2}','{$fecha_recepcion}','{$name3}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";

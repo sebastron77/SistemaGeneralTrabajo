@@ -2268,6 +2268,18 @@ function last_id_folios()
   return $result;
 }
 
+/*------------------------------------------------------------------*/
+/* Funcion para encontrar el ultimo id de orientaciones y canalizaciones
+   para despues sumarle uno y que el nuevo registro tome ese valor */
+/*------------------------------------------------------------------*/
+function last_id_folios_general()
+{
+  global $db;
+  $sql = "SELECT * FROM folios_general ORDER BY id DESC LIMIT 1";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
 /* --------------------------------------------------------------------*/
 /* Función para obtener el area a la que pertenece el usuario logueado */
 /* --------------------------------------------------------------------*/
@@ -2302,7 +2314,7 @@ function page_require_area($require_area)
 
   // Le puse || $id_area==2, para que los que son de sistemas
   // si puedan ver todos los módulos
-  if (($id_area == $require_area) || ($id_area<=2)) {
+  if (($id_area == $require_area) || ($id_area <= 2)) {
     return true;
   } else {
     $session->msg("d", "¡Lo siento! tu área no tiene permiso para ver esta página.");
@@ -2837,6 +2849,86 @@ function count_by_foro($table)
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
+}
+/*--------------------------------------------------------------*/
+/* Funcion para generar reporte de tipos de evento entre fechas
+/*--------------------------------------------------------------*/
+function find_capacitacion_tipo_evento_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(tipo_evento) AS total FROM capacitaciones WHERE tipo_evento = 'Capacitación' AND fecha BETWEEN '{$start_date}' AND '$end_date' GROUP BY DATE(fecha),id ORDER BY DATE(fecha) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_conferencia_tipo_evento_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(tipo_evento) AS total FROM capacitaciones WHERE tipo_evento = 'Conferencia' AND fecha BETWEEN '{$start_date}' AND '$end_date' GROUP BY DATE(fecha),id ORDER BY DATE(fecha) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_curso_tipo_evento_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(tipo_evento) AS total FROM capacitaciones WHERE tipo_evento = 'Curso' AND fecha BETWEEN '{$start_date}' AND '$end_date' GROUP BY DATE(fecha),id ORDER BY DATE(fecha) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_taller_tipo_evento_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(tipo_evento) AS total FROM capacitaciones WHERE tipo_evento = 'Taller' AND fecha BETWEEN '{$start_date}' AND '$end_date' GROUP BY DATE(fecha),id ORDER BY DATE(fecha) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_platica_tipo_evento_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(tipo_evento) AS total FROM capacitaciones WHERE tipo_evento = 'Platica' AND fecha BETWEEN '{$start_date}' AND '$end_date' GROUP BY DATE(fecha),id ORDER BY DATE(fecha) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_diplomado_tipo_evento_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(tipo_evento) AS total FROM capacitaciones WHERE tipo_evento = 'Diplomado' AND fecha BETWEEN '{$start_date}' AND '$end_date' GROUP BY DATE(fecha),id ORDER BY DATE(fecha) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_foro_tipo_evento_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(tipo_evento) AS total FROM capacitaciones WHERE tipo_evento = 'Foro' AND fecha BETWEEN '{$start_date}' AND '$end_date' GROUP BY DATE(fecha),id ORDER BY DATE(fecha) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
 }
 // ------------------------------------------------------------------------------ Contar por modalidad ------------------------------------------------------------------------------
 function count_by_presencial($table)

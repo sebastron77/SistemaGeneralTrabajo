@@ -3,7 +3,7 @@ $page_title = 'Agregar Ficha Técnica';
 require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
-$id_folio = last_id_folios();
+$id_folio = last_id_folios_general();
 page_require_level(4);
 $id_user = $user['id'];
 $busca_area = area_usuario($id_user);
@@ -77,7 +77,7 @@ if (isset($_POST['add_ficha'])) {
             $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}','{$name}','{$medio_solicita}','{$num_oficio_designacion}','{$protocolo_estambul}','{$documento_entregado}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";
@@ -89,7 +89,7 @@ if (isset($_POST['add_ficha'])) {
             $query .= " '{$folio}','{$tipo_sol}','{$num_expediente}','{$solicitante}','{$visitaduria}','{$hechos}','{$autoridad}','{$quien_presenta}','{$nombre_usuario}','{$parentesco}','{$edad}','{$fecha_nacimiento}','{$sexo}','{$grupo_vulnerable}','{$tutor}','{$fecha_intervencion}','{$hora_lugar}','{$actividad_realizada}','{$observaciones}','{$fecha_entrega_documento}','{$medio_solicita}','{$num_oficio_designacion}','{$protocolo_estambul}','{$documento_entregado}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";

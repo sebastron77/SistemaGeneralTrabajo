@@ -41,18 +41,23 @@ if (isset($_POST['edit_queja'])) {
     validate_fields($req_fields);
     if (empty($errors)) {
         $id = (int)$e_queja['id'];
+        $folio_queja   = remove_junk($db->escape($_POST['folio_queja']));
         $autoridad_responsable   = remove_junk($db->escape($_POST['autoridad_responsable']));
         $agraviado   = remove_junk($db->escape($_POST['agraviado']));
         $estatus_queja   = remove_junk($db->escape($_POST['estatus_queja']));
         date_default_timezone_set('America/Mexico_City');
         $fecha_actualizacion = date('Y-m-d H:i:s');
+        $la_queja = $e_queja['folio_queja'];
 
-        $sql = "UPDATE quejas SET ultima_actualizacion='{$fecha_actualizacion}', autoridad_responsable='{$autoridad_responsable}', creada_por='{$agraviado}', estatus_queja='$estatus_queja' WHERE id='{$db->escape($id)}'";
+        $sql2 = "UPDATE folios SET folio='{$folio_queja}' WHERE folio='{$db->escape($la_queja)}'";
+        $sql = "UPDATE quejas SET folio_queja='{$folio_queja}', ultima_actualizacion='{$fecha_actualizacion}', autoridad_responsable='{$autoridad_responsable}', creada_por='{$agraviado}', estatus_queja='$estatus_queja' WHERE id='{$db->escape($id)}'";
         
         $result = $db->query($sql);
-        if ($result && $db->affected_rows() === 1) {
+        $result2 = $db->query($sql2);
+
+        if (($result && $db->affected_rows() === 1) || ($result2 && $db->affected_rows() === 1)) {
             $session->msg('s', "Información Actualizada ");
-            redirect('quejas.php', false);
+            redirect('quejas_agregadas.php', false);
         } else {
             $session->msg('d', ' Lo siento no se actualizaron los datos.');
             redirect('edit_queja.php?id=' . (int)$e_queja['id'], false);
@@ -78,7 +83,7 @@ if (isset($_POST['edit_queja'])) {
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="folio_queja">Folio de Queja</label>
-                            <input type="text" class="form-control" name="folio_queja" value="<?php echo remove_junk($e_queja['folio_queja']);?>" readonly>
+                            <input type="text" class="form-control" name="folio_queja" value="<?php echo remove_junk($e_queja['folio_queja']);?>">
                         </div>
                     </div>
                     <div class="col-md-3">

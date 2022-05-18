@@ -1,7 +1,7 @@
 <?php header('Content-type: text/html; charset=utf-8');
 $page_title = 'Agregar Convenio';
 require_once('includes/load.php');
-$id_folio = last_id_folios();
+$id_folio = last_id_folios_general();
 // $queja = find_by_id_quejas((int)$_GET['id']);
 $user = current_user();
 $nivel = $user['user_level'];
@@ -79,7 +79,7 @@ if (isset($_POST['add_convenio'])) {
             $query .= " '{$folio}','{$fecha_convenio}','{$institucion}','{$ambito_institucion}','{$tipo_institucion}','{$descripcion_convenio}','{$vigencia}','{$direccion_institucion}','{$telefono}','{$name}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";
@@ -91,7 +91,7 @@ if (isset($_POST['add_convenio'])) {
             $query .= " '{$folio}','{$fecha_convenio}','{$institucion}','{$ambito_institucion}','{$tipo_institucion}','{$descripcion_convenio}','{$vigencia}','{$direccion_institucion}','{$telefono}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";

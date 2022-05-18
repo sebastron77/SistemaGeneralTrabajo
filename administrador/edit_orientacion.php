@@ -43,6 +43,7 @@ if (isset($_POST['edit_orientacion'])) {
     validate_fields($req_fields);
     if (empty($errors)) {
         $id = (int)$e_detalle['id'];
+        $folio_orientacion   = remove_junk($db->escape($_POST['folio']));
         $correo   = remove_junk($db->escape($_POST['correo']));
         $nombre   = remove_junk($db->escape($_POST['nombre']));
         $nestudios   = remove_junk($db->escape($_POST['nestudios']));
@@ -63,6 +64,7 @@ if (isset($_POST['edit_orientacion'])) {
         $lengua   = remove_junk($db->escape($_POST['lengua']));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
+        $la_orientacion = $e_detalle['folio'];
         //$name = remove_junk((int)$db->escape($_POST['detalle-user']));
 
         $folio_editar = $e_detalle['folio'];
@@ -84,13 +86,16 @@ if (isset($_POST['edit_orientacion'])) {
         // $move =  move_uploaded_file($temp, "uploads/orientacioncanalizacion/" . $name);
 
         if ($name != '') {
-            $sql = "UPDATE orientacion_canalizacion SET correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', grupo_vulnerable='{$grupo_vulnerable}', lengua='{$lengua}', observaciones='{$observaciones}', adjunto='{$name}' WHERE id='{$db->escape($id)}'";
+            $sql2 = "UPDATE folios SET folio='{$folio_orientacion}' WHERE folio='{$db->escape($la_orientacion)}'";
+            $sql = "UPDATE orientacion_canalizacion SET folio='{$folio_orientacion}', correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', grupo_vulnerable='{$grupo_vulnerable}', lengua='{$lengua}', observaciones='{$observaciones}', adjunto='{$name}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql = "UPDATE orientacion_canalizacion SET correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', grupo_vulnerable='{$grupo_vulnerable}', lengua='{$lengua}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
+            $sql2 = "UPDATE folios SET folio='{$folio_orientacion}' WHERE folio='{$db->escape($la_orientacion)}'";
+            $sql = "UPDATE orientacion_canalizacion SET folio='{$folio_orientacion}', correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', grupo_vulnerable='{$grupo_vulnerable}', lengua='{$lengua}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
-        if ($result && $db->affected_rows() === 1) {
+        $result2 = $db->query($sql2);
+        if (($result && $db->affected_rows() === 1) || ($result2 && $db->affected_rows() === 1)) {
             $session->msg('s', "Información Actualizada ");
             redirect('orientaciones.php', false);
         } else {
@@ -115,6 +120,12 @@ if (isset($_POST['edit_orientacion'])) {
         <div class="panel-body">
             <form method="post" action="edit_orientacion.php?id=<?php echo (int)$e_detalle['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
+                <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="folio">Folio de Orientación</label>
+                            <input type="text" class="form-control" name="folio" value="<?php echo remove_junk($e_detalle['folio']);?>">
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="correo">Correo Electrónico</label>

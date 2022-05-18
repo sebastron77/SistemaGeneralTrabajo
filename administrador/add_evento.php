@@ -1,7 +1,7 @@
 <?php header('Content-type: text/html; charset=utf-8');
 $page_title = 'Agregar Evento';
 require_once('includes/load.php');
-$id_folio = last_id_folios();
+$id_folio = last_id_folios_general();
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
@@ -19,7 +19,7 @@ if ($nivel == 5) {
     redirect('home.php');
 }
 if ($nivel == 6) {
-    redirect('home.php');    
+    redirect('home.php');
 }
 if ($nivel == 7) {
     page_require_level_exacto(7);
@@ -83,7 +83,7 @@ if (isset($_POST['add_evento'])) {
             $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$quien_asiste}','{$name}','{$constancia}','{$folio}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";
@@ -95,7 +95,7 @@ if (isset($_POST['add_evento'])) {
             $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$quien_asiste}','{$name}','{$constancia}','{$folio}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios (";
+            $query2 = "INSERT INTO folios_general (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";
@@ -141,6 +141,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="tipo_evento">Tipo de evento</label>
                             <select class="form-control" name="tipo_evento">
+                                <option value="Escoge una opción">Escoge una opción</option>
                                 <option value="Conferencia">Conferencia</option>
                                 <option value="Rueda de Prensa">Rueda de Prensa</option>
                                 <option value="Representación">Representación</option>
@@ -159,11 +160,11 @@ include_once('layouts/header.php'); ?>
                             <label for="fecha">Fecha</label><br>
                             <input type="date" class="form-control" name="fecha">
                         </div>
-                    </div>                    
+                    </div>
                 </div>
 
                 <div class="row">
-                <div class="col-md-2">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="hora">Hora</label><br>
                             <input type="time" class="form-control" name="hora">
@@ -185,6 +186,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="modalidad">Modalidad</label>
                             <select class="form-control" name="modalidad">
+                                <option value="Escoge una opción">Escoge una opción</option>
                                 <option value="Presencial">Presencial</option>
                                 <option value="En línea">En línea</option>
                                 <option value="Híbrido">Híbrido</option>

@@ -4,7 +4,7 @@ require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
 $id_ori_canal = last_id_oricanal();
-$id_folio = last_id_folios();
+$id_folio = last_id_folios_general();
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
@@ -68,7 +68,7 @@ if (isset($_POST['add_correspondencia'])) {
         $query .= " '{$folio}','{$fecha_recibido}','{$nombre_remitente}','{$nombre_institucion}','{$cargo_funcionario}','{$asunto}','{$medio_recepcion}','{$seguimiento}','{$medio_entrega}'";
         $query .= ")";
 
-        $query2 = "INSERT INTO folios (";
+        $query2 = "INSERT INTO folios_general (";
         $query2 .= "folio, contador";
         $query2 .= ") VALUES (";
         $query2 .= " '{$folio}','{$no_folio1}'";
