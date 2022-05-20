@@ -85,7 +85,7 @@ $quejas = quejas();
                     <a href="add_recomendacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip" title="Agregar una Recomendación">
                       Recomendación
                     </a>
-                    <a href="http://177.229.209.29/quejas/upload/scp/tickets.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-queja btn-sm" data-toggle="tooltip" title="Ver en Sistema de Quejas">
+                    <a target="_blank" href="http://177.229.209.29/quejas/upload/scp/tickets.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-queja btn-sm" data-toggle="tooltip" title="Ver en Sistema de Quejas">
                       Ver Queja
                     </a>
                     <div class="btn-group">
@@ -93,6 +93,11 @@ $quejas = quejas();
                         Editar
                       </a>
                     </div>
+                    <?php if ($nivel == 1) : ?>
+                      <a href="delete_queja.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-sm btn-delete" data-toggle="tooltip" title="Eliminar" onclick="return confirm('¿Seguro que deseas eliminar esta queja?');">
+                        <i class="glyphicon glyphicon-trash"></i>
+                      </a>
+                    <?php endif; ?>
                   </td>
                 <?php endif; ?>
               </tr>

@@ -426,7 +426,7 @@ include_once('layouts/header.php'); ?>
                     <a href="canalizaciones.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar
                     </a>
-                    <button type="submit" name="add_canalizacion" class="btn btn-primary" onclick="return confirm('¿Estás seguro que deseas guardar?');">Guardar</button>
+                    <button type="submit" name="add_canalizacion" class="btn btn-primary" onclick="return confirm('Tu canalización será guardada, verifica el folio generado para asignarlo de manera correcta a su expediente. Da clic en Aceptar para continuar.');">Guardar</button>
                 </div>
             </form>
         </div>

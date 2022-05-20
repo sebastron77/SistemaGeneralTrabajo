@@ -193,7 +193,7 @@ if (isset($_POST['submit'])) {
     <?php
     else :
         $session->msg("d", "No se encontraron datos. ");
-        redirect('tabla_estadistica_capcapacitacion_tipo_evento.php', false);
+        redirect('tabla_estadistica_capacitacion.php', false);
     endif;
     ?>
 </body>

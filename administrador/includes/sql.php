@@ -246,7 +246,20 @@ function delete_by_id($table, $id)
     return ($db->affected_rows() === 1) ? true : false;
   }
 }
-
+/*-----------------------------------------------------*/
+/* Funcion para eliminar datos de una tabla, por su ID */
+/*-----------------------------------------------------*/
+function delete_by_folio_queja($table,$folio)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql = "DELETE FROM " . $db->escape($table);
+    $sql .= " WHERE folio = '{$db->escape($folio)}'";
+    $sql .= " LIMIT 1";
+    $db->query($sql);
+    return ($db->affected_rows() === 1) ? true : false;
+  }
+}
 /*-----------------------------------------------------*/
 /* Funcion para eliminar un reguardo completo */
 /*-----------------------------------------------------*/
@@ -2957,6 +2970,43 @@ function count_by_hibrido($table)
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
+}
+
+// ------------------------------------------------------------------------------ Contar por modalidad ------------------------------------------------------------------------------
+function find_presencial_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(modalidad) AS total FROM capacitaciones WHERE modalidad = 'Presencial' AND fecha BETWEEN '{$start_date}' AND '$end_date' GROUP BY DATE(fecha),id ORDER BY DATE(fecha) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+function find_en_linea_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(modalidad) AS total FROM capacitaciones WHERE modalidad = 'En línea' AND fecha BETWEEN '{$start_date}' AND '$end_date' GROUP BY DATE(fecha),id ORDER BY DATE(fecha) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+function find_hibrido_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(modalidad) AS total FROM capacitaciones WHERE modalidad = 'Híbrido' AND fecha BETWEEN '{$start_date}' AND '$end_date' GROUP BY DATE(fecha),id ORDER BY DATE(fecha) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
 }
 
 // global $db;

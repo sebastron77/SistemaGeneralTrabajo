@@ -56,11 +56,11 @@ endif;
                 <table class="datatable table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 10%;">Folio</th>
-                            <th style="width: 5%;">Tipo</th>
+                            <th style="width: 15%;">Folio</th>
+                            <!-- <th style="width: 5%;">Tipo</th> -->
                             <th style="width: 5%;">Medio presentación</th>
                             <th style="width: 1%;">Adjunto</th>
-                            <th style="width: 5%;">Correo</th>
+                            <th style="width: 4%;">Correo</th>
                             <!--SE PUEDE AGREGAR UN LINK QUE TE LLEVE A EDITAR EL USUARIO, COMO EN EL PANEL DE CONTROL EN ULTIMAS ASIGNACIONES-->
                             <th style="width: 5%;">Nombre Completo</th>
                             <th style="width: 5%;">Ocupación</th>
@@ -74,7 +74,7 @@ endif;
                         <?php foreach ($all_canalizaciones as $a_canalizacion) : ?>
                             <tr>
                                 <td><?php echo remove_junk(ucwords($a_canalizacion['folio'])) ?></td>
-                                <td><?php
+                                <!-- <td><?php
                                     if ($a_canalizacion['tipo_solicitud'] == '1') {
                                         echo 'Orientación';
                                     }
@@ -82,7 +82,7 @@ endif;
                                         echo 'Canalización';
                                     }
                                     ?>
-                                </td>
+                                </td> -->
                                 <?php
                                 $folio_editar = $a_canalizacion['folio'];
                                 $resultado = str_replace("/", "-", $folio_editar);

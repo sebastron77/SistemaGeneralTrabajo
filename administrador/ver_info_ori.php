@@ -82,7 +82,8 @@ if ($nivel == 7) {
                             <th style="width: 1%;">Extensión</th>
                             <th style="width: 1%;">Género</th>
                             <th style="width: 3%;">Grupo Vulnerable</th>
-                            <th style="width: 3%;">Lengua</th>
+                            <th style="width: 2%;">Lengua</th>
+                            <th style="width: 5%;">Calle-Num.</th>
                             <th style="width: 5%;">Colonia</th>
                             <th style="width: 2%;">Código Postal</th>
                         </tr>
@@ -94,6 +95,7 @@ if ($nivel == 7) {
                             <td><?php echo remove_junk(ucwords($e_detalle['sexo'])) ?></td>
                             <td><?php echo remove_junk(ucwords($e_detalle['grupo_vulnerable'])) ?></td>
                             <td><?php echo remove_junk(ucwords($e_detalle['lengua'])) ?></td>
+                            <td><?php echo remove_junk(ucwords($e_detalle['calle_numero'])) ?></td>
                             <td><?php echo remove_junk(ucwords(($e_detalle['colonia']))) ?></td>
                             <td><?php echo remove_junk(ucwords($e_detalle['codigo_postal'])) ?></td>                            
                         </tr>
@@ -105,7 +107,6 @@ if ($nivel == 7) {
                             <th style="width: 2%;">Municipio</th>
                             <th style="width: 2%;">Entidad</th>
                             <th style="width: 1%;">Nacionalidad</th>
-                            <th style="width: 5%;">Calle-Num.</th>
                             <th style="width: 5%;">Observaciones</th>
                             <th style="width: 5%;">Adjunto</th>
                         </tr>
@@ -115,7 +116,6 @@ if ($nivel == 7) {
                             <td><?php echo remove_junk(ucwords(($e_detalle['municipio_localidad']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($e_detalle['entidad']))) ?></td>
                             <td><?php echo remove_junk(ucwords($e_detalle['nacionalidad'])) ?></td>
-                            <td><?php echo remove_junk(ucwords(($e_detalle['calle_numero']))) ?></td>
                             <td><?php echo remove_junk(ucwords($e_detalle['observaciones'])) ?></td>
                             <?php
                             $folio_editar = $e_detalle['folio'];

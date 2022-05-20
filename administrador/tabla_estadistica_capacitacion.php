@@ -203,11 +203,11 @@ $total_hibrido = count_by_hibrido('capacitaciones');
 
 <script>
     function abrir() {
-        document.getElementById("vent2").style.display = "block";
+        document.getElementById("vent").style.display = "block";
     }
 
     function cerrar() {
-        document.getElementById("vent2").style.display = "none"
+        document.getElementById("vent").style.display = "none"
     }
     function abrir2() {
         document.getElementById("vent2").style.display = "block";

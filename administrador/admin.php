@@ -25,7 +25,7 @@ $c_user = count_by_id('users');
 $c_trabajadores = count_by_id('detalles_usuario');
 $c_areas = count_by_id('area');
 $c_cargos = count_by_id('cargos');
-$c_convenios = count_by_id('convenios');
+$convenios = count_by_id('convenios');
 $c_capacitacion = count_by_id('capacitaciones');
 $c_orientacion = count_by_id_orientacion('orientacion_canalizacion');
 $c_canalizacion = count_by_id_canalizacion('orientacion_canalizacion');
@@ -38,6 +38,8 @@ $c_invitaciones = count_by_id('invitaciones');
 $c_acuerdos = count_by_id('acuerdos');
 $c_recomendaciones = count_by_id('recomendaciones');
 $c_eventos = count_by_id('eventos');
+$c_inf_anual = count_by_id('informes');
+$c_poa = count_by_id('poa');
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -198,8 +200,8 @@ $c_eventos = count_by_id('eventos');
         </svg>
       </div>
       <div class="panel-value pull-right">
-        <h2 style="margin-top: 10%"> <?php echo $c_convenios['total']; ?> </h2>
-        <p class="text-muted">Convenios</p>
+        <h2 style="margin-top: 10%"> <?php echo $convenios['total']; ?> </h2>
+        <p class="text-muted">Convenios de colaboración</p>
       </div>
     </div>
   </div>
@@ -359,24 +361,11 @@ $c_eventos = count_by_id('eventos');
     <div class="panel panel-box clearfix">
       <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
         <svg style="width:40px;height:62px" viewBox="0 0 24 24">
-          <path fill="white" d="M16 9C22 9 22 13 22 13V15H16V13C16 13 16 11.31 14.85 9.8C14.68 9.57 14.47 9.35 14.25 9.14C14.77 9.06 15.34 9 16 9M8 11C11.5 11 11.94 12.56 12 13H4C4.06 12.56 4.5 11 8 11M8 9C2 9 2 13 2 13V15H14V13C14 13 14 9 8 9M9 17V19H15V17L18 20L15 23V21H9V23L6 20L9 17M8 3C8.55 3 9 3.45 9 4S8.55 5 8 5 7 4.55 7 4 7.45 3 8 3M8 1C6.34 1 5 2.34 5 4S6.34 7 8 7 11 5.66 11 4 9.66 1 8 1M16 1C14.34 1 13 2.34 13 4S14.34 7 16 7 19 5.66 19 4 17.66 1 16 1Z" />
-        </svg>
-      </div>
-      <div class="panel-value pull-right">
-        <h2 style="margin-top: 10%"> <?php echo $c_invitaciones['total']; ?> </h2>
-        <p class="text-muted">Convenios de Colaboración</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3" style="height: 12.5rem;">
-    <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
-        <svg style="width:40px;height:62px" viewBox="0 0 24 24">
           <path fill="white" d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H10V19H5V8H19V9H21V5A2,2 0 0,0 19,3M21.7,13.35L20.7,14.35L18.65,12.35L19.65,11.35C19.85,11.14 20.19,11.13 20.42,11.35L21.7,12.63C21.89,12.83 21.89,13.15 21.7,13.35M12,18.94L18.07,12.88L20.12,14.88L14.06,21H12V18.94Z" />
         </svg>
       </div>
       <div class="panel-value pull-right">
-        <h2 style="margin-top: 10%"> <?php echo $c_invitaciones['total']; ?> </h2>
+        <h2 style="margin-top: 10%"> <?php echo $c_inf_anual['total']; ?> </h2>
         <p class="text-muted">Informe Anual de Actividades</p>
       </div>
     </div>
@@ -389,7 +378,7 @@ $c_eventos = count_by_id('eventos');
         </svg>
       </div>
       <div class="panel-value pull-right">
-        <h2 style="margin-top: 10%"> <?php echo $c_invitaciones['total']; ?> </h2>
+        <h2 style="margin-top: 10%"> <?php echo $c_poa['total']; ?> </h2>
         <p class="text-muted">Programa Operativo Anual</p>
       </div>
     </div>

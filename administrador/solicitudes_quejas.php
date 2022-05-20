@@ -95,12 +95,12 @@ $c_cargos          = count_by_id('cargos');
                     </svg>
                 </div>
                 <div>
-                    <p style="font-size: 16px; margin-top:2%;">Canalización</p>
-                    <div style="margin-top:-8%;"><br>
+                    <p style="font-size: 15.5px; margin-top:2%;">Canalización</p>
+                    <div style="margin-top:-6%;"><br>
                         <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
-                            <a style="margin-top:5%;" href="add_canalizacion.php" class="btn btn-success btn-sm">Agregar</a>
+                            <a style="margin-top:2%;" href="add_canalizacion.php" class="btn btn-success btn-sm">Agregar</a>
                         <?php endif; ?>
-                        <a style="margin-top:5%;" href="canalizaciones.php" class="btn btn-primary btn-sm">Ver</a>
+                        <a style="margin-top:2%;" href="canalizaciones.php" class="btn btn-primary btn-sm">Ver</a>
                     </div>
                 </div>
             </div>

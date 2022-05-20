@@ -163,7 +163,7 @@ include_once('layouts/header.php'); ?>
                     <a href="quejas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar
                     </a>
-                    <button type="submit" name="add_queja" class="btn btn-primary">Guardar</button>
+                    <button type="submit" name="add_queja" class="btn btn-primary" onclick="return confirm('Tu queja será guardada, verifica el folio generado para asignarlo de manera correcta a su expediente. Da clic en Aceptar para continuar.');">Guardar</button>
                 </div>
             </form>
         </div>
