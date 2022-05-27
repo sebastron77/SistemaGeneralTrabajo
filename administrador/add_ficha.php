@@ -134,7 +134,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="tipo_sol">Tipo de ficha</label>
                             <select class="form-control" name="tipo_sol">
-                                <option value="">Elige una opción</option>
+                                <option value="">Escoge una opción</option>
                                 <option value="Dictamen">Dictamen</option>
                                 <option value="Certificado">Certificado</option>
                                 <option value="Valoración">Valoración</option>
@@ -164,7 +164,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="visitaduria">Visitaduria</label>
                             <select class="form-control" name="visitaduria">
-                                <option value="">Elige una opción</option>
+                                <option value="">Escoge una opción</option>
                                 <option value="Regional de Apatzingán">Regional de Apatzingán</option>
                                 <option value="Regional de Lázaro Cárdenas">Regional de Lázaro Cárdenas</option>
                                 <option value="Regional de Morelia">Regional de Morelia</option>
@@ -187,7 +187,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="autoridad">Autoridad señalada</label>
                             <select class="form-control" name="autoridad">
-                                <option value="">Elige una opción</option>
+                                <option value="">Escoge una opción</option>
                                 <option value="Otra">Otra</option>
                                 <option value="Secretaría de Seguridad Pública">Secretaría de Seguridad Pública</option>
                                 <option value="Fiscalía General en el Estado">Fiscalía General en el Estado</option>
@@ -393,7 +393,7 @@ include_once('layouts/header.php'); ?>
                             <label for="parentesco">Parentesco</label>
                             <!-- <input type="text" class="form-control" name="parentesco" placeholder="En caso de ser distinto a quien presenta queja"> -->
                             <select class="form-control" name="parentesco">
-                                <option value="">Elige una opción</option>
+                                <option value="">Escoge una opción</option>
                                 <option value="Hijo(a)">Hijo(a)</option>
                                 <option value="Padre">Padre</option>
                                 <option value="Madre">Madre</option>
@@ -436,6 +436,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="sexo">Género</label>
                             <select class="form-control" name="sexo">
+                                <option value="">Escoge una opción</option>
                                 <option value="Mujer">Mujer</option>
                                 <option value="Hombre">Hombre</option>
                                 <option value="LGBTIQ+">LGBTIQ+</option>
@@ -448,7 +449,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="medio_solicita">Medio por el que se solicita</label>
                             <select class="form-control" name="medio_solicita">
-                                <option value="">Elige una opción</option>
+                                <option value="">Escoge una opción</option>
                                 <option value="Solicitud Verbal">Solicitud Verbal</option>
                                 <option value="Oficio">Oficio</option>
                             </select>
@@ -458,7 +459,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
-                                <option value="">Elige una opción</option>
+                                <option value="">Escoge una opción</option>
                                 <option value="Comunidad LGBTIQ+">Comunidad LGBTIQ+</option>
                                 <option value="Derecho de las mujeres">Derecho de las mujeres</option>
                                 <option value="Niñas, niños y adolescentes">Niñas, niños y adolescentes</option>
@@ -505,7 +506,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="protocolo_estambul">Protocolo de Estambul</label>
                             <select class="form-control" name="protocolo_estambul">
-                                <option value="">Elige una opción</option>
+                                <option value="">Escoge una opción</option>
                                 <option value="Sí">Sí</option>
                                 <option value="No">No</option>
                             </select>
@@ -515,7 +516,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="documento_entregado">Documento Entregado</label>
                             <select class="form-control" name="documento_entregado">
-                                <option value="">Elige una opción</option>
+                                <option value="">Escoge una opción</option>
                                 <option value="Dictamen Pericial Psicológico">Dictamen Pericial Psicológico</option>
                                 <option value="Opinión Médica">Opinión Médica</option>
                                 <option value="Certificado de Lesiones">Certificado de Lesiones</option>

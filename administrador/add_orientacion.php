@@ -56,6 +56,8 @@ if (isset($_POST['add_orientacion'])) {
         $lengua   = remove_junk($db->escape($_POST['lengua']));
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
+        date_default_timezone_set('America/Mexico_City');
+        $creacion = date('Y-m-d H:i:s');
         // $id_creador   = remove_junk($db->escape($_POST['creador']));        
 
         //Suma el valor del id anterior + 1, para generar ese id para el nuevo resguardo
@@ -101,9 +103,9 @@ if (isset($_POST['add_orientacion'])) {
 
         if ($move && $name != '') {
             $query = "INSERT INTO orientacion_canalizacion (";
-            $query .= "folio,correo_electronico,nombre_completo,nivel_estudios,ocupacion,edad,telefono,extension,sexo,calle_numero,colonia,codigo_postal,municipio_localidad,entidad,nacionalidad,tipo_solicitud,medio_presentacion,grupo_vulnerable,lengua,observaciones,adjunto,id_creador";
+            $query .= "folio,correo_electronico,nombre_completo,nivel_estudios,ocupacion,edad,telefono,extension,sexo,calle_numero,colonia,codigo_postal,municipio_localidad,entidad,nacionalidad,tipo_solicitud,medio_presentacion,grupo_vulnerable,lengua,observaciones,adjunto,id_creador,creacion";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$correo}','{$nombre}','{$nestudios}','{$ocupacion}','{$edad}','{$tel}','{$ext}','{$sexo}','{$calle}','{$colonia}','{$cpostal}','{$municipio}','{$entidad}','{$nacionalidad}','1','{$medio}','{$grupo_vulnerable}','{$lengua}','{$observaciones}','{$name}','{$detalle}'";
+            $query .= " '{$folio}','{$correo}','{$nombre}','{$nestudios}','{$ocupacion}','{$edad}','{$tel}','{$ext}','{$sexo}','{$calle}','{$colonia}','{$cpostal}','{$municipio}','{$entidad}','{$nacionalidad}','1','{$medio}','{$grupo_vulnerable}','{$lengua}','{$observaciones}','{$name}','{$detalle}','{$creacion}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios (";
@@ -113,9 +115,9 @@ if (isset($_POST['add_orientacion'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO orientacion_canalizacion (";
-            $query .= "folio,correo_electronico,nombre_completo,nivel_estudios,ocupacion,edad,telefono,extension,sexo,calle_numero,colonia,codigo_postal,municipio_localidad,entidad,nacionalidad,tipo_solicitud,medio_presentacion,grupo_vulnerable,lengua,observaciones,adjunto,id_creador";
+            $query .= "folio,correo_electronico,nombre_completo,nivel_estudios,ocupacion,edad,telefono,extension,sexo,calle_numero,colonia,codigo_postal,municipio_localidad,entidad,nacionalidad,tipo_solicitud,medio_presentacion,grupo_vulnerable,lengua,observaciones,adjunto,id_creador,creacion";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$correo}','{$nombre}','{$nestudios}','{$ocupacion}','{$edad}','{$tel}','{$ext}','{$sexo}','{$calle}','{$colonia}','{$cpostal}','{$municipio}','{$entidad}','{$nacionalidad}','1','{$medio}','{$grupo_vulnerable}','{$lengua}','{$observaciones}','{$name}','{$detalle}'";
+            $query .= " '{$folio}','{$correo}','{$nombre}','{$nestudios}','{$ocupacion}','{$edad}','{$tel}','{$ext}','{$sexo}','{$calle}','{$colonia}','{$cpostal}','{$municipio}','{$entidad}','{$nacionalidad}','1','{$medio}','{$grupo_vulnerable}','{$lengua}','{$observaciones}','{$name}','{$detalle}','{$creacion}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios (";
@@ -170,6 +172,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="nestudios">Nivel de Estudios</label>
                             <select class="form-control" name="nestudios">
+                                <option value="">Escoge una opción</option>
                                 <option value="Sin estudios">Sin estudios</option>
                                 <option value="Primaria">Primaria</option>
                                 <option value="Secundaria">Secundaria</option>
@@ -186,6 +189,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="ocupacion">Ocupacion</label>
                             <select class="form-control" name="ocupacion">
+                                <option>Escoge una opción</option>
                                 <option value="Otro">Otro</option>
                                 <option value="Agricultor(a)">Agricultor(a)</option>
                                 <option value="Albañil">Albañil</option>
@@ -288,7 +292,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
-                                <option value="">Elige una opción</option>
+                                <option value="">Escoge una opción</option>
                                 <option value="Comunidad LGBTIQ+">Comunidad LGBTIQ+</option>
                                 <option value="Derecho de las mujeres">Derecho de las mujeres</option>
                                 <option value="Niñas, niños y adolescentes">Niñas, niños y adolescentes</option>
@@ -311,6 +315,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="sexo">Género</label>
                             <select class="form-control" name="sexo">
+                                <option value="">Escoge una opción</option>
                                 <option value="M">Mujer</option>
                                 <option value="H">Hombre</option>
                                 <option value="LGBTIQ+">LGBTIQ+</option>

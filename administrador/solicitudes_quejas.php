@@ -62,7 +62,7 @@ $c_cargos          = count_by_id('cargos');
                         </svg>
                     </div>
                     <div class="panel-value pull-right">
-                        <p style="font-size: 17px; margin-top:10%; color:#333333;">Quejas</p>
+                        <p style="font-size: 15px; margin-top:10%; color:#333333;">Quejas</p>
                     </div>
                 </div>
             </a>
@@ -76,7 +76,7 @@ $c_cargos          = count_by_id('cargos');
                     </svg>
                 </div>
                 <div>
-                    <p style="font-size: 17px; margin-top:2%;">Orientación</p>
+                    <p style="font-size: 15px; margin-top:2%;">Orientación</p>
                     <div style="margin-top:-5%;">
                         <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                             <a style="margin-top:5%;" href="add_orientacion.php" class="btn btn-success btn-sm">Agregar</a>
@@ -95,12 +95,12 @@ $c_cargos          = count_by_id('cargos');
                     </svg>
                 </div>
                 <div>
-                    <p style="font-size: 15.5px; margin-top:2%;">Canalización</p>
-                    <div style="margin-top:-6%;"><br>
+                    <p style="font-size: 15px; margin-top:2%;">Canalización</p>
+                    <div style="margin-top:-5%;">
                         <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
-                            <a style="margin-top:2%;" href="add_canalizacion.php" class="btn btn-success btn-sm">Agregar</a>
+                            <a style="margin-top:5%;" href="add_canalizacion.php" class="btn btn-success btn-sm">Agregar</a>
                         <?php endif; ?>
-                        <a style="margin-top:2%;" href="canalizaciones.php" class="btn btn-primary btn-sm">Ver</a>
+                        <a style="margin-top:5%;" href="canalizaciones.php" class="btn btn-primary btn-sm">Ver</a>
                     </div>
                 </div>
             </div>
@@ -114,7 +114,7 @@ $c_cargos          = count_by_id('cargos');
                     </svg>
                 </div>
                 <div>
-                    <p style="font-size: 17px; margin-top:1%;">Acuerdos de No Violación</p>
+                    <p style="font-size: 15px; margin-top:1%;">Acuerdos de No Violación</p>
                     <div>
                         <a href="acuerdos_no_violacion.php" class="btn btn-primary btn-sm">Ver</a>
                     </div>
@@ -132,8 +132,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div>
-                <p style="font-size: 17px; margin-top:4%;">Recomen-</p>
-                <p style="font-size: 17px; margin-top:-2%;">daciones</p>
+                <p style="font-size: 15px; margin-top:4%;">Recomen-<br>daciones</p>
                 <div>
                     <a href="recomendaciones.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>

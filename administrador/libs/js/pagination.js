@@ -1,4 +1,5 @@
 var dataTable = $(".datatable").DataTable({
+  responsive: true,
   language: {
     search: "Buscar:",
     lengthMenu: "Mostrar _MENU_ elementos",
@@ -10,11 +11,11 @@ var dataTable = $(".datatable").DataTable({
     },
   },
   buttons: [ //Descomentar para que salga el botón de Excel
-    /*{
+    {
       extend: "excel",
       text: "Exportar en Excel",
       className: "btn-md btn-excel",
-    },*/
+    },
   ],
   dom:
     "<'row'<'col-md-3'l><'col-md-5 text-center'B><'col-md-3'f>>" +

@@ -63,7 +63,7 @@ $c_cargos          = count_by_id('cargos');
                     </svg>
                 </div>
                 <div class="panel-value pull-right">
-                    <p style="font-size: 16px; margin-top:8%;">Capacitación</p>
+                    <p style="font-size: 15px; margin-top:8%;">Capacitación</p>
                     <div style="margin-top:-7%;">
                         <?php if (($nivel_user <= 2) || ($nivel_user == 6)) : ?>
                             <a style="margin-top:5%;" href="add_capacitacion.php" class="btn btn-success btn-sm">Agregar</a>

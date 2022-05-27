@@ -49,105 +49,134 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
 
 <a href="tabla_estadistica_orientacion.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
   Regresar
-</a><br><br>
+</a><br>
 <center>
-  <h2 style="margin-top: -10px;">Estadística de Orientaciones (Por medio de presentación)</h2><br>
-  <div class="row" style="display: flex; justify-content: center; align-items: center;">
-    <div style="width:50%; float:left;">
-      <!-- <div class="col-md-6" style="width: 50%; height: 20%;"> -->
-      <canvas id="mPresentacion"></canvas>
-      <!-- Incluímos Chart.js -->
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <button id="btnCrearPdf" style="margin-top: -40px;" class="btn btn-pdf btn-md">Guardar en PDF</button>
+  <div id="prueba">
+    <center>
+      <h3 style="margin-top: 10px;">Estadística de Orientaciones (Por medio de presentación)</h3><br>
+    </center>
+    <div class="row" style="display: flex; justify-content: center; align-items: center; margin-left:-150px;">
+      <div style="width:45%; float:left;">
+        <!-- <div class="col-md-6" style="width: 50%; height: 20%;"> -->
+        <canvas id="mPresentacion"></canvas>
+        <!-- Incluímos Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-      <!-- Añadimos el script a la página -->
+        <!-- Añadimos el script a la página -->
 
-      <script>
-        var yValues = [<?php echo $total_asesorv['total']; ?>, <?php echo $total_asistentev['total']; ?>, <?php echo $total_comp['total']; ?>, <?php echo $total_escrito['total']; ?>,
-          <?php echo $total_vt['total']; ?>, <?php echo $total_ve['total']; ?>, <?php echo $total_cndh['total']; ?>
-        ];
-        const ctx5 = document.getElementById('mPresentacion');
-        const mPresentacion = new Chart(ctx5, {
-          type: 'bar',
-          data: {
-            labels: ['Asesor Virtual', 'Asistente Virtual', 'Comparecencia', 'Escrito', 'Vía telefónica', 'Vía electrónica', 'Comisión Nacional de los Derechos Humanos'],
-            datasets: [{
-              label: 'Orientaciones por Medio de Presentación',
-              data: yValues,
-              backgroundColor: [
-                '#7A8A28', '#9FC983', '#7DB37F', '#B4CCBD', '#354A45', '#195947', '#688C82'
-              ],
-              borderColor: [
-                '#4C5719', '#73915E', '#577D59', '#728278', '#253330', '#0F362B', '#394D47'
-              ],
-              borderWidth: 2
-            }]
-          },
-          options: {
-            legend: {
-              display: false
+        <script>
+          var yValues = [<?php echo $total_asesorv['total']; ?>, <?php echo $total_asistentev['total']; ?>, <?php echo $total_comp['total']; ?>, <?php echo $total_escrito['total']; ?>,
+            <?php echo $total_vt['total']; ?>, <?php echo $total_ve['total']; ?>, <?php echo $total_cndh['total']; ?>
+          ];
+          const ctx5 = document.getElementById('mPresentacion');
+          const mPresentacion = new Chart(ctx5, {
+            type: 'bar',
+            data: {
+              labels: ['Asesor Virtual', 'Asistente Virtual', 'Comparecencia', 'Escrito', 'Vía telefónica', 'Vía electrónica', 'Comisión Nacional de los Derechos Humanos'],
+              datasets: [{
+                label: 'Orientaciones por Medio de Presentación',
+                data: yValues,
+                backgroundColor: [
+                  '#7A8A28', '#9FC983', '#7DB37F', '#B4CCBD', '#354A45', '#195947', '#688C82'
+                ],
+                borderColor: [
+                  '#4C5719', '#73915E', '#577D59', '#728278', '#253330', '#0F362B', '#394D47'
+                ],
+                borderWidth: 2
+              }]
             },
-            // El salto entre cada valor de Y
-            ticks: {
-              min: 0,
-              max: 10000,
-              stepSize: 10
-            },
-            responsive: true
-          }
-        });
-      </script>
-    </div>
-    <!-- </div> -->
-
-    <!-- <div class="col-md-6" style="width: 420px; height: 250px;"> -->
-    <div style="width:40%; float:right; margin-left: 50px">
-      <!-- Debemos de tener Canvas en la página -->
-      <canvas id="mPresentacionC"></canvas>
-
-      <!-- Incluímos Chart.js -->
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-      <!-- Añadimos el script a la página -->
-      <script>
-        var yValues = [<?php echo $total_asesorv['total']; ?>, <?php echo $total_asistentev['total']; ?>, <?php echo $total_comp['total']; ?>, <?php echo $total_escrito['total']; ?>,
-          <?php echo $total_vt['total']; ?>, <?php echo $total_ve['total']; ?>, <?php echo $total_cndh['total']; ?>
-        ];
-        const ctx6 = document.getElementById('mPresentacionC');
-        const mPresentacionC = new Chart(ctx6, {
-          type: 'pie',
-          data: {
-            labels: ['Asesor Virtual', 'Asistente Virtual', 'Comparecencia', 'Escrito', 'Vía telefónica', 'Vía electrónica', 'Comisión Nacional de los Derechos Humanos'],
-            datasets: [{
-              data: yValues,
-              backgroundColor: [
-                '#7A8A28', '#9FC983', '#7DB37F', '#B4CCBD', '#354A45', '#195947', '#688C82'
-              ],
-              hoverOffset: 4
-            }]
-          },
-          options: {
-            legend: {
-              display: false
-            },
-            // El salto entre cada valor de Y
-            ticks: {
-              min: 0,
-              max: 6000,
-              stepSize: 1
-            },
-          }
-        });
-      </script>
-
-      <!-- Renderizamos la gráfica -->
-      <script>
-        const miGrafo = new Chart(
-          document.getElementById('miGrafo'),
-          config
-        );
-      </script>
+            options: {
+              legend: {
+                display: false
+              },
+              // El salto entre cada valor de Y
+              ticks: {
+                min: 0,
+                max: 10000,
+                stepSize: 10
+              },
+              responsive: true
+            }
+          });
+        </script>
+      </div>
       <!-- </div> -->
     </div>
-  </div>
+    <div class="row" style="display: flex; justify-content: center; align-items: center;">
+      <!-- <div class="col-md-12" style="width: 720px; height: 250px;"> -->
+      <div style="width:40%; float:right; margin-left: 50px;  margin-top: 40px">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr style="height: 10px;" class="info">
+              <th class="text-center" style="width: 70%;">Grupo Vulnerable</th>
+              <th class="text-center" style="width: 30%;">Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Comunidad LGBTIQ+</td>
+              <td class="text-center"><?php echo $total_gv_lgbt['total'] + $total_gv_lgbt2['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Derechos de las mujeres</td>
+              <td class="text-center"><?php echo $total_der_mujer['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Niñas, niños y adolescentes</td>
+              <td class="text-center"><?php echo $total_nna['total'] + $total_nna2['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Personas con discapacidad</td>
+              <td class="text-center"><?php echo $total_disc['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Personas migrantes</td>
+              <td class="text-center"><?php echo $total_mig['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Personas que viven con VIH SIDA</td>
+              <td class="text-center"><?php echo $total_vih['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Grupos indígenas</td>
+              <td class="text-center"><?php echo $total_gi['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Periodistas</td>
+              <td class="text-center"><?php echo $total_perio['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Defensores de los derechos humanos</td>
+              <td class="text-center"><?php echo $total_ddh['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Adultos Mayores</td>
+              <td class="text-center"><?php echo $total_am['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Internos</td>
+              <td class="text-center"><?php echo $total_int['total'] ?></td>
+            </tr>
+            <tr>
+              <td>Otros</td>
+              <td class="text-center"><?php echo $total_otros['total'] ?></td>
+            </tr>
+            <tr>
+              <td>No aplica</td>
+              <td class="text-center"><?php echo $total_na['total'] ?></td>
+            </tr>
+            <tr>
+              <td style="text-align:right;"><b>Total</b></td>
+              <td>
+                <?php echo $total_gv_lgbt['total'] + $total_gv_lgbt2['total'] + $total_der_mujer['total'] + $total_nna['total'] + $total_nna2['total']  + $total_disc['total'] +
+                  $total_mig['total'] + $total_vih['total'] + $total_gi['total'] + $total_perio['total'] + $total_ddh['total'] + $total_am['total'] +
+                  $total_int['total'] + $total_otros['total'] + $total_na['total'] ?>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 </center>
 <?php include_once('layouts/footer.php'); ?>

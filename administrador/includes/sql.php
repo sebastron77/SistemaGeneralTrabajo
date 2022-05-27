@@ -2397,6 +2397,15 @@ function count_by_id_lgbt($table, $tipo)
     return ($db->fetch_assoc($result));
   }
 }
+function count_by_id_lgbt2($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(sexo) AS total FROM " . $db->escape($table) . " WHERE sexo = 'LGBT' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
 
 // ------------------------------------------------------------------------- Contar por grupo vulnerable -------------------------------------------------------------------------
 function count_by_comLg($table, $tipo)
@@ -2404,6 +2413,15 @@ function count_by_comLg($table, $tipo)
   global $db;
   if (tableExists($table)) {
     $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Comunidad LGBTIQ+' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_comLg2($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Comunidad LGBT' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
@@ -2422,6 +2440,15 @@ function count_by_nna($table, $tipo)
   global $db;
   if (tableExists($table)) {
     $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Niñas, niños y adolescentes' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_nna2($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(grupo_vulnerable) AS total FROM " . $db->escape($table) . " WHERE grupo_vulnerable = 'Niños y adolescentes' and tipo_solicitud = '{$db->escape($tipo)}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }

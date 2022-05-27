@@ -35,10 +35,13 @@ if ($nivel == 7) {
 $total_mujeres = count_by_id_mujer('orientacion_canalizacion', 1);
 $total_hombres = count_by_id_hombre('orientacion_canalizacion', 1);
 $total_lgbtiq = count_by_id_lgbt('orientacion_canalizacion', 1);
+$total_lgbt = count_by_id_lgbt2('orientacion_canalizacion', 1);
 
 $total_gv_lgbt = count_by_comLg('orientacion_canalizacion', 1);
+$total_gv_lgbt2 = count_by_comLg2('orientacion_canalizacion', 1);
 $total_der_mujer = count_by_derMuj('orientacion_canalizacion', 1);
 $total_nna = count_by_nna('orientacion_canalizacion', 1);
+$total_nna2 = count_by_nna2('orientacion_canalizacion', 1);
 $total_disc = count_by_disc('orientacion_canalizacion', 1);
 $total_mig = count_by_mig('orientacion_canalizacion', 1);
 $total_vih = count_by_vih('orientacion_canalizacion', 1);
@@ -160,12 +163,12 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                         </tr>
                         <tr>
                             <td>LGBTIQ+</td>
-                            <td class="text-center"><?php echo $total_lgbtiq['total'] ?></td>
+                            <td class="text-center"><?php echo $total_lgbtiq['total'] + $total_lgbt['total'] ?></td>
                         </tr>
                         <tr>
                             <td style="text-align:right;"><b>Total</b></td>
                             <td>
-                                <?php echo $total_mujeres['total'] + $total_hombres['total'] + $total_lgbtiq['total'] ?>
+                                <?php echo $total_mujeres['total'] + $total_hombres['total'] + $total_lgbtiq['total'] + $total_lgbt['total']?>
                             </td>
                         </tr>
                     </tbody>
@@ -197,7 +200,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                     <tbody>
                         <tr>
                             <td>Comunidad LGBTIQ+</td>
-                            <td class="text-center"><?php echo $total_gv_lgbt['total'] ?></td>
+                            <td class="text-center"><?php echo $total_gv_lgbt['total'] + $total_gv_lgbt2['total']?></td>
                         </tr>
                         <tr>
                             <td>Derechos de las mujeres</td>
@@ -205,7 +208,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                         </tr>
                         <tr>
                             <td>Niñas, niños y adolescentes</td>
-                            <td class="text-center"><?php echo $total_nna['total'] ?></td>
+                            <td class="text-center"><?php echo $total_nna['total'] + $total_nna2['total']?></td>
                         </tr>
                         <tr>
                             <td>Personas con discapacidad</td>
@@ -250,9 +253,9 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                         <tr>
                             <td style="text-align:right;"><b>Total</b></td>
                             <td>
-                                <?php echo $total_gv_lgbt['total'] + $total_der_mujer['total'] + $total_nna['total'] + $total_disc['total'] + $total_mig['total'] +
-                                $total_vih['total'] + $total_gi['total'] + $total_perio['total'] + $total_ddh['total'] + $total_am['total'] + $total_int['total'] + 
-                                $total_otros['total'] +$total_na['total'] ?>
+                                <?php echo $total_gv_lgbt['total'] + $total_gv_lgbt2['total'] + $total_der_mujer['total'] + $total_nna['total'] + $total_nna2['total']  + $total_disc['total'] + 
+                                $total_mig['total'] + $total_vih['total'] + $total_gi['total'] + $total_perio['total'] + $total_ddh['total'] + $total_am['total'] + 
+                                $total_int['total'] + $total_otros['total'] +$total_na['total'] ?>
                             </td>
                         </tr>
                     </tbody>

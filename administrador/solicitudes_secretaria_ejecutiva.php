@@ -64,7 +64,7 @@ $c_cargos          = count_by_id('cargos');
                     </svg>
                 </div>
                 <div class="panel-value pull-right">
-                    <p style="font-size: 14px; margin-top:8%;">Convenios</p>
+                    <p style="font-size: 15px; margin-top:8%;">Convenios</p>
                     <div style="margin-top:-8%;">
                         <?php if (($nivel_user <= 2) || ($nivel_user == 3)) : ?>
                             <a style="margin-top:5%;" href="add_convenio.php" class="btn btn-success btn-sm">Agregar</a>

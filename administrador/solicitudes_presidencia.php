@@ -70,7 +70,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:4%; color:#333333;">Consejo de la CEDH</p>
+                <p style="font-size: 15px; margin-top:4%; color:#333333; line-height: 100%;">Consejo de la CEDH</p>
                 <div style="margin-top:-5%;">
                     <?php if ($nivel_user <= 2) : ?>
                         <a style="margin-top:5%;" href="add_consejo.php" class="btn btn-success btn-sm">Agregar</a>
@@ -88,8 +88,8 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:2%; color:#333333;">Recepción General de Correspondencia</p>
-                <div style="margin-top:-2%;">
+                <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Recepción General de Correspon-<br>dencia</p>
+                <div style="margin-top:-1%;">
                     <a href="correspondencia.php" class="btn btn-secondary btn-xs" style="margin-top: 3px;">Correspondencia</a>
                     <a href="invitaciones.php" class="btn btn-secondary btn-xs" style="margin-top: 3px;">Invitaciones</a>
                 </div>
@@ -105,7 +105,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:5%; color:#333333;">Convenio de Colaboración</p>
+                <p style="font-size: 15px; margin-top:5%; color:#333333; line-height: 100%;">Convenio de Colaboración</p>
                 <div style="margin-top:-3%;">
                     <?php if ($nivel_user <= 2) : ?>
                         <a style="margin-top:3%;" href="add_convenio.php" class="btn btn-success btn-sm">Agregar</a>
@@ -125,7 +125,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:15%; color:#333333;">Unidad de Gestión de Recursos</p>
+                <p style="font-size: 15px; margin-top:15%; color:#333333; line-height: 100%;">Unidad de Gestión de Recursos</p>
             </div>
         </div>
     </div>
@@ -137,7 +137,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:5%; color:#333333;">Gestiones Jurisdiccionales</p>
+                <p style="font-size: 15px; margin-top:5%; color:#333333; line-height: 100%;">Gestiones Jurisdiccio-<br>nales</p>
             </div>
         </div>
     </div>
@@ -149,8 +149,8 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:5%; color:#333333;">Informe Anual de Actividades</p>
-                <div style="margin-top:-5%;">
+                <p style="font-size: 15px; margin-top:5%; color:#333333; line-height: 100%;">Informe Anual de Actividades</p>
+                <div style="margin-top:-3%;">
                     <?php if ($nivel_user <= 2) : ?>
                         <a style="margin-top:3%;" href="add_informe.php" class="btn btn-success btn-sm">Agregar</a>
                     <?php endif; ?>
@@ -167,7 +167,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:3%; color:#333333;">Programa Operativo Anual (POA)</p>
+                <p style="font-size: 15px; margin-top:3%; color:#333333; line-height: 100%;">Programa Operativo Anual (POA)</p>
                 <div style="margin-top:-3%;">
                     <?php if ($nivel_user <= 2) : ?>
                         <a style="margin-top:3%;" href="add_poa.php" class="btn btn-success btn-sm">Agregar</a>

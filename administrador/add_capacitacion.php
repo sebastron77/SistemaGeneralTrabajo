@@ -140,6 +140,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="tipo_evento">Tipo de evento</label>
                             <select class="form-control" name="tipo_evento">
+                                <option value="">Escoge una opción</option>
                                 <option value="Capacitación">Capacitación</option>
                                 <option value="Conferencia">Conferencia</option>
                                 <option value="Curso">Curso</option>
@@ -161,11 +162,11 @@ include_once('layouts/header.php'); ?>
                             <label for="fecha">Fecha</label><br>
                             <input type="date" class="form-control" name="fecha">
                         </div>
-                    </div>                    
+                    </div>
                 </div>
 
                 <div class="row">
-                <div class="col-md-2">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="hora">Hora</label><br>
                             <input type="time" class="form-control" name="hora">
@@ -187,6 +188,7 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="modalidad">Modalidad</label>
                             <select class="form-control" name="modalidad">
+                                <option value="">Escoge una opción</option>
                                 <option value="Presencial">Presencial</option>
                                 <option value="En línea">En línea</option>
                                 <option value="Híbrido">Híbrido</option>
