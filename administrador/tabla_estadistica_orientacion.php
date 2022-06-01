@@ -23,7 +23,7 @@ if ($nivel == 4) {
     redirect('home.php');
 }
 if ($nivel == 5) {
-    redirect('home.php');    
+    redirect('home.php');
 }
 if ($nivel == 6) {
     redirect('home.php');
@@ -84,7 +84,9 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                 <table class="table table-bordered table-striped">
                     <a href="estadistica_orientaciones_medioP.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
-                    </a><br><br>
+                    </a>
+                    <a href="javascript:abrir()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
+                    <br><br>
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th class="text-center" style="width: 70%;">Medio de presentación</th>
@@ -145,7 +147,9 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                 <table class="table table-bordered table-striped">
                     <a href="estadistica_orientaciones_medioGen.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
-                    </a><br><br>
+                    </a>
+                    <a href="javascript:abrir2()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
+                    <br><br>
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th class="text-center" style="width: 70%;">Género</th>
@@ -168,7 +172,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                         <tr>
                             <td style="text-align:right;"><b>Total</b></td>
                             <td>
-                                <?php echo $total_mujeres['total'] + $total_hombres['total'] + $total_lgbtiq['total'] + $total_lgbt['total']?>
+                                <?php echo $total_mujeres['total'] + $total_hombres['total'] + $total_lgbtiq['total'] + $total_lgbt['total'] ?>
                             </td>
                         </tr>
                     </tbody>
@@ -190,7 +194,9 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                 <table class="table table-bordered table-striped">
                     <a href="estadistica_orientaciones_medioGV.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
-                    </a><br><br>
+                    </a>
+                    <a href="javascript:abrir3()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
+                    <br><br>
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th class="text-center" style="width: 70%;">Grupo Vulnerable</th>
@@ -200,7 +206,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                     <tbody>
                         <tr>
                             <td>Comunidad LGBTIQ+</td>
-                            <td class="text-center"><?php echo $total_gv_lgbt['total'] + $total_gv_lgbt2['total']?></td>
+                            <td class="text-center"><?php echo $total_gv_lgbt['total'] + $total_gv_lgbt2['total'] ?></td>
                         </tr>
                         <tr>
                             <td>Derechos de las mujeres</td>
@@ -208,7 +214,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                         </tr>
                         <tr>
                             <td>Niñas, niños y adolescentes</td>
-                            <td class="text-center"><?php echo $total_nna['total'] + $total_nna2['total']?></td>
+                            <td class="text-center"><?php echo $total_nna['total'] + $total_nna2['total'] ?></td>
                         </tr>
                         <tr>
                             <td>Personas con discapacidad</td>
@@ -253,9 +259,9 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                         <tr>
                             <td style="text-align:right;"><b>Total</b></td>
                             <td>
-                                <?php echo $total_gv_lgbt['total'] + $total_gv_lgbt2['total'] + $total_der_mujer['total'] + $total_nna['total'] + $total_nna2['total']  + $total_disc['total'] + 
-                                $total_mig['total'] + $total_vih['total'] + $total_gi['total'] + $total_perio['total'] + $total_ddh['total'] + $total_am['total'] + 
-                                $total_int['total'] + $total_otros['total'] +$total_na['total'] ?>
+                                <?php echo $total_gv_lgbt['total'] + $total_gv_lgbt2['total'] + $total_der_mujer['total'] + $total_nna['total'] + $total_nna2['total']  + $total_disc['total'] +
+                                    $total_mig['total'] + $total_vih['total'] + $total_gi['total'] + $total_perio['total'] + $total_ddh['total'] + $total_am['total'] +
+                                    $total_int['total'] + $total_otros['total'] + $total_na['total'] ?>
                             </td>
                         </tr>
                     </tbody>
@@ -264,5 +270,97 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
         </div>
     </div>
 </div>
+
+<div class="ventana" id="vent">
+    <div id="cerrar">
+        <a href="javascript:cerrar()"><img src="cerrar.png" height="25px" width="25px"></a>
+    </div>
+    <span></span>
+    <h4 style="margin-top: 5%;">Selecciona el rango a graficar</h4>
+
+    <form class="clearfix" method="post" action="grafica_fecha_medioP.php">
+        <div class="form-group">
+            <label class="form-label">Rango de fechas</label>
+            <div class="input-group">
+                <input type="text" class="datepicker form-control" name="start-date" placeholder="Desde">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
+                <input type="text" class="datepicker form-control" name="end-date" placeholder="Hasta">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-primary">Generar gráfica</button>
+        </div>
+    </form>
+</div>
+
+<div class="ventana2" id="vent2">
+    <div id="cerrar2">
+        <a href="javascript:cerrar2()"><img src="cerrar.png" height="25px" width="25px"></a>
+    </div>
+    <span></span>
+    <h4 style="margin-top: 5%;">Selecciona el rango a graficar2</h4>
+
+    <form class="clearfix" method="post" action="grafica_fecha_genero.php">
+        <div class="form-group">
+            <label class="form-label">Rango de fechas</label>
+            <div class="input-group">
+                <input type="text" class="datepicker form-control" name="start-date" placeholder="Desde">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
+                <input type="text" class="datepicker form-control" name="end-date" placeholder="Hasta">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-primary">Generar gráfica</button>
+        </div>
+    </form>
+</div>
+
+<div class="ventana3" id="vent3">
+    <div id="cerrar3">
+        <a href="javascript:cerrar3()"><img src="cerrar.png" height="25px" width="25px"></a>
+    </div>
+    <span></span>
+    <h4 style="margin-top: 5%;">Selecciona el rango a graficar3</h4>
+
+    <form class="clearfix" method="post" action="grafica_fecha_grupoV.php">
+        <div class="form-group">
+            <label class="form-label">Rango de fechas</label>
+            <div class="input-group">
+                <input type="text" class="datepicker form-control" name="start-date" placeholder="Desde">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
+                <input type="text" class="datepicker form-control" name="end-date" placeholder="Hasta">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-primary">Generar gráfica</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function abrir() {
+        document.getElementById("vent").style.display = "block";
+    }
+
+    function cerrar() {
+        document.getElementById("vent").style.display = "none"
+    }
+
+    function abrir2() {
+        document.getElementById("vent2").style.display = "block";
+    }
+
+    function cerrar2() {
+        document.getElementById("vent2").style.display = "none"
+    }
+
+    function abrir3() {
+        document.getElementById("vent3").style.display = "block";
+    }
+
+    function cerrar3() {
+        document.getElementById("vent3").style.display = "none"
+    }
+</script>
 
 <?php include_once('layouts/footer.php'); ?>

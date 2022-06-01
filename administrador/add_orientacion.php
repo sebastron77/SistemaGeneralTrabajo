@@ -57,7 +57,7 @@ if (isset($_POST['add_orientacion'])) {
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
         date_default_timezone_set('America/Mexico_City');
-        $creacion = date('Y-m-d H:i:s');
+        $creacion = date('Y-m-d');
         // $id_creador   = remove_junk($db->escape($_POST['creador']));        
 
         //Suma el valor del id anterior + 1, para generar ese id para el nuevo resguardo

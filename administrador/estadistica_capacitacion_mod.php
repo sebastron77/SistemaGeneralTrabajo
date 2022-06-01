@@ -26,104 +26,106 @@ $total_hibrido = count_by_hibrido('capacitaciones');
 ?>
 
 <?php include_once('layouts/header.php'); ?>
-
+<a href="tabla_estadistica_capacitacion.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+  Regresar
+</a><br><br>
 <center>
-  <h2 style="margin-top: -10px;">Estadística de Capacitaciones (Por modalidad)</h2>
-  <div class="row" style="display: flex; justify-content: center; align-items: center;">
-    <div class="col-md-6" style="width: 50%; height: 20%;">
-      <canvas id="gVulnerableB"></canvas>
-      <!-- Incluímos Chart.js -->
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <button id="btnCrearPdf" style="margin-top: -60px;" class="btn btn-pdf btn-md">Guardar en PDF</button>
+  <div id="prueba">
+    <center>
+      <h2 style="margin-top: 10px;">Estadística de Capacitaciones (Por modalidad)</h2>
+    </center>
+    <div class="row" style="display: flex; justify-content: center; align-items: center; margin-left:-70px;">
+      <div class="col-md-6" style="width: 50%; height: 20%;">
+        <canvas id="gVulnerableB"></canvas>
+        <!-- Incluímos Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-      <!-- Añadimos el script a la página -->
+        <!-- Añadimos el script a la página -->
 
-      <script>
-        var yValues = [<?php echo $total_presencial['total']; ?>, <?php echo $total_en_linea['total']; ?>, <?php echo $total_hibrido['total']; ?>];
+        <script>
+          var yValues = [<?php echo $total_presencial['total']; ?>, <?php echo $total_en_linea['total']; ?>, <?php echo $total_hibrido['total']; ?>];
 
-        const ctx3 = document.getElementById('gVulnerableB');
-        const gVulnerableB = new Chart(ctx3, {
-          type: 'bar',
-          data: {
-            labels: ['Presencial', 'En línea', 'Híbrido'],
-            datasets: [{
-              label: 'Capacitaciones por modalidad',
-              data: yValues,
-              backgroundColor: [
-                '#143C8C', '#398CBF', '#1F598C'
-              ],
-              borderColor: [
-                '#0D285E', '#2C6A91', '#174269'
-              ],
-              borderWidth: 2
-            }]
-          },
-          options: {
-            legend: {
-              display: false
+          const ctx3 = document.getElementById('gVulnerableB');
+          const gVulnerableB = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+              labels: ['Presencial', 'En línea', 'Híbrido'],
+              datasets: [{
+                label: 'Capacitaciones por modalidad',
+                data: yValues,
+                backgroundColor: [
+                  '#143C8C', '#398CBF', '#1F598C'
+                ],
+                borderColor: [
+                  '#0D285E', '#2C6A91', '#174269'
+                ],
+                borderWidth: 2
+              }]
             },
-            // El salto entre cada valor de Y
-            ticks: {
-              min: 0,
-              max: 10000,
-              stepSize: 10
-            },
+            options: {
+              legend: {
+                display: false
+              },
+              // El salto entre cada valor de Y
+              ticks: {
+                min: 0,
+                max: 10000,
+                stepSize: 10
+              },
 
-          }
-        });
-      </script>
+            }
+          });
+        </script>
 
+      </div>
     </div>
-
-    <div class="col-md-6" style="width: 420px; height: 250px;">
-      <!-- Debemos de tener Canvas en la página -->
-      <canvas id="gVulnerableC"></canvas>
-
-      <!-- Incluímos Chart.js -->
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-      <!-- Añadimos el script a la página -->
-      <script>
-        var yValues = [<?php echo $total_presencial['total']; ?>, <?php echo $total_en_linea['total']; ?>, <?php echo $total_hibrido['total']; ?>];
-
-        const ctx4 = document.getElementById('gVulnerableC');
-        const gVulnerableC = new Chart(ctx4, {
-          type: 'pie',
-          data: {
-            labels: ['Presencial', 'En línea', 'Híbrido'],
-
-            datasets: [{
-              data: yValues,
-              backgroundColor: [
-                '#143C8C', '#398CBF', '#1F598C'
-              ],
-              hoverOffset: 4
-            }]
-          },
-          options: {
-            legend: {
-              display: false
-            },
-            // El salto entre cada valor de Y
-            ticks: {
-              min: 0,
-              max: 6000,
-              stepSize: 1
-            },
-          }
-        });
-      </script>
-
-      <!-- Renderizamos la gráfica -->
-      <script>
-        const miGrafo = new Chart(
-          document.getElementById('miGrafo'),
-          config
-        );
-      </script>
+    <div class="row" style="display: flex; justify-content: center; align-items: center;">
+      <div class="col-md-6" style="margin-top: 5%;">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr style="height: 10px;" class="info">
+              <th class="text-center" style="width: 70%;">Modalidad</th>
+              <th class="text-center" style="width: 30%;">Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Presencial</td>
+              <?php if ($total_presencial['total'] != 0) { ?>
+                <td class="text-center"><?php echo $total_presencial['total']; ?></td>
+              <?php } else { ?>
+                <td class="text-center">0</td>
+              <?php } ?>
+            </tr>
+            <tr>
+              <td>En línea</td>
+              <?php if ($total_en_linea['total'] != 0) { ?>
+                <td class="text-center"><?php echo $total_en_linea['total']; ?></td>
+              <?php } else { ?>
+                <td class="text-center">0</td>
+              <?php } ?>
+            </tr>
+            <tr>
+              <td>Híbrido</td>
+              <?php if ($total_hibrido['total'] != 0) { ?>
+                <td class="text-center"><?php echo $total_hibrido['total']; ?></td>
+              <?php } else { ?>
+                <td class="text-center">0</td>
+              <?php } ?>
+            </tr>
+            <tr>
+              <td style="text-align:right;"><b>Total</b></td>
+              <td>
+                <?php echo $total_presencial['total'] + $total_en_linea['total'] + $total_hibrido['total'];
+                ?>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </center>
-
-<hr style="margin-top: 140px; height:2px;border-width:0;background-color:#aaaaaa">
 
 <?php include_once('layouts/footer.php'); ?>

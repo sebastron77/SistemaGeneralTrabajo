@@ -72,7 +72,9 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 2);
                 <table class="table table-bordered table-striped">
                     <a href="estadistica_canalizacion_medioP.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
-                    </a><br><br>
+                    </a>
+                    <a href="javascript:abrir()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
+                    <br><br>
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th class="text-center" style="width: 70%;">Medio de presentación</th>
@@ -130,7 +132,9 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 2);
                 <table class="table table-bordered table-striped">
                     <a href="estadistica_canalizacion_medioGen.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
-                    </a><br><br>
+                    </a>
+                    <a href="javascript:abrir2()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
+                    <br><br>
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th class="text-center" style="width: 70%;">Género</th>
@@ -173,7 +177,9 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 2);
                 <table class="table table-bordered table-striped">
                     <a href="estadistica_canalizaciones_medioGV.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
-                    </a><br><br>
+                    </a>
+                    <a href="javascript:abrir3()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
+                    <br><br>
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th class="text-center" style="width: 70%;">Grupo Vulnerable</th>
@@ -247,4 +253,95 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 2);
     </div>
 </div>
 
+<div class="ventana" id="vent">
+    <div id="cerrar">
+        <a href="javascript:cerrar()"><img src="cerrar.png" height="25px" width="25px"></a>
+    </div>
+    <span></span>
+    <h4 style="margin-top: 5%;">Selecciona el rango a graficar</h4>
+
+    <form class="clearfix" method="post" action="grafica_fecha_medioP_can.php">
+        <div class="form-group">
+            <label class="form-label">Rango de fechas</label>
+            <div class="input-group">
+                <input type="text" class="datepicker form-control" name="start-date" placeholder="Desde">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
+                <input type="text" class="datepicker form-control" name="end-date" placeholder="Hasta">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-primary">Generar gráfica</button>
+        </div>
+    </form>
+</div>
+
+<div class="ventana2" id="vent2">
+    <div id="cerrar2">
+        <a href="javascript:cerrar2()"><img src="cerrar.png" height="25px" width="25px"></a>
+    </div>
+    <span></span>
+    <h4 style="margin-top: 5%;">Selecciona el rango a graficar2</h4>
+
+    <form class="clearfix" method="post" action="grafica_fecha_generoC.php">
+        <div class="form-group">
+            <label class="form-label">Rango de fechas</label>
+            <div class="input-group">
+                <input type="text" class="datepicker form-control" name="start-date" placeholder="Desde">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
+                <input type="text" class="datepicker form-control" name="end-date" placeholder="Hasta">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-primary">Generar gráfica</button>
+        </div>
+    </form>
+</div>
+
+<div class="ventana3" id="vent3">
+    <div id="cerrar3">
+        <a href="javascript:cerrar3()"><img src="cerrar.png" height="25px" width="25px"></a>
+    </div>
+    <span></span>
+    <h4 style="margin-top: 5%;">Selecciona el rango a graficar3</h4>
+
+    <form class="clearfix" method="post" action="grafica_fecha_grupoVC.php">
+        <div class="form-group">
+            <label class="form-label">Rango de fechas</label>
+            <div class="input-group">
+                <input type="text" class="datepicker form-control" name="start-date" placeholder="Desde">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-menu-right"></i></span>
+                <input type="text" class="datepicker form-control" name="end-date" placeholder="Hasta">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-primary">Generar gráfica</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function abrir() {
+        document.getElementById("vent").style.display = "block";
+    }
+
+    function cerrar() {
+        document.getElementById("vent").style.display = "none"
+    }
+
+    function abrir2() {
+        document.getElementById("vent2").style.display = "block";
+    }
+
+    function cerrar2() {
+        document.getElementById("vent2").style.display = "none"
+    }
+
+    function abrir3() {
+        document.getElementById("vent3").style.display = "block";
+    }
+
+    function cerrar3() {
+        document.getElementById("vent3").style.display = "none"
+    }
+</script>
 <?php include_once('layouts/footer.php'); ?>

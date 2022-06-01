@@ -3036,6 +3036,591 @@ function find_hibrido_by_dates($start_date, $end_date)
     return null;
 }
 
+// --------------------------------------------------------------------- Contar por medio presentacion ---------------------------------------------------------------------
+function find_asesorV_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Asesor Virtual' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_asistenteV_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Asistente Virtual' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_comparecencia_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Comparecencia' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_escrito_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Escrito' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_vTelefonica_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Vía Telefónica' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_vElectronica_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Vía Electrónica' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_cndh_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Comisión Nacional de los Derechos Humanos' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+// --------------------------------------------------------------------- Contar por grupo vulnerable ---------------------------------------------------------------------
+function find_lgbt_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Comunidad LGBTIQ+' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_lgbt_by_dates2($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Comunidad LGBT' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_ddm_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Derecho de las mujeres' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_nna_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Niñas, niños y adolescentes' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_nna_by_dates2($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Niños y adolescentes' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_pDiscapacidad_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Personas con discapacidad' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_pMigrantes_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Personas migrantes' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_vih_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Personas que viven con VIH SIDA' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_gIndigenas_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Grupos indígenas' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_periodistas_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Periodistas' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_ddh_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Defensores de los Derechos Humanos' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_aMayores_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Adultos mayores' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_internos_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Internos' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_otros_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Otros' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_na_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'No aplica' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+// ---------------------------------------------------------------------------- Contar por género ----------------------------------------------------------------------------
+function find_hombre_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(sexo) AS total FROM orientacion_canalizacion WHERE sexo = 'H' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_mujer_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(sexo) AS total FROM orientacion_canalizacion WHERE sexo = 'M' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_lgbtiq_by_dates($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(sexo) AS total FROM orientacion_canalizacion WHERE sexo = 'LGBT' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_lgbtiq_by_dates2($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(sexo) AS total FROM orientacion_canalizacion WHERE sexo = 'LGBTIQ+' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 1 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+
+
+// --------------------------------------------------------------------- Contar por medio presentacion ---------------------------------------------------------------------
+function find_asesorV_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Asesor Virtual' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_asistenteV_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Asistente Virtual' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_comparecencia_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Comparecencia' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_escrito_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Escrito' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_vTelefonica_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Vía Telefónica' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_vElectronica_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Vía Electrónica' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_cndh_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Comisión Nacional de los Derechos Humanos' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+// --------------------------------------------------------------------- Contar por grupo vulnerable ---------------------------------------------------------------------
+function find_lgbt_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Comunidad LGBTIQ+' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_lgbt_by_dates2C($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Comunidad LGBT' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_ddm_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Derecho de las mujeres' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_nna_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Niñas, niños y adolescentes' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_nna_by_dates2C($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Niños y adolescentes' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_pDiscapacidad_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Personas con discapacidad' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_pMigrantes_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Personas migrantes' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_vih_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Personas que viven con VIH SIDA' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_gIndigenas_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Grupos indígenas' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_periodistas_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Periodistas' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_ddh_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Defensores de los Derechos Humanos' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_aMayores_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Adultos mayores' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_internos_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Internos' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_otros_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'Otros' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_na_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(grupo_vulnerable) AS total FROM orientacion_canalizacion WHERE grupo_vulnerable = 'No aplica' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+// ---------------------------------------------------------------------------- Contar por género ----------------------------------------------------------------------------
+function find_hombre_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(sexo) AS total FROM orientacion_canalizacion WHERE sexo = 'H' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_mujer_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(sexo) AS total FROM orientacion_canalizacion WHERE sexo = 'M' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_lgbtiq_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(sexo) AS total FROM orientacion_canalizacion WHERE sexo = 'LGBT' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+function find_lgbtiq_by_dates2C($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(sexo) AS total FROM orientacion_canalizacion WHERE sexo = 'LGBTIQ+' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
 // global $db;
 //   $id = (int)$id;
 //   $sql = $db->query("SELECT COUNT(*) FROM quejas WHERE ticket_id = '{$db->escape($id)}'");

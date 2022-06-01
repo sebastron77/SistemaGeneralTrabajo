@@ -56,7 +56,7 @@ if (isset($_POST['add_canalizacion'])) {
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
         date_default_timezone_set('America/Mexico_City');
-        $creacion = date('Y-m-d H:i:s');
+        $creacion = date('Y-m-d');
 
         //Suma el valor del id anterior + 1, para generar ese id para el nuevo resguardo
         //La variable $no_folio sirve para el numero de folio
