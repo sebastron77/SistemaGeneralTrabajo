@@ -63,6 +63,7 @@ if (isset($_POST['edit_canalizacion'])) {
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
         $observaciones   = remove_junk($db->escape($_POST['observaciones']));
         $la_canalizacion = $e_detalle['folio'];
+        $creacion   = remove_junk($db->escape($_POST['creacion']));
         //$name = remove_junk((int)$db->escape($_POST['detalle-user']));
 
         $folio_editar = $e_detalle['folio'];
@@ -82,16 +83,20 @@ if (isset($_POST['edit_canalizacion'])) {
         }
 
         if ($name != '') {
-            $sql2 = "UPDATE folios SET folio='{$folio_canalizacion}' WHERE folio='{$db->escape($la_canalizacion)}'";
-            $sql = "UPDATE orientacion_canalizacion SET folio='{$folio_canalizacion}', correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', institucion_canaliza='{$institucion_canaliza}', grupo_vulnerable='{$grupo_vulnerable}', lengua='{$lengua}', observaciones='{$observaciones}', adjunto='{$name}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE folios SET folio='{$folio_canalizacion}' WHERE folio='{$db->escape($la_canalizacion)}'";
+            $sql2 = "UPDATE orientacion_canalizacion SET folio='{$folio_canalizacion}', correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', institucion_canaliza='{$institucion_canaliza}', grupo_vulnerable='{$grupo_vulnerable}', lengua='{$lengua}', observaciones='{$observaciones}', adjunto='{$name}', creacion='{$creacion}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql2 = "UPDATE folios SET folio='{$folio_canalizacion}' WHERE folio='{$db->escape($la_canalizacion)}'";
-            $sql = "UPDATE orientacion_canalizacion SET folio='{$folio_canalizacion}', correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', institucion_canaliza='{$institucion_canaliza}', grupo_vulnerable='{$grupo_vulnerable}', lengua='{$lengua}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
+            $sql3 = "UPDATE folios SET folio='{$folio_canalizacion}' WHERE folio='{$db->escape($la_canalizacion)}'";
+            $sql4 = "UPDATE orientacion_canalizacion SET folio='{$folio_canalizacion}', correo_electronico='{$correo}', nombre_completo='{$nombre}', nivel_estudios='{$nestudios}', ocupacion='{$ocupacion}', edad='{$edad}', telefono='{$tel}', extension='{$ext}', sexo='{$sexo}', calle_numero='{$calle}', colonia='{$colonia}',codigo_postal='{$cpostal}', municipio_localidad='{$municipio}', entidad='{$entidad}', nacionalidad='{$nacionalidad}', medio_presentacion='{$medio}', institucion_canaliza='{$institucion_canaliza}', grupo_vulnerable='{$grupo_vulnerable}', lengua='{$lengua}', observaciones='{$observaciones}', creacion='{$creacion}' WHERE id='{$db->escape($id)}'";
         }
+
         $result = $db->query($sql);
         $result2 = $db->query($sql2);
-        if (($result && $db->affected_rows() === 1) || ($result2 && $db->affected_rows() === 1)) {
+        $result3 = $db->query($sql3);
+        $result4 = $db->query($sql4);
+
+        if (($result && $db->affected_rows() === 1) || ($result2 && $db->affected_rows() === 1) || ($result3 && $db->affected_rows() === 1) || ($result4 && $db->affected_rows() === 1)) {
             $session->msg('s', "Información Actualizada");
             redirect('canalizaciones.php', false);
         } else {
@@ -116,10 +121,16 @@ if (isset($_POST['edit_canalizacion'])) {
         <div class="panel-body">
             <form method="post" action="edit_canalizacion.php?id=<?php echo (int)$e_detalle['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                         <div class="form-group">
                             <label for="folio">Folio de Canalización</label>
                             <input type="text" class="form-control" name="folio" value="<?php echo remove_junk($e_detalle['folio']);?>">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="creacion">Fecha de creación</label><br>
+                            <input type="date" class="form-control" name="creacion" value="<?php echo remove_junk($e_detalle['creacion']); ?>">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -149,8 +160,10 @@ if (isset($_POST['edit_canalizacion'])) {
                                 <option <?php if ($e_detalle['nivel_estudios'] === 'Pos Doctorado') echo 'selected="selected"'; ?> value="Pos Doctorado">Pos Doctorado</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="col-md-4">
+                    </div>                    
+                </div>
+                <div class="row">
+                <div class="col-md-3">
                         <div class="form-group">
                             <label for="ocupacion">Ocupacion</label>
                             <select class="form-control" name="ocupacion">
@@ -226,9 +239,7 @@ if (isset($_POST['edit_canalizacion'])) {
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <div class="form-group">
                             <label for="edad">Edad</label>
                             <input type="number" min="1" max="120" class="form-control" name="edad" placeholder="Edad" value="<?php echo remove_junk($e_detalle['edad']); ?>">
@@ -240,7 +251,7 @@ if (isset($_POST['edit_canalizacion'])) {
                             <input type="text" class="form-control" maxlength="10" name="tel" placeholder="Teléfono" value="<?php echo remove_junk($e_detalle['telefono']); ?>">
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <div class="form-group">
                             <label for="ext">Ext</label>
                             <input type="text" class="form-control" maxlength="3" name="ext" placeholder="Extensión" value="<?php echo remove_junk($e_detalle['extension']); ?>">
@@ -252,7 +263,7 @@ if (isset($_POST['edit_canalizacion'])) {
                             <input type="text" class="form-control" name="lengua" value="<?php echo remove_junk($e_detalle['lengua']); ?>" required>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
@@ -304,7 +315,7 @@ if (isset($_POST['edit_canalizacion'])) {
                     </div>
                 </div>
                 <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                         <div class="form-group">
                             <label for="institucion_canaliza">Institución que se canaliza</label>
                             <input type="text" class="form-control" name="institucion_canaliza" value="<?php echo remove_junk($e_detalle['institucion_canaliza']); ?>" required>
@@ -355,7 +366,7 @@ if (isset($_POST['edit_canalizacion'])) {
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="nacionalidad">Nacionalidad</label>
                             <select class="form-control" name="nacionalidad">

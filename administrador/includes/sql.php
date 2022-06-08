@@ -78,6 +78,19 @@ function find_by_id_cargo($table, $id)
       return null;
   }
 }
+/*--------------------------------------------------------------*/
+/*  Funcion para encontrar datos por su id en una tabla
+/*--------------------------------------------------------------*/
+function find_by_id_atencion($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT * FROM atencion WHERE id='{$db->escape($id)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
 
 /*--------------------------------------------------------------*/
 /*  Funcion para encontrar datos por su id en una tabla
@@ -249,7 +262,7 @@ function delete_by_id($table, $id)
 /*-----------------------------------------------------*/
 /* Funcion para eliminar datos de una tabla, por su ID */
 /*-----------------------------------------------------*/
-function delete_by_folio_queja($table,$folio)
+function delete_by_folio_queja($table, $folio)
 {
   global $db;
   if (tableExists($table)) {
@@ -1987,7 +2000,7 @@ function find_all_orientaciones()
 {
   global $db;
   $sql = "SELECT o.id as idor,o.folio,o.correo_electronico,o.nombre_completo,o.nivel_estudios,o.ocupacion,o.edad,o.telefono,o.extension,o.sexo,o.calle_numero,
-  o.colonia,o.codigo_postal,o.municipio_localidad,o.entidad,o.nacionalidad,o.tipo_solicitud,o.medio_presentacion,o.observaciones,o.adjunto,
+  o.colonia,o.codigo_postal,o.municipio_localidad,o.entidad,o.nacionalidad,o.tipo_solicitud,o.medio_presentacion,o.observaciones,o.adjunto, o.creacion,
   o.id_creador,u.id,u.id_detalle_user,d.nombre,d.apellidos";
   $sql .= " FROM orientacion_canalizacion as o";
   $sql .= " LEFT JOIN users as u ON u.id = o.id_creador";
@@ -2003,7 +2016,7 @@ function find_all_canalizaciones()
 {
   global $db;
   $sql = "SELECT o.id as idcan,o.folio,o.correo_electronico,o.nombre_completo,o.nivel_estudios,o.ocupacion,o.edad,o.telefono,o.extension,o.sexo,o.calle_numero,
-  o.colonia,o.codigo_postal,o.municipio_localidad,o.entidad,o.nacionalidad,o.tipo_solicitud,o.medio_presentacion,o.observaciones,o.adjunto,
+  o.colonia,o.codigo_postal,o.municipio_localidad,o.entidad,o.nacionalidad,o.tipo_solicitud,o.medio_presentacion,o.observaciones,o.adjunto, o.creacion,
   o.id_creador,u.id,u.id_detalle_user,d.nombre,d.apellidos";
   $sql .= " FROM orientacion_canalizacion as o";
   $sql .= " LEFT JOIN users as u ON u.id = o.id_creador";
@@ -2293,15 +2306,36 @@ function last_id_folios_general()
   return $result;
 }
 
-/* --------------------------------------------------------------------*/
-/* Función para obtener el area a la que pertenece el usuario logueado */
-/* --------------------------------------------------------------------*/
+/* ------------------------------------------------------------------------------*/
+/* Función para obtener el grupo de usuario al que pertenece el usuario logueado */
+/* ------------------------------------------------------------------------------*/
 function area_usuario($id_usuario)
 {
   global $db;
   $id_usuario = (int)$id_usuario;
 
   $sql = $db->query("SELECT g.id 
+                      FROM  grupo_usuarios g
+                      LEFT JOIN users u ON u.user_level = g.id
+                      LEFT JOIN detalles_usuario d ON u.id_detalle_user = d.id 
+                      LEFT JOIN cargos c ON c.id = d.id_cargo 
+                      LEFT JOIN area a ON a.id = c.id_area 
+                      WHERE u.id = '{$db->escape($id_usuario)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+/* --------------------------------------------------------------------*/
+/* Función para obtener el area a la que pertenece el usuario logueado */
+/* --------------------------------------------------------------------*/
+function area_usuario2($id_usuario)
+{
+  global $db;
+  $id_usuario = (int)$id_usuario;
+
+  $sql = $db->query("SELECT a.nombre_area
                       FROM  grupo_usuarios g
                       LEFT JOIN users u ON u.user_level = g.id
                       LEFT JOIN detalles_usuario d ON u.id_detalle_user = d.id 
@@ -2341,6 +2375,15 @@ function page_require_area($require_area)
 function find_all_quejas()
 {
   $sql = "SELECT * FROM quejas";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*------------------------------------------------------------------*/
+/* Ver todas las quejas que han sido agregadas al libro electrónico */
+/*------------------------------------------------------------------*/
+function find_all_atenciones()
+{
+  $sql = "SELECT * FROM atencion";
   $result = find_by_sql($sql);
   return $result;
 }
@@ -3620,6 +3663,1672 @@ function find_lgbtiq_by_dates2C($start_date, $end_date)
     return $result;
   else
     return null;
+}
+
+// --------------------------------------------------------------------- Contar por autoridad responsable ---------------------------------------------------------------------
+function count_by_aeropuerto($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Aeropuerto de Morelia'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cobaem($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Colegio de Bachilleres del Estado de Michoacán COBAEM'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cecytem($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Colegio de Estudios Científicos y Tecnológicos del Estado de Michoacán CECYTEM'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_conalep($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Colegio Nacional de Educación Profesional Técnica CONALEP'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cocotra($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Comisión Coordinadora del Transporte Publico en Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_ceeav($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Comisión Ejecutiva Estatal de Atención a Victimas'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cecufid($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Comisión Estatal de Cultura Física y Deporte'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_ceagc($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Comisión Estatal del Agua y Gestión de Cuencas'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cfe($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Comisión Federal de Electricidad CFE'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cndh4($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Comisión Nacional de los Derechos Humanos CNDH'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_conagua($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Comisión Nacional del Agua CONAGUA'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_condusef($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Comisión Nacional Para la Protección y Defensa de los Usuarios de Servicios Financieros CONDUSEF'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_corett($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Comisión Para la Regularización de la Tenencia de la Tierra CORETT'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cjee($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Consejería Jurídica del Ejecutivo del Estado'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cnpd($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Consejo Nacional Para Prevenir la Discriminación'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_ccs($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Coordinación de Comunicación Social'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cspem($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Coordinación del Sistema Penitenciario del Estado de Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_dpf($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Defensoría Publica Federal'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_dcg($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Despacho del C Gobernador'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_drc($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Dirección de Registro Civil'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_dtps($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Dirección de Trabajo y Previsión Social'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_dgti($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Dirección General de Educación Tecnológica Industrial DGTI'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_dgit($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Dirección General de Institutos Tecnológicos'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_fge($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Fiscalía General en el Estado'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_fgr($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Fiscalía General de la República'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_fovissste($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'FOVISSSTE Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_hcem($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Honorable Congreso del Estado de Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_idpe($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Instituto de la Defensoría Publica del Estado'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_injuve($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Instituto de la Juventud Michoacana'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_issste($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Instituto de Seguridad y Servicios Sociales de los Trabajadores al Servicio del Estado'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_ivem($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Instituto de Vivienda de Michoacán IVEM'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_infonavit($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Instituto del Fondo Nacional de la Vivienda Para los Trabajadores INFONAVIT'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_iem($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Instituto Electoral de Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_imss($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Instituto Mexicano del Seguro Social IMSS'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_imced($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Instituto Michoacano de Ciencias de la Educación José María Morelos'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_inea($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Instituto Nacional de Educación Para los Adultos INEA'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_inm($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Instituto Nacional de Migración'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_japge($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Junta de Asistencia Privada del Gobierno del Estado'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_jcem($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Junta de Caminos del Estado de Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_jlca($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Junta Local de Conciliación y Arbitraje'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_zoo($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Parque Zoológico Benito Juárez'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pce($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Pensiones Civiles del Estado'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmacu($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Acuitzio'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmag($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Aguililla'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmao($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Álvaro Obregón'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmangama($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Angamacutiro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmangan($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Angangueo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmapat($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Apatzingán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmaquila($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Aquila'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmario($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Ario'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmart($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Arteaga'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmbris($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Briseñas'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmbv($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Buenavista'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmcarac($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Carácuaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmcharapan($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Charapan'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmcharo($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Charo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmchav($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Chavinda'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_cheran($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Cheran'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmchil($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Chilchota'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmchucan($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Chucándiro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmchuri($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Churintzio'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmcoah($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Coahuayana'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmcoeneo($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Coeneo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmcotija($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Cotija'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmcuitzeo($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Cuitzeo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmecuan($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Ecuandureo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmeh($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Epitacio Huerta'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmeron($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Erongarícuaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmzamora($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Gabriel Zamora'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmhidalgo($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Hidalgo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmhuanda($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Huandacareo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmhuani($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Huaniqueo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmhuet($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Huetamo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmhuiramba($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Huiramba'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pminda($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Indaparapeo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmirim($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Irimbo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmixt($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Ixtlán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmjac($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Jacona'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmjime($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Jiménez'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmjiq($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Jiquilpan'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmsixver($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de José Sixto Verduzco'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmjunga($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Jungapeo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmhuac($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de la Huacana'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmlapiedad($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de la Piedad'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmlagu($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Lagunillas'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmlc($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Lázaro Cárdenas'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmlosreyes($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de los Reyes'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmmadero($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Madero'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmmarav($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Maravatío'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmmc($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Marcos Castellanos'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmmorelia($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Morelia'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmmorelos($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Morelos'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmmugica($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Múgica'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmnahuatzen($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Nahuatzen'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmnocu($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Nocupétaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmnparan($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Nuevo Parangaricutiro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmnurecho($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Nuevo Urecho'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmnumaran($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Numarán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmocampo($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Ocampo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmpajacuaran($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Pajacuarán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmpanin($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Panindícuaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmparacho($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Paracho
+    '";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmpatz($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Pátzcuaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmpenja($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Penjamillo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmperiban($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Peribán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmpure($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Purépero'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmpuruan($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Puruándiro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmqueren($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Queréndaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmquiroga($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Quiroga'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmsahuayo($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Sahuayo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmsalvesc($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Salvador Escalante'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmsam($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Santa Ana Maya'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmseng($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Senguio'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtacam($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tacámbaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtanc($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tancítaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtangamandapio($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tangamandapio'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtangancicuaro($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tangancicuaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtanhuato($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tanhuato'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtaretan($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Taretan'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtarimbaro($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tarímbaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtepalcatepec($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tepalcatepec'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtingambato($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tingambato'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtingu($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tingüindín'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtiqui($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tiquicheo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtlalpu($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tlalpujahua'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtlaza($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tlazazalca'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtocumbo($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tocumbo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtux($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tuxpan'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtuzan($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tuzantla'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtzintzun($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tzintzuntzan'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmtzit($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Tzitzio'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmuruapan($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Uruapan'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmvenus($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Venustiano Carranza'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmvillamar($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Villamar'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmvh($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Vista Hermosa'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmyure($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Yurécuaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmzaca($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Zacapu'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmzamora2($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Zamora'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmzinap($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Zináparo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmzinapecuaro($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Zinapécuaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmzira($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Ziracuaretiro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pmzita($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Presidencia Municipal de Zitácuaro'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_procamich($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Procuraduría Agraria En Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_padt($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Procuraduría Auxiliar de la Defensa del Trabajo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_pfdt($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Procuraduría Federal de la Defensa del Trabajo'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_profeco($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Procuraduría Federal del Consumidor PROFECO'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_qsasr($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Quejas Sin Autoridad Señalada Como Responsable'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sce($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Contraloría del Estado'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_secbien($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaría de Bienestar'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_scop($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Comunicaciones y Obras Publicas'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sct($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Comunicaciones y Transportes SCT'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sculte($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Cultura en el Estado'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sde($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Desarrollo Económico'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sdra($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Desarrollo Rural y Agroalimentario'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sdsh($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaría de Desarrollo Social y Humano'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sdtum($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Desarrollo Territorial Urbano y Movilidad'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_see($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Educación del Estado'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sepf($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Educación Pública Federal'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sfa($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Finanzas y Administración'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_secgobernacion($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaría de Gobernación'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_secgobierno($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Gobierno'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sisdmm($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Igualdad Sustantiva y Desarrollo de Las Mujeres Michoacanas'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sedena($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de la Defensa Nacional Ejercito Mexicano'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sme($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de los Migrantes En El Extranjero'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_marina($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Marina y Armada de México'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sre($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Relaciones Exteriores SRE'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_ss($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Salud'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_ssp($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaría de Seguridad Pública'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sspe($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Seguridad Pública Estatal'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sspf($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Seguridad Pública Federal'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sspc($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria de Seguridad y Protección Ciudadana'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_stps($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Secretaria del Trabajo y Previsión Social'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_sifdmsf($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Sistema Integral de Financiamiento para el Desarrollo de Michoacán Si Financia'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_smrt($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Sistema Michoacano de Radio y Televisión'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_dif($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Sistema Para el Desarrollo Integral de la Familia DIF'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_stj($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Supremo Tribunal de Justicia'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_tbm($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Telebachillerato de Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_tcaem($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Tribunal de Conciliación y Arbitraje del Estado de Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_tjaem($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Tribunal de Justicia Administrativa del Estado de Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_uiim($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Universidad Intercultural Indígena de Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_umsnh($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Universidad Michoacana de San Nicolas de Hidalgo UMSNH'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_uvem($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Universidad Virtual del Estado de Michoacán'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_vismorelia($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Visitaduría Morelia'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_visuruapan($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " WHERE autoridad_responsable = 'Visitaduría Uruapan'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+
+function total_porAutoridad($table){
+  global $db;
+  if (tableExists($table)) {
+    return find_by_sql("SELECT autoridad_responsable, COUNT(autoridad_responsable) FROM " . $db->escape($table)) . " GROUP BY autoridad_responsable";
+  }
 }
 // global $db;
 //   $id = (int)$id;

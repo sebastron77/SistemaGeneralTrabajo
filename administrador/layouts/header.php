@@ -105,6 +105,10 @@
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('presidencia_secTecnica_menu.php'); ?>
 
+      <?php elseif ($user['user_level'] === '8') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('secParticular_menu.php'); ?>
+
       <?php endif; ?>
     </div>
   <?php endif; ?>

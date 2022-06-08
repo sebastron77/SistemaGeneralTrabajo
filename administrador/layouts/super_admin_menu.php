@@ -79,7 +79,7 @@
       <li><a href="#">Gestiones</a></li>
       <li><a href="#">Solicitud de información</a></li>
       <li><a href="tabla_estadistica_capacitacion.php">Capacitaciones</a></li>
-      <li><a href="#">Quejas</a></li>
+      <li><a href="tabla_estadistica_quejas.php">Quejas</a></li>
     </ul>
   </li>
 </ul>

@@ -16,11 +16,14 @@ if ($nivel_user <= 2) {
 if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
+if ($nivel_user == 8) {
+    page_require_level_exacto(8);
+}
 
-if ($nivel_user > 2 && $nivel_user < 7):
+if ($nivel_user > 2 && $nivel_user < 7) :
     redirect('home.php');
 endif;
-if ($nivel_user > 7):
+if ($nivel_user > 8) :
     redirect('home.php');
 endif;
 ?>
@@ -80,6 +83,29 @@ endif;
                             <td><?php echo remove_junk(ucwords(($a_correspondencia['medio_recepcion']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_correspondencia['seguimiento']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_correspondencia['medio_entrega']))) ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr style="height: 10px;" class="info">
+                            <th style="width: 12%;">Acción realizada</th>
+                            <th style="width: 5%;">Fecha de Seguimiento</th>
+                            <th style="width: 10%;">Respuesta Adjunta</th>
+                            <th style="width: 10%;">Persona que realizó</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?php echo remove_junk(ucwords($a_correspondencia['accion_realizada'])) ?></td>
+                            <td><?php echo remove_junk(ucwords($a_correspondencia['fecha_seguimiento'])) ?></td>
+                            <?php
+                            $folio_editar = $a_correspondencia['folio'];
+                            $resultado = str_replace("/", "-", $folio_editar);
+                            ?>
+                            <td><a target="_blank" style="color: #23296B;" href="uploads/correspondencia/<?php echo $resultado . '/' . $a_correspondencia['respuesta']; ?>"><?php echo $a_correspondencia['respuesta']; ?></a></td>
+                            <td><?php echo remove_junk(ucwords(($a_correspondencia['quien_realizo']))) ?></td>
                         </tr>
                     </tbody>
                 </table>

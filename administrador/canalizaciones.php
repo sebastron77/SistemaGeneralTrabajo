@@ -56,14 +56,15 @@ endif;
                 <table class="datatable table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 15%;">Folio</th>
+                            <th style="width: 25%;">Folio</th>
+                            <th style="width: 15%;">Fecha creación</th>
                             <!-- <th style="width: 5%;">Tipo</th> -->
                             <th style="width: 5%;">Medio presentación</th>
                             <th style="width: 1%;">Adjunto</th>
                             <th style="width: 4%;">Correo</th>
                             <!--SE PUEDE AGREGAR UN LINK QUE TE LLEVE A EDITAR EL USUARIO, COMO EN EL PANEL DE CONTROL EN ULTIMAS ASIGNACIONES-->
                             <th style="width: 5%;">Nombre Completo</th>
-                            <th style="width: 5%;">Ocupación</th>
+                            <!-- <th style="width: 5%;">Ocupación</th> -->
                             <th style="width: 3%;">Creador</th>
                             <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                                 <th style="width: 10%;" class="text-center">Acciones</th>
@@ -87,11 +88,12 @@ endif;
                                 $folio_editar = $a_canalizacion['folio'];
                                 $resultado = str_replace("/", "-", $folio_editar);
                                 ?>
+                                <td><?php echo remove_junk(ucwords($a_canalizacion['creacion'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_canalizacion['medio_presentacion'])) ?></td>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/orientacioncanalizacion/canalizacion/<?php echo $resultado . '/' . $a_canalizacion['adjunto']; ?>"><?php echo $a_canalizacion['adjunto']; ?></a></td>
                                 <td><?php echo remove_junk(ucwords($a_canalizacion['correo_electronico'])) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_canalizacion['nombre_completo']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_canalizacion['ocupacion']))) ?></td>
+                                <!-- <td><?php echo remove_junk(ucwords(($a_canalizacion['ocupacion']))) ?></td> -->
                                 <td><?php echo remove_junk($a_canalizacion['nombre'] . " " . $a_canalizacion['apellidos']) ?></td>
                                 <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                                     <td class="text-center">

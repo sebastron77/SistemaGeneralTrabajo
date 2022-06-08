@@ -5,6 +5,10 @@ $id_folio = last_id_folios_general();
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
+
+$area_user = area_usuario2($id_user);
+$area = $area_user['nombre_area'];
+
 if ($nivel <= 2) {
     page_require_level(2);
 }
@@ -77,9 +81,9 @@ if (isset($_POST['add_capacitacion'])) {
 
         if ($move && $name != '') {
             $query = "INSERT INTO capacitaciones (";
-            $query .= "nombre_capacitacion,tipo_evento,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,capacitador,curriculum,constancia,folio";
+            $query .= "nombre_capacitacion,tipo_evento,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,capacitador,curriculum,constancia,folio,area_creacion";
             $query .= ") VALUES (";
-            $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$capacitador}','{$name}','{$constancia}','{$folio}'";
+            $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$capacitador}','{$name}','{$constancia}','{$folio}','{$area}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";
@@ -89,9 +93,9 @@ if (isset($_POST['add_capacitacion'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO capacitaciones (";
-            $query .= "nombre_capacitacion,tipo_evento,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,capacitador,curriculum,constancia,folio";
+            $query .= "nombre_capacitacion,tipo_evento,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,capacitador,curriculum,constancia,folio,area_creacion";
             $query .= ") VALUES (";
-            $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$capacitador}','{$name}','{$constancia}','{$folio}'";
+            $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$capacitador}','{$name}','{$constancia}','{$folio}','{$area}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";

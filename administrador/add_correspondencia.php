@@ -9,6 +9,9 @@ $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
 
+$area_user = area_usuario2($id_user);
+$area = $area_user['nombre_area'];
+
 if ($nivel <= 2) {
     page_require_level(2);
 }
@@ -26,6 +29,9 @@ if ($nivel == 6) {
 }
 if ($nivel == 7) {
     page_require_level(7);
+}
+if ($nivel == 8) {
+    page_require_level(8);
 }
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
@@ -63,9 +69,9 @@ if (isset($_POST['add_correspondencia'])) {
         $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-COR';
 
         $query = "INSERT INTO correspondencia (";
-        $query .= "folio, fecha_recibido, nombre_remitente, nombre_institucion, cargo_funcionario, asunto, medio_recepcion, seguimiento, medio_entrega";
+        $query .= "folio, fecha_recibido, nombre_remitente, nombre_institucion, cargo_funcionario, asunto, medio_recepcion, seguimiento, medio_entrega, creador";
         $query .= ") VALUES (";
-        $query .= " '{$folio}','{$fecha_recibido}','{$nombre_remitente}','{$nombre_institucion}','{$cargo_funcionario}','{$asunto}','{$medio_recepcion}','{$seguimiento}','{$medio_entrega}'";
+        $query .= " '{$folio}','{$fecha_recibido}','{$nombre_remitente}','{$nombre_institucion}','{$cargo_funcionario}','{$asunto}','{$medio_recepcion}','{$seguimiento}','{$medio_entrega}','{$area}'";
         $query .= ")";
 
         $query2 = "INSERT INTO folios_general (";

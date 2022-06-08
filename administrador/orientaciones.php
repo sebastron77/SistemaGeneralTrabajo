@@ -20,13 +20,13 @@ if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
 
-if ($nivel_user > 2 && $nivel_user < 5):
+if ($nivel_user > 2 && $nivel_user < 5) :
     redirect('home.php');
 endif;
-if ($nivel_user > 5 && $nivel_user < 7):
+if ($nivel_user > 5 && $nivel_user < 7) :
     redirect('home.php');
 endif;
-if ($nivel_user > 7):
+if ($nivel_user > 7) :
     redirect('home.php');
 endif;
 ?>
@@ -54,18 +54,19 @@ endif;
             <div class="panel-body">
                 <table class="datatable table table-bordered table-striped">
                     <thead>
-                        <tr style="height: 10px;" class="info">
-                            <th style="width: 15%;">Folio</th>
+                        <tr class="info">
+                            <th width="20%">Folio</th>
+                            <th width="15%">Fecha creación</th>
                             <!-- <th style="width: 5%;">Tipo</th> -->
-                            <th style="width: 5%;">Medio presentación</th>
-                            <th style="width: 1%;">Adjunto</th>
-                            <th style="width: 4%;">Correo</th>
+                            <th width="15%">Medio presentación</th>
+                            <th width="15%">Adjunto</th>
+                            <th width="1%">Correo</th>
                             <!--SE PUEDE AGREGAR UN LINK QUE TE LLEVE A EDITAR EL USUARIO, COMO EN EL PANEL DE CONTROL EN ULTIMAS ASIGNACIONES-->
-                            <th style="width: 5%;">Nombre Completo</th>
-                            <th style="width: 5%;">Ocupación</th>
-                            <th style="width: 3%;">Creador</th>
+                            <th width="15%">Nombre Completo</th>
+                            <!-- <th style="width: 5%;">Ocupación</th> -->
+                            <th width="15%">Creador</th>
                             <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
-                                <th style="width: 10%;" class="text-center">Acciones</th>
+                                <th width="20%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
                     </thead>
@@ -74,23 +75,24 @@ endif;
                             <tr>
                                 <td><?php echo remove_junk(ucwords($a_orientacion['folio'])) ?></td>
                                 <!-- <td><?php
-                                    if ($a_orientacion['tipo_solicitud'] == '1') {
-                                        echo 'Orientación';
-                                    }
-                                    if ($a_orientacion['tipo_solicitud'] == '2') {
-                                        echo 'Canalización';
-                                    }
-                                    ?>
+                                            if ($a_orientacion['tipo_solicitud'] == '1') {
+                                                echo 'Orientación';
+                                            }
+                                            if ($a_orientacion['tipo_solicitud'] == '2') {
+                                                echo 'Canalización';
+                                            }
+                                            ?>
                                 </td> -->
                                 <?php
                                 $folio_editar = $a_orientacion['folio'];
                                 $resultado = str_replace("/", "-", $folio_editar);
                                 ?>
+                                <td><?php echo remove_junk(ucwords($a_orientacion['creacion'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_orientacion['medio_presentacion'])) ?></td>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/orientacioncanalizacion/orientacion/<?php echo $resultado . '/' . $a_orientacion['adjunto']; ?>"><?php echo $a_orientacion['adjunto']; ?></a></td>
                                 <td><?php echo remove_junk(ucwords($a_orientacion['correo_electronico'])) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_orientacion['nombre_completo']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_orientacion['ocupacion']))) ?></td>
+                                <!-- <td><?php echo remove_junk(ucwords(($a_orientacion['ocupacion']))) ?></td> -->
                                 <td><?php echo remove_junk($a_orientacion['nombre'] . " " . $a_orientacion['apellidos']) ?></td>
                                 <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                                     <td class="text-center">

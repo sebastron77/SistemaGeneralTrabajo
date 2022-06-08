@@ -51,26 +51,26 @@ if ($nivel == 7) {
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr class="info" style="height: 10px;">
-                            <th style="width: 3%;">Folio</th>
-                            <th style="width: 3%;">Medio de presentación</th>
-                            <th style="width: 3%;">Correo</th>
+                            <th style="width: 1%;" class="text-center">Folio</th>
+                            <th style="width: 3%;" class="text-center">Fecha de Creación</th>
+                            <th style="width: 3%;" class="text-center">Medio de presentación</th>
+                            <th style="width: 7%;" class="text-center">Correo</th>
                             <!--SE PUEDE AGREGAR UN LINK QUE TE LLEVE A EDITAR EL USUARIO, COMO EN EL PANEL DE CONTROL EN ULTIMAS ASIGNACIONES-->
-                            <th style="width: 5%;">Nombre Completo</th>
-                            <th style="width: 5%;">Nivel de Estudios</th>
-                            <th style="width: 5%;">Ocupación</th>
-                            <th style="width: 1%;">Edad</th>
+                            <th style="width: 5%;" class="text-center">Nombre Completo</th>
+                            <th style="width: 3%;" class="text-center">Nivel de Estudios</th>
+                            <th style="width: 5%;" class="text-center">Ocupación</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         <tr>
-                            <td><?php echo remove_junk(ucwords($e_detalle['folio'])) ?></td>
-                            <td><?php echo remove_junk(ucwords($e_detalle['medio_presentacion'])) ?></td>
-                            <td><?php echo remove_junk(ucwords($e_detalle['correo_electronico'])) ?></td>
-                            <td><?php echo remove_junk(ucwords(($e_detalle['nombre_completo']))) ?></td>
-                            <td><?php echo remove_junk(ucwords(($e_detalle['nivel_estudios']))) ?></td>
-                            <td><?php echo remove_junk(ucwords(($e_detalle['ocupacion']))) ?></td>
-                            <td><?php echo remove_junk(ucwords($e_detalle['edad'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['folio'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['creacion'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['medio_presentacion'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['correo_electronico'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['nombre_completo']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['nivel_estudios']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['ocupacion']))) ?></td>
                         </tr>
 
                     </tbody>
@@ -78,52 +78,54 @@ if ($nivel == 7) {
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr class="info">
-                            <th style="width: 1%;">Telefono</th>
-                            <th style="width: 1%;">Extensión</th>
-                            <th style="width: 1%;">Género</th>
-                            <th style="width: 3%;">Grupo Vulnerable</th>
-                            <th style="width: 3%;">Lengua</th>
-                            <th style="width: 5%;">Calle-Num.</th>
-                            <th style="width: 5%;">Colonia</th>
-                            <th style="width: 3%;">Código Postal</th>
+                            <th style="width: 1%;" class="text-center">Edad</th>
+                            <th style="width: 1%;" class="text-center">Telefono</th>
+                            <th style="width: 1%;" class="text-center">Extensión</th>
+                            <th style="width: 1%;" class="text-center">Género</th>
+                            <th style="width: 3%;" class="text-center">Grupo Vulnerable</th>
+                            <th style="width: 2%;" class="text-center">Lengua</th>
+                            <th style="width: 5%;" class="text-center">Calle-Num.</th>
+                            <th style="width: 5%;" class="text-center">Colonia</th>
+                            <th style="width: 2%;" class="text-center">Código Postal</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?php echo remove_junk(ucwords($e_detalle['telefono'])) ?></td>
-                            <td><?php echo remove_junk($e_detalle['extension']) ?></td>
-                            <td><?php echo remove_junk(ucwords($e_detalle['sexo'])) ?></td>
-                            <td><?php echo remove_junk(ucwords(($e_detalle['grupo_vulnerable']))) ?></td>
-                            <td><?php echo remove_junk(ucwords(($e_detalle['lengua']))) ?></td>
-                            <td><?php echo remove_junk(ucwords(($e_detalle['calle_numero']))) ?></td>
-                            <td><?php echo remove_junk(ucwords(($e_detalle['colonia']))) ?></td>
-                            <td><?php echo remove_junk(ucwords($e_detalle['codigo_postal'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['edad'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['telefono'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk($e_detalle['extension']) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['sexo'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['grupo_vulnerable']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['lengua']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['calle_numero']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['colonia']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['codigo_postal'])) ?></td>
                         </tr>
                     </tbody>
                 </table>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr class="info">
-                            <th style="width: 5%;">Institución que se canaliza</th>
-                            <th style="width: 2%;">Municipio</th>
-                            <th style="width: 2%;">Entidad</th>
-                            <th style="width: 1%;">Nacionalidad</th>
-                            <th style="width: 5%;">Observaciones</th>
-                            <th style="width: 5%;">Acta de Canalización</th>
+                            <th style="width: 5%;" class="text-center">Institución que se canaliza</th>
+                            <th style="width: 2%;" class="text-center">Municipio</th>
+                            <th style="width: 2%;" class="text-center">Entidad</th>
+                            <th style="width: 1%;" class="text-center">Nacionalidad</th>
+                            <th style="width: 5%;" class="text-center">Observaciones</th>
+                            <th style="width: 3%;" class="text-center">Acta de Canalización</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?php echo remove_junk(ucwords($e_detalle['institucion_canaliza'])) ?></td>
-                            <td><?php echo remove_junk(ucwords(($e_detalle['municipio_localidad']))) ?></td>
-                            <td><?php echo remove_junk(ucwords(($e_detalle['entidad']))) ?></td>
-                            <td><?php echo remove_junk(ucwords($e_detalle['nacionalidad'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['institucion_canaliza'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['municipio_localidad']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['entidad']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['nacionalidad'])) ?></td>
                             <td><?php echo remove_junk(ucwords($e_detalle['observaciones'])) ?></td>
                             <?php
                             $folio_editar = $e_detalle['folio'];
                             $resultado = str_replace("/", "-", $folio_editar);
                             ?>
-                            <td><a target="_blank" href="uploads/orientacioncanalizacion/canalizacion/<?php echo $resultado . '/' . $e_detalle['adjunto']; ?>"><?php echo $e_detalle['adjunto']; ?></a></td>
+                            <td class="text-center"><a target="_blank" href="uploads/orientacioncanalizacion/canalizacion/<?php echo $resultado . '/' . $e_detalle['adjunto']; ?>"><?php echo $e_detalle['adjunto']; ?></a></td>
 
                         </tr>
                     </tbody>
