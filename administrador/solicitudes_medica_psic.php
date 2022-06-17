@@ -24,15 +24,15 @@ if ($nivel_user == 4) {
 if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
-if ($nivel_user > 2 && $nivel_user < 4):
+if ($nivel_user > 2 && $nivel_user < 4) :
     redirect('home.php');
-  endif;
-  if ($nivel_user > 4 && $nivel_user < 7):
+endif;
+if ($nivel_user > 4 && $nivel_user < 7) :
     redirect('home.php');
-  endif;
-  if ($nivel_user > 7):
+endif;
+if ($nivel_user > 7) :
     redirect('home.php');
-  endif;
+endif;
 
 ?>
 
@@ -66,12 +66,48 @@ $c_cargos          = count_by_id('cargos');
                     </svg>
                 </div>
                 <div>
-                    <p style="font-size: 15px; margin-top:3%;">Fichas Técnicas</p>
+                    <p style="font-size: 15px; margin-top:3%;">Ficha (Área Médica)</p>
                     <div style="margin-top:-5%;">
                         <?php if (($nivel <= 2) || ($nivel == 4)) : ?>
                             <a style="margin-top:3%;" href="add_ficha.php" class="btn btn-success btn-sm">Agregar</a>
                         <?php endif; ?>
                         <a style="margin-top:3%;" href="fichas.php" class="btn btn-primary btn-sm">Ver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" style="height: 12.5rem;">
+            <div class="panel panel-box clearfix">
+                <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+                    <svg style="width:40px;height:63px" viewBox="0 0 24 24">
+                        <path fill="white" d="M13 3C16.88 3 20 6.14 20 10C20 12.8 18.37 15.19 16 16.31V21H9V18H8C6.89 18 6 17.11 6 16V13H4.5C4.08 13 3.84 12.5 4.08 12.19L6 9.66C6.19 5.95 9.23 3 13 3M13 1C8.41 1 4.61 4.42 4.06 8.9L2.5 11L2.47 11L2.45 11.03C1.9 11.79 1.83 12.79 2.26 13.62C2.62 14.31 3.26 14.79 4 14.94V16C4 17.85 5.28 19.42 7 19.87V23H18V17.5C20.5 15.83 22 13.06 22 10C22 5.03 17.96 1 13 1M17.33 9.3L15.37 9.81L16.81 11.27C17.16 11.61 17.16 12.19 16.81 12.54S15.88 12.89 15.54 12.54L14.09 11.1L13.57 13.06C13.45 13.55 12.96 13.82 12.5 13.7C12 13.57 11.72 13.08 11.84 12.59L12.37 10.63L10.41 11.16C9.92 11.28 9.43 11 9.3 10.5C9.18 10.05 9.46 9.55 9.94 9.43L11.9 8.91L10.46 7.46C10.11 7.12 10.11 6.55 10.46 6.19C10.81 5.84 11.39 5.84 11.73 6.19L13.19 7.63L13.7 5.67C13.82 5.18 14.32 4.9 14.79 5.03C15.28 5.16 15.56 5.65 15.43 6.13L14.9 8.1L16.87 7.57C17.35 7.44 17.84 7.72 17.97 8.21C18.1 8.68 17.82 9.18 17.33 9.3Z" />
+                    </svg>
+                </div>
+                <div>
+                    <p style="font-size: 15px; margin-top:3%;">Ficha (Área Psicológica)</p>
+                    <div style="margin-top:-5%;">
+                        <?php if (($nivel <= 2) || ($nivel == 4)) : ?>
+                            <a style="margin-top:3%;" href="add_ficha_psic.php" class="btn btn-success btn-sm">Agregar</a>
+                        <?php endif; ?>
+                        <a style="margin-top:3%;" href="fichas_psic.php" class="btn btn-primary btn-sm">Ver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" style="height: 12.5rem;">
+            <div class="panel panel-box clearfix">
+                <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+                    <svg style="width:40px;height:63px" viewBox="0 0 24 24">
+                        <path fill="white" d="M20,6C20.58,6 21.05,6.2 21.42,6.59C21.8,7 22,7.45 22,8V19C22,19.55 21.8,20 21.42,20.41C21.05,20.8 20.58,21 20,21H4C3.42,21 2.95,20.8 2.58,20.41C2.2,20 2,19.55 2,19V8C2,7.45 2.2,7 2.58,6.59C2.95,6.2 3.42,6 4,6H8V4C8,3.42 8.2,2.95 8.58,2.58C8.95,2.2 9.42,2 10,2H14C14.58,2 15.05,2.2 15.42,2.58C15.8,2.95 16,3.42 16,4V6H20M4,8V19H20V8H4M14,6V4H10V6H14M12,9A2.25,2.25 0 0,1 14.25,11.25C14.25,12.5 13.24,13.5 12,13.5A2.25,2.25 0 0,1 9.75,11.25C9.75,10 10.76,9 12,9M16.5,18H7.5V16.88C7.5,15.63 9.5,14.63 12,14.63C14.5,14.63 16.5,15.63 16.5,16.88V18Z" />
+                    </svg>
+                </div>
+                <div class="panel-value pull-right">
+                    <p style="font-size: 15px; margin-top:8%;">Jornadas</p>
+                    <div style="margin-top:-5%;">
+                        <?php if (($nivel <= 2) || ($nivel == 4)) : ?>
+                            <a style="margin-top:5%;" href="add_jornada.php" class="btn btn-success btn-sm">Agregar</a>
+                        <?php endif; ?>
+                        <a style="margin-top:5%;" href="jornadas.php" class="btn btn-primary btn-sm">Ver</a>
                     </div>
                 </div>
             </div>
@@ -93,7 +129,7 @@ $c_cargos          = count_by_id('cargos');
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
     <?php endif ?>
 </div>
 

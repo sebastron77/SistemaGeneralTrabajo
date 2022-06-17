@@ -1,5 +1,5 @@
 <?php header('Content-type: text/html; charset=utf-8');
-$page_title = 'Agregar Ficha Técnica - Área Médica';
+$page_title = 'Agregar Ficha Técnica - Área Psicológica';
 require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
@@ -12,7 +12,7 @@ $areas = find_all_area_orden('area');
 page_require_area(4);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
-if (isset($_POST['add_ficha'])) {
+if (isset($_POST['add_ficha_psic'])) {
 
     $req_fields = array('funcion', 'num_queja', 'area_solicitante', 'visitaduria', 'ocupacion', 'escolaridad', 'hechos', 'autoridad', 'nombre_usuario', 'edad', 'sexo', 'grupo_vulnerable', 'fecha_intervencion', 'resultado', 'documento_emitido');
     validate_fields($req_fields);
@@ -34,6 +34,7 @@ if (isset($_POST['add_ficha'])) {
         $resultado   = remove_junk($db->escape($_POST['resultado']));
         $documento_emitido   = remove_junk($db->escape($_POST['documento_emitido']));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
+        $protocolo_estambul   = remove_junk($db->escape($_POST['protocolo_estambul']));
         date_default_timezone_set('America/Mexico_City');
         $creacion = date('Y-m-d');
 
@@ -66,9 +67,9 @@ if (isset($_POST['add_ficha'])) {
         $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         if ($move && $name != '') {
             $query = "INSERT INTO fichas (";
-            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,ficha_adjunto,fecha_creacion,tipo_ficha";
+            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,ficha_adjunto,fecha_creacion,protocolo_estambul,tipo_ficha";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$name}','{$creacion}',1";
+            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$name}','{$creacion}','{$protocolo_estambul}',2";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";
@@ -78,9 +79,9 @@ if (isset($_POST['add_ficha'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO fichas (";
-            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,fecha_creacion,tipo_ficha";
+            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,fecha_creacion,protocolo_estambul,tipo_ficha";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$creacion}',1";
+            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$creacion}','{$protocolo_estambul}',2";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";
@@ -92,15 +93,15 @@ if (isset($_POST['add_ficha'])) {
         if ($db->query($query) && $db->query($query2)) {
             //sucess
             $session->msg('s', " La ficha ha sido agregada con éxito.");
-            redirect('fichas.php', false);
+            redirect('fichas_psic.php', false);
         } else {
             //failed
             $session->msg('d', ' No se pudo agregar la ficha.');
-            redirect('add_ficha.php', false);
+            redirect('add_ficha_psic.php', false);
         }
     } else {
         $session->msg("d", $errors);
-        redirect('add_ficha.php', false);
+        redirect('add_ficha_psic.php', false);
     }
 }
 ?>
@@ -112,23 +113,21 @@ include_once('layouts/header.php'); ?>
         <div class="panel-heading">
             <strong>
                 <span class="glyphicon glyphicon-th"></span>
-                <span>Agregar Ficha Técnica - Área Médica</span>
+                <span>Agregar Ficha Técnica - Área Psicológica</span>
             </strong>
         </div>
         <div class="panel-body">
-            <form method="post" action="add_ficha.php" enctype="multipart/form-data">
+            <form method="post" action="add_ficha_psic.php" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="funcion">Función</label>
                             <select class="form-control" name="funcion">
                                 <option value="">Escoge una opción</option>
-                                <option value="Gestión Hospitalaria">Gestión Hospitalaria</option>
-                                <option value="Certificación médica de lesiones">Certificación médica de lesiones</option>
-                                <option value="Valoración y/u Orientación Médica">Valoración y/u Orientación Médica</option>
+                                <option value="Valoración Psicológica">Valoración Psicológica</option>
                                 <option value="Contención Psicológica">Contención Psicológica</option>
+                                <option value="Orientación y Canalización Psicológica">Orientación y Canalización Psicológica</option>
                                 <option value="Supervisión y Diagnóstico Institucional">Supervisión y Diagnóstico Institucional</option>
-                                <option value="Opinión Médica">Opinión Médica</option>
                             </select>
                         </div>
                     </div>
@@ -515,6 +514,16 @@ include_once('layouts/header.php'); ?>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label for="protocolo_estambul">Protocolo de Estambul</label>
+                            <select class="form-control" name="protocolo_estambul">
+                                <option value="">Escoge una opción</option>
+                                <option value="Aplicado">Aplicado</option>
+                                <option value="No Aplicado">No Aplicado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label for="resultado">Resultado</label>
                             <select class="form-control" name="resultado">
                                 <option value="">Escoge una opción</option>
@@ -535,7 +544,7 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="adjunto">Adjuntar Ficha</label>
                             <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto">
@@ -543,10 +552,10 @@ include_once('layouts/header.php'); ?>
                     </div>
                 </div>
                 <div class="form-group clearfix">
-                    <a href="fichas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                    <a href="fichas_psic.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar
                     </a>
-                    <button type="submit" name="add_ficha" class="btn btn-primary">Guardar</button>
+                    <button type="submit" name="add_ficha_psic" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
         </div>

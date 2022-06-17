@@ -1,10 +1,10 @@
 <?php
-$page_title = 'Fichas Técnicas - Área Médica';
+$page_title = 'Fichas Técnicas - Área Psicológica';
 require_once('includes/load.php');
 ?>
 <?php
 // page_require_level(4);
-$all_fichas = find_all_fichas();
+$all_fichas = find_all_fichas2();
 $user = current_user();
 $nivel = $user['user_level'];
 // page_require_area(4);
@@ -48,10 +48,10 @@ endif;
             <div class="panel-heading clearfix">
                 <strong>
                     <span class="glyphicon glyphicon-th"></span>
-                    <span>Fichas técnicas - Área Médica</span>
+                    <span>Fichas técnicas - Área Psicológica</span>
                 </strong>
                 <?php if (($nivel_user <= 2) || ($nivel_user == 4)) : ?>
-                    <a href="add_ficha.php" class="btn btn-info pull-right">Agregar ficha</a>
+                    <a href="add_ficha_psic.php" class="btn btn-info pull-right">Agregar ficha</a>
                 <?php endif; ?>
             </div>
 
@@ -91,7 +91,7 @@ endif;
                                             <a href="ver_info_ficha.php?id=<?php echo (int)$a_ficha['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
                                                 <i class="glyphicon glyphicon-eye-open"></i>
                                             </a>
-                                            <a href="edit_ficha.php?id=<?php echo (int)$a_ficha['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
+                                            <a href="edit_ficha_psic.php?id=<?php echo (int)$a_ficha['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
                                                 <span class="glyphicon glyphicon-edit"></span>
                                             </a>
                                         </div>

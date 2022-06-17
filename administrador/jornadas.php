@@ -1,10 +1,10 @@
 <?php
-$page_title = 'Fichas Técnicas - Área Médica';
+$page_title = 'Jornadas';
 require_once('includes/load.php');
 ?>
 <?php
 // page_require_level(4);
-$all_fichas = find_all_fichas();
+$all_fichas = find_all_jornadas();
 $user = current_user();
 $nivel = $user['user_level'];
 // page_require_area(4);
@@ -48,10 +48,10 @@ endif;
             <div class="panel-heading clearfix">
                 <strong>
                     <span class="glyphicon glyphicon-th"></span>
-                    <span>Fichas técnicas - Área Médica</span>
+                    <span>Jornadas</span>
                 </strong>
                 <?php if (($nivel_user <= 2) || ($nivel_user == 4)) : ?>
-                    <a href="add_ficha.php" class="btn btn-info pull-right">Agregar ficha</a>
+                    <a href="add_jornada.php" class="btn btn-info pull-right">Agregar jornada</a>
                 <?php endif; ?>
             </div>
 
@@ -59,15 +59,13 @@ endif;
                 <table class="datatable table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 2%;">Folio</th>
-                            <th style="width: 1%;">Función</th>
-                            <th style="width: 1%;">No. Queja</th>
-                            <th style="width: 1%;">Visitaduría</th>
-                            <th style="width: 3%;">Área Solicitante</th>
-                            <th style="width: 3%;">Autoridad Responsable</th>
-                            <th style="width: 3%;">Adjunto</th>
+                            <th class="text-center" style="width: 2%;">Folio</th>
+                            <th class="text-center" style="width: 5%;">Nombre Actividad</th>
+                            <th class="text-center" style="width: 5%;">Objetivo de Actividad</th>
+                            <th class="text-center" style="width: 1%;">Total atendidos</th>
+                            <th class="text-center" style="width: 3%;">Fecha de actividad</th>
                             <?php if (($nivel_user <= 2) || ($nivel_user == 4)) : ?>
-                                <th style="width: 1%;" class="text-center">Acciones</th>
+                                <th style="width: 3%;" class="text-center">Acciones</th>
                             <?php endif; ?>
                         </tr>
                     </thead>
@@ -75,23 +73,20 @@ endif;
                         <?php foreach ($all_fichas as $a_ficha) : ?>
                             <tr>
                                 <td><?php echo remove_junk(ucwords($a_ficha['folio'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_ficha['funcion'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_ficha['num_queja'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_ficha['visitaduria'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_ficha['area_solicitante'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_ficha['autoridad'])) ?></td>
-                                <?php
-                                $folio_editar = $a_ficha['folio'];
-                                $resultado = str_replace("/", "-", $folio_editar);
-                                ?>
-                                <td><a target="_blank" style="color: #23296B;" href="uploads/fichastecnicas/<?php echo $resultado . '/' . $a_ficha['ficha_adjunto']; ?>"><?php echo $a_ficha['ficha_adjunto']; ?></a></td>
+                                <td><?php echo remove_junk(ucwords($a_ficha['nombre_actividad'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_ficha['objetivo_actividad'])) ?></td>
+                                <td class="text-center"><?php echo remove_junk($a_ficha['mujeres'] + $a_ficha['hombres'] + $a_ficha['lgbtiq']) ?></td>
+                                <td class="text-center"><?php echo remove_junk(ucwords($a_ficha['fecha_actividad'])) ?></td>
                                 <?php if (($nivel_user <= 2) || ($nivel_user == 4)) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            <a href="ver_info_ficha.php?id=<?php echo (int)$a_ficha['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
+                                            <a href="ver_imagenes.php?carpeta=<?php echo $a_ficha['carpeta']; ?>" class="btn btn-md btn-secondary" data-toggle="tooltip" title="Ver evidencia fotográfica">
+                                                <i class="glyphicon glyphicon-picture"></i>
+                                            </a>
+                                            <a href="ver_info_jornada.php?id=<?php echo (int)$a_ficha['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
                                                 <i class="glyphicon glyphicon-eye-open"></i>
                                             </a>
-                                            <a href="edit_ficha.php?id=<?php echo (int)$a_ficha['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
+                                            <a href="edit_jornada.php?id=<?php echo (int)$a_ficha['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
                                                 <span class="glyphicon glyphicon-edit"></span>
                                             </a>
                                         </div>

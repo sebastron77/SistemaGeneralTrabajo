@@ -12,6 +12,7 @@ $nivel = $user['user_level'];
 $id_user = $user['id'];
 // page_require_area(4);
 $id_user = $user['id'];
+$all_quejas = total_porAutoridad('quejas');
 
 if ($nivel <= 2) {
     page_require_level(2);
@@ -224,30 +225,45 @@ $total_visuruapan = count_by_visuruapan('quejas');
         <?php echo display_msg($msg); ?>
     </div>
 </div>
-<center>
-    <button id="btnCrearPdf" style="margin-top: 5px; margin-bottom: 5px;" class="btn btn-pdf btn-md">Guardar en PDF</button>
-</center>
-<div id='prueba'>
-    <div class="row">
-        <div class="col-md-12">
-
-            <!-- <strong>
-                        <span class="glyphicon glyphicon-th"></span>
-                        <span>Quejas presentadas por autoridad responsable</span>
-                    </strong> -->
-            <!-- <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a> -->
-
-            <center>
-                <table class="table table-bordered table-striped" style="display: grid; place-content: center;">
+<div class="row">
+    <div class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <strong>
+                    <span class="glyphicon glyphicon-th"></span>
+                    <span>Quejas por autoridad responsable (más de 20 quejas)</span>
+                </strong>
+                <!-- <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a> -->
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-striped">
+                    <a href="estadistica_quejas_autoridadR.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                        Ver en gráfica
+                    </a>
                     <!-- <a href="javascript:abrir()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a> -->
                     <br><br>
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th class="text-center" style="width: 30%;">Autoridad Responsable</th>
-                            <th class="text-center" style="width: 5%;">Cantidad</th>
+                            <th class="text-center" style="width: 40%;">Autoridad Responsable</th>
+                            <th class="text-center" style="width: 1%;">Cantidad</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach ($all_quejas as $a_quejas) : ?>
+                            <?php if ($a_quejas['total'] >= 20) : ?>
+                                <tr>
+                                    <td><?php echo remove_junk(ucwords($a_quejas['autoridad_responsable'])) ?></td>
+                                    <td class="text-center"><?php echo remove_junk(ucwords($a_quejas['total'])) ?></td>
+                                </tr>
+                                <?php $suma = $suma + $a_quejas['total'] ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                        <tr>
+                            <td style="text-align:right;"><b>Total</b></td>
+                            <td><?php echo $suma; ?></td>
+                        </tr>
+                    </tbody>
+                    <!-- <tbody>
                         <tr>
                             <td>Aeropuerto de Morelia</td>
                             <td class="text-center"><?php echo $total_aeropuerto['total'] ?></td>
@@ -1021,12 +1037,54 @@ $total_visuruapan = count_by_visuruapan('quejas');
                                 ?>
                             </td>
                         </tr>
+                    </tbody> -->
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <strong>
+                    <span class="glyphicon glyphicon-th"></span>
+                    <span>Quejas por autoridad responsable (menos de 20 quejas)</span>
+                </strong>
+                <!-- <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a> -->
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-striped">
+                    <a href="estadistica_quejas_autoridadR2.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                        Ver en gráfica
+                    </a>
+                    <!-- <a href="javascript:abrir()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a> -->
+                    <br><br>
+                    <thead>
+                        <tr style="height: 10px;" class="info">
+                            <th class="text-center" style="width: 40%;">Autoridad Responsable</th>
+                            <th class="text-center" style="width: 1%;">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($all_quejas as $a_quejas) : ?>
+                            <?php if ($a_quejas['total'] <= 20) : ?>
+                                <tr>
+                                    <td><?php echo remove_junk(ucwords($a_quejas['autoridad_responsable'])) ?></td>
+                                    <td class="text-center"><?php echo remove_junk(ucwords($a_quejas['total'])) ?></td>
+                                </tr>
+                                <?php $suma = $suma + $a_quejas['total'] ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                        <tr>
+                            <td style="text-align:right;"><b>Total</b></td>
+                            <td><?php echo $suma; ?></td>
+                        </tr>
                     </tbody>
                 </table>
-            </center>
+            </div>
         </div>
     </div>
 </div>
+
 
 <div class="ventana" id="vent">
     <div id="cerrar">

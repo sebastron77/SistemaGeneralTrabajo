@@ -20,6 +20,14 @@ function find_all_cargo_orden($table)
   }
 }
 
+function find_all_area_orden($table)
+{
+  global $db;
+  if (tableExists($table)) {
+    return find_by_sql("SELECT * FROM " . $db->escape($table) . " ORDER BY nombre_area");
+  }
+}
+
 /*--------------------------------------------------------------*/
 /* Funcion para encontrar en una tabla toda la informacion
 /*--------------------------------------------------------------*/
@@ -2060,16 +2068,51 @@ function find_all_recomendaciones()
   return $result;
 }
 
-/*-------------------------------------------------*/
-/* Funcion que encuentra todas las fichas técnicas */
-/*-------------------------------------------------*/
+/*----------------------------------------------------------------*/
+/* Funcion que encuentra todas las fichas técnicas del Área Médica*/
+/*----------------------------------------------------------------*/
 function find_all_fichas()
 {
   global $db;
   $results = array();
-  $sql = "SELECT * FROM fichas";
+  $sql = "SELECT * FROM fichas WHERE tipo_ficha = 1";
   $result = find_by_sql($sql);
   return $result;
+}
+/*---------------------------------------------------------------------*/
+/* Funcion que encuentra todas las fichas técnicas del Área Psicológica*/
+/*---------------------------------------------------------------------*/
+function find_all_fichas2()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM fichas WHERE tipo_ficha = 2";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*----------------------------------------------------------------*/
+/* Funcion que encuentra todas las fichas técnicas del Área Médica*/
+/*----------------------------------------------------------------*/
+function find_all_jornadas()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM jornadas";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*----------------------------------------------*/
+/* Funcion que verifica el tipo de ficha que es */
+/*----------------------------------------------*/
+function find_tipo_ficha($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT tipo_ficha FROM fichas WHERE id='{$db->escape($id)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
 }
 /*----------------------------------------------*/
 /* Funcion que encuentra todas las resoluciones */
@@ -2123,6 +2166,19 @@ function find_by_id_ficha($id)
   global $db;
   $id = (int)$id;
   $sql = $db->query("SELECT * FROM fichas WHERE id='{$db->escape($id)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+/*----------------------------------------------------------------------------*/
+/* Funcion que encuentra una jornada por id, que ayudara al momento de editar */
+/*----------------------------------------------------------------------------*/
+function find_by_id_jornadas($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT * FROM jornadas WHERE id='{$db->escape($id)}' LIMIT 1");
   if ($result = $db->fetch_assoc($sql))
     return $result;
   else
@@ -5326,9 +5382,16 @@ function count_by_visuruapan($table)
 
 function total_porAutoridad($table){
   global $db;
-  if (tableExists($table)) {
-    return find_by_sql("SELECT autoridad_responsable, COUNT(autoridad_responsable) FROM " . $db->escape($table)) . " GROUP BY autoridad_responsable";
-  }
+  // if (tableExists($table)) {
+  //   return find_by_sql("SELECT autoridad_responsable, COUNT(autoridad_responsable) FROM " . $db->escape($table)) . " GROUP BY autoridad_responsable";
+  // }
+
+  global $db;
+  $results = array();
+  $sql = "SELECT autoridad_responsable, COUNT(autoridad_responsable) AS total FROM " . $db->escape($table) . " GROUP BY autoridad_responsable ORDER BY autoridad_responsable ASC";
+  
+  $result = find_by_sql($sql);
+  return $result;
 }
 // global $db;
 //   $id = (int)$id;

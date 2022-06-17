@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     unit: "",
                     format: "letter",
                     orientation: 'portrait' // landscape o portrait
-                }
+                },
+                pagebreak: {avoid: 'tr'}
             })
             .from($elementoParaConvertir)
             .save()

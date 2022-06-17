@@ -225,7 +225,7 @@ a{
   color: white;
 }.sidebar ul li a,ul.submenu li a {
   color: #aeb2b7;  
-  font-size: 12px;
+  font-size: 14px;
   display: block;
   overflow: hidden;
   position: relative;
@@ -233,7 +233,7 @@ a{
   text-decoration: none;
   text-align: left;
 }.sidebar ul li a span,.sidebar ul li i{
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 300;
   letter-spacing: 1.5px;
   text-shadow: 0 1px rgba(0,0,0, 1);

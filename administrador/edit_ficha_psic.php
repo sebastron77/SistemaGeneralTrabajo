@@ -1,5 +1,5 @@
 <?php
-$page_title = 'Ficha Técnica - Área Médica';
+$page_title = 'Ficha Técnica - Área Psicológica';
 require_once('includes/load.php');
 ?>
 <?php
@@ -7,6 +7,7 @@ $user = current_user();
 $nivel = $user['user_level'];
 $areas = find_all_area_orden('area');
 $tipo_ficha = find_tipo_ficha((int)$_GET['id']);
+
 
 
 if ($nivel <= 2) {
@@ -32,11 +33,11 @@ if ($nivel == 7) {
 $e_ficha = find_by_id_ficha((int)$_GET['id']);
 if (!$e_ficha) {
     $session->msg("d", "id de ficha no encontrado.");
-    redirect('fichas.php');
+    redirect('fichas_psic.php');
 }
 ?>
 <?php
-if (isset($_POST['edit_ficha'])) {
+if (isset($_POST['edit_ficha_psic'])) {
     $req_fields = array('funcion', 'num_queja', 'area_solicitante', 'visitaduria', 'ocupacion', 'escolaridad', 'hechos', 'autoridad', 'nombre_usuario', 'edad', 'sexo', 'grupo_vulnerable', 'fecha_intervencion', 'resultado', 'documento_emitido');
     validate_fields($req_fields);
     if (empty($errors)) {
@@ -57,6 +58,7 @@ if (isset($_POST['edit_ficha'])) {
         $resultado2   = remove_junk($db->escape($_POST['resultado']));
         $documento_emitido   = remove_junk($db->escape($_POST['documento_emitido']));
         $adjunto   = remove_junk($db->escape($_POST['ficha_adjunto']));
+        $protocolo_estambul   = remove_junk($db->escape($_POST['protocolo_estambul']));
 
         $folio_editar = $e_ficha['folio'];
         $resultado = str_replace("/", "-", $folio_editar);
@@ -75,22 +77,22 @@ if (isset($_POST['edit_ficha'])) {
         }
 
         if ($name != '') {
-            $sql = "UPDATE fichas SET funcion='{$funcion}', num_queja='{$num_queja}', visitaduria='{$visitaduria}', area_solicitante='{$area_solicitante}', ocupacion='{$ocupacion}', escolaridad='{$escolaridad}', hechos='{$hechos}', autoridad='{$autoridad}', nombre_usuario='{$nombre_usuario}',edad='{$edad}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', fecha_intervencion='{$fecha_intervencion}', resultado='{$resultado2}', documento_emitido='{$documento_emitido}', ficha_adjunto='{$name}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE fichas SET funcion='{$funcion}', num_queja='{$num_queja}', visitaduria='{$visitaduria}', area_solicitante='{$area_solicitante}', ocupacion='{$ocupacion}', escolaridad='{$escolaridad}', hechos='{$hechos}', autoridad='{$autoridad}', nombre_usuario='{$nombre_usuario}',edad='{$edad}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', fecha_intervencion='{$fecha_intervencion}', resultado='{$resultado2}', documento_emitido='{$documento_emitido}', ficha_adjunto='{$name}', protocolo_estambul='{$protocolo_estambul}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql = "UPDATE fichas SET funcion='{$funcion}', num_queja='{$num_queja}', visitaduria='{$visitaduria}', area_solicitante='{$area_solicitante}', ocupacion='{$ocupacion}', escolaridad='{$escolaridad}', hechos='{$hechos}', autoridad='{$autoridad}', nombre_usuario='{$nombre_usuario}',edad='{$edad}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', fecha_intervencion='{$fecha_intervencion}', resultado='{$resultado2}', documento_emitido='{$documento_emitido}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE fichas SET funcion='{$funcion}', num_queja='{$num_queja}', visitaduria='{$visitaduria}', area_solicitante='{$area_solicitante}', ocupacion='{$ocupacion}', escolaridad='{$escolaridad}', hechos='{$hechos}', autoridad='{$autoridad}', nombre_usuario='{$nombre_usuario}',edad='{$edad}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', fecha_intervencion='{$fecha_intervencion}', resultado='{$resultado2}', documento_emitido='{$documento_emitido}', protocolo_estambul='{$protocolo_estambul}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
             $session->msg('s', "Información Actualizada ");
-            redirect('fichas.php', false);
+            redirect('fichas_psic.php', false);
         } else {
             $session->msg('d', ' Lo siento no se actualizaron los datos.');
-            redirect('fichas.php', false);
+            redirect('fichas_psic.php', false);
         }
     } else {
         $session->msg("d", $errors);
-        redirect('edit_ficha.php?id=' . (int)$e_ficha['id'], false);
+        redirect('edit_ficha_psic.php?id=' . (int)$e_ficha['id'], false);
     }
 }
 ?>
@@ -100,22 +102,20 @@ if (isset($_POST['edit_ficha'])) {
         <div class="panel-heading">
             <strong>
                 <span class="glyphicon glyphicon-th"></span>
-                <span>Editar ficha - Área Médica</span>
+                <span>Editar ficha - Área Psicológica</span>
             </strong>
         </div>
         <div class="panel-body">
-            <form method="post" action="edit_ficha.php?id=<?php echo (int)$e_ficha['id']; ?>" enctype="multipart/form-data">
+            <form method="post" action="edit_ficha_psic.php?id=<?php echo (int)$e_ficha['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="funcion">Función</label>
                             <select class="form-control" name="funcion">
-                                <option <?php if ($e_ficha['funcion'] === 'Gestión Hospitalaria') echo 'selected="selected"'; ?> value="Gestión Hospitalaria">Gestión Hospitalaria</option>
-                                <option <?php if ($e_ficha['funcion'] === 'Certificación médica de lesiones') echo 'selected="selected"'; ?> value="Certificación médica de lesiones">Certificación médica de lesiones</option>
-                                <option <?php if ($e_ficha['funcion'] === 'Valoración y/u Orientación Médica') echo 'selected="selected"'; ?> value="Valoración y/u Orientación Médica">Valoración y/u Orientación Médica</option>
+                                <option <?php if ($e_ficha['funcion'] === 'Valoración Psicológica') echo 'selected="selected"'; ?> value="Valoración Psicológica">Valoración Psicológica</option>
                                 <option <?php if ($e_ficha['funcion'] === 'Contención Psicológica') echo 'selected="selected"'; ?> value="Contención Psicológica">Contención Psicológica</option>
+                                <option <?php if ($e_ficha['funcion'] === 'Orientación y Canalización Psicológica') echo 'selected="selected"'; ?> value="Orientación y Canalización Psicológica">Orientación y Canalización Psicológica</option>
                                 <option <?php if ($e_ficha['funcion'] === 'Supervisión y Diagnóstico Institucional') echo 'selected="selected"'; ?> value="Supervisión y Diagnóstico Institucional">Supervisión y Diagnóstico Institucional</option>
-                                <option <?php if ($e_ficha['funcion'] === 'Opinión Médica') echo 'selected="selected"'; ?> value="Opinión Médica">Opinión Médica</option>
                             </select>
                         </div>
                     </div>
@@ -497,6 +497,15 @@ if (isset($_POST['edit_ficha'])) {
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label for="protocolo_estambul">Protocolo de Estambul</label>
+                            <select class="form-control" name="protocolo_estambul">
+                                <option <?php if ($e_ficha['protocolo_estambul'] === 'Aplicado') echo 'selected="selected"'; ?> value="Aplicado">Aplicado</option>
+                                <option <?php if ($e_ficha['protocolo_estambul'] === 'No Aplicado') echo 'selected="selected"'; ?> value="No Aplicado">No Aplicado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label for="resultado">Resultado</label>
                             <select class="form-control" name="resultado">
                                 <option <?php if ($e_ficha['resultado'] === 'Positivo') echo 'selected="selected"'; ?> value="Positivo">Positivo</option>
@@ -515,7 +524,7 @@ if (isset($_POST['edit_ficha'])) {
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="ficha_adjunto">Ficha Adjunta</label>
                             <input type="file" accept="application/pdf" class="form-control" name="ficha_adjunto" id="ficha_adjunto" value="uploads/fichastecnicas/<?php echo $e_ficha['ficha_adjunto']; ?>">
@@ -524,16 +533,16 @@ if (isset($_POST['edit_ficha'])) {
                     </div>
                 </div>
                 <div class="form-group clearfix">
-                <?php if ($tipo_ficha['tipo_ficha'] == 1) : ?>
-                    <a href="fichas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
-                        Regresar
-                    </a>
-                <?php else : ?>
-                    <a href="fichas_psic.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
-                        Regresar
-                    </a>
-                <?php endif; ?>
-                    <button type="submit" name="edit_ficha" class="btn btn-primary">Guardar</button>
+                    <?php if ($tipo_ficha['tipo_ficha'] == 1) : ?>
+                        <a href="fichas_psic.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                            Regresar
+                        </a>
+                    <?php else : ?>
+                        <a href="fichas_psic.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                            Regresar
+                        </a>
+                    <?php endif; ?>
+                    <button type="submit" name="edit_ficha_psic" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
         </div>
