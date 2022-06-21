@@ -64,14 +64,17 @@ $carpetas = array();
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         gap: 30px;
     }
+
     .img-gallery img {
         width: 100%;
         cursor: pointer;
         transition: 1s;
     }
+
     .img-gallery img:hover {
         transform: scale(1.2);
     }
+
     .ful-img {
         width: 100%;
         height: 100vh;
@@ -84,6 +87,7 @@ $carpetas = array();
         justify-content: center;
         z-index: 99;
     }
+
     .ful-img span {
         position: absolute;
         top: 5%;
@@ -92,10 +96,12 @@ $carpetas = array();
         color: #EA2518;
         cursor: pointer;
     }
+
     .ful-img img {
         width: 85%;
         max-width: 100%;
     }
+
     @media screen and (max-width:400px) {
         h1 {
             text-decoration: underline;
@@ -110,23 +116,32 @@ $carpetas = array();
         }
     }
 </style>
-
+<a href="jornadas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+    Regresar
+</a>
 <h1 style="text-align: center;">Imágenes de la jornada <?php echo $carpeta ?></h1>
 <div class="row">
 
-    <?php 
+    <?php
     $liga = "uploads/jornadas/" . $carpeta;
-     $borrar = filter_input(INPUT_GET, 'borrar');
-     if (!empty($borrar)) {
-         unlink("uploads/jornadas/" . $elemento . $borrar);
-         echo $carpeta ;
-         redirect('jornadas.php', false); 
-        }
-    
-    $imagenes2 = scandir($liga); 
-    for ($i = 2; $i < count($imagenes2); $i++){ ?>
+    $borrar = filter_input(INPUT_GET, 'borrar');
+    if (!empty($borrar)) {
+        unlink("uploads/jornadas/" . $elemento . $borrar);
+        echo $carpeta;
+        echo '<script> window.history.back() </script>';
+
+        // redirect('jornadas.php');
+    }
+    // else {
+    //     //failed
+    //     $session->msg('d', ' No se pudo eliminar la imagen.');
+    //     redirect('jornadas.php', false);
+    // }
+
+    $imagenes2 = scandir($liga);
+    for ($i = 2; $i < count($imagenes2); $i++) { ?>
         <div class="ful-img" id="fulImgBox">
-            <img src="uploads/jornadas/<?php echo $carpeta. '/' . $imagenes2[$i] ?>" id="fulImg" alt="">
+            <img src="uploads/jornadas/<?php echo $carpeta . '/' . $imagenes2[$i] ?>" id="fulImg" alt="">
             <span onclick="closeImg()">X</span>
         </div>
         <div class="col-md-4">

@@ -36,6 +36,7 @@ if (!$e_jornada) {
 ?>
 <?php
 if (isset($_POST['edit_jornada'])) {
+    $countfiles = count($_FILES['files']['name']);
     $req_fields = array('nombre_actividad', 'objetivo_actividad', 'area_responsable', 'mujeres', 'hombres', 'lgbtiq', 'fecha_actividad', 'alcance', 'colaboracion_institucional');
     validate_fields($req_fields);
     if (empty($errors)) {
@@ -67,6 +68,30 @@ if (isset($_POST['edit_jornada'])) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
 
+        // Generamos el bucle de todos los archivos
+        for ($i = 0; $i < $countfiles; $i++) {
+
+            // Extraemos en variable el nombre de archivo
+            $filename = $_FILES['files']['name'][$i];
+
+            // Designamos la carpeta de subida
+            $target_file = 'uploads/jornadas/' . $resultado . '/' . $filename;
+
+            // Obtenemos la extension del archivo
+            $file_extension = pathinfo($target_file, PATHINFO_EXTENSION);
+
+            $file_extension = strtolower($file_extension);
+
+            // Validamos la extensión de la imagen
+            $valid_extension = array("png", "jpeg", "jpg");
+
+            if (in_array($file_extension, $valid_extension)) {
+
+                // Subimos la imagen al servidor
+                move_uploaded_file($_FILES['files']['tmp_name'][$i], $target_file);
+            }
+        }
+
         if ($name != '') {
             $sql = "UPDATE jornadas SET nombre_actividad='{$nombre_actividad}', objetivo_actividad='{$objetivo_actividad}', area_responsable='{$area_responsable}', mujeres='{$mujeres}', hombres='{$hombres}', lgbtiq='{$lgbtiq}', fecha_actividad='{$fecha_actividad}', alcance='{$alcance}', colaboracion_institucional='{$colaboracion_institucional}' WHERE id='{$db->escape($id)}'";
         }
@@ -74,7 +99,7 @@ if (isset($_POST['edit_jornada'])) {
             $sql = "UPDATE jornadas SET nombre_actividad='{$nombre_actividad}', objetivo_actividad='{$objetivo_actividad}', area_responsable='{$area_responsable}', mujeres='{$mujeres}', hombres='{$hombres}', lgbtiq='{$lgbtiq}', fecha_actividad='{$fecha_actividad}', alcance='{$alcance}', colaboracion_institucional='{$colaboracion_institucional}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
-        if ($result && $db->affected_rows() === 1) {
+        if (($result && $db->affected_rows() === 1) || ($result && $db->affected_rows() === 0)) {
             $session->msg('s', "Información Actualizada ");
             redirect('jornadas.php', false);
         } else {
@@ -165,6 +190,12 @@ if (isset($_POST['edit_jornada'])) {
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="evidencia_fotografica">Evidencia Fotográfica</label>
+                        <input type='file' class="custom-file-input form-control" id="inputGroupFile01" name='files[]' multiple />
+                    </div>
+                </div><br>
                 <div class="form-group clearfix">
                     <a href="jornadas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar

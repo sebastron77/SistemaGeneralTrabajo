@@ -84,9 +84,9 @@ if (isset($_POST['add_jornada'])) {
         }
 
         $query = "INSERT INTO jornadas (";
-        $query .= "folio,nombre_actividad,objetivo_actividad,area_responsable,mujeres,hombres,lgbtiq,fecha_actividad,alcance,colaboracion_institucional,creacion";
+        $query .= "folio,nombre_actividad,objetivo_actividad,area_responsable,mujeres,hombres,lgbtiq,fecha_actividad,alcance,colaboracion_institucional,creacion,carpeta";
         $query .= ") VALUES (";
-        $query .= " '{$folio}','{$nombre_actividad}','{$objetivo_actividad}','{$area_responsable}','{$mujeres}','{$hombres}','{$lgbtiq}','{$fecha_actividad}','{$alcance}','{$colaboracion_institucional}','{$creacion}'";
+        $query .= " '{$folio}','{$nombre_actividad}','{$objetivo_actividad}','{$area_responsable}','{$mujeres}','{$hombres}','{$lgbtiq}','{$fecha_actividad}','{$alcance}','{$colaboracion_institucional}','{$creacion}','{$folio_carpeta}'";
         $query .= ")";
 
         $query2 = "INSERT INTO folios_general (";
