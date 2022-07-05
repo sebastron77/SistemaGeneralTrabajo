@@ -38,6 +38,26 @@ if (isset($_POST['add_queja'])) {
         $estatus_queja   = remove_junk($db->escape($_POST['estatus_queja']));
         $asignada_a   = remove_junk(($db->escape($_POST['asignada_a'])));
         $ticket_id   = remove_junk(($db->escape($_POST['ticket_id'])));
+        $email = $queja['email'];
+        $name = $queja['name'];
+        $n_estudios = $queja['n_estudios'];
+        $ocupacion = $queja['ocupacion'];
+        $edad = $queja['edad'];
+        $phone = $queja['phone'];
+        $sexo = $queja['sexo'];
+        $direccion = $queja['direccion'];
+        $colonia = $queja['colonia'];
+        $cp = $queja['cp'];
+        $municipio = $queja['municipio'];
+        $entidad = $queja['entidad'];
+        $nacionalidad = $queja['nacionalidad'];
+        $visitaduria = $queja['visitaduria'];
+        $agraviado = $queja['agraviado'];
+        $a_firma = $queja['a_firma'];
+        $h_direccion = $queja['h_direccion'];
+        $h_colonia = $queja['h_colonia'];
+        $h_municipio = $queja['h_municipio'];
+        $h_direccion = $queja['h_direccion'];
 
         if (count($id_folio) == 0) {
             $nuevo_id_folio = 1;
@@ -64,9 +84,12 @@ if (isset($_POST['add_queja'])) {
 
         // if ($name != '') {
         $query = "INSERT INTO quejas (";
-        $query .= "folio_queja,ultima_actualizacion,autoridad_responsable,creada_por,estatus_queja,asignada_a,ticket_id";
+        $query .= "folio_queja,ultima_actualizacion,autoridad_responsable,creada_por,estatus_queja,asignada_a,ticket_id,email,name,n_estudios,ocupacion,edad,phone,sexo,
+                    direccion,colonia,cp,municipio,entidad,nacionalidad,visitaduria,agraviado,a_firma,h_direccion,h_colonia,h_municipio,h_entidad";
         $query .= ") VALUES (";
-        $query .= " '{$folio}','{$ultima_actualizacion}','{$autoridad_responsable}','{$creada_por}','{$estatus_queja}','{$asignada_a}','{$ticket_id}'";
+        $query .= " '{$folio}','{$ultima_actualizacion}','{$autoridad_responsable}','{$creada_por}','{$estatus_queja}','{$asignada_a}','{$ticket_id}','{$email}',
+                    '{$name}','{$n_estudios}','{$ocupacion}','{$edad}','{$phone}','{$sexo}','{$direccion}','{$colonia}','{$cp}','{$municipio}','{$entidad}',
+                    '{$nacionalidad}','{$visitaduria}','{$agraviado}','{$a_firma}','{$h_direccion}','{$h_colonia}','{$h_municipio}','{$h_entidad}'";
         $query .= ")";
 
         $query2 = "INSERT INTO folios (";
@@ -103,12 +126,6 @@ include_once('layouts/header.php'); ?>
         <div class="panel-body">
             <form method="post" action="add_queja.php">
                 <div class="row">
-                    <!-- <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="folio_queja">Folio Queja</label>
-                            <input type="text" class="form-control" name="folio_queja" value="<?php echo remove_junk($queja['Folio_Queja']); ?>">
-                        </div>
-                    </div> -->
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="ultima_actualizacion">Última Actualización</label>

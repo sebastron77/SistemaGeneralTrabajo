@@ -165,13 +165,19 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-1">
                         <div class="form-group">
                             <label>LGBTIQ+</label>
-                            <input type="number" class="form-control" min="1" max="120" name="lgbtiq" required>
+                            <input type="number" class="form-control" min="0" max="120" name="lgbtiq" required>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label>Fecha de Actividad</label>
+                            <label>Inicio de Actividad</label>
                             <input type="date" class="form-control" name="fecha_actividad" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Fin de Actividad</label>
+                            <input type="date" class="form-control" name="fin_actividad">
                         </div>
                     </div>
                     <div class="col-md-3">

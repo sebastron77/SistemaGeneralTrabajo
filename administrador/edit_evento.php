@@ -15,24 +15,24 @@ $nivel = $user['user_level'];
 
 $id_user = $user['id'];
 
-if ($nivel <= 2) {
-    page_require_level(2);
-}
-if ($nivel == 3) {
-    redirect('home.php');
-}
-if ($nivel == 4) {
-    redirect('home.php');
-}
-if ($nivel == 5) {
-    redirect('home.php');
-}
-if ($nivel == 6) {
-    redirect('home.php');
-}
-if ($nivel == 7) {
-    page_require_level(7);
-}
+// if ($nivel <= 2) {
+//     page_require_level(2);
+// }
+// if ($nivel == 3) {
+//     redirect('home.php');
+// }
+// if ($nivel == 4) {
+//     redirect('home.php');
+// }
+// if ($nivel == 5) {
+//     redirect('home.php');
+// }
+// if ($nivel == 6) {
+//     redirect('home.php');
+// }
+// if ($nivel == 7) {
+//     page_require_level(7);
+// }
 ?>
 
 <?php
@@ -177,7 +177,7 @@ if (isset($_POST['edit_evento'])) {
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="quien_asiste">¿Quién asiste? (separado por comas)</label>
-                            <textarea name="quien_asiste" id="quien_asiste" cols="30" rows="10"  value="<?php echo remove_junk(($e_evento['quien_asiste'])); ?>"><?php echo remove_junk(($e_evento['quien_asiste'])); ?></textarea>
+                            <textarea name="quien_asiste" class="form-control" id="quien_asiste" cols="30" rows="10"  value="<?php echo remove_junk(($e_evento['quien_asiste'])); ?>"><?php echo remove_junk(($e_evento['quien_asiste'])); ?></textarea>
                         </div>
                     </div>
                     <div class="col-md-4">

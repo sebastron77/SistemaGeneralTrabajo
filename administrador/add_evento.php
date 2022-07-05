@@ -5,25 +5,28 @@ $id_folio = last_id_folios_general();
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
-if ($nivel <= 2) {
-    page_require_level(2);
-}
-if ($nivel == 3) {
-    redirect('home.php');
-}
-if ($nivel == 4) {
-    // page_require_level_exacto(4);
-    redirect('home.php');
-}
-if ($nivel == 5) {
-    redirect('home.php');
-}
-if ($nivel == 6) {
-    redirect('home.php');
-}
-if ($nivel == 7) {
-    page_require_level_exacto(7);
-}
+
+$area_user = area_usuario2($id_user);
+$area = $area_user['nombre_area'];
+// if ($nivel <= 2) {
+//     page_require_level(2);
+// }
+// if ($nivel == 3) {
+//     redirect('home.php');
+// }
+// if ($nivel == 4) {
+//     // page_require_level_exacto(4);
+//     redirect('home.php');
+// }
+// if ($nivel == 5) {
+//     redirect('home.php');
+// }
+// if ($nivel == 6) {
+//     redirect('home.php');
+// }
+// if ($nivel == 7) {
+//     page_require_level_exacto(7);
+// }
 
 // page_require_level(4);
 ?>
@@ -78,9 +81,9 @@ if (isset($_POST['add_evento'])) {
 
         if ($move && $name != '') {
             $query = "INSERT INTO eventos (";
-            $query .= "nombre_evento,tipo_evento,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,quien_asiste,invitacion,constancia,folio";
+            $query .= "folio,nombre_evento,tipo_evento,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,quien_asiste,invitacion,constancia,area_creacion";
             $query .= ") VALUES (";
-            $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$quien_asiste}','{$name}','{$constancia}','{$folio}'";
+            $query .= " '{$folio}','{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$quien_asiste}','{$name}','{$constancia}','{$area}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";
@@ -90,9 +93,9 @@ if (isset($_POST['add_evento'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO eventos (";
-            $query .= "nombre_evento,tipo_evento,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,quien_asiste,invitacion,constancia,folio";
+            $query .= "folio,nombre_evento,tipo_evento,quien_solicita,fecha,hora,lugar,no_asistentes,modalidad,depto_org,quien_asiste,invitacion,constancia,area_creacion";
             $query .= ") VALUES (";
-            $query .= " '{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$quien_asiste}','{$name}','{$constancia}','{$folio}'";
+            $query .= " '{$folio}','{$nombre}','{$tipo_evento}','{$solicita}','{$fecha}','{$hora}','{$lugar}','{$asistentes}','{$modalidad}','{$depto}','{$quien_asiste}','{$name}','{$constancia}','{$area}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";

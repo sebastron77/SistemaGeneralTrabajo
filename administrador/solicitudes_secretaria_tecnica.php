@@ -98,6 +98,24 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
+    <div class="col-md-3" style="height: 13.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+                <svg style="width:40px;height:73px" viewBox="0 0 24 24">
+                    <path fill="white" d="M17,4H7A5,5 0 0,0 2,9V20H20A2,2 0 0,0 22,18V9A5,5 0 0,0 17,4M10,18H4V9A3,3 0 0,1 7,6A3,3 0 0,1 10,9V18M19,15H17V13H13V11H19V15M9,11H5V9H9V11Z" />
+                </svg>
+            </div>
+            <div class="panel-value pull-right">
+                <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Envío de Correspon-<br>dencia Interna</p>
+                <div style="margin-top:-5%;">
+                    
+                        <a style="margin-top:5%;" href="add_env_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
+                    
+                    <a style="margin-top:5%;" href="env_correspondencia.php" class="btn btn-primary btn-sm">Ver</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
@@ -135,7 +153,11 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
-    <div class="col-md-3" style="height: 13.5rem;">
+    
+</div>
+
+<div class="row" style="margin-top: 10px;">
+<div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
                 <svg style="width:40px;height:73px" viewBox="0 0 24 24">
@@ -153,8 +175,6 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
-</div>
-<div class="row" style="margin-top: 10px;">
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
@@ -165,9 +185,9 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 15px; margin-top:5%; color:#333333;">Eventos</p>
                 <div style="margin-top:-5%;">
-                    <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
+                    
                         <a style="margin-top:5%;" href="add_evento.php" class="btn btn-success btn-sm">Agregar</a>
-                    <?php endif; ?>
+                    
                     <a style="margin-top:5%;" href="eventos.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>

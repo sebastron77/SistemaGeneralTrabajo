@@ -10,24 +10,46 @@ $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
 
-if ($nivel <= 2) {
-    page_require_level(2);
-}
-if ($nivel == 3) {
+if ($nivel_user > 2 && $nivel_user < 7):
     redirect('home.php');
-}
-if ($nivel == 4) {
+endif;
+if ($nivel_user > 7):
     redirect('home.php');
+endif;
+
+$conexion = mysqli_connect ("localhost", "root", "");
+mysqli_set_charset($conexion,"utf8");
+mysqli_select_db ($conexion, "probar_antes_server");
+$sql = "SELECT * FROM recomendaciones";
+$resultado = mysqli_query ($conexion, $sql) or die;
+$resoluciones = array();
+while( $rows = mysqli_fetch_assoc($resultado) ) {
+    $recomendaciones[] = $rows;
 }
-if ($nivel == 5) {
-    page_require_level_exacto(5);
+
+mysqli_close($conexion);
+
+if (isset($_POST["export_data"])) {
+    if (!empty($recomendaciones)) {
+        header('Content-Encoding: UTF-8');
+        header('Content-type: application/vnd.ms-excel;charset=UTF-8');
+        header("Content-Disposition: attachment; filename=recomendaciones.xls");        
+        $filename = "recomendaciones.xls";
+        $mostrar_columnas = false;
+
+        foreach ($recomendaciones as $resolucion) {
+            if (!$mostrar_columnas) {
+                echo implode("\t", array_keys($resolucion)) . "\n";
+                $mostrar_columnas = true;
+            }
+            echo implode("\t", array_values($resolucion)) . "\n";
+        }
+    } else {
+        echo 'No hay datos a exportar';
+    }
+    exit;
 }
-if ($nivel == 6) {
-    redirect('home.php');
-}
-if ($nivel == 7) {
-    page_require_level_exacto(7);
-}
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -41,6 +63,7 @@ if ($nivel == 7) {
 <?php if (($nivel <= 2) || ($nivel == 5) || ($nivel == 7)) : ?>
     <a href="quejas_agregadas.php" class="btn btn-success">Regresar a quejas agregadas</a>
 <?php endif; ?>
+
 <br><br>
 
 <div class="row">
@@ -51,6 +74,10 @@ if ($nivel == 7) {
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Recomendaciones</span>
                 </strong>
+                <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                    <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
+                </form>
+            </div>
                 <!-- <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6)) : ?>
                     <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a>
                 <?php endif; ?> -->

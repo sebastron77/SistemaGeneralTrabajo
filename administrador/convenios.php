@@ -30,6 +30,39 @@ if ($nivel_user > 7):
     redirect('home.php');
 endif;
 
+$conexion = mysqli_connect ("localhost", "root", "");
+mysqli_set_charset($conexion,"utf8");
+mysqli_select_db ($conexion, "probar_antes_server");
+$sql = "SELECT * FROM convenios";
+$resultado = mysqli_query ($conexion, $sql) or die;
+$convenios = array();
+while( $rows = mysqli_fetch_assoc($resultado) ) {
+    $convenios[] = $rows;
+}
+
+mysqli_close($conexion);
+
+if (isset($_POST["export_data"])) {
+    if (!empty($convenios)) {
+        header('Content-Encoding: UTF-8');
+        header('Content-type: application/vnd.ms-excel;charset=UTF-8');
+        header("Content-Disposition: attachment; filename=convenios.xls");        
+        $filename = "convenios.xls";
+        $mostrar_columnas = false;
+
+        foreach ($convenios as $resolucion) {
+            if (!$mostrar_columnas) {
+                echo implode("\t", array_keys($resolucion)) . "\n";
+                $mostrar_columnas = true;
+            }
+            echo implode("\t", array_values($resolucion)) . "\n";
+        }
+    } else {
+        echo 'No hay datos a exportar';
+    }
+    exit;
+}
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -58,8 +91,12 @@ endif;
                     <span>Convenios</span>
                 </strong>
                 <?php if (($nivel_user <= 2) || ($nivel_user == 3) || ($nivel_user == 7)) : ?>
-                    <a href="add_convenio.php" class="btn btn-info pull-right">Agregar convenio</a>
+                    <a href="add_convenio.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar convenio</a>
                 <?php endif; ?>
+                <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                    <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
+                </form>
+            </div>
             </div>
 
             <div class="panel-body">

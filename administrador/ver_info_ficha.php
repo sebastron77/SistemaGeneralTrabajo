@@ -94,7 +94,7 @@ if ($nivel == 7) {
                     </thead>
                     <tbody>
                         <td><?php echo remove_junk(ucwords(($a_ficha['escolaridad']))) ?></td>
-                        <td><?php echo remove_junk(ucwords(($a_ficha['hechos']))) ?></td>
+                        <td><?php echo remove_junk((($a_ficha['hechos']))) ?></td>
                         <td><?php echo remove_junk(ucwords(($a_ficha['autoridad']))) ?></td>
                         <td><?php echo remove_junk(ucwords(($a_ficha['nombre_usuario']))) ?></td>
                         <td class="text-center"><?php echo remove_junk(ucwords(($a_ficha['edad']))) ?></td>
@@ -112,7 +112,9 @@ if ($nivel == 7) {
                             <?php endif; ?>
                             <th class="text-center" style="width: 2%;">Resultado</th>
                             <th class="text-center" style="width: 2%;">Documento Emitido</th>
-                            <th class="text-center" style="width: 5%;">Ficha Adjunta</th>
+                            <th class="text-center" style="width: 7%;">Nombre del especialista que emitió</th>
+                            <th class="text-center" style="width: 7%;">Clave del documento</th>
+                            <th class="text-center" style="width: 5%;">Documento emitido</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -124,6 +126,8 @@ if ($nivel == 7) {
                             <?php endif; ?>
                             <td class="text-center"><?php echo remove_junk(ucwords(($a_ficha['resultado']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['documento_emitido']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['nombre_especialista']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_ficha['clave_documento']))) ?></td>
                             <?php
                             $folio_editar = $a_ficha['folio'];
                             $resultado = str_replace("/", "-", $folio_editar);

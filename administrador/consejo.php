@@ -19,9 +19,43 @@ if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
 
-if ($nivel_user > 2 && $nivel_user < 7):
+if ($nivel_user > 2 && $nivel_user < 7) :
     redirect('home.php');
 endif;
+
+
+$conexion = mysqli_connect("localhost", "root", "");
+mysqli_set_charset($conexion, "utf8");
+mysqli_select_db($conexion, "probar_antes_server");
+$sql = "SELECT * FROM consejo";
+$resultado = mysqli_query($conexion, $sql) or die;
+$consejo = array();
+while ($rows = mysqli_fetch_assoc($resultado)) {
+    $consejo[] = $rows;
+}
+
+mysqli_close($conexion);
+
+if (isset($_POST["export_data"])) {
+    if (!empty($consejo)) {
+        header('Content-Encoding: UTF-8');
+        header('Content-type: application/vnd.ms-excel;charset=UTF-8');
+        header("Content-Disposition: attachment; filename=consejo.xls");
+        $filename = "consejo.xls";
+        $mostrar_columnas = false;
+
+        foreach ($consejo as $resolucion) {
+            if (!$mostrar_columnas) {
+                echo implode("\t", array_keys($resolucion)) . "\n";
+                $mostrar_columnas = true;
+            }
+            echo implode("\t", array_values($resolucion)) . "\n";
+        }
+    } else {
+        echo 'No hay datos a exportar';
+    }
+    exit;
+}
 
 // page_require_level(2);
 
@@ -46,60 +80,64 @@ endif;
                     <span>Consejo</span>
                 </strong>
                 <?php if ($nivel_user <= 2) : ?>
-                    <a href="add_consejo.php" class="btn btn-info pull-right">Agregar Consejo</a>
+                    <a href="add_consejo.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar Consejo</a>
                 <?php endif; ?>
-            </div>
-
-            <div class="panel-body">
-                <table class="datatable table table-bordered table-striped">
-                    <thead>
-                        <tr style="height: 10px;" class="info">
-                            <th style="width: 5%;">Folio</th>
-                            <th style="width: 1%;">No. Sesión</th>
-                            <th style="width: 10%;">Tipo Sesión</th>
-                            <th style="width: 5%;">Fecha Sesión</th>
-                            <th style="width: 1%;">Hora</th>
-                            <th style="width: 2%;">Lugar</th>
-                            <th style="width: 1%;">No. Asistentes</th>
-                            <th style="width: 5%;">Orden del día</th>
-                            <th style="width: 5%;">Acta acuerdos</th>
-                            <?php if ($nivel_user <= 2) : ?>
-                                <th style="width: 5%;" class="text-center">Acciones</th>
-                            <?php endif; ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($all_consejo as $a_consejo) : ?>
-                            <?php
-                            $folio_editar = $a_consejo['folio'];
-                            $resultado = str_replace("/", "-", $folio_editar);
-                            ?>
-                            <tr>
-                                <td><?php echo remove_junk(ucwords($a_consejo['folio'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_consejo['num_sesion'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_consejo['tipo_sesion'])) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_consejo['fecha_sesion']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_consejo['hora']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_consejo['lugar']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_consejo['num_asistentes']))) ?></td>
-                                <td><a target="_blank" style="color: #23296B;" href="uploads/consejo/<?php echo $resultado . '/' . $a_consejo['orden_dia']; ?>"><?php echo $a_consejo['orden_dia']; ?></a></td>
-                                <td><a target="_blank" style="color: #23296B;" href="uploads/consejo/<?php echo $resultado . '/' . $a_consejo['acta_acuerdos']; ?>"><?php echo $a_consejo['acta_acuerdos']; ?></a></td>
-                                <?php if ($nivel_user <= 2) : ?>
-                                    <td class="text-center">
-                                        <div class="btn-group">
-                                            <a href="edit_consejo.php?id=<?php echo (int)$a_consejo['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
-                                                <span class="glyphicon glyphicon-edit"></span>
-                                            </a>
-                                        </div>
-                                    </td>
-                                <?php endif; ?>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                    <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
+                </form>
             </div>
         </div>
+
+        <div class="panel-body">
+            <table class="datatable table table-bordered table-striped">
+                <thead>
+                    <tr style="height: 10px;" class="info">
+                        <th style="width: 5%;">Folio</th>
+                        <th style="width: 1%;">No. Sesión</th>
+                        <th style="width: 10%;">Tipo Sesión</th>
+                        <th style="width: 5%;">Fecha Sesión</th>
+                        <th style="width: 1%;">Hora</th>
+                        <th style="width: 2%;">Lugar</th>
+                        <th style="width: 1%;">No. Asistentes</th>
+                        <th style="width: 5%;">Orden del día</th>
+                        <th style="width: 5%;">Acta acuerdos</th>
+                        <?php if ($nivel_user <= 2) : ?>
+                            <th style="width: 5%;" class="text-center">Acciones</th>
+                        <?php endif; ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($all_consejo as $a_consejo) : ?>
+                        <?php
+                        $folio_editar = $a_consejo['folio'];
+                        $resultado = str_replace("/", "-", $folio_editar);
+                        ?>
+                        <tr>
+                            <td><?php echo remove_junk(ucwords($a_consejo['folio'])) ?></td>
+                            <td><?php echo remove_junk(ucwords($a_consejo['num_sesion'])) ?></td>
+                            <td><?php echo remove_junk(ucwords($a_consejo['tipo_sesion'])) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_consejo['fecha_sesion']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_consejo['hora']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_consejo['lugar']))) ?></td>
+                            <td><?php echo remove_junk(ucwords(($a_consejo['num_asistentes']))) ?></td>
+                            <td><a target="_blank" style="color: #23296B;" href="uploads/consejo/<?php echo $resultado . '/' . $a_consejo['orden_dia']; ?>"><?php echo $a_consejo['orden_dia']; ?></a></td>
+                            <td><a target="_blank" style="color: #23296B;" href="uploads/consejo/<?php echo $resultado . '/' . $a_consejo['acta_acuerdos']; ?>"><?php echo $a_consejo['acta_acuerdos']; ?></a></td>
+                            <?php if ($nivel_user <= 2) : ?>
+                                <td class="text-center">
+                                    <div class="btn-group">
+                                        <a href="edit_consejo.php?id=<?php echo (int)$a_consejo['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                        </a>
+                                    </div>
+                                </td>
+                            <?php endif; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 </div>
 
 <?php include_once('layouts/footer.php'); ?>

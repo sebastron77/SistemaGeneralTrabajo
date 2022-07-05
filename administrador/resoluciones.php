@@ -25,6 +25,39 @@ if ($nivel_user > 2 && $nivel_user < 7):
     redirect('home.php');
   endif;
 // page_require_area(4);
+$conexion = mysqli_connect ("localhost", "root", "");
+mysqli_set_charset($conexion,"utf8");
+mysqli_select_db ($conexion, "probar_antes_server");
+$sql = "SELECT * FROM resoluciones";
+$resultado = mysqli_query ($conexion, $sql) or die;
+$resoluciones = array();
+while( $rows = mysqli_fetch_assoc($resultado) ) {
+    $resoluciones[] = $rows;
+}
+
+mysqli_close($conexion);
+
+if (isset($_POST["export_data"])) {
+    if (!empty($resoluciones)) {
+        header('Content-Encoding: UTF-8');
+        header('Content-type: application/vnd.ms-excel;charset=UTF-8');
+        header("Content-Disposition: attachment; filename=resoluciones.xls");        
+        $filename = "resoluciones.xls";
+        $mostrar_columnas = false;
+
+        foreach ($resoluciones as $resolucion) {
+            if (!$mostrar_columnas) {
+                echo implode("\t", array_keys($resolucion)) . "\n";
+                $mostrar_columnas = true;
+            }
+            echo implode("\t", array_values($resolucion)) . "\n";
+        }
+    } else {
+        echo 'No hay datos a exportar';
+    }
+    exit;
+}
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -45,8 +78,11 @@ if ($nivel_user > 2 && $nivel_user < 7):
                     <span>Resoluciones</span>
                 </strong>
                 <?php if($nivel_user <= 2):?>
-                    <a href="add_resolucion.php" class="btn btn-info pull-right">Agregar Resolución</a>
+                    <a href="add_resolucion.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar Resolución</a>
                 <?php endif;?>
+                <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                    <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
+                </form>
             </div>
 
             <div class="panel-body">

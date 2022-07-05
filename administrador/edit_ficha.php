@@ -56,6 +56,8 @@ if (isset($_POST['edit_ficha'])) {
         $fecha_intervencion   = remove_junk($db->escape($_POST['fecha_intervencion']));
         $resultado2   = remove_junk($db->escape($_POST['resultado']));
         $documento_emitido   = remove_junk($db->escape($_POST['documento_emitido']));
+        $nombre_especialista   = remove_junk($db->escape($_POST['nombre_especialista']));
+        $clave_documento   = remove_junk($db->escape($_POST['clave_documento']));
         $adjunto   = remove_junk($db->escape($_POST['ficha_adjunto']));
 
         $folio_editar = $e_ficha['folio'];
@@ -75,10 +77,10 @@ if (isset($_POST['edit_ficha'])) {
         }
 
         if ($name != '') {
-            $sql = "UPDATE fichas SET funcion='{$funcion}', num_queja='{$num_queja}', visitaduria='{$visitaduria}', area_solicitante='{$area_solicitante}', ocupacion='{$ocupacion}', escolaridad='{$escolaridad}', hechos='{$hechos}', autoridad='{$autoridad}', nombre_usuario='{$nombre_usuario}',edad='{$edad}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', fecha_intervencion='{$fecha_intervencion}', resultado='{$resultado2}', documento_emitido='{$documento_emitido}', ficha_adjunto='{$name}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE fichas SET funcion='{$funcion}', num_queja='{$num_queja}', visitaduria='{$visitaduria}', area_solicitante='{$area_solicitante}', ocupacion='{$ocupacion}', escolaridad='{$escolaridad}', hechos='{$hechos}', autoridad='{$autoridad}', nombre_usuario='{$nombre_usuario}',edad='{$edad}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', fecha_intervencion='{$fecha_intervencion}', resultado='{$resultado2}', documento_emitido='{$documento_emitido}', ficha_adjunto='{$name}', nombre_especialista='{$nombre_especialista}', clave_documento='{$clave_documento}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql = "UPDATE fichas SET funcion='{$funcion}', num_queja='{$num_queja}', visitaduria='{$visitaduria}', area_solicitante='{$area_solicitante}', ocupacion='{$ocupacion}', escolaridad='{$escolaridad}', hechos='{$hechos}', autoridad='{$autoridad}', nombre_usuario='{$nombre_usuario}',edad='{$edad}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', fecha_intervencion='{$fecha_intervencion}', resultado='{$resultado2}', documento_emitido='{$documento_emitido}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE fichas SET funcion='{$funcion}', num_queja='{$num_queja}', visitaduria='{$visitaduria}', area_solicitante='{$area_solicitante}', ocupacion='{$ocupacion}', escolaridad='{$escolaridad}', hechos='{$hechos}', autoridad='{$autoridad}', nombre_usuario='{$nombre_usuario}',edad='{$edad}', sexo='{$sexo}', grupo_vulnerable='{$grupo_vulnerable}', fecha_intervencion='{$fecha_intervencion}', resultado='{$resultado2}', documento_emitido='{$documento_emitido}', nombre_especialista='{$nombre_especialista}', clave_documento='{$clave_documento}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
@@ -233,7 +235,6 @@ if (isset($_POST['edit_ficha'])) {
                         <div class="form-group">
                             <label for="visitaduria">Visitaduria</label>
                             <select class="form-control" name="visitaduria">
-                                <option value="">Elige una opción</option>
                                 <option <?php if ($e_ficha['visitaduria'] === 'Regional de Apatzingán') echo 'selected="selected"'; ?> value="Regional de Apatzingán">Regional de Apatzingán</option>
                                 <option <?php if ($e_ficha['visitaduria'] === 'Regional de Lázaro Cárdenas') echo 'selected="selected"'; ?> value="Regional de Lázaro Cárdenas">Regional de Lázaro Cárdenas</option>
                                 <option <?php if ($e_ficha['visitaduria'] === 'Regional de Morelia') echo 'selected="selected"'; ?> value="Regional de Morelia">Regional de Morelia</option>
@@ -249,7 +250,145 @@ if (isset($_POST['edit_ficha'])) {
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="hechos">Presuntos hechos violatorios</label>
-                            <textarea type="text" class="form-control" name="hechos" cols="30" rows="1" value="<?php echo remove_junk($e_ficha['hechos']); ?>" required><?php echo remove_junk($e_ficha['hechos']); ?></textarea>
+                            <select class="form-control" name="hechos">
+                                <option <?php if ($e_ficha['hechos'] === 'Preservar la vida humana') echo 'selected="selected"'; ?> value="Preservar la vida humana">Preservar la vida humana</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser privado de la vida arbitraria extrajudicial o sumaramente') echo 'selected="selected"'; ?> value="No ser privado de la vida arbitraria extrajudicial o sumaramente">No ser privado de la vida arbitraria extrajudicial o sumaramente</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Preservar la vida del producto de la concepción') echo 'selected="selected"'; ?> value="Preservar la vida del producto de la concepción">Preservar la vida del producto de la concepción</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser victima de genocidio') echo 'selected="selected"'; ?> value="No ser victima de genocidio">No ser victima de genocidio</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad de creencia religiosa') echo 'selected="selected"'; ?> value="La libertad de creencia religiosa">La libertad de creencia religiosa</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad de objeción de conciencia') echo 'selected="selected"'; ?> value="La libertad de objeción de conciencia">La libertad de objeción de conciencia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad de expresión') echo 'selected="selected"'; ?> value="La libertad de expresión">La libertad de expresión</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad de asociación') echo 'selected="selected"'; ?> value="La libertad de asociación">La libertad de asociación</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad de reunión') echo 'selected="selected"'; ?> value="La libertad de reunión">La libertad de reunión</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad de defender a los derechos humanos') echo 'selected="selected"'; ?> value="La libertad de defender a los derechos humanos">La libertad de defender a los derechos humanos</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad de procreación') echo 'selected="selected"'; ?> value="La libertad de procreación">La libertad de procreación</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad sexual') echo 'selected="selected"'; ?> value="La libertad sexual">La libertad sexual</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad de transito') echo 'selected="selected"'; ?> value="La libertad de transito">La libertad de transito</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sujeto de privación ilegal de la libertad') echo 'selected="selected"'; ?> value="No ser sujeto de privación ilegal de la libertad">No ser sujeto de privación ilegal de la libertad</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sujeto de retención ilegal') echo 'selected="selected"'; ?> value="No ser sujeto de retención ilegal">No ser sujeto de retención ilegal</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sujeto de detención ilegal') echo 'selected="selected"'; ?> value="No ser sujeto de detención ilegal">No ser sujeto de detención ilegal</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sujeto a trata de personas') echo 'selected="selected"'; ?> value="No ser sujeto a trata de personas">No ser sujeto a trata de personas</option>
+                                <option <?php if ($e_ficha['hechos'] === 'A la dignidad') echo 'selected="selected"'; ?> value="A la dignidad">A la dignidad</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sometido a violencia institucional') echo 'selected="selected"'; ?> value="No ser sometido a violencia institucional">No ser sometido a violencia institucional</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser discriminado') echo 'selected="selected"'; ?> value="No ser discriminado">No ser discriminado</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La honra') echo 'selected="selected"'; ?> value="La honra">La honra</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La intimidad') echo 'selected="selected"'; ?> value="La intimidad">La intimidad</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La identidad') echo 'selected="selected"'; ?> value="La identidad">La identidad</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Igualdad de oportunidades') echo 'selected="selected"'; ?> value="Igualdad de oportunidades">Igualdad de oportunidades</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Proyecto de vida') echo 'selected="selected"'; ?> value="Proyecto de vida">Proyecto de vida</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La protección de la familia') echo 'selected="selected"'; ?> value="La protección de la familia">La protección de la familia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Equidad de género') echo 'selected="selected"'; ?> value="Equidad de género">Equidad de género</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Libre desarrollo de la personalidad') echo 'selected="selected"'; ?> value="Libre desarrollo de la personalidad">Libre desarrollo de la personalidad</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una imagen propia') echo 'selected="selected"'; ?> value="Una imagen propia">Una imagen propia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Trato diferenciado y preferente') echo 'selected="selected"'; ?> value="Trato diferenciado y preferente">Trato diferenciado y preferente</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Personas con algún tipo de discapacidad') echo 'selected="selected"'; ?> value="Personas con algún tipo de discapacidad">Personas con algún tipo de discapacidad</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sometido a tortura') echo 'selected="selected"'; ?> value="No ser sometido a tortura">No ser sometido a tortura</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sometido a penas o tratos crueles inhumanos y degradantes') echo 'selected="selected"'; ?> value="No ser sometido a penas o tratos crueles inhumanos y degradantes">No ser sometido a penas o tratos crueles inhumanos y degradantes</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sometido al uso desproporcionado o indebido de la fuerza pública') echo 'selected="selected"'; ?> value="No ser sometido al uso desproporcionado o indebido de la fuerza pública">No ser sometido al uso desproporcionado o indebido de la fuerza pública</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sujeto de desaparición forzada') echo 'selected="selected"'; ?> value="No ser sujeto de desaparición forzada">No ser sujeto de desaparición forzada</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Protección contra toda forma de violencia') echo 'selected="selected"'; ?> value="Protección contra toda forma de violencia">Protección contra toda forma de violencia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La posesión y portación de armas') echo 'selected="selected"'; ?> value="La posesión y portación de armas">La posesión y portación de armas</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Acceso a la justicia') echo 'selected="selected"'; ?> value="Acceso a la justicia">Acceso a la justicia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sujeto de incomunicación') echo 'selected="selected"'; ?> value="No ser sujeto de incomunicación">No ser sujeto de incomunicación</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Debida diligencia') echo 'selected="selected"'; ?> value="Debida diligencia">Debida diligencia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Garantía de audiencia') echo 'selected="selected"'; ?> value="Garantía de audiencia">Garantía de audiencia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La fundamentación y motivación') echo 'selected="selected"'; ?> value="La fundamentación y motivación">La fundamentación y motivación</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La presunción de inocencia') echo 'selected="selected"'; ?> value="La presunción de inocencia">La presunción de inocencia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La irretroactividad de la ley') echo 'selected="selected"'; ?> value="La irretroactividad de la ley">La irretroactividad de la ley</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una fianza asequible') echo 'selected="selected"'; ?> value="Una fianza asequible">Una fianza asequible</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La oportuna y adecuada adopción de medidas cautelares') echo 'selected="selected"'; ?> value="La oportuna y adecuada adopción de medidas cautelares">La oportuna y adecuada adopción de medidas cautelares</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Del imputado a recibir información') echo 'selected="selected"'; ?> value="Del imputado a recibir información">Del imputado a recibir información</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Preservar custodiar y  conservar las actuaciones ministeriales') echo 'selected="selected"'; ?> value="Preservar custodiar y  conservar las actuaciones ministeriales">Preservar custodiar y  conservar las actuaciones ministeriales</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una valoración y certificación médica') echo 'selected="selected"'; ?> value="Una valoración y certificación médica">Una valoración y certificación médica</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una adecuada administración y procuración de justicia') echo 'selected="selected"'; ?> value="Una adecuada administración y procuración de justicia">Una adecuada administración y procuración de justicia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una defensa adecuada') echo 'selected="selected"'; ?> value="Una defensa adecuada">Una defensa adecuada</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Que se proporcione traductor o interprete') echo 'selected="selected"'; ?> value="Que se proporcione traductor o interprete">Que se proporcione traductor o interprete</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una oportuna y adecuada ejecución de los mandamientos judiciales') echo 'selected="selected"'; ?> value="Una oportuna y adecuada ejecución de los mandamientos judiciales">Una oportuna y adecuada ejecución de los mandamientos judiciales</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Los medios alternativos de ejecución de controversias') echo 'selected="selected"'; ?> value="Los medios alternativos de ejecución de controversias">Los medios alternativos de ejecución de controversias</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La inviolabilidad del domicilio') echo 'selected="selected"'; ?> value="La inviolabilidad del domicilio">La inviolabilidad del domicilio</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La propiedad y a la posesión') echo 'selected="selected"'; ?> value="La propiedad y a la posesión">La propiedad y a la posesión</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La inviolabilidad de la correspondencia') echo 'selected="selected"'; ?> value="La inviolabilidad de la correspondencia">La inviolabilidad de la correspondencia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La confidencialidad de las comunicaciones') echo 'selected="selected"'; ?> value="La confidencialidad de las comunicaciones">La confidencialidad de las comunicaciones</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La inviolabilidad del secreto profesional') echo 'selected="selected"'; ?> value="La inviolabilidad del secreto profesional">La inviolabilidad del secreto profesional</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Recibir asesoría para la defensa de sus intereses') echo 'selected="selected"'; ?> value="Recibir asesoría para la defensa de sus intereses">Recibir asesoría para la defensa de sus intereses</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Ser informado de los intereses en que tenga interés legitimo') echo 'selected="selected"'; ?> value="Ser informado de los intereses en que tenga interés legitimo">Ser informado de los intereses en que tenga interés legitimo</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Coadyubar con el ministerio público en la investigación de los delitos') echo 'selected="selected"'; ?> value="Coadyubar con el ministerio público en la investigación de los delitos">Coadyubar con el ministerio público en la investigación de los delitos</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Recibir atención médica psicológica y tratamiento especializado') echo 'selected="selected"'; ?> value="Recibir atención médica psicológica y tratamiento especializado">Recibir atención médica psicológica y tratamiento especializado</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Reparación integral') echo 'selected="selected"'; ?> value="Reparación integral">Reparación integral</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La adopción de medidas cautelares') echo 'selected="selected"'; ?> value="La adopción de medidas cautelares">La adopción de medidas cautelares</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Impugnar las resoluciones en su agravio') echo 'selected="selected"'; ?> value="Impugnar las resoluciones en su agravio">Impugnar las resoluciones en su agravio</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sujeto de victimización secundaria') echo 'selected="selected"'; ?> value="No ser sujeto de victimización secundaria">No ser sujeto de victimización secundaria</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Las personas en situación de desplazamiento forzado') echo 'selected="selected"'; ?> value="Las personas en situación de desplazamiento forzado">Las personas en situación de desplazamiento forzado</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Recibir educación de calidad') echo 'selected="selected"'; ?> value="Recibir educación de calidad">Recibir educación de calidad</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Acceso a la educación') echo 'selected="selected"'; ?> value="Acceso a la educación">Acceso a la educación</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La gratuidad de la educación') echo 'selected="selected"'; ?> value="La gratuidad de la educación">La gratuidad de la educación</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Educación laica') echo 'selected="selected"'; ?> value="Educación laica">Educación laica</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Recibir educación en igualdad de trato y condiciones') echo 'selected="selected"'; ?> value="Recibir educación en igualdad de trato y condiciones">Recibir educación en igualdad de trato y condiciones</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La adecuada supervisión de la educación impartida por particulares') echo 'selected="selected"'; ?> value="La adecuada supervisión de la educación impartida por particulares">La adecuada supervisión de la educación impartida por particulares</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La educación especial') echo 'selected="selected"'; ?> value="La educación especial">La educación especial</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La elección de la educación de los hijos') echo 'selected="selected"'; ?> value="La elección de la educación de los hijos">La elección de la educación de los hijos</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una educación libre de violencia') echo 'selected="selected"'; ?> value="Una educación libre de violencia">Una educación libre de violencia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Respeto a la situación jurídica') echo 'selected="selected"'; ?> value="Respeto a la situación jurídica">Respeto a la situación jurídica</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una estancia digna y segura') echo 'selected="selected"'; ?> value="Una estancia digna y segura">Una estancia digna y segura</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Protección de la integridad') echo 'selected="selected"'; ?> value="Protección de la integridad">Protección de la integridad</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Desarrollo de actividades productivas y educativas') echo 'selected="selected"'; ?> value="Desarrollo de actividades productivas y educativas">Desarrollo de actividades productivas y educativas</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La vinculación social del interno') echo 'selected="selected"'; ?> value="La vinculación social del interno">La vinculación social del interno</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Mantenimiento del orden y aplicación de sanciones') echo 'selected="selected"'; ?> value="Mantenimiento del orden y aplicación de sanciones">Mantenimiento del orden y aplicación de sanciones</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Atención de grupos especiales dentro de instituciones penitenciarias') echo 'selected="selected"'; ?> value="Atención de grupos especiales dentro de instituciones penitenciarias">Atención de grupos especiales dentro de instituciones penitenciarias</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Recibir atención médica integral') echo 'selected="selected"'; ?> value="Recibir atención médica integral">Recibir atención médica integral</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una atención médica libre de negligencia') echo 'selected="selected"'; ?> value="Una atención médica libre de negligencia">Una atención médica libre de negligencia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La accesibilidad de los servicios de salud') echo 'selected="selected"'; ?> value="La accesibilidad de los servicios de salud">La accesibilidad de los servicios de salud</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Recibir un trato digno y respetuoso') echo 'selected="selected"'; ?> value="Recibir un trato digno y respetuoso">Recibir un trato digno y respetuoso</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Decidir libremente sobre su atención médica') echo 'selected="selected"'; ?> value="Decidir libremente sobre su atención médica">Decidir libremente sobre su atención médica</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Otorgar el consentimiento válidamente informado') echo 'selected="selected"'; ?> value="Otorgar el consentimiento válidamente informado">Otorgar el consentimiento válidamente informado</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Confidencialidad respecto a sus enfermedades o padecimientos') echo 'selected="selected"'; ?> value="Confidencialidad respecto a sus enfermedades o padecimientos">Confidencialidad respecto a sus enfermedades o padecimientos</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Tener una segunda opinión médica') echo 'selected="selected"'; ?> value="Tener una segunda opinión médica">Tener una segunda opinión médica</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La debida integración del expediente clínico') echo 'selected="selected"'; ?> value="La debida integración del expediente clínico">La debida integración del expediente clínico</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Ser atendido cuando se inconforme con la atención médica recibida') echo 'selected="selected"'; ?> value="Ser atendido cuando se inconforme con la atención médica recibida">Ser atendido cuando se inconforme con la atención médica recibida</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Recibir los medicamentos y tratamiento correspondiente a su padecimiento') echo 'selected="selected"'; ?> value="Recibir los medicamentos y tratamiento correspondiente a su padecimiento">Recibir los medicamentos y tratamiento correspondiente a su padecimiento</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La inmunización universal') echo 'selected="selected"'; ?> value="La inmunización universal">La inmunización universal</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La educación para la salud alimentación e higiene') echo 'selected="selected"'; ?> value="La educación para la salud alimentación e higiene">La educación para la salud alimentación e higiene</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La satisfacción de las necesidades de salud de los grupos de más alto riesgo') echo 'selected="selected"'; ?> value="La satisfacción de las necesidades de salud de los grupos de más alto riesgo">La satisfacción de las necesidades de salud de los grupos de más alto riesgo</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sometido a esterilización forzada') echo 'selected="selected"'; ?> value="No ser sometido a esterilización forzada">No ser sometido a esterilización forzada</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Las mujeres a recibir información para decidir sobre la interrupción del embarazo') echo 'selected="selected"'; ?> value="Las mujeres a recibir información para decidir sobre la interrupción del embarazo">Las mujeres a recibir información para decidir sobre la interrupción del embarazo</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Las mujeres a no ser sujetas de violencia obstétrica') echo 'selected="selected"'; ?> value="Las mujeres a no ser sujetas de violencia obstétrica">Las mujeres a no ser sujetas de violencia obstétrica</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La lactancia') echo 'selected="selected"'; ?> value="La lactancia">La lactancia</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Acceso a la información pública') echo 'selected="selected"'; ?> value="Acceso a la información pública">Acceso a la información pública</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Acceso rectificación y corrección de la información pública') echo 'selected="selected"'; ?> value="Acceso rectificación y corrección de la información pública">Acceso rectificación y corrección de la información pública</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Buscar recibir o difundir cualquier información pública') echo 'selected="selected"'; ?> value="Buscar recibir o difundir cualquier información pública">Buscar recibir o difundir cualquier información pública</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad de trabajo') echo 'selected="selected"'; ?> value="La libertad de trabajo">La libertad de trabajo</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Goce de condiciones de trabajo justas equitativas y satisfactorias') echo 'selected="selected"'; ?> value="Goce de condiciones de trabajo justas equitativas y satisfactorias">Goce de condiciones de trabajo justas equitativas y satisfactorias</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sometido a trabajo forzado u obligatorio') echo 'selected="selected"'; ?> value="No ser sometido a trabajo forzado u obligatorio">No ser sometido a trabajo forzado u obligatorio</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Las prestaciones de seguridad social') echo 'selected="selected"'; ?> value="Las prestaciones de seguridad social">Las prestaciones de seguridad social</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La libertad sindical') echo 'selected="selected"'; ?> value="La libertad sindical">La libertad sindical</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La seguridad e higiene en el trabajo') echo 'selected="selected"'; ?> value="La seguridad e higiene en el trabajo">La seguridad e higiene en el trabajo</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Al descanso al disfrute del tiempo libre y a la limitación razonable de la jornada de trabajo') echo 'selected="selected"'; ?> value="Al descanso al disfrute del tiempo libre y a la limitación razonable de la jornada de trabajo">Al descanso al disfrute del tiempo libre y a la limitación razonable de la jornada de trabajo</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Al escalafón') echo 'selected="selected"'; ?> value="Al escalafón">Al escalafón</option>
+                                <option <?php if ($e_ficha['hechos'] === 'No ser sometido al hostigamiento laboral') echo 'selected="selected"'; ?> value="No ser sometido al hostigamiento laboral">No ser sometido al hostigamiento laboral</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Instrumentos y apoyos para el acceso a una vivienda digna') echo 'selected="selected"'; ?> value="Instrumentos y apoyos para el acceso a una vivienda digna">Instrumentos y apoyos para el acceso a una vivienda digna</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una vivienda digna segura decorosa y con acceso a servicios e infraestructura vitales') echo 'selected="selected"'; ?> value="Una vivienda digna segura decorosa y con acceso a servicios e infraestructura vitales">Una vivienda digna segura decorosa y con acceso a servicios e infraestructura vitales</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Protección preservación y cuidado del medio ambiente') echo 'selected="selected"'; ?> value="Protección preservación y cuidado del medio ambiente">Protección preservación y cuidado del medio ambiente</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Disfrute de un medio ambiente sano y ecológicamente equilibrado') echo 'selected="selected"'; ?> value="Disfrute de un medio ambiente sano y ecológicamente equilibrado">Disfrute de un medio ambiente sano y ecológicamente equilibrado</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La indemnización por DA') echo 'selected="selected"'; ?> value="La indemnización por DA">La indemnización por DA</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Al agua y al saneamiento') echo 'selected="selected"'; ?> value="Al agua y al saneamiento">Al agua y al saneamiento</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Debido cobro de contribuciones e impuestos') echo 'selected="selected"'; ?> value="Debido cobro de contribuciones e impuestos">Debido cobro de contribuciones e impuestos</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Petición') echo 'selected="selected"'; ?> value="Petición">Petición</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Obtener servicios públicos de calidad') echo 'selected="selected"'; ?> value="Obtener servicios públicos de calidad">Obtener servicios públicos de calidad</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Seguridad pública') echo 'selected="selected"'; ?> value="Seguridad pública">Seguridad pública</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Protección civil') echo 'selected="selected"'; ?> value="Protección civil">Protección civil</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Políticas públicas que propicien un mejor nivel de vida') echo 'selected="selected"'; ?> value="Políticas públicas que propicien un mejor nivel de vida">Políticas públicas que propicien un mejor nivel de vida</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una vida en paz') echo 'selected="selected"'; ?> value="Una vida en paz">Una vida en paz</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Desarrollo') echo 'selected="selected"'; ?> value="Desarrollo">Desarrollo</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Cultura física y deporte') echo 'selected="selected"'; ?> value="Cultura física y deporte">Cultura física y deporte</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Acceso del internet') echo 'selected="selected"'; ?> value="Acceso del internet">Acceso del internet</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Formar partidos políticos a agrupaciones políticas a nivel local') echo 'selected="selected"'; ?> value="Formar partidos políticos a agrupaciones políticas a nivel local">Formar partidos políticos a agrupaciones políticas a nivel local</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Ejercer el voto libre y sin coacción') echo 'selected="selected"'; ?> value="Ejercer el voto libre y sin coacción">Ejercer el voto libre y sin coacción</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Ser elegido') echo 'selected="selected"'; ?> value="Ser elegido">Ser elegido</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Una valoración y certificación médica o psicológica') echo 'selected="selected"'; ?> value="Una valoración y certificación médica o psicológica">Una valoración y certificación médica o psicológica</option>
+                                <option <?php if ($e_ficha['hechos'] === 'La percepción puntual de la remuneración pactada o legalmente establecida') echo 'selected="selected"'; ?> value="La percepción puntual de la remuneración pactada o legalmente establecida">La percepción puntual de la remuneración pactada o legalmente establecida</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Desarrollo de la colectividad') echo 'selected="selected"'; ?> value="Desarrollo de la colectividad">Desarrollo de la colectividad</option>
+                                <option <?php if ($e_ficha['hechos'] === 'Seguridad en los centros educativos') echo 'selected="selected"'; ?> value="Seguridad en los centros educativos">Seguridad en los centros educativos</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -470,7 +609,6 @@ if (isset($_POST['edit_ficha'])) {
                         <div class="form-group">
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
-                                <option value="">Elige una opción</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Comunidad LGBTIQ+') echo 'selected="selected"'; ?> value="Comunidad LGBTIQ+">Comunidad LGBTIQ+</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Derecho de las mujeres') echo 'selected="selected"'; ?> value="Derecho de las mujeres">Derecho de las mujeres</option>
                                 <option <?php if ($e_ficha['grupo_vulnerable'] === 'Niñas, niños y adolescentes') echo 'selected="selected"'; ?> value="Niñas, niños y adolescentes">Niñas, niños y adolescentes</option>
@@ -515,14 +653,28 @@ if (isset($_POST['edit_ficha'])) {
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for="ficha_adjunto">Ficha Adjunta</label>
-                            <input type="file" accept="application/pdf" class="form-control" name="ficha_adjunto" id="ficha_adjunto" value="uploads/fichastecnicas/<?php echo $e_ficha['ficha_adjunto']; ?>">
-                            <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_ficha['ficha_adjunto']); ?></label>
+                            <label for="nombre_especialista">Especialista que emite</label>
+                            <input type="text" class="form-control" name="nombre_especialista" value="<?php echo remove_junk($e_ficha['nombre_especialista']); ?>" placeholder="Nombre Completo del especialista" required>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="clave_documento">Clave del documento</label>
+                            <input type="text" class="form-control" name="clave_documento" value="<?php echo remove_junk($e_ficha['clave_documento']); ?>" placeholder="Insertar la clave del documento" required>
+                        </div>
+                    </div>                    
                 </div>
+                <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="ficha_adjunto">Ficha Adjunta</label>
+                                <input type="file" accept="application/pdf" class="form-control" name="ficha_adjunto" id="ficha_adjunto" value="uploads/fichastecnicas/<?php echo $e_ficha['ficha_adjunto']; ?>">
+                                <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_ficha['ficha_adjunto']); ?></label>
+                            </div>
+                        </div>
+                    </div>
                 <div class="form-group clearfix">
                 <?php if ($tipo_ficha['tipo_ficha'] == 1) : ?>
                     <a href="fichas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">

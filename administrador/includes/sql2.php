@@ -108,12 +108,32 @@ function find_by_id_quejas($id)
 {
   global $db;
   $id = (int)$id;
-  $sql = $db->query("SELECT DISTINCT t.number as Folio_Queja,t.lastupdate as Ultima_Actualizacion,d.subject as Autoridad_Responsable,u.name as Creada_Por,d.priority as Prioridad,s.firstname as Asignado_Nombre,
-  s.lastname as Asignado_Apellido,st.state,t.status_id,t.isoverdue,t.isanswered,d.ticket_id,d.n_autoridad FROM ost_ticket as t LEFT JOIN ost_ticket__cdata as d ON t.ticket_id = d.ticket_id
-  LEFT JOIN ost_staff as s ON t.staff_id = s.staff_id LEFT JOIN ost_user as u ON u.id = t.user_id LEFT JOIN ost_ticket_status as st ON st.id = t.status_id WHERE t.ticket_id = '{$db->escape($id)}'");
+  $sql = $db->query(
+  "SELECT DISTINCT t.lastupdate as Ultima_Actualizacion,u.name as Creada_Por,s.firstname as Asignado_Nombre,s.lastname as Asignado_Apellido,t.isoverdue,t.isanswered,
+  d.ticket_id,d.n_autoridad,oud.email,oud.name,oud.n_estudios,oud.ocupacion,oud.edad,oud.phone,oud.sexo,oud.direccion,oud.colonia,oud.cp,oud.municipio,oud.entidad,
+  oud.nacionalidad,d.visitaduria,d.subject,d.agraviado,d.a_firma,d.priority,d.h_direccion,d.h_colonia,d.h_municipio,d.h_entidad
+  
+  FROM ost_ticket as t LEFT JOIN ost_ticket__cdata as d ON t.ticket_id = d.ticket_id LEFT JOIN ost_staff as s ON t.staff_id = s.staff_id 
+  LEFT JOIN ost_user as u ON u.id = t.user_id LEFT JOIN ost_user__cdata as oud ON oud.user_id = u.id
+  
+  WHERE t.ticket_id = '{$db->escape($id)}'");
+
   if ($result = $db->fetch_assoc($sql))
     return $result;
   else
     return null;
 }
+// ANTES DE REALIZARLE MODIFICACIONES
+// function find_by_id_quejas($id)
+// {
+//   global $db;
+//   $id = (int)$id;
+//   $sql = $db->query("SELECT DISTINCT t.number as Folio_Queja,t.lastupdate as Ultima_Actualizacion,d.subject as Autoridad_Responsable,u.name as Creada_Por,d.priority as Prioridad,s.firstname as Asignado_Nombre,
+//   s.lastname as Asignado_Apellido,st.state,t.status_id,t.isoverdue,t.isanswered,d.ticket_id,d.n_autoridad FROM ost_ticket as t LEFT JOIN ost_ticket__cdata as d ON t.ticket_id = d.ticket_id
+//   LEFT JOIN ost_staff as s ON t.staff_id = s.staff_id LEFT JOIN ost_user as u ON u.id = t.user_id LEFT JOIN ost_ticket_status as st ON st.id = t.status_id WHERE t.ticket_id = '{$db->escape($id)}'");
+//   if ($result = $db->fetch_assoc($sql))
+//     return $result;
+//   else
+//     return null;
+// }
 ?>

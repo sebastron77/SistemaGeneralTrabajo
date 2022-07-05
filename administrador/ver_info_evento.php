@@ -13,24 +13,24 @@ $id_user = $user['id'];
 // page_require_area(4);
 $id_user = $user['id'];
 
-if ($nivel <= 2) {
-    page_require_level(2);
-}
-if ($nivel == 3) {
-    redirect('home.php');
-}
-if ($nivel == 4) {
-    redirect('home.php');
-}
-if ($nivel == 5) {
-    redirect('home.php');
-}
-if ($nivel == 6) {
-    redirect('home.php');
-}
-if ($nivel == 7) {
-    page_require_level(7);
-}
+// if ($nivel <= 2) {
+//     page_require_level(2);
+// }
+// if ($nivel == 3) {
+//     redirect('home.php');
+// }
+// if ($nivel == 4) {
+//     redirect('home.php');
+// }
+// if ($nivel == 5) {
+//     redirect('home.php');
+// }
+// if ($nivel == 6) {
+//     redirect('home.php');
+// }
+// if ($nivel == 7) {
+//     page_require_level(7);
+// }
 ?>
 <?php include_once('layouts/header.php'); ?>
 

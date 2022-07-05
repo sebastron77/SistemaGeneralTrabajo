@@ -12,22 +12,22 @@ $id_user = $user['id'];
 $nivel_user = $user['user_level'];
 $trabajadores = find_all_trabajadores();
 
-if ($nivel_user <= 2) {
-    page_require_level(2);
-}
+// if ($nivel_user <= 2) {
+//     page_require_level(2);
+// }
 // if ($nivel_user == 7) {
 //     page_require_level_exacto(7);
 // }
-if ($nivel_user == 8) {
-    page_require_level_exacto(8);
-}
+// if ($nivel_user == 8) {
+//     page_require_level_exacto(8);
+// }
 
-if ($nivel_user > 2 && $nivel_user <= 7) :
-    redirect('home.php');
-endif;
-if ($nivel_user > 8) :
-    redirect('home.php');
-endif;
+// if ($nivel_user > 2 && $nivel_user <= 7) :
+//     redirect('home.php');
+// endif;
+// if ($nivel_user > 8) :
+//     redirect('home.php');
+// endif;
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['seguimiento_correspondencia'])) {
@@ -37,27 +37,18 @@ if (isset($_POST['seguimiento_correspondencia'])) {
 
     if (empty($errors)) {
         $id = (int)$e_correspondencia['id'];
-        $fecha_recibido   = remove_junk($db->escape($_POST['fecha_recibido']));
-        $nombre_remitente   = remove_junk($db->escape($_POST['nombre_remitente']));
-        $nombre_institucion   = remove_junk($db->escape($_POST['nombre_institucion']));
-        $cargo_funcionario   = remove_junk($db->escape($_POST['cargo_funcionario']));
-        $asunto   = remove_junk(($db->escape($_POST['asunto'])));
-        $medio_recepcion   = remove_junk(($db->escape($_POST['medio_recepcion'])));
-        $seguimiento   = remove_junk(($db->escape($_POST['seguimiento'])));
-        $medio_entrega   = remove_junk($db->escape($_POST['medio_entrega']));
         $accion_realizada   = remove_junk($db->escape($_POST['accion_realizada']));
-        $fecha_seguimiento   = remove_junk($db->escape($_POST['fecha_seguimiento']));
-        $respuesta   = remove_junk($db->escape($_POST['respuesta']));
-        $quien_realizo   = remove_junk($db->escape($_POST['detalle-usuario']));
+        $fecha   = remove_junk($db->escape($_POST['fecha']));
+        $quien_realizo   = remove_junk($db->escape($_POST['quien_realizo']));
 
         $folio_editar = $e_correspondencia['folio'];
         $resultado = str_replace("/", "-", $folio_editar);
         $carpeta = 'uploads/correspondencia/' . $resultado;
 
-        $name = $_FILES['respuesta']['name'];
-        $size = $_FILES['respuesta']['size'];
-        $type = $_FILES['respuesta']['type'];
-        $temp = $_FILES['respuesta']['tmp_name'];
+        $name = $_FILES['oficio']['name'];
+        $size = $_FILES['oficio']['size'];
+        $type = $_FILES['oficio']['type'];
+        $temp = $_FILES['oficio']['tmp_name'];
 
         if (is_dir($carpeta)) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
@@ -67,10 +58,10 @@ if (isset($_POST['seguimiento_correspondencia'])) {
         }
 
         if ($name != '') {
-            $sql = "UPDATE correspondencia SET fecha_recibido='{$fecha_recibido}', nombre_remitente='{$nombre_remitente}', nombre_institucion='{$nombre_institucion}', cargo_funcionario='{$cargo_funcionario}', asunto='{$asunto}', medio_recepcion='{$medio_recepcion}', seguimiento='{$seguimiento}', medio_entrega='{$medio_entrega}',accion_realizada='{$accion_realizada}',fecha_seguimiento='{$fecha_seguimiento}',respuesta='{$name}',quien_realizo='{$quien_realizo}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE correspondencia SET accion_realizada='{$accion_realizada}',fecha='{$fecha}',oficio='{$name}',quien_realizo='{$quien_realizo}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql = "UPDATE correspondencia SET fecha_recibido='{$fecha_recibido}', nombre_remitente='{$nombre_remitente}', nombre_institucion='{$nombre_institucion}', cargo_funcionario='{$cargo_funcionario}', asunto='{$asunto}', medio_recepcion='{$medio_recepcion}', seguimiento='{$seguimiento}', medio_entrega='{$medio_entrega}',accion_realizada='{$accion_realizada}',fecha_seguimiento='{$fecha_seguimiento}',quien_realizo='{$quien_realizo}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE correspondencia SET accion_realizada='{$accion_realizada}',fecha='{$fecha}',quien_realizo='{$quien_realizo}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
@@ -110,6 +101,12 @@ include_once('layouts/header.php'); ?>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label for="num_oficio_recepcion">Número de Oficio de Recepción</label>
+                            <input type="text" class="form-control" name="num_oficio_recepcion" value="<?php echo remove_junk($e_correspondencia['num_oficio_recepcion']); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label for="nombre_remitente">Nombre de Remitente</label>
                             <input type="text" class="form-control" name="nombre_remitente" value="<?php echo remove_junk($e_correspondencia['nombre_remitente']); ?>" readonly>
                         </div>
@@ -120,14 +117,14 @@ include_once('layouts/header.php'); ?>
                             <input type="text" class="form-control" name="nombre_institucion" value="<?php echo remove_junk($e_correspondencia['nombre_institucion']); ?>" readonly>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="cargo_funcionario">Cargo de Funcionario</label>
                             <input type="text" class="form-control" name="cargo_funcionario" value="<?php echo remove_junk($e_correspondencia['cargo_funcionario']); ?>" readonly>
                         </div>
                     </div>
-                </div>
-                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="asunto">Asunto</label>
@@ -140,48 +137,80 @@ include_once('layouts/header.php'); ?>
                             <input type="text" class="form-control" name="asunto" value="<?php echo remove_junk($e_correspondencia['medio_recepcion']); ?>" readonly>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="seguimiento">Seguimiento</label><br>
-                            <input type="text" class="form-control" name="seguimiento" value="<?php echo remove_junk($e_correspondencia['seguimiento']); ?>" readonly>
-                        </div>
-                    </div>
+                </div>
+                <!-- <hr style="margin-top: 5px;height:2px;border-width:0;background-color:#aaaaaa"> -->
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="medio_entrega">Medio de Entrega</label><br>
                             <input type="text" class="form-control" name="medio_entrega" value="<?php echo remove_junk($e_correspondencia['medio_entrega']); ?>" readonly>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="se_turna_a_area">Área a la que se turna</label><br>
+                            <input type="text" class="form-control" name="se_turna_a_area" value="<?php echo remove_junk($e_correspondencia['se_turna_a_area']); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="fecha_en_que_se_turna">Fecha en que se turna oficio</label>
+                            <input type="date" class="form-control" value="<?php echo remove_junk($e_correspondencia['fecha_en_que_se_turna']); ?>" name="fecha_en_que_se_turna" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="fecha_espera_respuesta">Fecha en que se espera respuesta</label>
+                            <input type="date" class="form-control" value="<?php echo remove_junk($e_correspondencia['fecha_espera_respuesta']); ?>" name="fecha_espera_respuesta" readonly>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="accion_realizada">Acción realizada</label><br>
-                            <input type="text" class="form-control" name="accion_realizada" value="<?php echo remove_junk($e_correspondencia['accion_realizada']); ?>">
+                            <label for="tipo_tramite">Tipo de Trámite</label><br>
+                            <input type="text" class="form-control" value="<?php echo remove_junk($e_correspondencia['tipo_tramite']); ?>" name="tipo_tramite" readonly>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fecha_seguimiento">Fecha de Seguimiento</label><br>
-                            <input type="date" class="form-control" name="fecha_seguimiento" value="<?php echo remove_junk($e_correspondencia['fecha_seguimiento']); ?>">
+                            <label for="observaciones">Observaciones</label>
+                            <textarea class="form-control" value="<?php echo remove_junk($e_correspondencia['observaciones']); ?>" name="observaciones" id="observaciones" cols="10" rows="3" readonly><?php echo remove_junk($e_correspondencia['observaciones']); ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <hr style="margin-top: 5px;height:2px;border-width:0;background-color:#aaaaaa">
+                <!-- <h4>Seguimiento de Correspondencia</h4> -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="accion_realizada">Acción Realizada</label><br>
+                            <input type="text" class="form-control" value="<?php echo remove_junk($e_correspondencia['accion_realizada']); ?>" name="accion_realizada"
+                            >
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="respuesta">Adjuntar Respuesta</label>
-                            <input type="file" accept="application/pdf" class="form-control" name="respuesta" value="<?php echo remove_junk($e_correspondencia['respuesta']); ?>" id="respuesta">
-                            <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_correspondencia['respuesta']); ?><?php ?></label>
+                            <label for="fecha">Fecha del seguimiento</label>
+                            <input type="date" class="form-control" value="<?php echo remove_junk($e_correspondencia['fecha']); ?>" name="fecha">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="level">Quién realizó</label>
-                            <select class="form-control" name="detalle-usuario">
+                            <label for="oficio">Adjuntar Oficio</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="oficio" value="<?php echo remove_junk($e_correspondencia['oficio']); ?>" id="oficio">
+                            <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_correspondencia['oficio']); ?><?php ?></label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="level">Quién realizó seguimiento: </label> <label style="font-size:12px; color:#E3054F;"> <?php echo remove_junk($e_correspondencia['quien_realizo']) . ' (actual)'; ?><?php ?></label>
+                            <select class="form-control" name="quien_realizo">
                                 <?php foreach ($trabajadores as $trabajador) : ?>
                                     <option value="<?php echo $trabajador['nombre'] . ' ' . $trabajador['apellidos']; ?>"><?php echo ucwords($trabajador['nombre']); ?> <?php echo ucwords($trabajador['apellidos']); ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <label style="font-size:12px; color:#E3054F;">Persona Actual: <?php echo remove_junk($e_correspondencia['quien_realizo']); ?><?php ?></label>
+                            <!-- <label style="font-size:12px; color:#E3054F;">Persona Actual: <?php echo remove_junk($e_correspondencia['quien_realizo']); ?><?php ?></label> -->
                         </div>
                     </div>
                 </div>

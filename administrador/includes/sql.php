@@ -2125,14 +2125,47 @@ function find_all_resoluciones()
   $result = find_by_sql($sql);
   return $result;
 }
-/*----------------------------------------------*/
-/* Funcion que encuentra todas las correspondencia */
-/*----------------------------------------------*/
-function find_all_correspondencia()
+/*--------------------------------------------------*/
+/* Funcion que encuentra todas las correspondencias */
+/*--------------------------------------------------*/
+function find_all_correspondenciaAdmin()
 {
   global $db;
   $results = array();
   $sql = "SELECT * FROM correspondencia";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*-------------------------------------------------------------*/
+/* Funcion que encuentra todas las correspondencias de un área */
+/*-------------------------------------------------------------*/
+function find_all_correspondencia($area)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM correspondencia WHERE se_turna_a_area='{$area}'";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*--------------------------------------------------*/
+/* Funcion que encuentra todas las correspondencias */
+/*--------------------------------------------------*/
+function find_all_env_correspondenciaAdmin()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM envio_correspondencia";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*-------------------------------------------------------------*/
+/* Funcion que encuentra todas las correspondencias de un área */
+/*-------------------------------------------------------------*/
+function find_all_env_correspondencia($area)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM envio_correspondencia WHERE area_creacion='{$area}'";
   $result = find_by_sql($sql);
   return $result;
 }
@@ -2205,6 +2238,19 @@ function find_by_id_correspondencia($id)
   global $db;
   $id = (int)$id;
   $sql = $db->query("SELECT * FROM correspondencia WHERE id='{$db->escape($id)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+/*----------------------------------------------------------------------------------*/
+/* Funcion que encuentra una correspondencia por id, que ayudara al momento de editar */
+/*----------------------------------------------------------------------------------*/
+function find_by_id_env_correspondencia($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT * FROM envio_correspondencia WHERE id='{$db->escape($id)}' LIMIT 1");
   if ($result = $db->fetch_assoc($sql))
     return $result;
   else

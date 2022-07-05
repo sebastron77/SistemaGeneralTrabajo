@@ -78,7 +78,7 @@
     </header>
     <div class="sidebar">
       <?php if ($user['user_level'] === '1') : ?>
-        <!-- Sistemas -->
+        <!-- Sistemas (Administrador) -->
         <?php include_once('super_admin_menu.php'); ?>
 
       <?php elseif ($user['user_level'] === '2') : ?>
@@ -108,6 +108,42 @@
       <?php elseif ($user['user_level'] === '8') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('secParticular_menu.php'); ?>
+
+        <?php elseif ($user['user_level'] === '9') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('servTec_menu.php'); ?>
+        
+        <?php elseif ($user['user_level'] === '10') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('transaparencia_menu.php'); ?>
+
+        <?php elseif ($user['user_level'] === '11') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('archivo_menu.php'); ?>
+
+        <?php elseif ($user['user_level'] === '12') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('desaparecidos_menu.php'); ?>
+
+        <?php elseif ($user['user_level'] === '13') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('sistemas_menu.php'); ?>
+
+        <?php elseif ($user['user_level'] === '14') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('administrativo_menu.php'); ?>
+
+        <?php elseif ($user['user_level'] === '15') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('comSocial_menu.php'); ?>
+
+        <?php elseif ($user['user_level'] === '16') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('orgInterno_menu.php'); ?>
+
+        <?php elseif ($user['user_level'] === '17') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('agendas_menu.php'); ?>
 
       <?php endif; ?>
     </div>

@@ -28,6 +28,40 @@ if ($nivel == 6) {
 if ($nivel == 7) {
     page_require_level_exacto(7);
 }
+
+$conexion = mysqli_connect ("localhost", "root", "");
+mysqli_set_charset($conexion,"utf8");
+mysqli_select_db ($conexion, "probar_antes_server");
+$sql = "SELECT * FROM capacitaciones";
+$resultado = mysqli_query ($conexion, $sql) or die;
+$capacitaciones = array();
+while( $rows = mysqli_fetch_assoc($resultado) ) {
+    $capacitaciones[] = $rows;
+}
+
+mysqli_close($conexion);
+
+if (isset($_POST["export_data"])) {
+    if (!empty($capacitaciones)) {
+        header('Content-Encoding: UTF-8');
+        header('Content-type: application/vnd.ms-excel;charset=UTF-8');
+        header("Content-Disposition: attachment; filename=capacitaciones.xls");        
+        $filename = "capacitaciones.xls";
+        $mostrar_columnas = false;
+
+        foreach ($capacitaciones as $resolucion) {
+            if (!$mostrar_columnas) {
+                echo implode("\t", array_keys($resolucion)) . "\n";
+                $mostrar_columnas = true;
+            }
+            echo implode("\t", array_values($resolucion)) . "\n";
+        }
+    } else {
+        echo 'No hay datos a exportar';
+    }
+    exit;
+}
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -48,8 +82,12 @@ if ($nivel == 7) {
                     <span>Lista de Capacitaciones</span>
                 </strong>
                 <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6) || ($nivel == 7)) : ?>
-                    <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a>
+                    <a href="add_capacitacion.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar capacitación</a>
                 <?php endif; ?>
+                <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                    <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
+                </form>
+            </div>
             </div>
 
             <div class="panel-body">

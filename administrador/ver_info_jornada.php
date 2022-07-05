@@ -76,7 +76,8 @@ if ($nivel == 7) {
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th class="text-center" style="width: 20%;">Fecha de Actividad</th>
+                            <th class="text-center" style="width: 20%;">Inicio de Actividad</th>
+                            <th class="text-center" style="width: 20%;">Fin de Actividad</th>
                             <th class="text-center" style="width: 40%;">Alcance</th>
                             <th class="text-center" style="width: 40%;">Colaboración Institucional</th>
                         </tr>
@@ -84,6 +85,7 @@ if ($nivel == 7) {
                     <tbody>
                         <tr>
                             <td class="text-center"><?php echo remove_junk(ucwords(($a_ficha['fecha_actividad']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($a_ficha['fin_actividad']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['alcance']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_ficha['colaboracion_institucional']))) ?></td>
                         </tr>

@@ -8,16 +8,19 @@ $user = current_user();
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];
 
-if ($nivel_user <= 2) :
-    page_require_level(2);
-endif;
-if ($nivel_user == 7) :
-    page_require_level_exacto(7);
-endif;
-if ($nivel_user == 8) :
-    page_require_level_exacto(8);
-endif;
+// if ($nivel_user <= 2) :
+//     page_require_level(2);
+// endif;
+// if ($nivel_user == 7) :
+//     page_require_level_exacto(7);
+// endif;
+// if ($nivel_user == 8) :
+//     page_require_level_exacto(8);
+// endif;
 if ($nivel_user > 2 && $nivel_user < 7) :
+    redirect('home.php');
+endif;
+if ($nivel_user > 8) :
     redirect('home.php');
 endif;
 
@@ -67,15 +70,33 @@ $c_cargos          = count_by_id('cargos');
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
                 <svg style="width:40px;height:73px" viewBox="0 0 24 24">
+                    <path fill="white" d="M17,4H7A5,5 0 0,0 2,9V20H20A2,2 0 0,0 22,18V9A5,5 0 0,0 17,4M10,18H4V9A3,3 0 0,1 7,6A3,3 0 0,1 10,9V18M19,15H17V13H13V11H19V15M9,11H5V9H9V11Z" />
+                </svg>
+            </div>
+            <div class="panel-value pull-right">
+                <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Envío de Correspon-<br>dencia Interna</p>
+                <div style="margin-top:-5%;">
+                    
+                        <a style="margin-top:5%;" href="add_env_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
+                    
+                    <a style="margin-top:5%;" href="env_correspondencia.php" class="btn btn-primary btn-sm">Ver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3" style="height: 13.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+                <svg style="width:40px;height:73px" viewBox="0 0 24 24">
                     <path fill="white" d="M3,7V5H5V4C5,2.89 5.9,2 7,2H13V9L15.5,7.5L18,9V2H19C20.05,2 21,2.95 21,4V20C21,21.05 20.05,22 19,22H7C5.95,22 5,21.05 5,20V19H3V17H5V13H3V11H5V7H3M7,11H5V13H7V11M7,7V5H5V7H7M7,19V17H5V19H7Z" />
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:10%; color:#333333; line-height: 100%;">Agenda</p>
+                <p style="font-size: 15px; margin-top:10%; color:#333333; line-height: 100%;">Eventos</p>
                 <div style="margin-top:-8%;">
-                    <?php if (($nivel_user <= 2) || ($nivel_user == 8)) : ?>
+                    
                         <a style="margin-top:10%;" href="add_evento.php" class="btn btn-success btn-sm">Agregar</a>
-                    <?php endif; ?>
+                    
                     <a style="margin-top:10%;" href="eventos.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>

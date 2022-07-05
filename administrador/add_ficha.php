@@ -14,7 +14,7 @@ page_require_area(4);
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_ficha'])) {
 
-    $req_fields = array('funcion', 'num_queja', 'area_solicitante', 'visitaduria', 'ocupacion', 'escolaridad', 'hechos', 'autoridad', 'nombre_usuario', 'edad', 'sexo', 'grupo_vulnerable', 'fecha_intervencion', 'resultado', 'documento_emitido');
+    $req_fields = array('funcion', 'num_queja', 'area_solicitante', 'visitaduria', 'ocupacion', 'escolaridad', 'hechos', 'autoridad', 'nombre_usuario', 'edad', 'sexo', 'grupo_vulnerable', 'fecha_intervencion', 'resultado', 'documento_emitido', 'nombre_especialista', 'clave_documento');
     validate_fields($req_fields);
 
     if (empty($errors)) {
@@ -32,6 +32,8 @@ if (isset($_POST['add_ficha'])) {
         $grupo_vulnerable   = remove_junk($db->escape($_POST['grupo_vulnerable']));
         $fecha_intervencion   = remove_junk($db->escape($_POST['fecha_intervencion']));
         $resultado   = remove_junk($db->escape($_POST['resultado']));
+        $nombre_especialista   = remove_junk($db->escape($_POST['nombre_especialista']));
+        $clave_documento   = remove_junk($db->escape($_POST['clave_documento']));
         $documento_emitido   = remove_junk($db->escape($_POST['documento_emitido']));
         $adjunto   = remove_junk($db->escape($_POST['adjunto']));
         date_default_timezone_set('America/Mexico_City');
@@ -66,9 +68,9 @@ if (isset($_POST['add_ficha'])) {
         $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         if ($move && $name != '') {
             $query = "INSERT INTO fichas (";
-            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,ficha_adjunto,fecha_creacion,tipo_ficha";
+            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,nombre_especialista,clave_documento,ficha_adjunto,fecha_creacion,tipo_ficha";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$name}','{$creacion}',1";
+            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$nombre_especialista}','{$clave_documento}','{$name}','{$creacion}',1";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";
@@ -78,9 +80,9 @@ if (isset($_POST['add_ficha'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO fichas (";
-            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,fecha_creacion,tipo_ficha";
+            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,nombre_especialista,clave_documento,fecha_creacion,tipo_ficha";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$creacion}',1";
+            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$nombre_especialista}','{$clave_documento}','{$creacion}',1";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";
@@ -126,7 +128,6 @@ include_once('layouts/header.php'); ?>
                                 <option value="Gestión Hospitalaria">Gestión Hospitalaria</option>
                                 <option value="Certificación médica de lesiones">Certificación médica de lesiones</option>
                                 <option value="Valoración y/u Orientación Médica">Valoración y/u Orientación Médica</option>
-                                <option value="Contención Psicológica">Contención Psicológica</option>
                                 <option value="Supervisión y Diagnóstico Institucional">Supervisión y Diagnóstico Institucional</option>
                                 <option value="Opinión Médica">Opinión Médica</option>
                             </select>
@@ -151,7 +152,7 @@ include_once('layouts/header.php'); ?>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="ocupacion">Ocupacion</label>
+                            <label for="ocupacion">Ocupación</label>
                             <select class="form-control" name="ocupacion">
                                 <option>Escoge una opción</option>
                                 <option value="Otro">Otro</option>
@@ -265,7 +266,146 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="hechos">Presuntos hechos violatorios</label>
-                            <textarea type="text" class="form-control" name="hechos" cols="30" rows="1" placeholder="Generales" required></textarea>
+                            <select class="form-control" name="hechos">
+                                <option value="">Escoge una opción</option>
+                                <option value="Preservar la vida humana">Preservar la vida humana</option>
+                                <option value="No ser privado de la vida arbitraria extrajudicial o sumaramente">No ser privado de la vida arbitraria extrajudicial o sumaramente</option>
+                                <option value="Preservar la vida del producto de la concepción">Preservar la vida del producto de la concepción</option>
+                                <option value="No ser victima de genocidio">No ser victima de genocidio</option>
+                                <option value="La libertad de creencia religiosa">La libertad de creencia religiosa</option>
+                                <option value="La libertad de objeción de conciencia">La libertad de objeción de conciencia</option>
+                                <option value="La libertad de expresión">La libertad de expresión</option>
+                                <option value="La libertad de asociación">La libertad de asociación</option>
+                                <option value="La libertad de reunión">La libertad de reunión</option>
+                                <option value="La libertad de defender a los derechos humanos">La libertad de defender a los derechos humanos</option>
+                                <option value="La libertad de procreación">La libertad de procreación</option>
+                                <option value="La libertad sexual">La libertad sexual</option>
+                                <option value="La libertad de transito">La libertad de transito</option>
+                                <option value="No ser sujeto de privación ilegal de la libertad">No ser sujeto de privación ilegal de la libertad</option>
+                                <option value="No ser sujeto de retención ilegal">No ser sujeto de retención ilegal</option>
+                                <option value="No ser sujeto de detención ilegal">No ser sujeto de detención ilegal</option>
+                                <option value="No ser sujeto a trata de personas">No ser sujeto a trata de personas</option>
+                                <option value="A la dignidad">A la dignidad</option>
+                                <option value="No ser sometido a violencia institucional">No ser sometido a violencia institucional</option>
+                                <option value="No ser discriminado">No ser discriminado</option>
+                                <option value="La honra">La honra</option>
+                                <option value="La intimidad">La intimidad</option>
+                                <option value="La identidad">La identidad</option>
+                                <option value="Igualdad de oportunidades">Igualdad de oportunidades</option>
+                                <option value="Proyecto de vida">Proyecto de vida</option>
+                                <option value="La protección de la familia">La protección de la familia</option>
+                                <option value="Equidad de género">Equidad de género</option>
+                                <option value="Libre desarrollo de la personalidad">Libre desarrollo de la personalidad</option>
+                                <option value="Una imagen propia">Una imagen propia</option>
+                                <option value="Trato diferenciado y preferente">Trato diferenciado y preferente</option>
+                                <option value="Personas con algún tipo de discapacidad">Personas con algún tipo de discapacidad</option>
+                                <option value="No ser sometido a tortura">No ser sometido a tortura</option>
+                                <option value="No ser sometido a penas o tratos crueles inhumanos y degradantes">No ser sometido a penas o tratos crueles inhumanos y degradantes</option>
+                                <option value="No ser sometido al uso desproporcionado o indebido de la fuerza pública">No ser sometido al uso desproporcionado o indebido de la fuerza pública</option>
+                                <option value="No ser sujeto de desaparición forzada">No ser sujeto de desaparición forzada</option>
+                                <option value="Protección contra toda forma de violencia">Protección contra toda forma de violencia</option>
+                                <option value="La posesión y portación de armas">La posesión y portación de armas</option>
+                                <option value="Acceso a la justicia">Acceso a la justicia</option>
+                                <option value="No ser sujeto de incomunicación">No ser sujeto de incomunicación</option>
+                                <option value="Debida diligencia">Debida diligencia</option>
+                                <option value="Garantía de audiencia">Garantía de audiencia</option>
+                                <option value="La fundamentación y motivación">La fundamentación y motivación</option>
+                                <option value="La presunción de inocencia">La presunción de inocencia</option>
+                                <option value="La irretroactividad de la ley">La irretroactividad de la ley</option>
+                                <option value="Una fianza asequible">Una fianza asequible</option>
+                                <option value="La oportuna y adecuada adopción de medidas cautelares">La oportuna y adecuada adopción de medidas cautelares</option>
+                                <option value="Del imputado a recibir información">Del imputado a recibir información</option>
+                                <option value="Preservar custodiar y  conservar las actuaciones ministeriales">Preservar custodiar y  conservar las actuaciones ministeriales</option>
+                                <option value="Una valoración y certificación médica">Una valoración y certificación médica</option>
+                                <option value="Una adecuada administración y procuración de justicia">Una adecuada administración y procuración de justicia</option>
+                                <option value="Una defensa adecuada">Una defensa adecuada</option>
+                                <option value="Que se proporcione traductor o interprete">Que se proporcione traductor o interprete</option>
+                                <option value="Una oportuna y adecuada ejecución de los mandamientos judiciales">Una oportuna y adecuada ejecución de los mandamientos judiciales</option>
+                                <option value="Los medios alternativos de ejecución de controversias">Los medios alternativos de ejecución de controversias</option>
+                                <option value="La inviolabilidad del domicilio">La inviolabilidad del domicilio</option>
+                                <option value="La propiedad y a la posesión">La propiedad y a la posesión</option>
+                                <option value="La inviolabilidad de la correspondencia">La inviolabilidad de la correspondencia</option>
+                                <option value="La confidencialidad de las comunicaciones">La confidencialidad de las comunicaciones</option>
+                                <option value="La inviolabilidad del secreto profesional">La inviolabilidad del secreto profesional</option>
+                                <option value="Recibir asesoría para la defensa de sus intereses">Recibir asesoría para la defensa de sus intereses</option>
+                                <option value="Ser informado de los intereses en que tenga interés legitimo">Ser informado de los intereses en que tenga interés legitimo</option>
+                                <option value="Coadyubar con el ministerio público en la investigación de los delitos">Coadyubar con el ministerio público en la investigación de los delitos</option>
+                                <option value="Recibir atención médica psicológica y tratamiento especializado">Recibir atención médica psicológica y tratamiento especializado</option>
+                                <option value="Reparación integral">Reparación integral</option>
+                                <option value="La adopción de medidas cautelares">La adopción de medidas cautelares</option>
+                                <option value="Impugnar las resoluciones en su agravio">Impugnar las resoluciones en su agravio</option>
+                                <option value="No ser sujeto de victimización secundaria">No ser sujeto de victimización secundaria</option>
+                                <option value="Las personas en situación de desplazamiento forzado">Las personas en situación de desplazamiento forzado</option>
+                                <option value="Recibir educación de calidad">Recibir educación de calidad</option>
+                                <option value="Acceso a la educación">Acceso a la educación</option>
+                                <option value="La gratuidad de la educación">La gratuidad de la educación</option>
+                                <option value="Educación laica">Educación laica</option>
+                                <option value="Recibir educación en igualdad de trato y condiciones">Recibir educación en igualdad de trato y condiciones</option>
+                                <option value="La adecuada supervisión de la educación impartida por particulares">La adecuada supervisión de la educación impartida por particulares</option>
+                                <option value="La educación especial">La educación especial</option>
+                                <option value="La elección de la educación de los hijos">La elección de la educación de los hijos</option>
+                                <option value="Una educación libre de violencia">Una educación libre de violencia</option>
+                                <option value="Respeto a la situación jurídica">Respeto a la situación jurídica</option>
+                                <option value="Una estancia digna y segura">Una estancia digna y segura</option>
+                                <option value="Protección de la integridad">Protección de la integridad</option>
+                                <option value="Desarrollo de actividades productivas y educativas">Desarrollo de actividades productivas y educativas</option>
+                                <option value="La vinculación social del interno">La vinculación social del interno</option>
+                                <option value="Mantenimiento del orden y aplicación de sanciones">Mantenimiento del orden y aplicación de sanciones</option>
+                                <option value="Atención de grupos especiales dentro de instituciones penitenciarias">Atención de grupos especiales dentro de instituciones penitenciarias</option>
+                                <option value="Recibir atención médica integral">Recibir atención médica integral</option>
+                                <option value="Una atención médica libre de negligencia">Una atención médica libre de negligencia</option>
+                                <option value="La accesibilidad de los servicios de salud">La accesibilidad de los servicios de salud</option>
+                                <option value="Recibir un trato digno y respetuoso">Recibir un trato digno y respetuoso</option>
+                                <option value="Decidir libremente sobre su atención médica">Decidir libremente sobre su atención médica</option>
+                                <option value="Otorgar el consentimiento válidamente informado">Otorgar el consentimiento válidamente informado</option>
+                                <option value="Confidencialidad respecto a sus enfermedades o padecimientos">Confidencialidad respecto a sus enfermedades o padecimientos</option>
+                                <option value="Tener una segunda opinión médica">Tener una segunda opinión médica</option>
+                                <option value="La debida integración del expediente clínico">La debida integración del expediente clínico</option>
+                                <option value="Ser atendido cuando se inconforme con la atención médica recibida">Ser atendido cuando se inconforme con la atención médica recibida</option>
+                                <option value="Recibir los medicamentos y tratamiento correspondiente a su padecimiento">Recibir los medicamentos y tratamiento correspondiente a su padecimiento</option>
+                                <option value="La inmunización universal">La inmunización universal</option>
+                                <option value="La educación para la salud alimentación e higiene">La educación para la salud alimentación e higiene</option>
+                                <option value="La satisfacción de las necesidades de salud de los grupos de más alto riesgo">La satisfacción de las necesidades de salud de los grupos de más alto riesgo</option>
+                                <option value="No ser sometido a esterilización forzada">No ser sometido a esterilización forzada</option>
+                                <option value="Las mujeres a recibir información para decidir sobre la interrupción del embarazo">Las mujeres a recibir información para decidir sobre la interrupción del embarazo</option>
+                                <option value="Las mujeres a no ser sujetas de violencia obstétrica">Las mujeres a no ser sujetas de violencia obstétrica</option>
+                                <option value="La lactancia">La lactancia</option>
+                                <option value="Acceso a la información pública">Acceso a la información pública</option>
+                                <option value="Acceso rectificación y corrección de la información pública">Acceso rectificación y corrección de la información pública</option>
+                                <option value="Buscar recibir o difundir cualquier información pública">Buscar recibir o difundir cualquier información pública</option>
+                                <option value="La libertad de trabajo">La libertad de trabajo</option>
+                                <option value="Goce de condiciones de trabajo justas equitativas y satisfactorias">Goce de condiciones de trabajo justas equitativas y satisfactorias</option>
+                                <option value="No ser sometido a trabajo forzado u obligatorio">No ser sometido a trabajo forzado u obligatorio</option>
+                                <option value="Las prestaciones de seguridad social">Las prestaciones de seguridad social</option>
+                                <option value="La libertad sindical">La libertad sindical</option>
+                                <option value="La seguridad e higiene en el trabajo">La seguridad e higiene en el trabajo</option>
+                                <option value="Al descanso al disfrute del tiempo libre y a la limitación razonable de la jornada de trabajo">Al descanso al disfrute del tiempo libre y a la limitación razonable de la jornada de trabajo</option>
+                                <option value="Al escalafón">Al escalafón</option>
+                                <option value="No ser sometido al hostigamiento laboral">No ser sometido al hostigamiento laboral</option>
+                                <option value="Instrumentos y apoyos para el acceso a una vivienda digna">Instrumentos y apoyos para el acceso a una vivienda digna</option>
+                                <option value="Una vivienda digna segura decorosa y con acceso a servicios e infraestructura vitales">Una vivienda digna segura decorosa y con acceso a servicios e infraestructura vitales</option>
+                                <option value="Protección preservación y cuidado del medio ambiente">Protección preservación y cuidado del medio ambiente</option>
+                                <option value="Disfrute de un medio ambiente sano y ecológicamente equilibrado">Disfrute de un medio ambiente sano y ecológicamente equilibrado</option>
+                                <option value="La indemnización por DA">La indemnización por DA</option>
+                                <option value="Al agua y al saneamiento">Al agua y al saneamiento</option>
+                                <option value="Debido cobro de contribuciones e impuestos">Debido cobro de contribuciones e impuestos</option>
+                                <option value="Petición">Petición</option>
+                                <option value="Obtener servicios públicos de calidad">Obtener servicios públicos de calidad</option>
+                                <option value="Seguridad pública">Seguridad pública</option>
+                                <option value="Protección civil">Protección civil</option>
+                                <option value="Políticas públicas que propicien un mejor nivel de vida">Políticas públicas que propicien un mejor nivel de vida</option>
+                                <option value="Una vida en paz">Una vida en paz</option>
+                                <option value="Desarrollo">Desarrollo</option>
+                                <option value="Cultura física y deporte">Cultura física y deporte</option>
+                                <option value="Acceso del internet">Acceso del internet</option>
+                                <option value="Formar partidos políticos a agrupaciones políticas a nivel local">Formar partidos políticos a agrupaciones políticas a nivel local</option>
+                                <option value="Ejercer el voto libre y sin coacción">Ejercer el voto libre y sin coacción</option>
+                                <option value="Ser elegido">Ser elegido</option>
+                                <option value="Una valoración y certificación médica o psicológica">Una valoración y certificación médica o psicológica</option>
+                                <option value="La percepción puntual de la remuneración pactada o legalmente establecida">La percepción puntual de la remuneración pactada o legalmente establecida</option>
+                                <option value="Desarrollo de la colectividad">Desarrollo de la colectividad</option>
+                                <option value="Seguridad en los centros educativos">Seguridad en los centros educativos</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -535,12 +675,26 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for="adjunto">Adjuntar Ficha</label>
-                            <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto">
+                            <label for="nombre_usuario">Especialista que emite</label>
+                            <input type="text" class="form-control" name="nombre_especialista" placeholder="Nombre Completo del especialista" required>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="nombre_usuario">Clave del documento</label>
+                            <input type="text" class="form-control" name="clave_documento" placeholder="Insertar la clave del documento" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="adjunto">Adjuntar documento emitido</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto">
+                        </div>
+                    </div>                    
                 </div>
                 <div class="form-group clearfix">
                     <a href="fichas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">

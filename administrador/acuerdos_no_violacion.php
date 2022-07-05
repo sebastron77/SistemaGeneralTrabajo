@@ -28,6 +28,40 @@ if ($nivel == 6) {
 if ($nivel == 7) {
     page_require_level_exacto(7);
 }
+
+$conexion = mysqli_connect ("localhost", "root", "");
+mysqli_set_charset($conexion,"utf8");
+mysqli_select_db ($conexion, "probar_antes_server");
+$sql = "SELECT * FROM acuerdos";
+$resultado = mysqli_query ($conexion, $sql) or die;
+$acuerdos = array();
+while( $rows = mysqli_fetch_assoc($resultado) ) {
+    $acuerdos[] = $rows;
+}
+
+mysqli_close($conexion);
+
+if (isset($_POST["export_data"])) {
+    if (!empty($acuerdos)) {
+        header('Content-Encoding: UTF-8');
+        header('Content-type: application/vnd.ms-excel;charset=UTF-8');
+        header("Content-Disposition: attachment; filename=acuerdos.xls");        
+        $filename = "acuerdos.xls";
+        $mostrar_columnas = false;
+
+        foreach ($acuerdos as $resolucion) {
+            if (!$mostrar_columnas) {
+                echo implode("\t", array_keys($resolucion)) . "\n";
+                $mostrar_columnas = true;
+            }
+            echo implode("\t", array_values($resolucion)) . "\n";
+        }
+    } else {
+        echo 'No hay datos a exportar';
+    }
+    exit;
+}
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -54,6 +88,10 @@ if ($nivel == 7) {
                 <!-- <?php if (($nivel <= 1) || ($nivel == 5)) : ?>
                     <a href="quejas_agregadas.php" class="btn btn-info pull-right">Agregar Acuerdo de No Violación</a>
                 <?php endif; ?> -->
+                <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+                    <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
+                </form>
+            </div>
             </div>
 
             <div class="panel-body">

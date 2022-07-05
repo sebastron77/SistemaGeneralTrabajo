@@ -146,7 +146,7 @@ $carpetas = array();
         </div>
         <div class="col-md-4">
             <div class="img-gallery">
-                <img src="uploads/jornadas/<?php echo $carpeta . '/' . $imagenes2[$i] ?>" onclick="openFulImg(this.src)" alt="">
+                <img style="width: 280px; height: 120px" src="uploads/jornadas/<?php echo $carpeta . '/' . $imagenes2[$i] ?>" onclick="openFulImg(this.src)" alt="">
                 <!-- <a href="?borrar=<?= $imagenes2[$i] ?>" class="btn btn-danger">Borrar imagen</a> -->
                 <a href="?borrar=<?= $carpeta . '/' . $imagenes2[$i] ?>" class="btn btn-danger">Borrar imagen</a>
             </div>

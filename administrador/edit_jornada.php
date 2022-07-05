@@ -37,7 +37,7 @@ if (!$e_jornada) {
 <?php
 if (isset($_POST['edit_jornada'])) {
     $countfiles = count($_FILES['files']['name']);
-    $req_fields = array('nombre_actividad', 'objetivo_actividad', 'area_responsable', 'mujeres', 'hombres', 'lgbtiq', 'fecha_actividad', 'alcance', 'colaboracion_institucional');
+    $req_fields = array('nombre_actividad', 'objetivo_actividad', 'area_responsable', 'mujeres', 'hombres', 'lgbtiq', 'fecha_actividad', 'fin_actividad', 'alcance', 'colaboracion_institucional');
     validate_fields($req_fields);
     if (empty($errors)) {
         $id = (int)$e_jornada['id'];
@@ -48,6 +48,7 @@ if (isset($_POST['edit_jornada'])) {
         $hombres   = remove_junk(($db->escape($_POST['hombres'])));
         $lgbtiq   = remove_junk(($db->escape($_POST['lgbtiq'])));
         $fecha_actividad   = remove_junk(($db->escape($_POST['fecha_actividad'])));
+        $fin_actividad   = remove_junk(($db->escape($_POST['fin_actividad'])));
         $alcance   = remove_junk(($db->escape($_POST['alcance'])));
         $colaboracion_institucional   = remove_junk($db->escape($_POST['colaboracion_institucional']));
         $evidencia_fotografica   = remove_junk($db->escape($_POST['evidencia_fotografica']));
@@ -93,10 +94,10 @@ if (isset($_POST['edit_jornada'])) {
         }
 
         if ($name != '') {
-            $sql = "UPDATE jornadas SET nombre_actividad='{$nombre_actividad}', objetivo_actividad='{$objetivo_actividad}', area_responsable='{$area_responsable}', mujeres='{$mujeres}', hombres='{$hombres}', lgbtiq='{$lgbtiq}', fecha_actividad='{$fecha_actividad}', alcance='{$alcance}', colaboracion_institucional='{$colaboracion_institucional}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE jornadas SET nombre_actividad='{$nombre_actividad}', objetivo_actividad='{$objetivo_actividad}', area_responsable='{$area_responsable}', mujeres='{$mujeres}', hombres='{$hombres}', lgbtiq='{$lgbtiq}', fecha_actividad='{$fecha_actividad}', fin_actividad='{$fin_actividad}', alcance='{$alcance}', colaboracion_institucional='{$colaboracion_institucional}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql = "UPDATE jornadas SET nombre_actividad='{$nombre_actividad}', objetivo_actividad='{$objetivo_actividad}', area_responsable='{$area_responsable}', mujeres='{$mujeres}', hombres='{$hombres}', lgbtiq='{$lgbtiq}', fecha_actividad='{$fecha_actividad}', alcance='{$alcance}', colaboracion_institucional='{$colaboracion_institucional}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE jornadas SET nombre_actividad='{$nombre_actividad}', objetivo_actividad='{$objetivo_actividad}', area_responsable='{$area_responsable}', mujeres='{$mujeres}', hombres='{$hombres}', lgbtiq='{$lgbtiq}', fecha_actividad='{$fecha_actividad}',fin_actividad='{$fin_actividad}', alcance='{$alcance}', colaboracion_institucional='{$colaboracion_institucional}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
         if (($result && $db->affected_rows() === 1) || ($result && $db->affected_rows() === 0)) {
@@ -164,13 +165,19 @@ if (isset($_POST['edit_jornada'])) {
                     <div class="col-md-1">
                         <div class="form-group">
                             <label>LGBTIQ+</label>
-                            <input type="number" class="form-control" value="<?php echo remove_junk($e_jornada['lgbtiq']); ?>" min="1" max="120" name="lgbtiq" required>
+                            <input type="number" class="form-control" value="<?php echo remove_junk($e_jornada['lgbtiq']); ?>" min="0" max="120" name="lgbtiq" required>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
-                            <label>Fecha de Actividad</label>
+                            <label>Inicio de Actividad</label>
                             <input type="date" class="form-control" value="<?php echo remove_junk($e_jornada['fecha_actividad']); ?>" name="fecha_actividad" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Fin de Actividad</label>
+                            <input type="date" class="form-control" value="<?php echo remove_junk($e_jornada['fin_actividad']); ?>" name="fin_actividad" required>
                         </div>
                     </div>
                     <div class="col-md-3">

@@ -502,3 +502,44 @@ input[type=file]{
   right: 10px;
   top: 10px;
 }
+
+span.green {
+  background: #18DB3D;
+  border-radius: 0.4em;
+  -moz-border-radius: 0.4em;
+  -webkit-border-radius: 0.4em;
+  color: #18DB3D;
+  display: inline-block;
+  line-height: 0.8em;
+  /* margin-right: 15px; */
+  text-align: center;
+  width: 0.8em; 
+}
+
+span.yellow {
+  background: #FFD400;
+   border-radius: 0.4em;
+   border-color: #000000;
+  -webkit-border-radius: 0.4em;
+  color: #FFD400;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 0.8em;
+  /* margin-right: 15px; */
+  text-align: center;
+  width: 0.8em; 
+}
+
+span.red {
+  background: red;
+   border-radius: 0.4em;
+  -moz-border-radius: 0.4em;
+  -webkit-border-radius: 0.4em;
+  color: red;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 0.8em;
+  /* margin-right: 15px; */
+  text-align: center;
+  width: 0.8em; 
+}
