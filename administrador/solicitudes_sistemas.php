@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
-$page_title = 'Secretaría Coordinación de Sistemas';
+$page_title = 'Solicitudes Coordinación de Sistemas';
 require_once('includes/load.php');
 $user = current_user();
 $id_usuario = $user['id'];
@@ -10,26 +10,15 @@ $id_user = $user['id'];
 $busca_area = area_usuario($id_usuario);
 $otro = $busca_area['id'];
 
-// if ($nivel_user <= 2) {
-//     page_require_level(2);
-// }
-// if ($nivel_user == 13) {
-//     page_require_level_exacto(13);
-// }
-// if ($nivel_user == 7) {
-//     page_require_level_exacto(7);
-// }
-if (($nivel_user > 2 && $nivel_user < 7)) :
+if (($nivel_user > 2) && ($nivel_user < 7)) :
     redirect('home.php');
 endif;
-if (($nivel_user > 7 && $nivel_user < 13)) :
+if (($nivel_user > 7) && ($nivel_user < 13)) :
     redirect('home.php');
 endif;
 if ($nivel_user > 13) :
     redirect('home.php');
 endif;
-
-// page_require_level(2);
 ?>
 
 <?php
