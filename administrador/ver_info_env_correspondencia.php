@@ -75,6 +75,7 @@ $nivel_user = $user['user_level'];
                         <tr style="height: 10px;" class="info">
                             <th style="width: 15%;">Fecha en que se espera respuesta</th>
                             <th style="width: 15%;">Tipo de trámite</th>
+                            <th style="width: 15%;">Oficio Enviado</th>
                             <th style="width: 15%;">Observaciones</th>
                         </tr>
                     </thead>
@@ -82,6 +83,11 @@ $nivel_user = $user['user_level'];
                         <tr>
                             <td><?php echo remove_junk(ucwords(($a_correspondencia['fecha_espera_respuesta']))) ?></td>
                             <td><?php echo remove_junk(ucwords(($a_correspondencia['tipo_tramite']))) ?></td>
+                            <?php
+                            $folio_editar = $a_correspondencia['folio'];
+                            $resultado = str_replace("/", "-", $folio_editar);
+                            ?>
+                            <td><a target="_blank" style="color: #23296B;" href="uploads/correspondencia/<?php echo $resultado . '/' . $a_correspondencia['oficio_enviado']; ?>"><?php echo $a_correspondencia['oficio_enviado']; ?></a></td>
                             <td><?php echo remove_junk(ucwords(($a_correspondencia['observaciones']))) ?></td>
                         </tr>
                     </tbody>
@@ -91,7 +97,7 @@ $nivel_user = $user['user_level'];
                         <tr style="height: 10px;" class="info">
                             <th style="width: 10%;">Acción Realizada</th>
                             <th style="width: 5%;">Fecha</th>
-                            <th style="width: 10%;">Oficio</th>
+                            <th style="width: 10%;">Oficio de respuesta</th>
                             <th style="width: 10%;">Quién realizó</th>
                         </tr>
                     </thead>
@@ -103,7 +109,7 @@ $nivel_user = $user['user_level'];
                             $folio_editar = $a_correspondencia['folio'];
                             $resultado = str_replace("/", "-", $folio_editar);
                             ?>
-                            <td><a target="_blank" style="color: #23296B;" href="uploads/correspondencia/<?php echo $resultado . '/' . $a_correspondencia['oficio']; ?>"><?php echo $a_correspondencia['oficio']; ?></a></td>
+                            <td><a target="_blank" style="color: #23296B;" href="uploads/correspondencia/<?php echo $resultado . '/' . $a_correspondencia['oficio_respuesta']; ?>"><?php echo $a_correspondencia['oficio_respuesta']; ?></a></td>
                             <td><?php echo remove_junk(ucwords(($a_correspondencia['quien_realizo']))) ?></td>
                         </tr>
                     </tbody>

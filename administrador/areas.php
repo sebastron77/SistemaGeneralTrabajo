@@ -14,7 +14,7 @@ $id_usuario = $user['id'];
 // $user = current_user();
 $id_user = $user['id'];
 $busca_area = area_usuario($id_usuario);
-$otro = $busca_area['id'];
+$otro = $busca_area['nivel_grupo'];
 $nivel_user = $user['user_level'];
 //@$level = find_user_level('users', (int)$_GET['id']);
 

@@ -73,11 +73,20 @@ $quejas = quejas();
           </thead>
           <tbody>
             <?php foreach ($quejas as $queja) : ?>
+              <?php 
+                  // Busca en libro electrónico si la queja ya está registrada
+                  $link = mysqli_connect('localhost', 'root', '', 'probar_antes_server');
+                  $sql = "SELECT ticket_id FROM quejas WHERE ticket_id = '{$queja['ticket_id']}'";
+                  $resultado = mysqli_query($link, $sql);
+                  $row = mysqli_fetch_array($resultado);
+              ?>
               <?php $a = count($quejas_libro) ?>
+              <!-- Verifica que libro electronico tenga registros -->
               <?php if ($a != 0) : ?>
                 <?php $c = 0; ?>
                 <?php foreach ($quejas_libro as $queja_libro) : ?>
-                  <?php if ($queja['ticket_id'] != $queja_libro['ticket_id']) : ?>
+                 
+                  <?php if ($queja['ticket_id'] != $row['ticket_id']) : ?>
                     <?php $c = $c + 1; ?>
                     <?php if (($c <= 1)) : ?>
                       <tr>
@@ -112,32 +121,12 @@ $quejas = quejas();
                         <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                           <td class="text-center">
                             <?php
-                              // ----------------------------------------- OPCION DE CONEXION 1 -----------------------------------------
-                              // $dbhost = "localhost";
-                              // $dbuser = "root";
-                              // $dbpass = "";
-                              // $dbname = "libro_electronico2";
-                              
-                              // $obj_conexion = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-
-                              //   if(!$obj_conexion)
-                              //     {
-                              //       echo "Existe un problema con la conexión a la base de datos";
-                              //     }
-                              //     else
-                              //     {
-                              //       $link = mysqli_connect($dbhost, $dbuser, $dbpass) or die ("Conection Error: " . mysqli_error());
-                              //         mysqli_select_db($link,$dbname) or die("Error conecting to db.");
-                              //     }
-                              // --------------------------------------------------------------------------------------------------------
-                              
-                              
                               // ----------------------------------------- OPCION DE CONEXION 2 -----------------------------------------                              
 
                               // $busca = find_by_ticket_id('quejas',$queja['ticket_id']); 
-                              $link = mysqli_connect('localhost', 'root', '', 'libro_electronico2');
+                              $link = mysqli_connect('localhost', 'root', '', 'probar_antes_server');
                               // mysqli_select_db($link,'libro_electronico2');
-                              $sql = "SELECT * FROM quejas WHERE ticket_id = '{$queja['ticket_id']}'";
+                              $sql = "SELECT ticket_id FROM quejas WHERE ticket_id = '{$queja['ticket_id']}'";
                               // En la linea de abajpo para que funcione con la otra forma de conexion, en lugar de $link es $obj_conexion
                               $resultado = mysqli_query($link, $sql); //or die(mysqli_error($link));
                               $row = mysqli_fetch_array($resultado);

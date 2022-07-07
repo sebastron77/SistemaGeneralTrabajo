@@ -49,6 +49,7 @@ if (isset($_POST['add_env_correspondencia'])) {
         $fecha_espera_respuesta   = remove_junk(($db->escape($_POST['fecha_espera_respuesta'])));
         $tipo_tramite   = remove_junk(($db->escape($_POST['tipo_tramite'])));
         $observaciones   = remove_junk(($db->escape($_POST['observaciones'])));
+        $adjunto   = remove_junk($db->escape($_POST['oficio_enviado']));
 
         //Suma el valor del id anterior + 1, para generar ese id para el nuevo resguardo
         //La variable $no_folio sirve para el numero de folio
@@ -68,17 +69,46 @@ if (isset($_POST['add_env_correspondencia'])) {
         // Se crea el folio orientacion
         $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-ECOR';
 
-        $query = "INSERT INTO envio_correspondencia (";
-        $query .= "folio,fecha_emision,asunto,medio_envio,se_turna_a_area,fecha_en_que_se_turna,fecha_espera_respuesta,tipo_tramite,observaciones,area_creacion";
-        $query .= ") VALUES (";
-        $query .= " '{$folio}','{$fecha_emision}','{$asunto}','{$medio_envio}','{$se_turna_a_area}','{$fecha_en_que_se_turna}','{$fecha_espera_respuesta}','{$tipo_tramite}','{$observaciones}','{$area}'";
-        $query .= ")";
+        $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-ECOR';
+        $carpeta = 'uploads/correspondencia/' . $folio_carpeta;
 
-        $query2 = "INSERT INTO folios_general (";
-        $query2 .= "folio, contador";
-        $query2 .= ") VALUES (";
-        $query2 .= " '{$folio}','{$no_folio1}'";
-        $query2 .= ")";
+        if (!is_dir($carpeta)) {
+            mkdir($carpeta, 0777, true);
+        }
+
+        $name = $_FILES['oficio_enviado']['name'];
+        $size = $_FILES['oficio_enviado']['size'];
+        $type = $_FILES['oficio_enviado']['type'];
+        $temp = $_FILES['oficio_enviado']['tmp_name'];
+
+        $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+
+        if ($move && $name != '') {
+            $query = "INSERT INTO envio_correspondencia (";
+            $query .= "folio,fecha_emision,asunto,medio_envio,se_turna_a_area,fecha_en_que_se_turna,fecha_espera_respuesta,tipo_tramite,oficio_enviado,observaciones,area_creacion";
+            $query .= ") VALUES (";
+            $query .= " '{$folio}','{$fecha_emision}','{$asunto}','{$medio_envio}','{$se_turna_a_area}','{$fecha_en_que_se_turna}','{$fecha_espera_respuesta}','{$tipo_tramite}','{$name}','{$observaciones}','{$area}'";
+            $query .= ")";
+
+            $query2 = "INSERT INTO folios_general (";
+            $query2 .= "folio, contador";
+            $query2 .= ") VALUES (";
+            $query2 .= " '{$folio}','{$no_folio1}'";
+            $query2 .= ")";
+        } else {
+
+            $query = "INSERT INTO envio_correspondencia (";
+            $query .= "folio,fecha_emision,asunto,medio_envio,se_turna_a_area,fecha_en_que_se_turna,fecha_espera_respuesta,tipo_tramite,observaciones,area_creacion";
+            $query .= ") VALUES (";
+            $query .= " '{$folio}','{$fecha_emision}','{$asunto}','{$medio_envio}','{$se_turna_a_area}','{$fecha_en_que_se_turna}','{$fecha_espera_respuesta}','{$tipo_tramite}','{$observaciones}','{$area}'";
+            $query .= ")";
+
+            $query2 = "INSERT INTO folios_general (";
+            $query2 .= "folio, contador";
+            $query2 .= ") VALUES (";
+            $query2 .= " '{$folio}','{$no_folio1}'";
+            $query2 .= ")";
+        }
 
         if ($db->query($query) && $db->query($query2)) {
             //sucess
@@ -168,6 +198,14 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="oficio_enviado">Adjuntar Oficio para enviar</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="oficio_enviado" id="oficio_enviado">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="observaciones">Observaciones</label>

@@ -4,7 +4,7 @@ require_once('includes/load.php');
 ?>
 <?php
 // page_require_level(4);
-$all_fichas = find_all_fichas();
+// $all_fichas = find_all_fichas();
 $user = current_user();
 $nivel = $user['user_level'];
 // page_require_area(4);
@@ -12,6 +12,12 @@ $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];
+
+if (($id_user == 28) || ($id_user == 2) || ($id_user == 41) || ($id_user == 1)) {
+    $all_fichas = find_all_fichas();
+} else {
+    $all_fichas = find_all_fichasUser($id_user);
+}
 
 if ($nivel_user <= 2) {
     page_require_level(2);

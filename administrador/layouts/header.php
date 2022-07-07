@@ -145,6 +145,10 @@
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('agendas_menu.php'); ?>
 
+        <?php elseif ($user['user_level'] === '18') : ?>
+        <!-- Presidencia y Secretaría Técnica -->
+        <?php include_once('oficialia_menu.php'); ?>
+
       <?php endif; ?>
     </div>
   <?php endif; ?>

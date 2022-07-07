@@ -8,7 +8,7 @@ $id_usuario = $user['id'];
 // $user = current_user();
 $id_user = $user['id'];
 $busca_area = area_usuario($id_usuario);
-$otro = $busca_area['id'];
+$otro = $busca_area['nivel_grupo'];
 
 page_require_level(50);
 
@@ -24,9 +24,7 @@ $c_cargos          = count_by_id('cargos');
 
 <?php include_once('layouts/header.php'); ?>
 
-
 <h1>Áreas</h1>
-
 
 <div class="row">
   <div class="col-md-12">
@@ -175,22 +173,6 @@ $c_cargos          = count_by_id('cargos');
   <?php endif ?>
 </div><br>
 <div class="row">
-  <?php if (($otro == 9) || ($otro <= 2)) : ?>
-    <a href="solicitudes_servicios_tecnicos.php" class="col-md-3" style="height: 12.5rem;">
-      <div class="panel panel-box clearfix">
-        <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
-          <svg style="width:40px;height:63px" viewBox="0 0 24 24">
-            <path fill="white" d="M5,3C3.89,3 3,3.89 3,5V19C3,20.11 3.89,21 5,21H11V3M13,3V11H21V5C21,3.89 20.11,3 19,3M13,13V21H19C20.11,21 21,20.11 21,19V13" />
-          </svg>
-        </div>
-        <div class="panel-value pull-right">
-          <p style="font-size: 16px; margin-top:8%; color:black;">Servicios Técnicos</p>
-          <div><br>
-          </div>
-        </div>
-      </div>
-    </a>
-  <?php endif ?>
   <?php if (($otro == 10) || ($otro <= 2)) : ?>
     <a href="solicitudes_transparencia.php" class="col-md-3" style="height: 12.5rem;">
       <div class="panel panel-box clearfix">
@@ -239,8 +221,6 @@ $c_cargos          = count_by_id('cargos');
       </div>
     </a>
   <?php endif ?>
-</div><br>
-<div class="row">
   <?php if (($otro == 14) || ($otro <= 2)) : ?>
     <a href="solicitudes_administrativo.php" class="col-md-3" style="height: 12.5rem;">
       <div class="panel panel-box clearfix">
@@ -257,6 +237,8 @@ $c_cargos          = count_by_id('cargos');
       </div>
     </a>
   <?php endif ?>
+</div><br>
+<div class="row">  
   <?php if (($otro == 15) || ($otro <= 2)) : ?>
     <a href="solicitudes_comunicacion_social.php" class="col-md-3" style="height: 12.5rem;">
       <div class="panel panel-box clearfix">
@@ -305,9 +287,22 @@ $c_cargos          = count_by_id('cargos');
       </div>
     </a>
   <?php endif ?>
+  <?php if (($otro == 18) || ($otro <= 2)) : ?>
+    <a href="solicitudes_oficialia.php" class="col-md-3" style="height: 12.5rem;">
+      <div class="panel panel-box clearfix">
+        <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+          <svg style="width:40px;height:63px" viewBox="0 0 24 24">
+            <path fill="white" d="M9.05,9H7.06V6H9.05V4.03H7.06V3.03C7.06,1.92 7.95,1.04 9.05,1.04H15.03V8L17.5,6.5L20,8V1.04H21C22.05,1.04 23,2 23,3.03V17C23,18.03 22.05,19 21,19H9.05C8,19 7.06,18.05 7.06,17V16H9.05V14H7.06V11H9.05V9M1,18H3V15H1V13H3V10H1V8H3V5H5V8H3V10H5V13H3V15H5V18H3V20H5V21H21V23H5A2,2 0 0,1 3,21V20H1V18Z" />
+          </svg>
+        </div>
+        <div class="panel-value pull-right">
+          <p style="font-size: 16px; margin-top:8%; color:black;">Oficialia de Partes</p>
+          <div><br>
+          </div>
+        </div>
+      </div>
+    </a>
+  <?php endif ?>
 </div><br>
-<div class="row">
-
-</div>
 
 <?php include_once('layouts/footer.php'); ?>

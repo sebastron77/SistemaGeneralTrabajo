@@ -67,11 +67,9 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 15px; margin-top:5%; color:#333333; line-height: 100%;">Correspon-<br>dencia</p>
                 <div style="margin-top:-5%;">
-                    <!-- <?php //if (($nivel <= 2) || ($nivel == 4)) : 
-                            ?> -->
+                    <?php if (($nivel <= 2) || ($nivel == 18)) : ?>
                     <a style="margin-top:5%;" href="add_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
-                    <!-- <?php //endif; 
-                            ?> -->
+                    <?php endif; ?>
                     <a style="margin-top:5%;" href="correspondencia.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>

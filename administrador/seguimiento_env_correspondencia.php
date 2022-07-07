@@ -67,7 +67,7 @@ include_once('layouts/header.php'); ?>
         <div class="panel-heading">
             <strong>
                 <span class="glyphicon glyphicon-th"></span>
-                <span>Seguimiento de correspondencia interna <?php echo $e_correspondencia['folio']?></span>
+                <span>Seguimiento de correspondencia interna <?php echo $e_correspondencia['folio'] ?></span>
             </strong>
         </div>
         <div class="panel-body">
@@ -99,7 +99,7 @@ include_once('layouts/header.php'); ?>
                     </div>
                 </div>
                 <div class="row">
-                <div class="col-md-3">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="fecha_en_que_se_turna">Fecha en que se turna oficio</label>
                             <input type="date" class="form-control" value="<?php echo remove_junk($e_correspondencia['fecha_en_que_se_turna']); ?>" name="fecha_en_que_se_turna" readonly>
@@ -108,7 +108,7 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="fecha_espera_respuesta">Fecha en que se espera respuesta</label>
-                            <input type="date" class="form-control" value="<?php echo remove_junk($e_correspondencia['fecha_espera_respuesta']); ?>"  name="fecha_espera_respuesta" readonly>
+                            <input type="date" class="form-control" value="<?php echo remove_junk($e_correspondencia['fecha_espera_respuesta']); ?>" name="fecha_espera_respuesta" readonly>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -119,20 +119,31 @@ include_once('layouts/header.php'); ?>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="observaciones">Observaciones</label>
-                            <textarea class="form-control" value="<?php echo remove_junk($e_correspondencia['observaciones']); ?>" name="observaciones" id="observaciones" cols="10" rows="3" readonly><?php echo remove_junk($e_correspondencia['observaciones']); ?></textarea>
+                            <label for="oficio_enviado" style="margin-bottom: 10px;">Oficio Enviado</label><br>
+                            <?php
+                            $folio_editar = $e_correspondencia['folio'];
+                            $resultado = str_replace("/", "-", $folio_editar);
+                            ?>
+                            <span><a target="_blank" style="color: #23296B;" href="uploads/correspondencia/<?php echo $resultado . '/' . $e_correspondencia['oficio_enviado']; ?>"><?php echo $e_correspondencia['oficio_enviado']; ?></a></span>
                         </div>
                     </div>
                 </div>
-                
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="observaciones">Observaciones</label>
+                            <textarea class="form-control" value="<?php echo remove_junk($e_correspondencia['observaciones']); ?>" name="observaciones" id="observaciones" cols="10" rows="3" readonly><?php echo remove_junk($e_correspondencia['observaciones']); ?></textarea>
+                        </div>
+                    </div>                    
+                </div>
+
                 <!-- <hr style="margin-top: 5px;height:2px;border-width:0;background-color:#aaaaaa"> -->
                 <!-- <h4>Seguimiento de Correspondencia</h4> -->
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="accion_realizada">Acción Realizada</label><br>
-                            <input type="text" class="form-control" value="<?php echo remove_junk($e_correspondencia['accion_realizada']); ?>" name="accion_realizada"
-                            >
+                            <input type="text" class="form-control" value="<?php echo remove_junk($e_correspondencia['accion_realizada']); ?>" name="accion_realizada">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -143,9 +154,9 @@ include_once('layouts/header.php'); ?>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="oficio">Adjuntar Oficio</label>
-                            <input type="file" accept="application/pdf" class="form-control" name="oficio" value="<?php echo remove_junk($e_correspondencia['oficio']); ?>" id="oficio">
-                            <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_correspondencia['oficio']); ?><?php ?></label>
+                            <label for="oficio_respuesta">Adjuntar Oficio de Respuesta</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="oficio_respuesta" value="<?php echo remove_junk($e_correspondencia['oficio_respuesta']); ?>" id="oficio_respuesta">
+                            <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_correspondencia['oficio_respuesta']); ?><?php ?></label>
                         </div>
                     </div>
                     <div class="col-md-3">

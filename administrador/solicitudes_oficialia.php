@@ -1,36 +1,22 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
-$page_title = 'Solicitudes - Desaparecidos';
+$page_title = 'Solicitudes - Oficialia de Partes';
 require_once('includes/load.php');
 $user = current_user();
 $id_usuario = $user['id'];
-
-// $user = current_user();
-// $id_user = $user['id'];
-// $busca_area = area_usuario($id_usuario);
-// $otro = $busca_area['id'];
 
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];
 
-// if ($nivel_user <= 2) {
-//     page_require_level(2);
-// }
-// if ($nivel_user == 12) {
-//     page_require_level_exacto(12);
-// }
-// if ($nivel_user == 7) {
-//     page_require_level_exacto(7);
-// }
 if (($nivel_user > 2 && $nivel_user < 7)) :
     redirect('home.php');
 endif;
-if (($nivel_user > 7 && $nivel_user < 12)) :
+if (($nivel_user > 7 && $nivel_user < 18)) :
     redirect('home.php');
 endif;
-if ($nivel_user > 12) :
+if ($nivel_user > 18) :
     redirect('home.php');
 endif;
 
@@ -47,7 +33,7 @@ $c_cargos          = count_by_id('cargos');
 <?php include_once('layouts/header.php'); ?>
 
 <a href="solicitudes.php" class="btn btn-info">Regresar a Áreas</a>
-<h1>Solicitudes Desaparecidos</h1>
+<h1>Solicitudes Oficialia de Partes</h1>
 
 
 <div class="row">

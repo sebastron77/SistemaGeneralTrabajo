@@ -58,7 +58,7 @@ if (isset($_POST["export_data"])) {
     exit;
 }
 
-page_require_level(15);
+// page_require_level(15);
 
 ?>
 <?php include_once('layouts/header.php'); ?>

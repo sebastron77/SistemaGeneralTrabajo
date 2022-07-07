@@ -14,7 +14,7 @@ page_require_area(4);
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_ficha_psic'])) {
 
-    $req_fields = array('funcion', 'num_queja', 'area_solicitante', 'visitaduria', 'ocupacion', 'escolaridad', 'hechos', 'autoridad', 'nombre_usuario', 'edad', 'sexo', 'grupo_vulnerable', 'fecha_intervencion', 'resultado', 'documento_emitido', 'nombre_especialista', 'clave_documento');
+    $req_fields = array('funcion', 'area_solicitante', 'visitaduria', 'ocupacion', 'escolaridad', 'hechos', 'autoridad', 'nombre_usuario', 'edad', 'sexo', 'grupo_vulnerable', 'fecha_intervencion', 'resultado', 'documento_emitido', 'nombre_especialista', 'clave_documento');
     validate_fields($req_fields);
 
     if (empty($errors)) {
@@ -69,9 +69,9 @@ if (isset($_POST['add_ficha_psic'])) {
         $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         if ($move && $name != '') {
             $query = "INSERT INTO fichas (";
-            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,ficha_adjunto,fecha_creacion,protocolo_estambul,nombre_especialista,clave_documento,tipo_ficha";
+            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,ficha_adjunto,fecha_creacion,protocolo_estambul,nombre_especialista,clave_documento,tipo_ficha,quien_creo";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$name}','{$creacion}','{$protocolo_estambul}','{$nombre_especialista}','{$clave_documento}',2";
+            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$name}','{$creacion}','{$protocolo_estambul}','{$nombre_especialista}','{$clave_documento}',2,'{$id_user}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";
@@ -81,9 +81,9 @@ if (isset($_POST['add_ficha_psic'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO fichas (";
-            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,fecha_creacion,protocolo_estambul,nombre_especialista,clave_documento,tipo_ficha";
+            $query .= "folio,funcion,num_queja,visitaduria,area_solicitante,ocupacion,escolaridad,hechos,autoridad,nombre_usuario,edad,sexo,grupo_vulnerable,fecha_intervencion,resultado,documento_emitido,fecha_creacion,protocolo_estambul,nombre_especialista,clave_documento,tipo_ficha,quien_creo";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$creacion}','{$protocolo_estambul}','{$nombre_especialista}','{$clave_documento}',2";
+            $query .= " '{$folio}','{$funcion}','{$num_queja}','{$visitaduria}','{$area_solicitante}','{$ocupacion}','{$escolaridad}','{$hechos}','{$autoridad}','{$nombre_usuario}','{$edad}','{$sexo}','{$grupo_vulnerable}','{$fecha_intervencion}','{$resultado}','{$documento_emitido}','{$creacion}','{$protocolo_estambul}','{$nombre_especialista}','{$clave_documento}',2,'{$id_user}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";
@@ -136,7 +136,7 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="num_queja">No. de Queja</label>
-                            <input type="text" class="form-control" name="num_queja" required>
+                            <input type="text" class="form-control" name="num_queja">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -260,6 +260,7 @@ include_once('layouts/header.php'); ?>
                                 <option value="Auxiliar de La Piedad">Auxiliar de La Piedad</option>
                                 <option value="Regional de Zitácuaro">Regional de Zitácuaro</option>
                                 <option value="Auxiliar de Huetamo">Auxiliar de Huetamo</option>
+                                <option value="No Aplica">No Aplica</option>
                             </select>
                         </div>
                     </div>
@@ -694,7 +695,7 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="nombre_usuario">Clave del documento</label>
-                            <input type="text" class="form-control" name="clave_documento" placeholder="Insertar la clave del documento" required>
+                            <input type="text" class="form-control" name="clave_documento" placeholder="Insertar la clave del documento">
                         </div>
                     </div>
                     <div class="col-md-3">

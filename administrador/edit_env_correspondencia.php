@@ -49,8 +49,23 @@ if (isset($_POST['edit_env_correspondencia'])) {
         $resultado = str_replace("/", "-", $folio_editar);
         $carpeta = 'uploads/correspondencia/' . $resultado;
 
-        $sql = "UPDATE envio_correspondencia SET fecha_emision='{$fecha_emision}',asunto='{$asunto}',medio_envio='{$medio_envio}',se_turna_a_area='{$se_turna_a_area}',fecha_en_que_se_turna='{$fecha_en_que_se_turna}',fecha_espera_respuesta='{$fecha_espera_respuesta}',tipo_tramite='{$tipo_tramite}',observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
+        $name = $_FILES['oficio_enviado']['name'];
+        $size = $_FILES['oficio_enviado']['size'];
+        $type = $_FILES['oficio_enviado']['type'];
+        $temp = $_FILES['oficio_enviado']['tmp_name'];
 
+        if (is_dir($carpeta)) {
+            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+        } else {
+            mkdir($carpeta, 0777, true);
+            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+        }
+        if ($name != '') {
+            $sql = "UPDATE envio_correspondencia SET fecha_emision='{$fecha_emision}',asunto='{$asunto}',medio_envio='{$medio_envio}',se_turna_a_area='{$se_turna_a_area}',fecha_en_que_se_turna='{$fecha_en_que_se_turna}',fecha_espera_respuesta='{$fecha_espera_respuesta}',tipo_tramite='{$tipo_tramite}',oficio_enviado='{$name}',observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
+        }
+        if ($name == '') {
+            $sql = "UPDATE envio_correspondencia SET fecha_emision='{$fecha_emision}',asunto='{$asunto}',medio_envio='{$medio_envio}',se_turna_a_area='{$se_turna_a_area}',fecha_en_que_se_turna='{$fecha_en_que_se_turna}',fecha_espera_respuesta='{$fecha_espera_respuesta}',tipo_tramite='{$tipo_tramite}',observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
+        }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
             //sucess
@@ -127,7 +142,7 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="fecha_espera_respuesta">Fecha en que se espera respuesta</label>
-                            <input type="date" class="form-control" value="<?php echo remove_junk($e_correspondencia['fecha_espera_respuesta']); ?>"  name="fecha_espera_respuesta" required>
+                            <input type="date" class="form-control" value="<?php echo remove_junk($e_correspondencia['fecha_espera_respuesta']); ?>" name="fecha_espera_respuesta" required>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -140,6 +155,15 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="oficio_enviado">Oficio enviado</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="oficio_enviado" value="<?php echo remove_junk($e_correspondencia['oficio_enviado']); ?>" id="oficio_enviado">
+                            <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_correspondencia['oficio_enviado']); ?><?php ?></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="observaciones">Observaciones</label>

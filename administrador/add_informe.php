@@ -54,9 +54,9 @@ if (isset($_POST['add_informe'])) {
         //Se crea el número de folio
         $year = date("Y");
         // Se crea el folio orientacion
-        $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-INF';
+        $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-INFAN';
 
-        $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-INF';
+        $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-INFAN';
         $carpeta = 'uploads/informes/' . $folio_carpeta;
 
         if (!is_dir($carpeta)) {

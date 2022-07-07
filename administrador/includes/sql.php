@@ -2079,6 +2079,17 @@ function find_all_fichas()
   $result = find_by_sql($sql);
   return $result;
 }
+/*----------------------------------------------------------------*/
+/* Funcion que encuentra todas las fichas técnicas del Área Médica*/
+/*----------------------------------------------------------------*/
+function find_all_fichasUser($id_user)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM fichas WHERE tipo_ficha = 1 AND quien_creo = '{$id_user}'";
+  $result = find_by_sql($sql);
+  return $result;
+}
 /*---------------------------------------------------------------------*/
 /* Funcion que encuentra todas las fichas técnicas del Área Psicológica*/
 /*---------------------------------------------------------------------*/
@@ -2087,6 +2098,17 @@ function find_all_fichas2()
   global $db;
   $results = array();
   $sql = "SELECT * FROM fichas WHERE tipo_ficha = 2";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*---------------------------------------------------------------------*/
+/* Funcion que encuentra todas las fichas técnicas del Área Psicológica*/
+/*---------------------------------------------------------------------*/
+function find_all_fichasUser2($id_user)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM fichas WHERE tipo_ficha = 2 AND quien_creo = '{$id_user}'";
   $result = find_by_sql($sql);
   return $result;
 }
@@ -2365,10 +2387,10 @@ function last_id_folios_acuerdos()
 /* Funcion para encontrar el ultimo id de folios de acuerdos para 
    despues sumarle uno y que el nuevo registro tome ese valor */
 /*------------------------------------------------------------------*/
-function last_id_folios_actividades_sistemas()
+function last_id_folios_actividades_areas()
 {
   global $db;
-  $sql = "SELECT * FROM folios_informe_sistemas ORDER BY id DESC LIMIT 1";
+  $sql = "SELECT * FROM folios_informe_areas ORDER BY id DESC LIMIT 1";
   $result = find_by_sql($sql);
   return $result;
 }
@@ -2416,9 +2438,9 @@ function area_usuario($id_usuario)
   global $db;
   $id_usuario = (int)$id_usuario;
 
-  $sql = $db->query("SELECT g.id 
+  $sql = $db->query("SELECT g.nivel_grupo 
                       FROM  grupo_usuarios g
-                      LEFT JOIN users u ON u.user_level = g.id
+                      LEFT JOIN users u ON u.user_level = g.nivel_grupo
                       LEFT JOIN detalles_usuario d ON u.id_detalle_user = d.id 
                       LEFT JOIN cargos c ON c.id = d.id_cargo 
                       LEFT JOIN area a ON a.id = c.id_area 

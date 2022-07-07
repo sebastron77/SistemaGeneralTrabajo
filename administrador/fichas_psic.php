@@ -32,6 +32,13 @@ if ($nivel_user > 7) :
     redirect('home.php');
 endif;
 
+
+if (($id_user == 28) || ($id_user == 2) || ($id_user == 41) || ($id_user == 1)) {
+    $all_fichas = find_all_fichas2();
+} else {
+    $all_fichas = find_all_fichasUser2($id_user);
+}
+
 $conexion = mysqli_connect ("localhost", "root", "");
 mysqli_set_charset($conexion,"utf8");
 mysqli_select_db ($conexion, "probar_antes_server");

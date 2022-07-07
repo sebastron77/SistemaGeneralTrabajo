@@ -14,7 +14,7 @@ $nivel_user = $user['user_level'];
 $area_user = area_usuario2($id_user);
 $area = $area_user['nombre_area'];
 
-if (($nivel_user <= 2) || ($nivel_user == 7) || ($nivel_user == 8)) {
+if (($nivel_user <= 2) || ($nivel_user == 7) || ($nivel_user == 8) || ($nivel_user == 18)) {
     $all_correspondencia = find_all_correspondenciaAdmin();
 } else {
     $all_correspondencia = find_all_correspondencia($area);
@@ -78,7 +78,7 @@ if (isset($_POST["export_data"])) {
 // endif;
 // page_require_area(4);
 
-page_require_level(15);
+page_require_level(50);
 
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -99,9 +99,9 @@ page_require_level(15);
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Correspondencia - Oficialia de partes</span>
                 </strong>
-                <!-- <?php //if (($nivel_user <= 2) || ($nivel_user == 7) || ($nivel_user == 8)) : 
-                        ?> -->
-                <a href="add_correspondencia.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar Correspondencia</a>
+                <?php if (($nivel_user <= 2) || ($nivel_user == 18)) : ?>
+                    <a href="add_correspondencia.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar Correspondencia</a>                
+                <?php endif; ?>
 
                 <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                     <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
@@ -182,7 +182,7 @@ page_require_level(15);
                                         <a href="ver_info_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
                                             <i class="glyphicon glyphicon-eye-open"></i>
                                         </a>
-                                        <?php if (/*($nivel_user <= 2) || ($nivel_user == 8)*/($nivel_user <= 15)) : ?>
+                                        <?php if (/*($nivel_user <= 2) || ($nivel_user == 8)*/($nivel_user <= 50)) : ?>
                                             <a href="edit_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
                                                 <span class="glyphicon glyphicon-edit"></span>
                                             </a>

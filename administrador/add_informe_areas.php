@@ -3,11 +3,11 @@ $page_title = 'Agregar Informe de Actividades';
 require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
-$id_folio = last_id_folios_actividades_sistemas();
+$id_folio = last_id_folios_actividades_areas();
 page_require_level(2);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
-if (isset($_POST['add_informe_sistemas'])) {
+if (isset($_POST['add_informe_areas'])) {
 
     $req_fields = array('no_informe', 'fecha_informe', 'fecha_entrega');
     validate_fields($req_fields);
@@ -35,10 +35,10 @@ if (isset($_POST['add_informe_sistemas'])) {
         //Se crea el número de folio
         $year = date("Y");
         // Se crea el folio orientacion
-        $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-INFSIST';
+        $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-INF';
 
-        $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-INFSIST';
-        $carpeta = 'uploads/informesistemas/' . $folio_carpeta;
+        $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-INF';
+        $carpeta = 'uploads/informesareas/' . $folio_carpeta;
 
         if (!is_dir($carpeta)) {
             mkdir($carpeta, 0777, true);
@@ -59,13 +59,13 @@ if (isset($_POST['add_informe_sistemas'])) {
         $move2 =  move_uploaded_file($temp2, $carpeta . "/" . $name2);
 
         if ($move && $name != '' && $name2 != '') {
-            $query = "INSERT INTO informe_actividades_sistemas (";
+            $query = "INSERT INTO informe_actividades_areas (";
             $query .= "folio, no_informe, oficio_entrega, fecha_informe, fecha_entrega, informe_adjunto";
             $query .= ") VALUES (";
             $query .= " '{$folio}','{$no_informe}','{$name}','{$fecha_informe}','{$fecha_entrega}','{$name2}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios_informe_sistemas (";
+            $query2 = "INSERT INTO folios_informe_areas (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";
@@ -75,15 +75,15 @@ if (isset($_POST['add_informe_sistemas'])) {
         if ($db->query($query) && $db->query($query2)) {
             //sucess
             $session->msg('s', " El informe de actividades ha sido agregado con éxito.");
-            redirect('informes_sistemas.php', false);
+            redirect('informes_areas.php', false);
         } else {
             //failed
             $session->msg('d', ' No se pudo agregar el informe.');
-            redirect('add_informe_sistemas.php', false);
+            redirect('add_informe_areas.php', false);
         }
     } else {
         $session->msg("d", $errors);
-        redirect('add_informe_sistemas.php', false);
+        redirect('add_informe_areas.php', false);
     }
 }
 ?>
@@ -95,11 +95,11 @@ include_once('layouts/header.php'); ?>
         <div class="panel-heading">
             <strong>
                 <span class="glyphicon glyphicon-th"></span>
-                <span>Agregar Informe de Actividades de Sistemas</span>
+                <span>Agregar Informe de Actividades</span>
             </strong>
         </div>
         <div class="panel-body">
-            <form method="post" action="add_informe_sistemas.php" enctype="multipart/form-data">
+            <form method="post" action="add_informe_areas.php" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
@@ -135,10 +135,10 @@ include_once('layouts/header.php'); ?>
                     </div>
                 </div>
                 <div class="form-group clearfix">
-                    <a href="informes_sistemas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                    <a href="informes_areas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar
                     </a>
-                    <button type="submit" name="add_informe_sistemas" class="btn btn-primary">Guardar</button>
+                    <button type="submit" name="add_informe_areas" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
         </div>

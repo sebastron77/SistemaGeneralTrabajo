@@ -90,7 +90,9 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Recepción General de Correspon-<br>dencia</p>
                 <div style="margin-top:-3%;">
-                    <a href="correspondencia.php" class="btn btn-secondary btn-xs" style="margin-top: 3px;">Correspondencia</a>
+                    <?php if (($nivel <= 2) || ($nivel == 18)) : ?>
+                        <a href="correspondencia.php" class="btn btn-secondary btn-xs" style="margin-top: 3px;">Correspondencia</a>
+                    <?php endif; ?>
                     <a href="invitaciones.php" class="btn btn-secondary btn-xs" style="margin-top: 3px;">Invitaciones</a>
                 </div>
             </div>
@@ -106,9 +108,9 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Envío de Correspon-<br>dencia Interna</p>
                 <div style="margin-top:-5%;">
-                    
-                        <a style="margin-top:5%;" href="add_env_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
-                    
+
+                    <a style="margin-top:5%;" href="add_env_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
+
                     <a style="margin-top:5%;" href="env_correspondencia.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>
@@ -151,11 +153,11 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <div class="row" style="margin-top: 10px;">
-<div class="col-md-3" style="height: 13.5rem;">
+    <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
                 <svg style="width:40px;height:73px" viewBox="0 0 24 24">
@@ -183,9 +185,9 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 15px; margin-top:5%; color:#333333;">Eventos</p>
                 <div style="margin-top:-5%;">
-                    
-                        <a style="margin-top:5%;" href="add_evento.php" class="btn btn-success btn-sm">Agregar</a>
-                    
+
+                    <a style="margin-top:5%;" href="add_evento.php" class="btn btn-success btn-sm">Agregar</a>
+
                     <a style="margin-top:5%;" href="eventos.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>
@@ -204,24 +206,24 @@ $c_cargos          = count_by_id('cargos');
                     <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                         <a style="margin-top:5%;" href="add_capacitacion.php" class="btn btn-success btn-sm"">Agregar</a>
                     <?php endif; ?>
-                    <a style="margin-top:5%;" href="capacitaciones.php" class="btn btn-primary btn-sm"">Ver</a>
+                    <a style=" margin-top:5%;" href="capacitaciones.php" class="btn btn-primary btn-sm"">Ver</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <div class="col-md-3" style="height: 13.5rem;">
-        <div class="panel panel-box clearfix">
-            <div class="panel-icon pull-left" style="background: #114987;">
-                <svg style="width:40px;height:68px" viewBox="0 0 24 24">
-                    <path fill="white" d="M19,11H13V5H19M19,19H13V13H19M11,11H5V5H11M11,19H5V13H11M3,21H21V3H3V21Z" />
-                </svg>
-            </div>
-            <div class="panel-value pull-right">
-                <p style="font-size: 16px; margin-top:15%; color:#333333;">Unidad de Gestión de Recursos</p>
-            </div>
-        </div>
-    </div> -->
-    <!-- <div class="col-md-3" style="height: 13.5rem;">
+    <!-- <div class=" col-md-3" style="height: 13.5rem;">
+                            <div class="panel panel-box clearfix">
+                                <div class="panel-icon pull-left" style="background: #114987;">
+                                    <svg style="width:40px;height:68px" viewBox="0 0 24 24">
+                                        <path fill="white" d="M19,11H13V5H19M19,19H13V13H19M11,11H5V5H11M11,19H5V13H11M3,21H21V3H3V21Z" />
+                                    </svg>
+                                </div>
+                                <div class="panel-value pull-right">
+                                    <p style="font-size: 16px; margin-top:15%; color:#333333;">Unidad de Gestión de Recursos</p>
+                                </div>
+                            </div>
+                </div> -->
+                <!-- <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987;">
                 <svg style="width:40px;height:68px" viewBox="0 0 24 24">
@@ -234,9 +236,9 @@ $c_cargos          = count_by_id('cargos');
         </div>
     </div> -->
 
-</div>
-<div class="row" style="margin-top: 10px;">
-    <!-- <div class="col-md-3" style="height: 13.5rem;">
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <!-- <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987;">
                 <svg style="width:40px;height:68px" viewBox="0 0 24 24">
@@ -248,6 +250,6 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div> -->
-</div>
+            </div>
 
-<?php include_once('layouts/footer.php'); ?>
+            <?php include_once('layouts/footer.php'); ?>

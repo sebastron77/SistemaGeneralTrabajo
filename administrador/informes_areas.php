@@ -1,10 +1,10 @@
 <?php
-$page_title = 'Informes de Actividades de Sistemas';
+$page_title = 'Informes de Actividades';
 require_once('includes/load.php');
 ?>
 <?php
 // page_require_level(2);
-$all_informe = find_all('informe_actividades_sistemas');
+$all_informe = find_all('informe_actividades_areas');
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
@@ -27,7 +27,7 @@ endif;
 $conexion = mysqli_connect ("localhost", "root", "");
 mysqli_set_charset($conexion,"utf8");
 mysqli_select_db ($conexion, "probar_antes_server");
-$sql = "SELECT * FROM informe_actividades_sistemas";
+$sql = "SELECT * FROM informe_actividades_areas";
 $resultado = mysqli_query ($conexion, $sql) or die;
 $informe_sistemas = array();
 while( $rows = mysqli_fetch_assoc($resultado) ) {
@@ -74,10 +74,10 @@ if (isset($_POST["export_data"])) {
             <div class="panel-heading clearfix">
                 <strong>
                     <span class="glyphicon glyphicon-th"></span>
-                    <span>Informes de Actividades de Sistemas</span>
+                    <span>Informes de Actividades</span>
                 </strong>
                 <?php if ($nivel_user <= 2) : ?>
-                    <a href="add_informe_sistemas.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar informe</a>
+                    <a href="add_informe_areas.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar informe</a>
                 <?php endif; ?>
                 <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                     <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
