@@ -1,31 +1,27 @@
 <?php
-$page_title = 'Editar Recomendación';
+$page_title = 'Editar Recomendación General';
 require_once('includes/load.php');
 
 // page_require_level(4);
 ?>
 <?php
-$e_recomendacion = find_by_id('recomendaciones', (int)$_GET['id']);
+$e_recomendacion = find_by_id('recomendaciones_generales', (int)$_GET['id']);
 if (!$e_recomendacion) {
-    $session->msg("d", "id de recomendación no encontrado.");
-    redirect('recomendaciones.php');
+    $session->msg("d", "id de recomendación general no encontrado.");
+    redirect('recomendaciones_generales.php');
 }
 $user = current_user();
 $nivel = $user['user_level'];
-$nivel_user = $user['user_level'];
+
 $id_user = $user['id'];
 
-if ($nivel_user > 2 && $nivel_user < 7):
-    redirect('home.php');
-endif;
-if ($nivel_user > 7):
-    redirect('home.php');
-endif;
+page_require_level(2);
+
 ?>
 
 <?php
-if (isset($_POST['edit_recomendacion'])) {
-    $req_fields = array('servidor_publico', 'fecha_acuerdo', 'observaciones');
+if (isset($_POST['edit_recomendacion_general'])) {
+    $req_fields = array('autoridad_responsable', 'servidor_publico', 'fecha_acuerdo', 'observaciones');
     validate_fields($req_fields);
     if (empty($errors)) {
         $id = (int)$e_recomendacion['id'];
@@ -37,7 +33,7 @@ if (isset($_POST['edit_recomendacion'])) {
 
         $folio_editar = $e_recomendacion['folio_queja'];
         $resultado = str_replace("/", "-", $folio_editar);
-        $carpeta = 'uploads/quejas/' . $resultado . '/recomendacion';
+        $carpeta = 'uploads/recomendacionesGenerales/' . $resultado;
 
         $name = $_FILES['recomendacion_adjunto']['name'];
         $size = $_FILES['recomendacion_adjunto']['size'];
@@ -47,28 +43,28 @@ if (isset($_POST['edit_recomendacion'])) {
         //Verificamos que exista la carpeta y si sí, guardamos el pdf
         if (is_dir($carpeta)) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
-        } else{
+        } else {
             mkdir($carpeta, 0777, true);
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
 
         if ($name != '') {
-            $sql = "UPDATE recomendaciones SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_recomendacion='{$fecha_acuerdo}', observaciones='{$observaciones}', recomendacion_adjunto='{$name}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE recomendaciones_generales SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_recomendacion='{$fecha_acuerdo}', observaciones='{$observaciones}', recomendacion_adjunto='{$name}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql = "UPDATE recomendaciones SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_recomendacion='{$fecha_acuerdo}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE recomendaciones_generales SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_recomendacion='{$fecha_acuerdo}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
-            $session->msg('s', "Información Actualizada ");
-            redirect('recomendaciones.php', false);
+            $session->msg('s', "Información Actualizada");
+            redirect('recomendaciones_generales.php', false);
         } else {
             $session->msg('d', ' Lo siento no se actualizaron los datos.');
-            redirect('edit_recomendacion.php?id=' . (int)$e_recomendacion['id'], false);
+            redirect('edit_recomendacion_general.php?id=' . (int)$e_recomendacion['id'], false);
         }
     } else {
         $session->msg("d", $errors);
-        redirect('edit_recomendacion.php?id=' . (int)$e_recomendacion['id'], false);
+        redirect('edit_recomendacion_general.php?id=' . (int)$e_recomendacion['id'], false);
     }
 }
 ?>
@@ -78,13 +74,19 @@ if (isset($_POST['edit_recomendacion'])) {
         <div class="panel-heading">
             <strong>
                 <span class="glyphicon glyphicon-th"></span>
-                <span>Editar recomendación <?php echo $e_recomendacion['folio_recomendacion']; ?></span>
+                <span>Editar recomendación general <?php echo $e_recomendacion['folio_recomendacion_general']; ?></span>
             </strong>
         </div>
         <div class="panel-body">
-            <form method="post" action="edit_recomendacion.php?id=<?php echo (int)$e_recomendacion['id']; ?>" enctype="multipart/form-data">
+            <form method="post" action="edit_recomendacion_general.php?id=<?php echo (int)$e_recomendacion['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
-                <div class="col-md-5">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="folio_queja">Folio de Queja</label>
+                            <input type="text" class="form-control" name="folio_queja" value="<?php echo remove_junk($e_recomendacion['folio_queja']); ?>" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="autoridad_responsable">Autoridad señalada</label>
                             <select class="form-control" name="autoridad_responsable">
@@ -274,7 +276,7 @@ if (isset($_POST['edit_recomendacion'])) {
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="servidor_publico">Servidor público</label>
                             <input type="text" class="form-control" name="servidor_publico" value="<?php echo remove_junk($e_recomendacion['servidor_publico']); ?>">
@@ -305,10 +307,10 @@ if (isset($_POST['edit_recomendacion'])) {
                     </div>
                 </div>
                 <div class="form-group clearfix">
-                    <a href="recomendaciones.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                    <a href="recomendaciones_generales.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar
                     </a>
-                    <button type="submit" name="edit_recomendacion" class="btn btn-primary" value="subir">Guardar</button>
+                    <button type="submit" name="edit_recomendacion_general" class="btn btn-primary" value="subir">Guardar</button>
                 </div>
             </form>
         </div>

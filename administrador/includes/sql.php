@@ -2068,6 +2068,18 @@ function find_all_recomendaciones()
   return $result;
 }
 
+/*-------------------------------------------------*/
+/* Funcion que encuentra todas las recomendaciones */
+/*-------------------------------------------------*/
+function find_all_recomendaciones_generales()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM recomendaciones_generales";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
 /*----------------------------------------------------------------*/
 /* Funcion que encuentra todas las fichas técnicas del Área Médica*/
 /*----------------------------------------------------------------*/
@@ -2402,6 +2414,17 @@ function last_id_folios_recomendaciones()
 {
   global $db;
   $sql = "SELECT * FROM folios_recomendaciones ORDER BY id DESC LIMIT 1";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*------------------------------------------------------------------*/
+/* Funcion para encontrar el ultimo id de folios de recomendaciones
+    para despues sumarle uno y que el nuevo registro tome ese valor */
+/*------------------------------------------------------------------*/
+function last_id_folios_recomendaciones_generales()
+{
+  global $db;
+  $sql = "SELECT * FROM folios_recomendaciones_generales ORDER BY id DESC LIMIT 1";
   $result = find_by_sql($sql);
   return $result;
 }
