@@ -3,12 +3,12 @@ $page_title = 'Editar Informe de Actividades';
 require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
-$e_informe = find_by_id('informe_actividades_sistemas', (int)$_GET['id']);
-$id_folio = last_id_folios_actividades_sistemas();
-page_require_level(2);
+$e_informe = find_by_id('informe_actividades_areas', (int)$_GET['id']);
+$id_folio = last_id_folios_actividades_areas();
+// page_require_level(2);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
-if (isset($_POST['edit_informe_actividades_sistemas'])) {
+if (isset($_POST['edit_informe_actividades_areas'])) {
 
     $req_fields = array('no_informe', 'fecha_informe', 'fecha_entrega');
     validate_fields($req_fields);
@@ -51,30 +51,30 @@ if (isset($_POST['edit_informe_actividades_sistemas'])) {
         }
 
         if ($name != '' && $name2 != '') {
-            $sql = "UPDATE informe_actividades_sistemas SET no_informe='{$no_informe}', oficio_entrega='{$name}', fecha_informe='{$fecha_informe}', fecha_entrega='{$fecha_entrega}', informe_adjunto='{$name2}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE informe_actividades_areas SET no_informe='{$no_informe}', oficio_entrega='{$name}', fecha_informe='{$fecha_informe}', fecha_entrega='{$fecha_entrega}', informe_adjunto='{$name2}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '' && $name2 == '') {
-            $sql = "UPDATE informe_actividades_sistemas SET no_informe='{$no_informe}', fecha_informe='{$fecha_informe}', fecha_entrega='{$fecha_entrega}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE informe_actividades_areas SET no_informe='{$no_informe}', fecha_informe='{$fecha_informe}', fecha_entrega='{$fecha_entrega}' WHERE id='{$db->escape($id)}'";
         }
         if ($name != '' && $name2 == '') {
-            $sql = "UPDATE informe_actividades_sistemas SET no_informe='{$no_informe}', oficio_entrega='{$name}', fecha_informe='{$fecha_informe}', fecha_entrega='{$fecha_entrega}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE informe_actividades_areas SET no_informe='{$no_informe}', oficio_entrega='{$name}', fecha_informe='{$fecha_informe}', fecha_entrega='{$fecha_entrega}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '' && $name2 != '') {
-            $sql = "UPDATE informe_actividades_sistemas SET no_informe='{$no_informe}', fecha_informe='{$fecha_informe}', fecha_entrega='{$fecha_entrega}', informe_adjunto='{$name2}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE informe_actividades_areas SET no_informe='{$no_informe}', fecha_informe='{$fecha_informe}', fecha_entrega='{$fecha_entrega}', informe_adjunto='{$name2}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
             //sucess
             $session->msg('s', " El informe de actividades ha sido editado con éxito.");
-            redirect('informes_sistemas.php', false);
+            redirect('informes_areas.php', false);
         } else {
             //failed
             $session->msg('d', ' No se pudo editar el informe.');
-            redirect('edit_informe_actividades_sistemas.php?id=' . (int)$e_informe['id'], false);
+            redirect('edit_informe_actividades_areas.php?id=' . (int)$e_informe['id'], false);
         }
     } else {
         $session->msg("d", $errors);
-        redirect('edit_informe_actividades_sistemas.php?id=' . (int)$e_informe['id'], false);
+        redirect('edit_informe_actividades_areas.php?id=' . (int)$e_informe['id'], false);
     }
 }
 ?>
@@ -90,7 +90,7 @@ include_once('layouts/header.php'); ?>
             </strong>
         </div>
         <div class="panel-body">
-            <form method="post" action="edit_informe_actividades_sistemas.php?id=<?php echo (int)$e_informe['id']; ?>" enctype="multipart/form-data">
+            <form method="post" action="edit_informe_actividades_areas.php?id=<?php echo (int)$e_informe['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
@@ -128,10 +128,10 @@ include_once('layouts/header.php'); ?>
                     </div>
                 </div>
                 <div class="form-group clearfix">
-                    <a href="informes_sistemas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                    <a href="informes_areas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar
                     </a>
-                    <button type="submit" name="edit_informe_actividades_sistemas" class="btn btn-primary">Guardar</button>
+                    <button type="submit" name="edit_informe_actividades_areas" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
         </div>

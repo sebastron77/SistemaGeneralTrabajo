@@ -4,7 +4,12 @@ require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
 $id_folio = last_id_folios_actividades_areas();
-page_require_level(2);
+// page_require_level(2);
+$id_user = $user['id'];
+$areas = find_all('area');
+$area_user = area_usuario2($id_user);
+$area_creacion = $area_user['nombre_area'];
+
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_informe_areas'])) {
@@ -19,9 +24,6 @@ if (isset($_POST['add_informe_areas'])) {
         $fecha_entrega   = remove_junk($db->escape($_POST['fecha_entrega']));
         $informe_adjunto   = remove_junk(($db->escape($_POST['informe_adjunto'])));
 
-        //Suma el valor del id anterior + 1, para generar ese id para el nuevo resguardo
-        //La variable $no_folio sirve para el numero de folio
-
         if (count($id_folio) == 0) {
             $nuevo_id_folio = 1;
             $no_folio1 = sprintf('%04d', 1);
@@ -32,9 +34,7 @@ if (isset($_POST['add_informe_areas'])) {
             }
         }
 
-        //Se crea el número de folio
         $year = date("Y");
-        // Se crea el folio orientacion
         $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-INF';
 
         $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-INF';
@@ -60,9 +60,9 @@ if (isset($_POST['add_informe_areas'])) {
 
         if ($move && $name != '' && $name2 != '') {
             $query = "INSERT INTO informe_actividades_areas (";
-            $query .= "folio, no_informe, oficio_entrega, fecha_informe, fecha_entrega, informe_adjunto";
+            $query .= "folio, no_informe, oficio_entrega, fecha_informe, fecha_entrega, informe_adjunto, area_creacion";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$no_informe}','{$name}','{$fecha_informe}','{$fecha_entrega}','{$name2}'";
+            $query .= " '{$folio}','{$no_informe}','{$name}','{$fecha_informe}','{$fecha_entrega}','{$name2}', '{$area_creacion}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_informe_areas (";
@@ -78,7 +78,7 @@ if (isset($_POST['add_informe_areas'])) {
             redirect('informes_areas.php', false);
         } else {
             //failed
-            $session->msg('d', ' No se pudo agregar el informe.');
+            $session->msg('d', ' No se pudo agregar el informe de actividades.');
             redirect('add_informe_areas.php', false);
         }
     } else {

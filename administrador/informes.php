@@ -92,12 +92,13 @@ if (isset($_POST["export_data"])) {
                     <thead>
                         <tr style="height: 10px;" class="info">
                             <th style="width: 3%;">Folio</th>
-                            <th style="width: 1%;"># Informe</th>
-                            <th style="width: 1%;">Fecha Informe</th>
-                            <th style="width: 1%;">Fecha de Entrega</th>
-                            <th style="width: 5%;">Oficio de Entrega a Congreso</th>
+                            <th style="width: 1%;">Num./Nombre Informe</th>
+                            <th style="width: 1%;">Fecha Inicio Informe</th>
+                            <th style="width: 1%;">Fecha Fin Informe</th>
+                            <th style="width: 1%;">Fecha Entrega Informe</th>
+                            <th style="width: 10%;">Institución a quien se entrega</th>
                             <th style="width: 5%;">Caratula de Informe</th>
-                            <th style="width: 10%;">URL</th>
+                            <th style="width: 5%;">Informe Adjunto</th>
                             <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                                 <th style="width: 1%;" class="text-center">Acciones</th>
                             <?php endif; ?>
@@ -111,12 +112,13 @@ if (isset($_POST["export_data"])) {
                             ?>
                             <tr>
                                 <td><?php echo remove_junk(ucwords($a_informe['folio'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_informe['num_informe'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_informe['fecha_informe'])) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_informe['fecha_entrega']))) ?></td>
-                                <td><a target="_blank" style="color: #23296B;" href="uploads/informes/<?php echo $resultado . '/' . $a_informe['oficio_entrega_congreso']; ?>"><?php echo $a_informe['oficio_entrega_congreso']; ?></a></td>
+                                <td><?php echo remove_junk(ucwords($a_informe['num_nom_informe'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_informe['fecha_inicio_informe'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_informe['fecha_fin_informe'])) ?></td>
+                                <td><?php echo remove_junk(ucwords(($a_informe['fecha_entrega_informe']))) ?></td>
+                                <td><?php echo remove_junk(ucwords(($a_informe['institucion_a_quien_se_entrega']))) ?></td>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/informes/<?php echo $resultado . '/' . $a_informe['caratula_informe']; ?>"><?php echo $a_informe['caratula_informe']; ?></a></td>
-                                <td><?php echo remove_junk(ucwords(($a_informe['liga_url']))) ?></td>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/informes/<?php echo $resultado . '/' . $a_informe['informe_adjunto']; ?>"><?php echo $a_informe['informe_adjunto']; ?></a></td>
                                 <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">

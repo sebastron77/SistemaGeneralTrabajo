@@ -1,5 +1,5 @@
 <?php header('Content-type: text/html; charset=utf-8');
-$page_title = 'Agregar Informe';
+$page_title = 'Agregar Informe Trimestral/Anual';
 require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
@@ -17,26 +17,26 @@ if ($nivel_user == 7) {
     page_require_level_exacto(7);
 };
 // page_require_area(4);
-if ($nivel_user > 2 && $nivel_user < 7):
+if ($nivel_user > 2 && $nivel_user < 7) :
     redirect('home.php');
 endif;
-if ($nivel_user > 7):
+if ($nivel_user > 7) :
     redirect('home.php');
 endif;
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_informe'])) {
-
-    $req_fields = array('num_informe', 'fecha_informe', 'fecha_entrega', 'liga_url');
+    $req_fields = array('num_nom_informe', 'fecha_inicio_informe', 'fecha_fin_informe');
     validate_fields($req_fields);
 
     if (empty($errors)) {
-        $num_informe   = remove_junk($db->escape($_POST['num_informe']));
-        $fecha_informe   = remove_junk($db->escape($_POST['fecha_informe']));
-        $fecha_entrega   = remove_junk($db->escape($_POST['fecha_entrega']));
-        $oficio_entrega_congreso   = remove_junk($db->escape($_POST['oficio_entrega_congreso']));
+        $num_nom_informe   = remove_junk($db->escape($_POST['num_nom_informe']));
+        $fecha_inicio_informe   = remove_junk($db->escape($_POST['fecha_inicio_informe']));
+        $fecha_fin_informe   = remove_junk($db->escape($_POST['fecha_fin_informe']));
+        $fecha_entrega_informe   = remove_junk($db->escape($_POST['fecha_entrega_informe']));
+        $institucion_a_quien_se_entrega   = remove_junk(($db->escape($_POST['institucion_a_quien_se_entrega'])));
         $caratula_informe   = remove_junk(($db->escape($_POST['caratula_informe'])));
-        $liga_url   = remove_junk(($db->escape($_POST['liga_url'])));
+        $informe_adjunto   = remove_junk($db->escape($_POST['informe_adjunto']));
 
         //Suma el valor del id anterior + 1, para generar ese id para el nuevo resguardo
         //La variable $no_folio sirve para el numero de folio
@@ -54,19 +54,19 @@ if (isset($_POST['add_informe'])) {
         //Se crea el número de folio
         $year = date("Y");
         // Se crea el folio orientacion
-        $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-INFAN';
+        $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-INFTA';
 
-        $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-INFAN';
+        $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-INFTA';
         $carpeta = 'uploads/informes/' . $folio_carpeta;
 
         if (!is_dir($carpeta)) {
             mkdir($carpeta, 0777, true);
         }
 
-        $name = $_FILES['oficio_entrega_congreso']['name'];
-        $size = $_FILES['oficio_entrega_congreso']['size'];
-        $type = $_FILES['oficio_entrega_congreso']['type'];
-        $temp = $_FILES['oficio_entrega_congreso']['tmp_name'];
+        $name = $_FILES['informe_adjunto']['name'];
+        $size = $_FILES['informe_adjunto']['size'];
+        $type = $_FILES['informe_adjunto']['type'];
+        $temp = $_FILES['informe_adjunto']['tmp_name'];
 
         $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
 
@@ -79,9 +79,9 @@ if (isset($_POST['add_informe'])) {
 
         if ($move && $name != '' && $name2 != '') {
             $query = "INSERT INTO informes (";
-            $query .= "folio, num_informe, fecha_informe, fecha_entrega, oficio_entrega_congreso, caratula_informe, liga_url";
+            $query .= "folio, num_nom_informe, fecha_inicio_informe, fecha_fin_informe, fecha_entrega_informe, institucion_a_quien_se_entrega, caratula_informe, informe_adjunto";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$num_informe}','{$fecha_informe}','{$fecha_entrega}','{$name}','{$name2}','{$liga_url}'";
+            $query .= " '{$folio}','{$num_nom_informe}','{$fecha_inicio_informe}','{$fecha_fin_informe}','{$fecha_entrega_informe}','{$institucion_a_quien_se_entrega}','{$name}','{$name2}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";
@@ -114,38 +114,46 @@ include_once('layouts/header.php'); ?>
         <div class="panel-heading">
             <strong>
                 <span class="glyphicon glyphicon-th"></span>
-                <span>Agregar Informe</span>
+                <span>Agregar Informe Trimestral/Anual</span>
             </strong>
         </div>
         <div class="panel-body">
             <form method="post" action="add_informe.php" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-group">
-                            <label for="num_informe">Número de Informe</label>
-                            <input type="text" class="form-control" name="num_informe" required>
+                            <label for="num_nom_informe">Número/Nombre de Informe</label>
+                            <input type="text" class="form-control" name="num_nom_informe" required>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fecha_informe">Fecha del informe</label>
-                            <input type="date" class="form-control" name="fecha_informe" required>
+                            <label for="fecha_entrega_informe">Fecha de entrega del reporte</label>
+                            <input type="date" class="form-control" name="fecha_entrega_informe" required>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <div class="form-group">
-                            <label for="fecha_entrega">Fecha del entrega</label>
-                            <input type="date" class="form-control" name="fecha_entrega" required>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="oficio_entrega_congreso">Adjuntar oficio de entrega Congreso</label>
-                            <input type="file" accept="application/pdf" class="form-control" name="oficio_entrega_congreso" id="oficio_entrega_congreso">
+                            <label>Periodo del informe</label>
+                            <div class="input-group input-daterange">
+                                <input type="date" style="width: 125px;" name="fecha_inicio_informe" class="form-control">
+                                <div class="input-group-addon" style="width: 12px;">-</div>
+                                <input type="date" style="width: 125px;" name="fecha_fin_informe" class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="institucion_a_quien_se_entrega">Institución a quien se entrega reporte</label>
+                            <select class="form-control" name="institucion_a_quien_se_entrega">
+                                <option value="">Escoge una opción</option>
+                                <option value="Consejo">Consejo</option>
+                                <option value="Congreso">Congreso</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="caratula_informe">Caratula del Informe</label>
@@ -155,8 +163,8 @@ include_once('layouts/header.php'); ?>
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="liga_url">URL</label>
-                            <input type="text" accept="application/pdf" class="form-control" name="liga_url" id="liga_url">
+                            <label for="informe_adjunto">Adjuntar informe</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="informe_adjunto" id="informe_adjunto">
                         </div>
                     </div>
                 </div>
