@@ -1,32 +1,26 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 $page_title = 'Capacitaciones';
 require_once('includes/load.php');
 ?>
 <?php
 
-$all_capacitaciones = find_all_capacitaciones();
+// $all_capacitaciones = find_all_capacitaciones();
 //$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
+// page_require_level(200);
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
+$nivel_user = $user['user_level'];
 
-if ($nivel <= 2) {
-    page_require_level(2);
-}
-if ($nivel == 3) {
-    redirect('home.php');
-}
-if ($nivel == 4) {
-    page_require_level_exacto(4);
-}
-if ($nivel == 5) {
-    redirect('home.php');
-}
-if ($nivel == 6) {
-    page_require_level_exacto(6);
-}
-if ($nivel == 7) {
-    page_require_level_exacto(7);
+// Identificamos a que área pertenece el usuario logueado
+$area_user = area_usuario2($id_user);
+$area = $area_user['nombre_area'];
+
+if (($nivel_user <= 2) || ($nivel_user == 7)) {
+    $all_capacitaciones = find_all_capacitaciones();
+} else {
+    $all_capacitaciones = find_all_capacitaciones_area($area);
 }
 
 $conexion = mysqli_connect ("localhost", "root", "");
@@ -81,9 +75,9 @@ if (isset($_POST["export_data"])) {
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Lista de Capacitaciones</span>
                 </strong>
-                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6) || ($nivel == 7)) : ?>
+                <?php //if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6) || ($nivel == 7)) : ?>
                     <a href="add_capacitacion.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar capacitación</a>
-                <?php endif; ?>
+                <?php //endif; ?>
                 <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                     <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
                 </form>
@@ -104,9 +98,9 @@ if (isset($_POST["export_data"])) {
                             <th style="width: 5%;">Capacitador</th>
                             <th style="width: 2%;">Curriculum</th>
                             <!-- <th style="width: 3%;">Constancia</th> -->
-                            <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6) || ($nivel == 7)) : ?>
+                            
                                 <th style="width: 3%;" class="text-center">Acciones</th>
-                            <?php endif; ?>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -137,7 +131,7 @@ if (isset($_POST["export_data"])) {
                                     <?php endif; ?> -->
 
                                 <!-- </td> -->
-                                <?php if (($nivel <= 2) || ($nivel == 4) || ($nivel == 6) || ($nivel == 7)) : ?>
+                                
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="ver_info_capacitacion.php?id=<?php echo (int)$a_capacitacion['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
@@ -153,7 +147,7 @@ if (isset($_POST["export_data"])) {
                                             <?php endif; ?>
                                         </div>
                                     </td>
-                                <?php endif; ?>
+                                
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

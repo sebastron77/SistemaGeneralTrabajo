@@ -13,35 +13,35 @@ $id_user = $user['id'];
 // page_require_area(4);
 $id_user = $user['id'];
 
-if ($nivel == 4) {
-    page_require_level(4);
-    page_require_area(4);
-}
-if ($nivel == 6){
-    page_require_level(6);
-    page_require_area(6);
-}
+// if ($nivel == 4) {
+//     page_require_level(4);
+//     page_require_area(4);
+// }
+// if ($nivel == 6){
+//     page_require_level(6);
+//     page_require_area(6);
+// }
 
-if ($nivel <= 2) {
-    page_require_level(2);
-}
-if ($nivel == 3) {
-    redirect('home.php');
-}
-if ($nivel == 4) {
-    page_require_level(4);
-    page_require_area(4);
-}
-if ($nivel == 5) {
-    redirect('home.php');
-}
-if ($nivel == 6) {
-    page_require_level(6);
-    page_require_area(6);
-}
-if ($nivel == 7) {
-    page_require_level_exacto(7);
-}
+// if ($nivel <= 2) {
+//     page_require_level(2);
+// }
+// if ($nivel == 3) {
+//     redirect('home.php');
+// }
+// if ($nivel == 4) {
+//     page_require_level(4);
+//     page_require_area(4);
+// }
+// if ($nivel == 5) {
+//     redirect('home.php');
+// }
+// if ($nivel == 6) {
+//     page_require_level(6);
+//     page_require_area(6);
+// }
+// if ($nivel == 7) {
+//     page_require_level_exacto(7);
+// }
 ?>
 <?php include_once('layouts/header.php'); ?>
 

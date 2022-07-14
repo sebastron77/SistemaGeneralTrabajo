@@ -13,8 +13,8 @@ $id_user = $user['id'];
 // page_require_area(4);
 $id_user = $user['id'];
 
-if ($nivel <= 2) {
-    page_require_level(2);
+if ($nivel <= 3) {
+    page_require_level(3);
 }
 if ($nivel == 7) {
     page_require_level_exacto(7);

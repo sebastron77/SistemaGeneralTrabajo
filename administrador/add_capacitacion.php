@@ -9,24 +9,24 @@ $id_user = $user['id'];
 $area_user = area_usuario2($id_user);
 $area = $area_user['nombre_area'];
 
-if ($nivel <= 2) {
-    page_require_level(2);
-}
-if ($nivel == 3) {
-    redirect('home.php');
-}
-if ($nivel == 4) {
-    page_require_level_exacto(4);
-}
-if ($nivel == 5) {
-    redirect('home.php');
-}
-if ($nivel == 6) {
-    page_require_level_exacto(6);
-}
-if ($nivel == 7) {
-    page_require_level_exacto(7);
-}
+// if ($nivel <= 2) {
+//     page_require_level(2);
+// }
+// if ($nivel == 3) {
+//     redirect('home.php');
+// }
+// if ($nivel == 4) {
+//     page_require_level_exacto(4);
+// }
+// if ($nivel == 5) {
+//     redirect('home.php');
+// }
+// if ($nivel == 6) {
+//     page_require_level_exacto(6);
+// }
+// if ($nivel == 7) {
+//     page_require_level_exacto(7);
+// }
 
 // page_require_level(4);
 ?>

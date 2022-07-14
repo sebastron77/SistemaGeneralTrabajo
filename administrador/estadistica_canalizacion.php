@@ -6,13 +6,13 @@ require_once('includes/load.php');
 $user = current_user();
 $nivel_user = $user['user_level'];
 // page_require_area(7);
-if ($nivel_user <= 2) {
-  page_require_level(2);
+if ($nivel_user <= 3) {
+  page_require_level(3);
 }
 if ($nivel_user == 7) {
   page_require_level_exacto(7);
 }
-if ($nivel_user > 2 && $nivel_user < 7) :
+if ($nivel_user > 3 && $nivel_user < 7) :
   redirect('home.php');
 endif;
 if ($nivel_user > 7) :

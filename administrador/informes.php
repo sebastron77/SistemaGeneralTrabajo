@@ -4,26 +4,34 @@ require_once('includes/load.php');
 ?>
 <?php
 // page_require_level(2);
-$all_informe = find_all('informes');
+// $all_informe = find_all('informes');
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];
 
-if ($nivel_user <= 2) {
-    page_require_level(2);
-}
-if ($nivel_user == 7) {
-    page_require_level_exacto(7);
-};
-// page_require_area(4);
-if ($nivel_user > 2 && $nivel_user < 7):
-    redirect('home.php');
-endif;
-if ($nivel_user > 7):
-    redirect('home.php');
-endif;
+// if ($nivel_user <= 2) {
+//     page_require_level(2);
+// }
+// if ($nivel_user == 7) {
+//     page_require_level_exacto(7);
+// };
+// // page_require_area(4);
+// if ($nivel_user > 2 && $nivel_user < 7):
+//     redirect('home.php');
+// endif;
+// if ($nivel_user > 7):
+//     redirect('home.php');
+// endif;
+// Identificamos a que área pertenece el usuario logueado
+$area_user = area_usuario2($id_user);
+$area = $area_user['nombre_area'];
 
+if (($nivel_user <= 2) || ($nivel_user == 7)) {
+    $all_informe = find_all_informeAdmin();
+} else {
+    $all_informe = find_all_informe($area);
+}
 
 $conexion = mysqli_connect ("localhost", "root", "");
 mysqli_set_charset($conexion,"utf8");
@@ -76,11 +84,11 @@ if (isset($_POST["export_data"])) {
             <div class="panel-heading clearfix">
                 <strong>
                     <span class="glyphicon glyphicon-th"></span>
-                    <span>Informes</span>
+                    <span>Informes Trimestrales/Anuales</span>
                 </strong>
-                <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
+                <?php //if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                     <a href="add_informe.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar informe</a>
-                <?php endif; ?>
+                <?php //endif; ?>
                 <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                     <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
                 </form>
@@ -99,9 +107,9 @@ if (isset($_POST["export_data"])) {
                             <th style="width: 10%;">Institución a quien se entrega</th>
                             <th style="width: 5%;">Caratula de Informe</th>
                             <th style="width: 5%;">Informe Adjunto</th>
-                            <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
+                            <?php //if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                                 <th style="width: 1%;" class="text-center">Acciones</th>
-                            <?php endif; ?>
+                            <?php //endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -119,7 +127,7 @@ if (isset($_POST["export_data"])) {
                                 <td><?php echo remove_junk(ucwords(($a_informe['institucion_a_quien_se_entrega']))) ?></td>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/informes/<?php echo $resultado . '/' . $a_informe['caratula_informe']; ?>"><?php echo $a_informe['caratula_informe']; ?></a></td>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/informes/<?php echo $resultado . '/' . $a_informe['informe_adjunto']; ?>"><?php echo $a_informe['informe_adjunto']; ?></a></td>
-                                <?php if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
+                                <?php //if (($nivel_user <= 2) || ($nivel_user == 7)) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="edit_informe.php?id=<?php echo (int)$a_informe['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
@@ -127,7 +135,7 @@ if (isset($_POST["export_data"])) {
                                             </a>
                                         </div>
                                     </td>
-                                <?php endif; ?>
+                                <?php //endif; ?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

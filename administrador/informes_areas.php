@@ -4,11 +4,21 @@ require_once('includes/load.php');
 ?>
 <?php
 // page_require_level(2);
-$all_informe = find_all('informe_actividades_areas');
+// $all_informe = find_all('informe_actividades_areas');
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];
+
+// Identificamos a que área pertenece el usuario logueado
+$area_user = area_usuario2($id_user);
+$area = $area_user['nombre_area'];
+
+if (($nivel_user <= 2) || ($nivel_user == 7)) {
+    $all_informe = find_all_informes_areasAdmin();
+} else {
+    $all_informe = find_all_informes_areas($area);
+}
 
 // if ($nivel_user <= 2) {
 //     page_require_level(2);
@@ -60,7 +70,7 @@ if (isset($_POST["export_data"])) {
 ?>
 <?php include_once('layouts/header.php'); ?>
 
-<a href="solicitudes_sistemas.php" class="btn btn-success">Regresar</a><br><br>
+<a href="solicitudes.php" class="btn btn-success">Regresar</a><br><br>
 
 <div class="row">
     <div class="col-md-12">
@@ -74,11 +84,11 @@ if (isset($_POST["export_data"])) {
             <div class="panel-heading clearfix">
                 <strong>
                     <span class="glyphicon glyphicon-th"></span>
-                    <span>Informes de Actividades</span>
+                    <span>Informes de Actividades <?php echo $area?></span>
                 </strong>
-                <?php if ($nivel_user <= 2) : ?>
+                <?php //if ($nivel_user <= 2) : ?>
                     <a href="add_informe_areas.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar informe</a>
-                <?php endif; ?>
+                <?php //endif; ?>
                 <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                     <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
                 </form>
@@ -95,9 +105,9 @@ if (isset($_POST["export_data"])) {
                             <th style="width: 7%;">Fecha de Informe</th>
                             <th style="width: 7%;">Fecha de Entrega</th>
                             <th style="width: 15%;">Informe</th>
-                            <?php if ($nivel_user <= 2) : ?>
+                            <?php //if ($nivel_user <= 2) : ?>
                                 <th style="width: 1%;" class="text-center">Acciones</th>
-                            <?php endif; ?>
+                            <?php //endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,7 +123,7 @@ if (isset($_POST["export_data"])) {
                                 <td class="text-center"><?php echo remove_junk(ucwords($a_informe['fecha_informe'])) ?></td>
                                 <td class="text-center"><?php echo remove_junk(ucwords(($a_informe['fecha_entrega']))) ?></td>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/informesareas/<?php echo $resultado . '/' . $a_informe['informe_adjunto']; ?>"><?php echo $a_informe['informe_adjunto']; ?></a></td>
-                                <?php if ($nivel_user <= 2) : ?>
+                                <?php //if ($nivel_user <= 2) : ?>
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="edit_informe_actividades_areas.php?id=<?php echo (int)$a_informe['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
@@ -121,7 +131,7 @@ if (isset($_POST["export_data"])) {
                                             </a>
                                         </div>
                                     </td>
-                                <?php endif; ?>
+                                <?php //endif; ?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

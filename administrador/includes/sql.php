@@ -2044,6 +2044,18 @@ function find_all_capacitaciones()
   return $result;
 }
 
+/*----------------------------------------------*/
+/* Funcion que encuentra todas las orientaciones */
+/*----------------------------------------------*/
+function find_all_capacitaciones_area($area)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM capacitaciones WHERE area_creacion = '{$area}' ORDER BY fecha";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
 /*----------------------------------------------------------*/
 /* Funcion que encuentra todos los acuerdos de no violacion */
 /*----------------------------------------------------------*/
@@ -2184,6 +2196,28 @@ function find_all_correspondencia($area)
 /*--------------------------------------------------*/
 /* Funcion que encuentra todas las correspondencias */
 /*--------------------------------------------------*/
+function find_all_informeAdmin()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM informes";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*-------------------------------------------------------------*/
+/* Funcion que encuentra todas las correspondencias de un área */
+/*-------------------------------------------------------------*/
+function find_all_informe($area)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM informes WHERE area_creacion='{$area}'";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*--------------------------------------------------*/
+/* Funcion que encuentra todas las correspondencias */
+/*--------------------------------------------------*/
 function find_all_env_correspondenciaAdmin()
 {
   global $db;
@@ -2200,6 +2234,28 @@ function find_all_env_correspondencia($area)
   global $db;
   $results = array();
   $sql = "SELECT * FROM envio_correspondencia WHERE area_creacion='{$area}'";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*--------------------------------------------------*/
+/* Funcion que encuentra todas las correspondencias */
+/*--------------------------------------------------*/
+function find_all_informes_areasAdmin()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM informe_actividades_areas";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*-------------------------------------------------------------*/
+/* Funcion que encuentra todas las correspondencias de un área */
+/*-------------------------------------------------------------*/
+function find_all_informes_areas($area)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM informe_actividades_areas WHERE area_creacion='{$area}'";
   $result = find_by_sql($sql);
   return $result;
 }
@@ -2483,7 +2539,7 @@ function area_usuario2($id_usuario)
   $id_usuario = (int)$id_usuario;
 
   $sql = $db->query("SELECT a.nombre_area
-                      FROM  grupo_usuarios g
+                      FROM  area g
                       LEFT JOIN users u ON u.user_level = g.id
                       LEFT JOIN detalles_usuario d ON u.id_detalle_user = d.id 
                       LEFT JOIN cargos c ON c.id = d.id_cargo 

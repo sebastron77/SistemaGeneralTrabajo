@@ -12,14 +12,14 @@ $nivel = $user['user_level'];
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];
 
-if ($nivel_user <= 2) {
-    page_require_level(2);
+if ($nivel_user <= 3) {
+    page_require_level(3);
 }
 if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
 
-if ($nivel_user > 2 && $nivel_user < 7) :
+if ($nivel_user > 3 && $nivel_user < 7) :
     redirect('home.php');
 endif;
 
@@ -79,9 +79,9 @@ if (isset($_POST["export_data"])) {
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Consejo</span>
                 </strong>
-                <?php if ($nivel_user <= 2) : ?>
+                <?php //if ($nivel_user <= 2) : ?>
                     <a href="add_consejo.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar Consejo</a>
-                <?php endif; ?>
+                <?php //endif; ?>
                 <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                     <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
                 </form>
@@ -101,9 +101,9 @@ if (isset($_POST["export_data"])) {
                         <th style="width: 1%;">No. Asistentes</th>
                         <th style="width: 5%;">Orden del día</th>
                         <th style="width: 5%;">Acta acuerdos</th>
-                        <?php if ($nivel_user <= 2) : ?>
+                        <?php //if ($nivel_user <= 2) : ?>
                             <th style="width: 5%;" class="text-center">Acciones</th>
-                        <?php endif; ?>
+                        <?php //endif; ?>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,7 +122,7 @@ if (isset($_POST["export_data"])) {
                             <td><?php echo remove_junk(ucwords(($a_consejo['num_asistentes']))) ?></td>
                             <td><a target="_blank" style="color: #23296B;" href="uploads/consejo/<?php echo $resultado . '/' . $a_consejo['orden_dia']; ?>"><?php echo $a_consejo['orden_dia']; ?></a></td>
                             <td><a target="_blank" style="color: #23296B;" href="uploads/consejo/<?php echo $resultado . '/' . $a_consejo['acta_acuerdos']; ?>"><?php echo $a_consejo['acta_acuerdos']; ?></a></td>
-                            <?php if ($nivel_user <= 2) : ?>
+                            <?php //if ($nivel_user <= 2) : ?>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="edit_consejo.php?id=<?php echo (int)$a_consejo['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
@@ -130,7 +130,7 @@ if (isset($_POST["export_data"])) {
                                         </a>
                                     </div>
                                 </td>
-                            <?php endif; ?>
+                            <?php //endif; ?>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

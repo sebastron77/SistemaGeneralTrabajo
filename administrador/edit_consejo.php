@@ -5,7 +5,7 @@ $user = current_user();
 $detalle = $user['id'];
 $a_consejo = find_by_id_consejo((int)$_GET['id']);
 $id_folio = last_id_folios();
-page_require_level(2);
+page_require_level(3);
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['edit_consejo'])) {

@@ -10,19 +10,23 @@ $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];
-if ($nivel_user <= 2) {
-    page_require_level(2);
-}
-if ($nivel_user == 7) {
-    page_require_level_exacto(7);
-};
-// page_require_area(4);
-if ($nivel_user > 2 && $nivel_user < 7) :
-    redirect('home.php');
-endif;
-if ($nivel_user > 7) :
-    redirect('home.php');
-endif;
+
+$areas = find_all('area');
+$area_user = area_usuario2($id_user);
+$area = $area_user['nombre_area'];
+// if ($nivel_user <= 2) {
+//     page_require_level(2);
+// }
+// if ($nivel_user == 7) {
+//     page_require_level_exacto(7);
+// };
+// // page_require_area(4);
+// if ($nivel_user > 2 && $nivel_user < 7) :
+//     redirect('home.php');
+// endif;
+// if ($nivel_user > 7) :
+//     redirect('home.php');
+// endif;
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['add_informe'])) {
@@ -79,9 +83,9 @@ if (isset($_POST['add_informe'])) {
 
         if ($move && $name != '' && $name2 != '') {
             $query = "INSERT INTO informes (";
-            $query .= "folio, num_nom_informe, fecha_inicio_informe, fecha_fin_informe, fecha_entrega_informe, institucion_a_quien_se_entrega, caratula_informe, informe_adjunto";
+            $query .= "folio, num_nom_informe, fecha_inicio_informe, fecha_fin_informe, fecha_entrega_informe, institucion_a_quien_se_entrega, caratula_informe, informe_adjunto, area_creacion";
             $query .= ") VALUES (";
-            $query .= " '{$folio}','{$num_nom_informe}','{$fecha_inicio_informe}','{$fecha_fin_informe}','{$fecha_entrega_informe}','{$institucion_a_quien_se_entrega}','{$name}','{$name2}'";
+            $query .= " '{$folio}','{$num_nom_informe}','{$fecha_inicio_informe}','{$fecha_fin_informe}','{$fecha_entrega_informe}','{$institucion_a_quien_se_entrega}','{$name}','{$name2}','{$area}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_general (";

@@ -22,4 +22,19 @@
       <li><a href="#">Registro de Constancias</a> </li>
     </ul>
   </li>
+  <li style="margin-top: 5px;">
+    <a href="#" class="submenu-toggle">
+      <i class="glyphicon glyphicon-signal"></i>
+      <span>Estadísticas</span>
+    </a>
+    <ul class="nav submenu">
+      <li><a href="#">Medida Cautelar</a></li>
+      <li><a href="tabla_estadistica_orientacion.php">Orientaciones</a></li>
+      <li><a href="tabla_estadistica_canalizacion.php">Canalizaciones</a></li>
+      <li><a href="#">Gestiones</a></li>
+      <li><a href="#">Solicitud de información</a></li>
+      <li><a href="tabla_estadistica_capacitacion.php">Capacitaciones</a></li>
+      <li><a href="tabla_estadistica_quejas.php">Quejas</a></li>
+    </ul>
+  </li>
 </ul>

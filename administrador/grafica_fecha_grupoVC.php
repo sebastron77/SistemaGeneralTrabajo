@@ -4,7 +4,7 @@ $page_title = 'Reporte';
 $results = '';
 require_once('includes/load.php');
 
-page_require_level(2);
+page_require_level(3);
 ?>
 <?php
 if (isset($_POST['submit'])) {
