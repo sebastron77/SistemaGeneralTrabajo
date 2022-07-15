@@ -4,7 +4,7 @@ $page_title = 'Reporte de resguardos';
 $results = '';
 require_once('includes/load.php');
 
-page_require_level(3);
+page_require_level(5);
 ?>
 <?php
 if (isset($_POST['submit'])) {

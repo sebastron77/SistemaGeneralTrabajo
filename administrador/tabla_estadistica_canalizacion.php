@@ -16,6 +16,9 @@ $id_user = $user['id'];
 if ($nivel <= 3) {
     page_require_level(3);
 }
+if ($nivel == 5) {
+    page_require_level_exacto(5);
+}
 if ($nivel == 7) {
     page_require_level_exacto(7);
 }

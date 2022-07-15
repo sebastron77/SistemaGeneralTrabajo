@@ -11,7 +11,7 @@ $nivel = $user['user_level'];
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];
 
-if ($nivel_user > 2 && $nivel_user < 7) :
+if (($nivel_user > 2 && $nivel_user < 5 && $nivel_user > 5)) :
     redirect('home.php');
 endif;
 if ($nivel_user > 7) :

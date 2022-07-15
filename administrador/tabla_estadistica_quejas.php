@@ -24,7 +24,7 @@ if ($nivel == 4) {
     redirect('home.php');
 }
 if ($nivel == 5) {
-    redirect('home.php');
+    page_require_level_exacto(5);
 }
 if ($nivel == 6) {
     redirect('home.php');
