@@ -123,6 +123,21 @@ $c_cargos          = count_by_id('cargos');
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
                 <svg style="width:40px;height:73px" viewBox="0 0 24 24">
+                    <path fill="white" d="M8,4A5,5 0 0,0 3,9V18H1V20H21A2,2 0 0,0 23,18V9A5,5 0 0,0 18,4H8M8,6A3,3 0 0,1 11,9V18H5V9A3,3 0 0,1 8,6M13,13V7H17V9H15V13H13Z" />
+                </svg>
+            </div>
+            <div class="panel-value pull-right">
+                <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Correspon-<br>dencia Interna Recibida</p>
+                <div style="margin-top:-8%;">
+                    <a style="margin-top:5%;" href="correspondencia_recibida.php" class="btn btn-primary btn-sm">Ver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3" style="height: 13.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+                <svg style="width:40px;height:73px" viewBox="0 0 24 24">
                     <path fill="white" d="M16 9C22 9 22 13 22 13V15H16V13C16 13 16 11.31 14.85 9.8C14.68 9.57 14.47 9.35 14.25 9.14C14.77 9.06 15.34 9 16 9M8 11C11.5 11 11.94 12.56 12 13H4C4.06 12.56 4.5 11 8 11M8 9C2 9 2 13 2 13V15H14V13C14 13 14 9 8 9M9 17V19H15V17L18 20L15 23V21H9V23L6 20L9 17M8 3C8.55 3 9 3.45 9 4S8.55 5 8 5 7 4.55 7 4 7.45 3 8 3M8 1C6.34 1 5 2.34 5 4S6.34 7 8 7 11 5.66 11 4 9.66 1 8 1M16 1C14.34 1 13 2.34 13 4S14.34 7 16 7 19 5.66 19 4 17.66 1 16 1Z" />
                 </svg>
             </div>
@@ -161,6 +176,10 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
+
+</div>
+
+<div class="row" style="margin-top: 10px;">
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
@@ -179,10 +198,6 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
-
-</div>
-
-<div class="row" style="margin-top: 10px;">
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
@@ -231,10 +246,12 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
-    <div class="col-md-3" style="height: 12.5rem;">
+</div><br>
+<div class="row">
+    <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
-                <svg style="width:40px;height:62px" viewBox="0 0 24 24">
+                <svg style="width:40px;height:73px" viewBox="0 0 24 24">
                     <path fill="white" d="M21,5C19.89,4.65 18.67,4.5 17.5,4.5C15.55,4.5 13.45,4.9 12,6C10.55,4.9 8.45,4.5 6.5,4.5C4.55,4.5 2.45,4.9 1,6V20.65C1,20.9 1.25,21.15 1.5,21.15C1.6,21.15 1.65,21.1 1.75,21.1C3.1,20.45 5.05,20 6.5,20C8.45,20 10.55,20.4 12,21.5C13.35,20.65 15.8,20 17.5,20C19.15,20 20.85,20.3 22.25,21.05C22.35,21.1 22.4,21.1 22.5,21.1C22.75,21.1 23,20.85 23,20.6V6C22.4,5.55 21.75,5.25 21,5M21,18.5C19.9,18.15 18.7,18 17.5,18C15.8,18 13.35,18.65 12,19.5V8C13.35,7.15 15.8,6.5 17.5,6.5C18.7,6.5 19.9,6.65 21,7V18.5Z" />
                 </svg>
             </div>

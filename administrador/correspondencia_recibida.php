@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
-$page_title = 'Correspondencia enviada';
+$page_title = 'Correspondencia recibida';
 require_once('includes/load.php');
 ?>
 <?php
@@ -15,9 +15,9 @@ $area_user = area_usuario2($id_user);
 $area = $area_user['nombre_area'];
 
 if (($nivel_user <= 2) || ($nivel_user == 7) || ($nivel_user == 8)) {
-    $all_correspondencia = find_all_env_correspondenciaAdmin();
+    $all_correspondencia = find_all_env_correspondenciaAdmin2();
 } else {
-    $all_correspondencia = find_all_env_correspondencia($area);
+    $all_correspondencia = find_all_env_correspondencia2($area);
 }
 
 $conexion = mysqli_connect("localhost", "root", "");
@@ -26,7 +26,7 @@ mysqli_select_db($conexion, "probar_antes_server");
 if (($nivel_user <= 2) || ($nivel_user == 7) || ($nivel_user == 8)) {
     $sql = "SELECT * FROM envio_correspondencia";
 } else {
-    $sql = "SELECT * FROM envio_correspondencia WHERE area_creacion='{$area}'";
+    $sql = "SELECT * FROM envio_correspondencia WHERE se_turna_a_area='{$area}'";
 }
 $resultado = mysqli_query($conexion, $sql) or die;
 $correspondencias = array();
@@ -77,10 +77,10 @@ if (isset($_POST["export_data"])) {
             <div class="panel-heading clearfix">
                 <strong>
                     <span class="glyphicon glyphicon-th"></span>
-                    <span>Correspondencia Enviada</span>
+                    <span>Correspondencia Interna Recibida</span>
                 </strong>
 
-                <a href="add_env_correspondencia.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar Correspondencia</a>
+                <!-- <a href="add_env_correspondencia.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar Correspondencia</a> -->
 
                 <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                     <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
@@ -127,7 +127,7 @@ if (isset($_POST["export_data"])) {
                                     </td>
                                 <?php endif; ?>
                                 <td><?php echo remove_junk(ucwords($a_correspondencia['folio'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_correspondencia['fecha_emision'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_correspondencia['fecha_en_que_se_turna'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_correspondencia['fecha_espera_respuesta'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_correspondencia['asunto'])) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_correspondencia['medio_envio']))) ?></td>
@@ -137,9 +137,9 @@ if (isset($_POST["export_data"])) {
                                         <a href="ver_info_env_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
                                             <i class="glyphicon glyphicon-eye-open"></i>
                                         </a>
-                                        <a href="edit_env_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
+                                        <!-- <a href="edit_env_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
                                             <span class="glyphicon glyphicon-edit"></span>
-                                        </a>
+                                        </a> -->
                                         <a href="seguimiento_env_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-secondary btn-md" title="Seguimiento" data-toggle="tooltip">
                                             <span class="glyphicon glyphicon-arrow-right"></span>
                                         </a>

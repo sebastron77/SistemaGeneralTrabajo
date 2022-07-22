@@ -125,7 +125,7 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="num_oficio_recepcion">Número de Oficio de Recepción</label>
-                            <input type="text" class="form-control" name="num_oficio_recepcion" required>
+                            <input type="text" class="form-control" name="num_oficio_recepcion">
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -201,13 +201,13 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="fecha_en_que_se_turna">Fecha en que se turna oficio</label>
-                            <input type="date" class="form-control" name="fecha_en_que_se_turna" required>
+                            <input type="date" class="form-control" name="fecha_en_que_se_turna">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="fecha_espera_respuesta">Fecha en que se espera respuesta</label>
-                            <input type="date" class="form-control" name="fecha_espera_respuesta" required>
+                            <input type="date" class="form-control" name="fecha_espera_respuesta">
                         </div>
                     </div>
                 </div>

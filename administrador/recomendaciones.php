@@ -11,12 +11,26 @@ $nivel = $user['user_level'];
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];
 
-if (($nivel_user > 2 && $nivel_user < 5 && $nivel_user > 5)) :
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 5) {
+    page_require_level_exacto(5);
+}
+if ($nivel_user == 7) {
+    page_require_level_exacto(7);
+}
+
+if ($nivel_user > 2 && $nivel_user < 5):
     redirect('home.php');
 endif;
-if ($nivel_user > 7) :
+if ($nivel_user > 5 && $nivel_user < 7):
     redirect('home.php');
 endif;
+if ($nivel_user > 7):
+    redirect('home.php');
+endif;
+
 
 $conexion = mysqli_connect("localhost", "root", "");
 mysqli_set_charset($conexion, "utf8");
@@ -115,11 +129,18 @@ if (isset($_POST["export_data"])) {
                             <?php
                             $folio_editar = $a_recomendacion['folio_queja'];
                             $resultado = str_replace("/", "-", $folio_editar);
-                            ?>
-                            <td><a target="_blank" style="color: #23296B;" href="uploads/quejas/<?php echo $resultado . '/' . 'recomendacion/' . $a_recomendacion['recomendacion_adjunto']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto']; ?></a></td>
 
-                            <!-- <?php //if (($nivel <= 2) || ($nivel == 5)) : 
-                                    ?> -->
+                            $folio_editar2 = $a_recomendacion['folio_recomendacion'];
+                            $resultado2 = str_replace("/", "-", $folio_editar2);
+                            ?>
+
+                            <?php $verifica = substr($a_recomendacion['folio_recomendacion'], 0, 4);
+                            if ($verifica == 'CEDH') : ?>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/quejas/<?php echo $resultado . '/' . 'recomendacion/' . $a_recomendacion['recomendacion_adjunto']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto']; ?></a></td>
+                            <?php elseif ($verifica != 'CEDH'): ?>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/recomendacionesAnteriores2022/<?php echo $resultado2 . '/' . $a_recomendacion['recomendacion_adjunto']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto']; ?></a></td>
+                            <?php endif ?>
+
                             <?php if (($nivel == 1)) : ?>
                                 <td class="text-center">
                                     <div class="btn-group">

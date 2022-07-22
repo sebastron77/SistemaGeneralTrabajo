@@ -1085,6 +1085,7 @@ function count_by_id_orientacion($table)
     return ($db->fetch_assoc($result));
   }
 }
+
 /*------------------------------------------------------------------------*/
 /* Funcion para contar los ID de canalizacion para saber su cantidad total */
 /*------------------------------------------------------------------------*/
@@ -1105,6 +1106,18 @@ function count_by_id_med_psic($table)
   global $db;
   if (tableExists($table)) {
     $sql    = "SELECT COUNT(id) AS total FROM " . $db->escape($table);
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+/*------------------------------------------------------------------------*/
+/* Funcion para contar los ID de canalizacion para saber su cantidad total */
+/*------------------------------------------------------------------------*/
+function count_by_id_med($table,$tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(id) AS total FROM " . $db->escape($table) . " WHERE tipo_ficha = '{$tipo}'";
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
@@ -2240,6 +2253,28 @@ function find_all_env_correspondencia($area)
 /*--------------------------------------------------*/
 /* Funcion que encuentra todas las correspondencias */
 /*--------------------------------------------------*/
+function find_all_env_correspondenciaAdmin2()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM envio_correspondencia";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*-------------------------------------------------------------*/
+/* Funcion que encuentra todas las correspondencias de un área */
+/*-------------------------------------------------------------*/
+function find_all_env_correspondencia2($area)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM envio_correspondencia WHERE se_turna_a_area='{$area}'";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*--------------------------------------------------*/
+/* Funcion que encuentra todas las correspondencias */
+/*--------------------------------------------------*/
 function find_all_informes_areasAdmin()
 {
   global $db;
@@ -2448,6 +2483,17 @@ function last_id_folios_acuerdos()
 {
   global $db;
   $sql = "SELECT * FROM folios_acuerdos ORDER BY id DESC LIMIT 1";
+  $result = find_by_sql($sql);
+  return $result;
+}
+/*------------------------------------------------------------------*/
+/* Funcion para encontrar el ultimo id de folios de acuerdos para 
+   despues sumarle uno y que el nuevo registro tome ese valor */
+/*------------------------------------------------------------------*/
+function last_id_folios_env_cor()
+{
+  global $db;
+  $sql = "SELECT * FROM folios_env_correspondencia ORDER BY id DESC LIMIT 1";
   $result = find_by_sql($sql);
   return $result;
 }

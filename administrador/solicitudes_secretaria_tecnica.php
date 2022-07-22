@@ -116,7 +116,21 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
-
+    <div class="col-md-3" style="height: 13.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+                <svg style="width:40px;height:73px" viewBox="0 0 24 24">
+                    <path fill="white" d="M8,4A5,5 0 0,0 3,9V18H1V20H21A2,2 0 0,0 23,18V9A5,5 0 0,0 18,4H8M8,6A3,3 0 0,1 11,9V18H5V9A3,3 0 0,1 8,6M13,13V7H17V9H15V13H13Z" />
+                </svg>
+            </div>
+            <div class="panel-value pull-right">
+                <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Correspon-<br>dencia Interna Recibida</p>
+                <div style="margin-top:-8%;">
+                    <a style="margin-top:5%;" href="correspondencia_recibida.php" class="btn btn-primary btn-sm">Ver</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
@@ -135,6 +149,9 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
+</div>
+
+<div class="row" style="margin-top: 10px;">
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
@@ -145,18 +162,17 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 16px; margin-top:5%; color:#333333;">Informe de Actividades</p>
                 <div style="margin-top:-4%;">
-                    <?php //if ($nivel_user <= 2) : ?>
-                        <a style="margin-top:5%;" href="add_informe_areas.php" class="btn btn-success btn-sm">Agregar</a>
-                    <?php //endif; ?>
+                    <?php //if ($nivel_user <= 2) : 
+                    ?>
+                    <a style="margin-top:5%;" href="add_informe_areas.php" class="btn btn-success btn-sm">Agregar</a>
+                    <?php //endif; 
+                    ?>
                     <a style="margin-top:5%;" href="informes_areas.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="row" style="margin-top: 10px;">
-<div class="col-md-3" style="height: 13.5rem;">
+    <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
                 <svg style="width:40px;height:72px" viewBox="0 0 24 24">
@@ -166,9 +182,11 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 16px; margin-top:5%; color:#333333;">Informe Trimestral/<br>Anual</p>
                 <div style="margin-top:-10%;">
-                    <?php //if ($nivel_user <= 2) : ?>
-                        <a style="margin-top:5%;" href="add_informe.php" class="btn btn-success btn-sm">Agregar</a>
-                    <?php //endif; ?>
+                    <?php //if ($nivel_user <= 2) : 
+                    ?>
+                    <a style="margin-top:5%;" href="add_informe.php" class="btn btn-success btn-sm">Agregar</a>
+                    <?php //endif; 
+                    ?>
                     <a style="margin-top:5%;" href="informes.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>
@@ -210,6 +228,8 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
+</div>
+<div class="row" style="margin-top: 10px;">
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
@@ -228,45 +248,6 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
-    <!-- <div class=" col-md-3" style="height: 13.5rem;">
-                            <div class="panel panel-box clearfix">
-                                <div class="panel-icon pull-left" style="background: #114987;">
-                                    <svg style="width:40px;height:68px" viewBox="0 0 24 24">
-                                        <path fill="white" d="M19,11H13V5H19M19,19H13V13H19M11,11H5V5H11M11,19H5V13H11M3,21H21V3H3V21Z" />
-                                    </svg>
-                                </div>
-                                <div class="panel-value pull-right">
-                                    <p style="font-size: 16px; margin-top:15%; color:#333333;">Unidad de Gestión de Recursos</p>
-                                </div>
-                            </div>
-                </div> -->
-                <!-- <div class="col-md-3" style="height: 13.5rem;">
-        <div class="panel panel-box clearfix">
-            <div class="panel-icon pull-left" style="background: #114987;">
-                <svg style="width:40px;height:68px" viewBox="0 0 24 24">
-                    <path fill="white" d="M2.3,20.28L11.9,10.68L10.5,9.26L9.78,9.97C9.39,10.36 8.76,10.36 8.37,9.97L7.66,9.26C7.27,8.87 7.27,8.24 7.66,7.85L13.32,2.19C13.71,1.8 14.34,1.8 14.73,2.19L15.44,2.9C15.83,3.29 15.83,3.92 15.44,4.31L14.73,5L16.15,6.43C16.54,6.04 17.17,6.04 17.56,6.43C17.95,6.82 17.95,7.46 17.56,7.85L18.97,9.26L19.68,8.55C20.07,8.16 20.71,8.16 21.1,8.55L21.8,9.26C22.19,9.65 22.19,10.29 21.8,10.68L16.15,16.33C15.76,16.72 15.12,16.72 14.73,16.33L14.03,15.63C13.63,15.24 13.63,14.6 14.03,14.21L14.73,13.5L13.32,12.09L3.71,21.7C3.32,22.09 2.69,22.09 2.3,21.7C1.91,21.31 1.91,20.67 2.3,20.28M20,19A2,2 0 0,1 22,21V22H12V21A2,2 0 0,1 14,19H20Z" />
-                </svg>
-            </div>
-            <div class="panel-value pull-right">
-                <p style="font-size: 16px; margin-top:5%; color:#333333;">Gestiones Jurisdiccionales</p>
-            </div>
-        </div>
-    </div> -->
-
-            </div>
-            <div class="row" style="margin-top: 10px;">
-                <!-- <div class="col-md-3" style="height: 13.5rem;">
-        <div class="panel panel-box clearfix">
-            <div class="panel-icon pull-left" style="background: #114987;">
-                <svg style="width:40px;height:68px" viewBox="0 0 24 24">
-                    <path fill="white" d="M9.05,9H7.06V6H9.05V4.03H7.06V3.03C7.06,1.92 7.95,1.04 9.05,1.04H15.03V8L17.5,6.5L20,8V1.04H21C22.05,1.04 23,2 23,3.03V17C23,18.03 22.05,19 21,19H9.05C8,19 7.06,18.05 7.06,17V16H9.05V14H7.06V11H9.05V9M1,18H3V15H1V13H3V10H1V8H3V5H5V8H3V10H5V13H3V15H5V18H3V20H5V21H21V23H5A2,2 0 0,1 3,21V20H1V18Z" />
-                </svg>
-            </div>
-            <div class="panel-value pull-right">
-                <p style="font-size: 16px; margin-top:5%; color:#333333;">Plan estratégico Institucional</p>
-            </div>
-        </div>
-    </div> -->
-            </div>
+</div>
 
             <?php include_once('layouts/footer.php'); ?>

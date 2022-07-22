@@ -68,7 +68,7 @@ $c_cargos          = count_by_id('cargos');
                 <p style="font-size: 15px; margin-top:5%; color:#333333; line-height: 100%;">Correspon-<br>dencia</p>
                 <div style="margin-top:-5%;">
                     <?php if (($nivel <= 2) || ($nivel == 18)) : ?>
-                    <a style="margin-top:5%;" href="add_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
+                        <a style="margin-top:5%;" href="add_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
                     <?php endif; ?>
                     <a style="margin-top:5%;" href="correspondencia.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
@@ -85,10 +85,25 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Envío de Correspon-<br>dencia Interna</p>
                 <div style="margin-top:-5%;">
-                    
-                        <a style="margin-top:5%;" href="add_env_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
-                    
+
+                    <a style="margin-top:5%;" href="add_env_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
+
                     <a style="margin-top:5%;" href="env_correspondencia.php" class="btn btn-primary btn-sm">Ver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3" style="height: 13.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+                <svg style="width:40px;height:73px" viewBox="0 0 24 24">
+                    <path fill="white" d="M8,4A5,5 0 0,0 3,9V18H1V20H21A2,2 0 0,0 23,18V9A5,5 0 0,0 18,4H8M8,6A3,3 0 0,1 11,9V18H5V9A3,3 0 0,1 8,6M13,13V7H17V9H15V13H13Z" />
+                </svg>
+            </div>
+            <div class="panel-value pull-right">
+                <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Correspon-<br>dencia Interna Recibida</p>
+                <div style="margin-top:-8%;">
+                    <a style="margin-top:5%;" href="correspondencia_recibida.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>
         </div>
@@ -103,15 +118,19 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 16px; margin-top:5%; color:#333333;">Informe de Actividades</p>
                 <div style="margin-top:-4%;">
-                    <?php //if ($nivel_user <= 2) : ?>
-                        <a style="margin-top:5%;" href="add_informe_areas.php" class="btn btn-success btn-sm">Agregar</a>
-                    <?php //endif; ?>
+                    <?php //if ($nivel_user <= 2) : 
+                    ?>
+                    <a style="margin-top:5%;" href="add_informe_areas.php" class="btn btn-success btn-sm">Agregar</a>
+                    <?php //endif; 
+                    ?>
                     <a style="margin-top:5%;" href="informes_areas.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3" style="height: 13.5rem;">
+    </div>    
+</div>
+<div class="row">
+<div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
                 <svg style="width:40px;height:72px" viewBox="0 0 24 24">
@@ -121,9 +140,11 @@ $c_cargos          = count_by_id('cargos');
             <div class="panel-value pull-right">
                 <p style="font-size: 16px; margin-top:5%; color:#333333;">Informe Trimestral/<br>Anual</p>
                 <div style="margin-top:-10%;">
-                    <?php //if ($nivel_user <= 2) : ?>
-                        <a style="margin-top:5%;" href="add_informe.php" class="btn btn-success btn-sm">Agregar</a>
-                    <?php //endif; ?>
+                    <?php //if ($nivel_user <= 2) : 
+                    ?>
+                    <a style="margin-top:5%;" href="add_informe.php" class="btn btn-success btn-sm">Agregar</a>
+                    <?php //endif; 
+                    ?>
                     <a style="margin-top:5%;" href="informes.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>

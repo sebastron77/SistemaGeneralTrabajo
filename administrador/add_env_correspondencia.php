@@ -4,7 +4,8 @@ require_once('includes/load.php');
 $user = current_user();
 $detalle = $user['id'];
 $id_ori_canal = last_id_oricanal();
-$id_folio = last_id_folios_general();
+// $id_folio = last_id_folios_general();
+$id_folio = last_id_folios_env_cor();
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
@@ -90,7 +91,7 @@ if (isset($_POST['add_env_correspondencia'])) {
             $query .= " '{$folio}','{$fecha_emision}','{$asunto}','{$medio_envio}','{$se_turna_a_area}','{$fecha_en_que_se_turna}','{$fecha_espera_respuesta}','{$tipo_tramite}','{$name}','{$observaciones}','{$area}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios_general (";
+            $query2 = "INSERT INTO folios_env_correspondencia (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";
@@ -103,7 +104,7 @@ if (isset($_POST['add_env_correspondencia'])) {
             $query .= " '{$folio}','{$fecha_emision}','{$asunto}','{$medio_envio}','{$se_turna_a_area}','{$fecha_en_que_se_turna}','{$fecha_espera_respuesta}','{$tipo_tramite}','{$observaciones}','{$area}'";
             $query .= ")";
 
-            $query2 = "INSERT INTO folios_general (";
+            $query2 = "INSERT INTO folios_env_correspondencia (";
             $query2 .= "folio, contador";
             $query2 .= ") VALUES (";
             $query2 .= " '{$folio}','{$no_folio1}'";
@@ -184,7 +185,7 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="fecha_espera_respuesta">Fecha en que se espera respuesta</label>
-                            <input type="date" class="form-control" name="fecha_espera_respuesta" required>
+                            <input type="date" class="form-control" name="fecha_espera_respuesta">
                         </div>
                     </div>
                     <div class="col-md-3">

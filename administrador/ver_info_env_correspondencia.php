@@ -29,7 +29,7 @@ $nivel_user = $user['user_level'];
 ?>
 <?php include_once('layouts/header.php'); ?>
 
-<a href="env_correspondencia.php" class="btn btn-success">Regresar</a><br><br>
+<a href="javascript:history.back()" class="btn btn-success">Regresar</a><br><br>
 
 <div class="row">
     <div class="col-md-12">

@@ -22,6 +22,7 @@ endif;
 ?>
 <?php
 $c_user = count_by_id('users');
+$c_atencion = count_by_id('atencion');
 $c_trabajadores = count_by_id('detalles_usuario');
 $c_areas = count_by_id('area');
 $c_cargos = count_by_id('cargos');
@@ -34,12 +35,17 @@ $c_quejas = count_by_id('quejas');
 $c_resoluciones = count_by_id('resoluciones');
 $c_consejo = count_by_id('consejo');
 $c_correspondencia = count_by_id('correspondencia');
+$c_env_correspondencia = count_by_id('envio_correspondencia');
 $c_invitaciones = count_by_id('invitaciones');
 $c_acuerdos = count_by_id('acuerdos');
 $c_recomendaciones = count_by_id('recomendaciones');
+$c_recomendaciones_generales = count_by_id('recomendaciones_generales');
 $c_eventos = count_by_id('eventos');
 $c_inf_anual = count_by_id('informes');
 $c_poa = count_by_id('poa');
+$c_fmedica = count_by_id_med('fichas',1);
+$c_fpsicologica = count_by_id_med('fichas',2);
+$c_jornada = count_by_id('jornadas');
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -103,101 +109,6 @@ $c_poa = count_by_id('poa');
   </div>
 </div>
 
-<!-- <div class="row">
-  <div class="col-md-3" style="height: 12.5rem;">
-    <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-violet">
-        <i class="glyphicon glyphicon-user"></i>
-      </div>
-      <div class="panel-value pull-right">
-        <h2 class="margin-top"> <?php echo $c_trabajadores['total']; ?> </h2>
-        <p class="text-muted">Trabajadores</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3" style="height: 12.5rem;">
-    <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-orange">
-        <i class="large material-icons">business</i>
-      </div>
-      <div class="panel-value pull-right">
-        <h2 class="margin-top"> <?php echo $c_areas['total']; ?> </h2>
-        <p class="text-muted">Áreas</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3" style="height: 12.5rem;">
-    <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-green2">
-        <i class="large material-icons">business_center</i>
-      </div>
-      <div class="panel-value pull-right">
-        <h2 class="margin-top"> <?php echo $c_cargos['total']; ?> </h2>
-        <p class="text-muted">Cargos</p>
-      </div>
-    </div>
-  </div> -->
-<!-- <div class="col-md-3" style="height: 12.5rem;">
-    <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-purple">
-        <i class="large material-icons">folder</i>
-      </div>
-      <div class="panel-value pull-right">
-        <h2 class="margin-top"> <?php echo $c_resguardos['total']; ?></h2>
-        <p class="text-muted">Resguardos componentes</p>
-      </div>
-    </div>
-  </div> -->
-<!-- </div><br> -->
-
-<!-- <div class="row">
-  <div class="col-md-3" style="height: 12.5rem;">
-    <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-pink">
-        <i class="glyphicon glyphicon-list"></i>
-      </div>
-      <div class="panel-value pull-right">
-        <h2 class="margin-top"> <?php echo $c_tipos['total']; ?> </h2>
-        <p class="text-muted">Tipos de vehículos</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3" style="height: 12.5rem;">
-    <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-blue2">
-        <svg style="width:50px; height:58px" viewBox="0 0 24 24">
-          <path fill="white" d="M5,11L6.5,6.5H17.5L19,11M17.5,16A1.5,1.5 0 0,1 16,14.5A1.5,1.5 0 0,1 17.5,13A1.5,1.5 0 0,1 19,14.5A1.5,1.5 0 0,1 17.5,16M6.5,16A1.5,1.5 0 0,1 5,14.5A1.5,1.5 0 0,1 6.5,13A1.5,1.5 0 0,1 8,14.5A1.5,1.5 0 0,1 6.5,16M18.92,6C18.72,5.42 18.16,5 17.5,5H6.5C5.84,5 5.28,5.42 5.08,6L3,12V20A1,1 0 0,0 4,21H5A1,1 0 0,0 6,20V19H18V20A1,1 0 0,0 19,21H20A1,1 0 0,0 21,20V12L18.92,6Z" />
-        </svg>
-      </div>
-      <div class="panel-value pull-right">
-        <h2 class="margin-top"> <?php echo $c_vehiculos['total']; ?> </h2>
-        <p class="text-muted">Vehículos</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3" style="height: 12.5rem;">
-    <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-blue3">
-        <i class="large material-icons">business_center</i>
-      </div>
-      <div class="panel-value pull-right">
-        <h2 class="margin-top"> <?php echo $c_asignacionesv['total']; ?> </h2>
-        <p class="text-muted">Asignaciones vehiculares</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3" style="height: 12.5rem;">
-    <div class="panel panel-box clearfix">
-      <div class="panel-icon pull-left bg-orange2">
-        <i class="large material-icons">folder</i>
-      </div>
-      <div class="panel-value pull-right">
-        <h2 class="margin-top"> <?php echo $c_resguardosv['total']; ?></h2>
-        <p class="text-muted">Resguardos vehiculares</p>
-      </div>
-    </div>
-  </div>
-</div><br> -->
 
 <div class="row" style="margin-top: 5px;">
   <div class="col-md-3" style="height: 12.5rem;">
@@ -295,7 +206,23 @@ $c_poa = count_by_id('poa');
     </a>
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
-    <a style="color: #333333;" href="solicitudes_medica_psic.php">
+    <a style="color: #333333;" href="recomendaciones_generales.php">
+      <div class="panel panel-box clearfix">
+        <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
+          <svg style="width:40px;height:62px;" viewBox="0 0 24 24">
+            <path fill="white" d="M20 17H22V15H20V17M20 7V13H22V7H20M11 9H16.5L11 3.5V9M4 2H12L18 8V20C18 21.11 17.11 22 16 22H4C2.89 22 2 21.1 2 20V4C2 2.89 2.89 2 4 2M13 18V16H4V18H13M16 14V12H4V14H16Z" />
+          </svg>
+        </div>
+        <div class="panel-value pull-right">
+          <h2 style="margin-top: 10%"> <?php echo $c_recomendaciones_generales['total']; ?></h2>
+          <p class="text-muted">Recomenda-</p>
+          <p class="text-muted" style="margin-top: -8%;">ciones generales</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-md-3" style="height: 12.5rem;">
+    <a style="color: #333333;" href="atencion.php">
       <div class="panel panel-box clearfix">
         <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
           <svg style="width:40px;height:62px" viewBox="0 0 24 24">
@@ -303,12 +230,14 @@ $c_poa = count_by_id('poa');
           </svg>
         </div>
         <div class="panel-value pull-right">
-          <h2 style="margin-top: 10%"> <?php echo $c_med_psic['total']; ?></h2>
-          <p class="text-muted">Área Médica y Psicológica</p>
+          <h2 style="margin-top: 10%"> <?php echo $c_atencion['total']; ?></h2>
+          <p class="text-muted">Atención</p>
         </div>
       </div>
     </a>
   </div>
+</div>
+<div class="row" style="margin-top: 5px;">
   <div class="col-md-3" style="height: 12.5rem;">
     <a style="color: #333333;" href="capacitaciones.php">
       <div class="panel panel-box clearfix">
@@ -324,8 +253,6 @@ $c_poa = count_by_id('poa');
       </div>
     </a>
   </div>
-</div>
-<div class="row" style="margin-top: 5px;">
   <div class="col-md-3" style="height: 12.5rem;">
     <a style="color: #333333;" href="resoluciones.php">
       <div class="panel panel-box clearfix">
@@ -372,6 +299,24 @@ $c_poa = count_by_id('poa');
       </div>
     </a>
   </div>
+</div>
+<div class="row" style="margin-top: 5px;">
+  <div class="col-md-3" style="height: 12.5rem;">
+    <a style="color: #333333;" href="env_correspondencia.php">
+      <div class="panel panel-box clearfix">
+        <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
+          <svg style="width:40px;height:62px" viewBox="0 0 24 24">
+            <path fill="white" d="M17,4H7A5,5 0 0,0 2,9V20H20A2,2 0 0,0 22,18V9A5,5 0 0,0 17,4M10,18H4V9A3,3 0 0,1 7,6A3,3 0 0,1 10,9V18M19,15H17V13H13V11H19V15M9,11H5V9H9V11Z" />
+          </svg>
+        </div>
+        <div class="panel-value pull-right">
+          <h2 style="margin-top: 10%"> <?php echo $c_env_correspondencia['total']; ?> </h2>
+          <p class="text-muted">Corresponden-</p>
+          <p class="text-muted" style="margin-top: -8%">cia interna</p>
+        </div>
+      </div>
+    </a>
+  </div>
   <div class="col-md-3" style="height: 12.5rem;">
     <a style="color: #333333;" href="invitaciones.php">
       <div class="panel panel-box clearfix">
@@ -387,8 +332,6 @@ $c_poa = count_by_id('poa');
       </div>
     </a>
   </div>
-</div>
-<div class="row" style="margin-top: 5px;">
   <div class="col-md-3" style="height: 12.5rem;">
     <a style="color: #333333;" href="informes.php">
       <div class="panel panel-box clearfix">
@@ -419,6 +362,9 @@ $c_poa = count_by_id('poa');
       </div>
     </a>
   </div>
+  </a>
+</div>
+<div class="row"  style="margin-top: 5px;">
   <div class="col-md-3" style="height: 12.5rem;">
     <a style="color: #333333;" href="eventos.php">
       <div class="panel panel-box clearfix">
@@ -433,7 +379,48 @@ $c_poa = count_by_id('poa');
         </div>
       </div>
   </div>
-  </a>
+  <div class="col-md-3" style="height: 12.5rem;">
+    <a style="color: #333333;" href="eventos.php">
+      <div class="panel panel-box clearfix">
+        <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
+          <svg style="width:40px;height:62px" viewBox="0 0 24 24">
+            <path fill="white" d="M19,20H5V9H19M16,2V4H8V2H6V4H5A2,2 0 0,0 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4H18V2M10.88,13H7.27L10.19,15.11L9.08,18.56L12,16.43L14.92,18.56L13.8,15.12L16.72,13H13.12L12,9.56L10.88,13Z" />
+          </svg>
+        </div>
+        <div class="panel-value pull-right">
+          <h2 style="margin-top: 10%"> <?php echo $c_fmedica['total']; ?> </h2>
+          <p class="text-muted">Fichas Médicas</p>
+        </div>
+      </div>
+  </div>
+  <div class="col-md-3" style="height: 12.5rem;">
+    <a style="color: #333333;" href="eventos.php">
+      <div class="panel panel-box clearfix">
+        <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
+          <svg style="width:40px;height:62px" viewBox="0 0 24 24">
+            <path fill="white" d="M19,20H5V9H19M16,2V4H8V2H6V4H5A2,2 0 0,0 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4H18V2M10.88,13H7.27L10.19,15.11L9.08,18.56L12,16.43L14.92,18.56L13.8,15.12L16.72,13H13.12L12,9.56L10.88,13Z" />
+          </svg>
+        </div>
+        <div class="panel-value pull-right">
+          <h2 style="margin-top: 10%"> <?php echo $c_fpsicologica['total']; ?> </h2>
+          <p class="text-muted">Fichas Psicológicas</p>
+        </div>
+      </div>
+  </div>
+  <div class="col-md-3" style="height: 12.5rem;">
+    <a style="color: #333333;" href="eventos.php">
+      <div class="panel panel-box clearfix">
+        <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
+          <svg style="width:40px;height:62px" viewBox="0 0 24 24">
+            <path fill="white" d="M19,20H5V9H19M16,2V4H8V2H6V4H5A2,2 0 0,0 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4H18V2M10.88,13H7.27L10.19,15.11L9.08,18.56L12,16.43L14.92,18.56L13.8,15.12L16.72,13H13.12L12,9.56L10.88,13Z" />
+          </svg>
+        </div>
+        <div class="panel-value pull-right">
+          <h2 style="margin-top: 10%"> <?php echo $c_jornada['total']; ?> </h2>
+          <p class="text-muted">Jornadas</p>
+        </div>
+      </div>
+  </div>
 </div>
 
 
