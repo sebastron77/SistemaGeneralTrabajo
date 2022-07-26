@@ -59,17 +59,41 @@ if (isset($_POST['edit_acuerdo_no_violacion'])) {
         //Verificamos que exista la carpeta y si sí, guardamos el pdf
         if (is_dir($carpeta)) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+            // $move =  move_uploaded_file($temp, $carpeta . "/" . $name2);
         } else{
             mkdir($carpeta, 0777, true);
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+            // $move =  move_uploaded_file($temp, $carpeta . "/" . $name2);
         }
 
-        if ($name != '') {
-            $sql = "UPDATE acuerdos SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_acuerdo='{$fecha_acuerdo}', observaciones='{$observaciones}', acuerdo_adjunto='{$name}' WHERE id='{$db->escape($id)}'";
+        $name2 = $_FILES['acuerdo_adjunto_publico']['name'];
+        $size2 = $_FILES['acuerdo_adjunto_publico']['size'];
+        $type2 = $_FILES['acuerdo_adjunto_publico']['type'];
+        $temp2 = $_FILES['acuerdo_adjunto_publico']['tmp_name'];
+
+        //Verificamos que exista la carpeta y si sí, guardamos el pdf
+        if (is_dir($carpeta)) {
+            // $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+            $move2 =  move_uploaded_file($temp2, $carpeta . "/" . $name2);
+        } else{
+            mkdir($carpeta, 0777, true);
+            // $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+            $move2 =  move_uploaded_file($temp2, $carpeta . "/" . $name2);
         }
-        if ($name == '') {
+
+        if ($name != '' && $name2 != '') {
+            $sql = "UPDATE acuerdos SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_acuerdo='{$fecha_acuerdo}', observaciones='{$observaciones}', acuerdo_adjunto='{$name}', acuerdo_adjunto_publico='{$name2}' WHERE id='{$db->escape($id)}'";
+        }
+        if ($name == '' && $name2 == '') {
             $sql = "UPDATE acuerdos SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_acuerdo='{$fecha_acuerdo}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
         }
+        if ($name != '' && $name2 == '') {
+            $sql = "UPDATE acuerdos SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_acuerdo='{$fecha_acuerdo}', observaciones='{$observaciones}', acuerdo_adjunto='{$name}' WHERE id='{$db->escape($id)}'";
+        }
+        if ($name == '' && $name2 != '') {
+            $sql = "UPDATE acuerdos SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_acuerdo='{$fecha_acuerdo}', observaciones='{$observaciones}', acuerdo_adjunto_publico='{$name2}' WHERE id='{$db->escape($id)}'";
+        }
+
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
             $session->msg('s', "Información Actualizada ");
@@ -116,7 +140,7 @@ if (isset($_POST['edit_acuerdo_no_violacion'])) {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="observaciones">Observaciones</label>
                             <textarea class="form-control" name="observaciones" id="observaciones" cols="10" rows="1" value="<?php echo remove_junk($e_acuerdo['observaciones']); ?>"><?php echo remove_junk($e_acuerdo['observaciones']); ?></textarea>
@@ -128,6 +152,15 @@ if (isset($_POST['edit_acuerdo_no_violacion'])) {
                                 <label for="acuerdo_adjunto">Acuerdo Adjunto</label>
                                 <input id="acuerdo_adjunto" type="file" accept="application/pdf" class="form-control" name="acuerdo_adjunto">
                                 <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_acuerdo['acuerdo_adjunto']); ?><?php ?></label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span>
+                                <label for="acuerdo_adjunto_publico">Acuerdo Adjunto Público</label>
+                                <input id="acuerdo_adjunto_publico" type="file" accept="application/pdf" class="form-control" name="acuerdo_adjunto_publico">
+                                <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_acuerdo['acuerdo_adjunto_publico']); ?><?php ?></label>
                             </span>
                         </div>
                     </div>

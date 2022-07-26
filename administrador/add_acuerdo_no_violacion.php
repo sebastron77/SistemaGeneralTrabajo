@@ -72,11 +72,18 @@ if (isset($_POST['add_acuerdo_no_violacion'])) {
 
         $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
 
+        $name2 = $_FILES['acuerdo_adjunto_publico']['name'];
+        $size2 = $_FILES['acuerdo_adjunto_publico']['size'];
+        $type2 = $_FILES['acuerdo_adjunto_publico']['type'];
+        $temp2 = $_FILES['acuerdo_adjunto_publico']['tmp_name'];
+
+        $move2 =  move_uploaded_file($temp2, $carpeta . "/" . $name2);
+
         if ($move && $name != '') {
             $query = "INSERT INTO acuerdos (";
-            $query .= "folio_acuerdo,folio_queja,autoridad_responsable,servidor_publico,fecha_acuerdo,observaciones,acuerdo_adjunto";
+            $query .= "folio_acuerdo,folio_queja,autoridad_responsable,servidor_publico,fecha_acuerdo,observaciones,acuerdo_adjunto,acuerdo_adjunto_publico";
             $query .= ") VALUES (";
-            $query .= " '{$folio_acuerdo}','{$folio_queja}','{$autoridad_responsable}','{$servidor_publico}','{$fecha_acuerdo}','{$observaciones}','{$name}'";
+            $query .= " '{$folio_acuerdo}','{$folio_queja}','{$autoridad_responsable}','{$servidor_publico}','{$fecha_acuerdo}','{$observaciones}','{$name}','{$name2}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_acuerdos (";
@@ -86,9 +93,9 @@ if (isset($_POST['add_acuerdo_no_violacion'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO acuerdos (";
-            $query .= "folio_acuerdo,folio_queja,autoridad_responsable,servidor_publico,fecha_acuerdo,observaciones,acuerdo_adjunto";
+            $query .= "folio_acuerdo,folio_queja,autoridad_responsable,servidor_publico,fecha_acuerdo,observaciones";
             $query .= ") VALUES (";
-            $query .= " '{$folio_acuerdo}','{$folio_queja}','{$autoridad_responsable}','{$servidor_publico}','{$fecha_acuerdo}','{$observaciones}','{$name}'";
+            $query .= " '{$folio_acuerdo}','{$folio_queja}','{$autoridad_responsable}','{$servidor_publico}','{$fecha_acuerdo}','{$observaciones}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_acuerdos (";
@@ -165,6 +172,14 @@ include_once('layouts/header.php'); ?>
                             <span>
                                 <label for="acuerdo_adjunto">Adjuntar Acuerdo</label>
                                 <input id="acuerdo_adjunto" type="file" accept="application/pdf" class="form-control" name="acuerdo_adjunto">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span>
+                                <label for="acuerdo_adjunto_publico">Adjuntar Acuerdo Público</label>
+                                <input id="acuerdo_adjunto_publico" type="file" accept="application/pdf" class="form-control" name="acuerdo_adjunto_publico">
                             </span>
                         </div>
                     </div>

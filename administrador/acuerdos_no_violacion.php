@@ -105,6 +105,7 @@ if (isset($_POST["export_data"])) {
                             <th style="width: 5%;">Fecha de Acuerdo</th>
                             <th style="width: 2%;">Observaciones</th>
                             <th style="width: 5%;">Acuerdo adjunto</th>
+                            <th style="width: 5%;">Acuerdo público adjunto</th>
                             <!-- <th style="width: 3%;">Constancia</th> -->
                             <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                                 <th style="width: 3%;" class="text-center">Acciones</th>
@@ -125,6 +126,7 @@ if (isset($_POST["export_data"])) {
                                 $resultado = str_replace("/", "-", $folio_editar);
                                 ?>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/quejas/<?php echo $resultado . '/' . 'acuerdosNoViolacion/' . $a_acuerdo['acuerdo_adjunto']; ?>"><?php echo $a_acuerdo['acuerdo_adjunto']; ?></a></td>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/quejas/<?php echo $resultado . '/' . 'acuerdosNoViolacion/' . $a_acuerdo['acuerdo_adjunto_publico']; ?>"><?php echo $a_acuerdo['acuerdo_adjunto_publico']; ?></a></td>
 
                                 <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                                     <td class="text-center">

@@ -82,7 +82,8 @@ if (isset($_POST["export_data"])) {
                         <th style="width: 5%;">Servidor Público</th>
                         <th style="width: 5%;">Fecha de Recomendación</th>
                         <th style="width: 2%;">Observaciones</th>
-                        <th style="width: 5%;">Recomendación adjunto</th>
+                        <th style="width: 5%;">Recomendación</th>
+                        <th style="width: 5%;">Recomendación Pública</th>
                         <!-- <?php //if (($nivel <= 2)): ?> -->
                             <?php if (($nivel == 1)) : ?>
                             <th style="width: 3%;" class="text-center">Acciones</th>
@@ -103,6 +104,7 @@ if (isset($_POST["export_data"])) {
                             $resultado = str_replace("/", "-", $folio_editar);
                             ?>
                             <td><a target="_blank" style="color: #23296B;" href="uploads/recomendacionesGenerales/<?php echo $resultado . '/' . $a_recomendacion['recomendacion_adjunto']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto']; ?></a></td>
+                            <td><a target="_blank" style="color: #23296B;" href="uploads/recomendacionesGenerales/<?php echo $resultado . '/' . $a_recomendacion['recomendacion_adjunto_publico']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto_publico']; ?></a></td>
 
                             <!-- <?php //if (($nivel <= 2)): ?> -->
                             <?php if (($nivel == 1)) : ?>

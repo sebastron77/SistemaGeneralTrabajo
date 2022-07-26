@@ -2104,7 +2104,17 @@ function find_all_recomendaciones_generales()
   $result = find_by_sql($sql);
   return $result;
 }
-
+/*-------------------------------------------------*/
+/* Funcion que encuentra todas las recomendaciones */
+/*-------------------------------------------------*/
+function find_all_recomendacionesTotales()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM recomendaciones UNION SELECT * FROM recomendaciones_generales ORDER BY fecha_recomendacion";
+  $result = find_by_sql($sql);
+  return $result;
+}
 /*----------------------------------------------------------------*/
 /* Funcion que encuentra todas las fichas técnicas del Área Médica*/
 /*----------------------------------------------------------------*/

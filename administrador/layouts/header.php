@@ -18,17 +18,20 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
   <link rel="stylesheet" href="libs/css/main.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- <script type="text/javascript" src="libs/js/pagination.js"></script> -->
-  <!-- LA COMENTE PORQUE NO EXITSE -->
-  <!-- <script type="text/javascript" src="prueba_agregar.js"></script> -->
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> -->
-  <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" /> -->
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> -->
+
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css" type="text/css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
   <script src="html2pdf.bundle.min.js"></script>
   <script src="script.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
 
 </head>
 
@@ -109,43 +112,43 @@
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('secParticular_menu.php'); ?>
 
-        <?php elseif ($user['user_level'] === '9') : ?>
+      <?php elseif ($user['user_level'] === '9') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('servTec_menu.php'); ?>
-        
-        <?php elseif ($user['user_level'] === '10') : ?>
+
+      <?php elseif ($user['user_level'] === '10') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('transaparencia_menu.php'); ?>
 
-        <?php elseif ($user['user_level'] === '11') : ?>
+      <?php elseif ($user['user_level'] === '11') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('archivo_menu.php'); ?>
 
-        <?php elseif ($user['user_level'] === '12') : ?>
+      <?php elseif ($user['user_level'] === '12') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('desaparecidos_menu.php'); ?>
 
-        <?php elseif ($user['user_level'] === '13') : ?>
+      <?php elseif ($user['user_level'] === '13') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('sistemas_menu.php'); ?>
 
-        <?php elseif ($user['user_level'] === '14') : ?>
+      <?php elseif ($user['user_level'] === '14') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('administrativo_menu.php'); ?>
 
-        <?php elseif ($user['user_level'] === '15') : ?>
+      <?php elseif ($user['user_level'] === '15') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('comSocial_menu.php'); ?>
 
-        <?php elseif ($user['user_level'] === '16') : ?>
+      <?php elseif ($user['user_level'] === '16') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('orgInterno_menu.php'); ?>
 
-        <?php elseif ($user['user_level'] === '17') : ?>
+      <?php elseif ($user['user_level'] === '17') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('agendas_menu.php'); ?>
 
-        <?php elseif ($user['user_level'] === '18') : ?>
+      <?php elseif ($user['user_level'] === '18') : ?>
         <!-- Presidencia y Secretaría Técnica -->
         <?php include_once('oficialia_menu.php'); ?>
 

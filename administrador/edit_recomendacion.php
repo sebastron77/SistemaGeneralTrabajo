@@ -15,10 +15,10 @@ $nivel = $user['user_level'];
 $nivel_user = $user['user_level'];
 $id_user = $user['id'];
 
-if ($nivel_user > 2 && $nivel_user < 7):
+if ($nivel_user > 2 && $nivel_user < 7) :
     redirect('home.php');
 endif;
-if ($nivel_user > 7):
+if ($nivel_user > 7) :
     redirect('home.php');
 endif;
 ?>
@@ -39,23 +39,70 @@ if (isset($_POST['edit_recomendacion'])) {
         $resultado = str_replace("/", "-", $folio_editar);
         $carpeta = 'uploads/quejas/' . $resultado . '/recomendacion';
 
+        $folio_editar2 = $e_recomendacion['folio_recomendacion'];
+        $resultado2 = str_replace("/", "-", $folio_editar2);
+        $carpeta2 = 'uploads/recomendacionesAnteriores2022/' . $resultado2;
+
         $name = $_FILES['recomendacion_adjunto']['name'];
         $size = $_FILES['recomendacion_adjunto']['size'];
         $type = $_FILES['recomendacion_adjunto']['type'];
         $temp = $_FILES['recomendacion_adjunto']['tmp_name'];
 
+        $verifica = substr($e_recomendacion['folio_recomendacion'], 0, 4);
         //Verificamos que exista la carpeta y si sí, guardamos el pdf
-        if (is_dir($carpeta)) {
-            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
-        } else{
-            mkdir($carpeta, 0777, true);
-            $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+        if ($verifica == 'CEDH') {
+            if (is_dir($carpeta)) {
+                $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+            } else {
+                mkdir($carpeta, 0777, true);
+                $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+            }
+        } elseif ($verifica != 'CEDH') {
+            if (is_dir($carpeta2)) {
+                $move =  move_uploaded_file($temp, $carpeta2 . "/" . $name);
+            } else {
+                mkdir($carpeta2, 0777, true);
+                $move =  move_uploaded_file($temp, $carpeta2 . "/" . $name);
+            }
         }
 
-        if ($name != '') {
+        $name2 = $_FILES['recomendacion_adjunto_publico']['name'];
+        $size = $_FILES['recomendacion_adjunto_publico']['size'];
+        $type = $_FILES['recomendacion_adjunto_publico']['type'];
+        $temp = $_FILES['recomendacion_adjunto_publico']['tmp_name'];
+        
+        $verifica = substr($e_recomendacion['folio_recomendacion'], 0, 4);
+
+        //Verificamos que exista la carpeta y si sí, guardamos el pdf
+        if ($verifica == 'CEDH') {
+            if (is_dir($carpeta)) {
+                $move =  move_uploaded_file($temp, $carpeta . "/" . $name2);
+            } else {
+                mkdir($carpeta, 0777, true);
+                $move =  move_uploaded_file($temp, $carpeta . "/" . $name2);
+            }
+        } elseif ($verifica != 'CEDH') {
+            if (is_dir($carpeta2)) {
+                $move =  move_uploaded_file($temp, $carpeta2 . "/" . $name2);
+            } else {
+                mkdir($carpeta2, 0777, true);
+                $move =  move_uploaded_file($temp, $carpeta2 . "/" . $name2);
+            }
+        }
+
+        if ($name != '' && $name2 != '') {
+            $sql = "UPDATE recomendaciones SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_recomendacion='{$fecha_acuerdo}', observaciones='{$observaciones}', recomendacion_adjunto='{$name}', recomendacion_adjunto_publico='{$name2}' WHERE id='{$db->escape($id)}'";
+        }
+
+        if ($name != '' && $name2 == '') {
             $sql = "UPDATE recomendaciones SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_recomendacion='{$fecha_acuerdo}', observaciones='{$observaciones}', recomendacion_adjunto='{$name}' WHERE id='{$db->escape($id)}'";
         }
-        if ($name == '') {
+
+        if ($name == '' && $name2 != '') {
+            $sql = "UPDATE recomendaciones SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_recomendacion='{$fecha_acuerdo}', observaciones='{$observaciones}', recomendacion_adjunto_publico='{$name2}' WHERE id='{$db->escape($id)}'";
+        }
+
+        if ($name == '' && $name2 == '') {
             $sql = "UPDATE recomendaciones SET autoridad_responsable='{$autoridad_responsable}', servidor_publico='{$servidor_publico}', fecha_recomendacion='{$fecha_acuerdo}', observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
@@ -84,7 +131,7 @@ if (isset($_POST['edit_recomendacion'])) {
         <div class="panel-body">
             <form method="post" action="edit_recomendacion.php?id=<?php echo (int)$e_recomendacion['id']; ?>" enctype="multipart/form-data">
                 <div class="row">
-                <div class="col-md-5">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="autoridad_responsable">Autoridad señalada</label>
                             <select class="form-control" name="autoridad_responsable">
@@ -288,7 +335,7 @@ if (isset($_POST['edit_recomendacion'])) {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="observaciones">Observaciones</label>
                             <textarea class="form-control" name="observaciones" id="observaciones" cols="10" rows="1" value="<?php echo remove_junk($e_recomendacion['observaciones']); ?>"><?php echo remove_junk($e_recomendacion['observaciones']); ?></textarea>
@@ -300,6 +347,15 @@ if (isset($_POST['edit_recomendacion'])) {
                                 <label for="recomendacion_adjunto">Recomendación Adjunto</label>
                                 <input id="recomendacion_adjunto" type="file" accept="application/pdf" class="form-control" name="recomendacion_adjunto">
                                 <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_recomendacion['recomendacion_adjunto']); ?><?php ?></label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span>
+                                <label for="recomendacion_adjunto_publico">Recomendación Pública Adjunto</label>
+                                <input id="recomendacion_adjunto_publico" type="file" accept="application/pdf" class="form-control" name="recomendacion_adjunto_publico">
+                                <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_recomendacion['recomendacion_adjunto_publico']); ?><?php ?></label>
                             </span>
                         </div>
                     </div>

@@ -43,8 +43,8 @@ $c_recomendaciones_generales = count_by_id('recomendaciones_generales');
 $c_eventos = count_by_id('eventos');
 $c_inf_anual = count_by_id('informes');
 $c_poa = count_by_id('poa');
-$c_fmedica = count_by_id_med('fichas',1);
-$c_fpsicologica = count_by_id_med('fichas',2);
+$c_fmedica = count_by_id_med('fichas', 1);
+$c_fpsicologica = count_by_id_med('fichas', 2);
 $c_jornada = count_by_id('jornadas');
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -88,7 +88,7 @@ $c_jornada = count_by_id('jornadas');
         <i class=" large material-icons">business</i>
         </div>
         <div class="panel-value pull-right">
-          <h2 style="margin-top: 10%"> <?php echo $c_areas['total']; ?> </h2>
+          <h2 style="margin-top: 10%;"> <?php echo $c_areas['total']; ?> </h2>
           <p class="text-muted">Áreas</p>
         </div>
       </div>
@@ -226,7 +226,7 @@ $c_jornada = count_by_id('jornadas');
       <div class="panel panel-box clearfix">
         <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
           <svg style="width:40px;height:62px" viewBox="0 0 24 24">
-            <path fill="white" d="M18,14H14V18H10V14H6V10H10V6H14V10H18M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z" />
+            <path fill="white" d="M10 4A4 4 0 0 1 14 8A4 4 0 0 1 10 12A4 4 0 0 1 6 8A4 4 0 0 1 10 4M10 14C14.42 14 18 15.79 18 18V20H2V18C2 15.79 5.58 14 10 14M20 12V7H22V13H20M20 17V15H22V17H20Z" />
           </svg>
         </div>
         <div class="panel-value pull-right">
@@ -362,9 +362,8 @@ $c_jornada = count_by_id('jornadas');
       </div>
     </a>
   </div>
-  </a>
 </div>
-<div class="row"  style="margin-top: 5px;">
+<div class="row" style="margin-top: 5px;">
   <div class="col-md-3" style="height: 12.5rem;">
     <a style="color: #333333;" href="eventos.php">
       <div class="panel panel-box clearfix">
@@ -378,13 +377,14 @@ $c_jornada = count_by_id('jornadas');
           <p class="text-muted">Eventos</p>
         </div>
       </div>
+    </a>
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
-    <a style="color: #333333;" href="eventos.php">
+    <a style="color: #333333;" href="fichas.php">
       <div class="panel panel-box clearfix">
         <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
           <svg style="width:40px;height:62px" viewBox="0 0 24 24">
-            <path fill="white" d="M19,20H5V9H19M16,2V4H8V2H6V4H5A2,2 0 0,0 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4H18V2M10.88,13H7.27L10.19,15.11L9.08,18.56L12,16.43L14.92,18.56L13.8,15.12L16.72,13H13.12L12,9.56L10.88,13Z" />
+            <path fill="white" d="M18 14H14V18H10V14H6V10H10V6H14V10H18M20 2H4C2.9 2 2 2.9 2 4V20C2 21.1 2.9 22 4 22H20C21.1 22 22 21.1 22 20V4C22 2.9 21.1 2 20 2M20 20H4V4H20V20Z" />
           </svg>
         </div>
         <div class="panel-value pull-right">
@@ -392,13 +392,14 @@ $c_jornada = count_by_id('jornadas');
           <p class="text-muted">Fichas Médicas</p>
         </div>
       </div>
+    </a>
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
-    <a style="color: #333333;" href="eventos.php">
+    <a style="color: #333333;" href="fichas_psic.php">
       <div class="panel panel-box clearfix">
         <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
           <svg style="width:40px;height:62px" viewBox="0 0 24 24">
-            <path fill="white" d="M19,20H5V9H19M16,2V4H8V2H6V4H5A2,2 0 0,0 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4H18V2M10.88,13H7.27L10.19,15.11L9.08,18.56L12,16.43L14.92,18.56L13.8,15.12L16.72,13H13.12L12,9.56L10.88,13Z" />
+            <path fill="white" d="M13 3C16.88 3 20 6.14 20 10C20 12.8 18.37 15.19 16 16.31V21H9V18H8C6.89 18 6 17.11 6 16V13H4.5C4.08 13 3.84 12.5 4.08 12.19L6 9.66C6.19 5.95 9.23 3 13 3M13 1C8.41 1 4.61 4.42 4.06 8.9L2.5 11L2.47 11L2.45 11.03C1.9 11.79 1.83 12.79 2.26 13.62C2.62 14.31 3.26 14.79 4 14.94V16C4 17.85 5.28 19.42 7 19.87V23H18V17.5C20.5 15.83 22 13.06 22 10C22 5.03 17.96 1 13 1M17.33 9.3L15.37 9.81L16.81 11.27C17.16 11.61 17.16 12.19 16.81 12.54S15.88 12.89 15.54 12.54L14.09 11.1L13.57 13.06C13.45 13.55 12.96 13.82 12.5 13.7C12 13.57 11.72 13.08 11.84 12.59L12.37 10.63L10.41 11.16C9.92 11.28 9.43 11 9.3 10.5C9.18 10.05 9.46 9.55 9.94 9.43L11.9 8.91L10.46 7.46C10.11 7.12 10.11 6.55 10.46 6.19C10.81 5.84 11.39 5.84 11.73 6.19L13.19 7.63L13.7 5.67C13.82 5.18 14.32 4.9 14.79 5.03C15.28 5.16 15.56 5.65 15.43 6.13L14.9 8.1L16.87 7.57C17.35 7.44 17.84 7.72 17.97 8.21C18.1 8.68 17.82 9.18 17.33 9.3Z" />
           </svg>
         </div>
         <div class="panel-value pull-right">
@@ -406,13 +407,14 @@ $c_jornada = count_by_id('jornadas');
           <p class="text-muted">Fichas Psicológicas</p>
         </div>
       </div>
+    </a>
   </div>
   <div class="col-md-3" style="height: 12.5rem;">
-    <a style="color: #333333;" href="eventos.php">
+    <a style="color: #333333;" href="jornadas.php">
       <div class="panel panel-box clearfix">
         <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
           <svg style="width:40px;height:62px" viewBox="0 0 24 24">
-            <path fill="white" d="M19,20H5V9H19M16,2V4H8V2H6V4H5A2,2 0 0,0 3,6V20A2,2 0 0,0 5,22H19A2,2 0 0,0 21,20V6A2,2 0 0,0 19,4H18V2M10.88,13H7.27L10.19,15.11L9.08,18.56L12,16.43L14.92,18.56L13.8,15.12L16.72,13H13.12L12,9.56L10.88,13Z" />
+            <path fill="white" d="M5 6C3.9 6 3 6.9 3 8S3.9 10 5 10 7 9.11 7 8 6.11 6 5 6M12 4C10.9 4 10 4.89 10 6S10.9 8 12 8 14 7.11 14 6 13.11 4 12 4M19 2C17.9 2 17 2.9 17 4S17.9 6 19 6 21 5.11 21 4 20.11 2 19 2M3.5 11C2.67 11 2 11.67 2 12.5V17H3V22H7V17H8V12.5C8 11.67 7.33 11 6.5 11H3.5M10.5 9C9.67 9 9 9.67 9 10.5V15H10V20H14V15H15V10.5C15 9.67 14.33 9 13.5 9H10.5M17.5 7C16.67 7 16 7.67 16 8.5V13H17V18H21V13H22V8.5C22 7.67 21.33 7 20.5 7H17.5Z" />
           </svg>
         </div>
         <div class="panel-value pull-right">
@@ -420,6 +422,7 @@ $c_jornada = count_by_id('jornadas');
           <p class="text-muted">Jornadas</p>
         </div>
       </div>
+    </a>
   </div>
 </div>
 

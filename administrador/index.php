@@ -6,9 +6,9 @@
 <div class="body2">
 <div class="login-page">
   <div class="text-center">
-    <h1>Bienvenido</h1>
+    <h1 style="margin-top:25px">Bienvenido</h1>
     <!-- <i class="large material-icons">account_circle</i> -->
-    <p>Iniciar sesión </p>
+    <p style="font-size:16px;">Iniciar sesión </p>
   </div>
   <?php echo display_msg($msg); ?>
   <form method="post" action="auth.php" class="clearfix">

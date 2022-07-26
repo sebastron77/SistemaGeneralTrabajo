@@ -72,11 +72,18 @@ if (isset($_POST['add_recomendacion'])) {
 
         $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
 
+        $name2 = $_FILES['recomendacion_adjunto_publico']['name'];
+        $size2 = $_FILES['recomendacion_adjunto_publico']['size'];
+        $type2 = $_FILES['recomendacion_adjunto_publico']['type'];
+        $temp2 = $_FILES['recomendacion_adjunto_publico']['tmp_name'];
+
+        $move2 =  move_uploaded_file($temp2, $carpeta . "/" . $name2);
+
         if ($move && $name != '') {
             $query = "INSERT INTO recomendaciones (";
-            $query .= "folio_recomendacion,folio_queja,autoridad_responsable,servidor_publico,fecha_recomendacion,observaciones,recomendacion_adjunto";
+            $query .= "folio_recomendacion,folio_queja,autoridad_responsable,servidor_publico,fecha_recomendacion,observaciones,recomendacion_adjunto,recomendacion_adjunto_publico";
             $query .= ") VALUES (";
-            $query .= " '{$folio_acuerdo}','{$folio_queja}','{$autoridad_responsable}','{$servidor_publico}','{$fecha_acuerdo}','{$observaciones}','{$name}'";
+            $query .= " '{$folio_acuerdo}','{$folio_queja}','{$autoridad_responsable}','{$servidor_publico}','{$fecha_acuerdo}','{$observaciones}','{$name}','{$name2}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_recomendaciones (";
@@ -86,9 +93,9 @@ if (isset($_POST['add_recomendacion'])) {
             $query2 .= ")";
         } else {
             $query = "INSERT INTO recomendaciones (";
-            $query .= "folio_recomendacion,folio_queja,autoridad_responsable,servidor_publico,fecha_recomendacion,observaciones,recomendacion_adjunto";
+            $query .= "folio_recomendacion,folio_queja,autoridad_responsable,servidor_publico,fecha_recomendacion,observaciones";
             $query .= ") VALUES (";
-            $query .= " '{$folio_acuerdo}','{$folio_queja}','{$autoridad_responsable}','{$servidor_publico}','{$fecha_acuerdo}','{$observaciones}','{$name}'";
+            $query .= " '{$folio_acuerdo}','{$folio_queja}','{$autoridad_responsable}','{$servidor_publico}','{$fecha_acuerdo}','{$observaciones}'";
             $query .= ")";
 
             $query2 = "INSERT INTO folios_recomendaciones (";
@@ -350,6 +357,14 @@ include_once('layouts/header.php'); ?>
                             <span>
                                 <label for="recomendacion_adjunto">Adjuntar Recomendación</label>
                                 <input id="recomendacion_adjunto" type="file" accept="application/pdf" class="form-control" name="recomendacion_adjunto">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <span>
+                                <label for="recomendacion_adjunto_publico">Adjuntar Recomendación Versión Pública</label>
+                                <input id="recomendacion_adjunto_publico" type="file" accept="application/pdf" class="form-control" name="recomendacion_adjunto_publico">
                             </span>
                         </div>
                     </div>

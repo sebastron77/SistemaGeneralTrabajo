@@ -102,13 +102,14 @@ if (isset($_POST["export_data"])) {
             <table class="datatable table table-bordered table-striped">
                 <thead>
                     <tr style="height: 10px;" class="info">
-                        <th style="width: 10%;">Folio Recomendación</th>
-                        <th style="width: 10%;">Folio Queja</th>
+                        <th style="width: 5%;">Folio Recomendación</th>
+                        <th style="width: 5%;">Folio Queja</th>
                         <th style="width: 7%;">Autoridad Responsable</th>
                         <th style="width: 5%;">Servidor Público</th>
-                        <th style="width: 5%;">Fecha de Recomendación</th>
+                        <th style="width: 5%;">Fecha Recomendación</th>
                         <th style="width: 2%;">Observaciones</th>
-                        <th style="width: 5%;">Recomendación adjunto</th>
+                        <th style="width: 5%;">Recomendación</th>
+                        <th style="width: 1%;">Recomendación Pública</th>
                         <!-- <?php //if (($nivel <= 2) || ($nivel == 5)) : 
                                 ?> -->
                         <?php if (($nivel == 1)) : ?>
@@ -137,8 +138,10 @@ if (isset($_POST["export_data"])) {
                             <?php $verifica = substr($a_recomendacion['folio_recomendacion'], 0, 4);
                             if ($verifica == 'CEDH') : ?>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/quejas/<?php echo $resultado . '/' . 'recomendacion/' . $a_recomendacion['recomendacion_adjunto']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto']; ?></a></td>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/quejas/<?php echo $resultado . '/' . 'recomendacion/' . $a_recomendacion['recomendacion_adjunto_publico']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto_publico']; ?></a></td>
                             <?php elseif ($verifica != 'CEDH'): ?>
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/recomendacionesAnteriores2022/<?php echo $resultado2 . '/' . $a_recomendacion['recomendacion_adjunto']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto']; ?></a></td>
+                                <td><a target="_blank" style="color: #23296B;" href="uploads/recomendacionesAnteriores2022/<?php echo $resultado2 . '/' . $a_recomendacion['recomendacion_adjunto_publico']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto_publico']; ?></a></td>
                             <?php endif ?>
 
                             <?php if (($nivel == 1)) : ?>
