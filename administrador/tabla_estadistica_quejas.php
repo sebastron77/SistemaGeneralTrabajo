@@ -1093,7 +1093,7 @@ $total_visuruapan = count_by_visuruapan('quejas');
     <span></span>
     <h4 style="margin-top: 5%;">Selecciona el rango a graficar</h4>
 
-    <form class="clearfix" method="post" action="grafica_fecha_medioP.php">
+    <form class="clearfix" method="post" action="grafica_fecha_autoridadR.php">
         <div class="form-group">
             <label class="form-label">Rango de fechas</label>
             <div class="input-group">

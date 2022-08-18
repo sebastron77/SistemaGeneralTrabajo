@@ -112,7 +112,7 @@ if (isset($_POST["export_data"])) {
                         <th style="width: 1%;">Recomendación Pública</th>
                         <!-- <?php //if (($nivel <= 2) || ($nivel == 5)) : 
                                 ?> -->
-                        <?php if (($nivel == 1)) : ?>
+                        <?php if (($nivel == 1) || ($nivel == 5)) : ?>
 
                             <th style="width: 3%;" class="text-center">Acciones</th>
                         <?php endif; ?>
@@ -144,7 +144,7 @@ if (isset($_POST["export_data"])) {
                                 <td><a target="_blank" style="color: #23296B;" href="uploads/recomendacionesAnteriores2022/<?php echo $resultado2 . '/' . $a_recomendacion['recomendacion_adjunto_publico']; ?>"><?php echo $a_recomendacion['recomendacion_adjunto_publico']; ?></a></td>
                             <?php endif ?>
 
-                            <?php if (($nivel == 1)) : ?>
+                            <?php if (($nivel == 1) || ($nivel == 5)) : ?>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="edit_recomendacion.php?id=<?php echo (int)$a_recomendacion['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">

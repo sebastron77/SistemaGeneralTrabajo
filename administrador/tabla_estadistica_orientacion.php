@@ -4,13 +4,9 @@ $page_title = 'Estadísticas de Orientaciones';
 require_once('includes/load.php');
 ?>
 <?php
-// page_require_level(4);
-// $a_orientacion = find_by_id('capacitaciones', (int)$_GET['id']);
-//$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
 $user = current_user();
 $nivel = $user['user_level'];
 $id_user = $user['id'];
-// page_require_area(4);
 $id_user = $user['id'];
 
 if ($nivel <= 2) {
@@ -61,6 +57,16 @@ $total_vt = count_by_vt('orientacion_canalizacion', 1);
 $total_ve = count_by_ve('orientacion_canalizacion', 1);
 $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
 
+$total_sin_est = count_by_sin_est('orientacion_canalizacion', 1);
+$total_primaria = count_by_primaria('orientacion_canalizacion', 1);
+$total_secundaria = count_by_secundaria('orientacion_canalizacion', 1);
+// $total_preparatoria = count_by_preparatoria('orientacion_canalizacion', 1);
+// $total_licenciatura = count_by_licenciatura('orientacion_canalizacion', 1);
+// $total_especialidad = count_by_especialidad('orientacion_canalizacion', 1);
+// $total_maestria = count_by_maestria('orientacion_canalizacion', 1);
+// $total_doctorado = count_by_doctorado('orientacion_canalizacion', 1);
+// $total_posdoctorado = count_by_posdoctorado('orientacion_canalizacion', 1);
+
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -78,7 +84,6 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Orientaciones por medio de presentación</span>
                 </strong>
-                <!-- <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a> -->
             </div>
             <div class="panel-body">
                 <table class="table table-bordered table-striped">
@@ -140,7 +145,6 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Orientaciones por género</span>
                 </strong>
-                <!-- <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a> -->
             </div>
 
             <div class="panel-body">
@@ -187,7 +191,6 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                     <span class="glyphicon glyphicon-th"></span>
                     <span>Orientaciones por grupo vulnerable</span>
                 </strong>
-                <!-- <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a> -->
             </div>
 
             <div class="panel-body">
@@ -262,6 +265,70 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
                                 <?php echo $total_gv_lgbt['total'] + $total_gv_lgbt2['total'] + $total_der_mujer['total'] + $total_nna['total'] + $total_nna2['total']  + $total_disc['total'] +
                                     $total_mig['total'] + $total_vih['total'] + $total_gi['total'] + $total_perio['total'] + $total_ddh['total'] + $total_am['total'] +
                                     $total_int['total'] + $total_otros['total'] + $total_na['total'] ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <strong>
+                    <span class="glyphicon glyphicon-th"></span>
+                    <span>Orientaciones por Nivel de Estudios</span>
+                </strong>
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-bordered table-striped">
+                    <a href="estadistica_orientaciones_medioGen.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                        Ver en gráfica
+                    </a>
+                    <a href="javascript:abrir2()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
+                    <br><br>
+                    <thead>
+                        <tr style="height: 10px;" class="info">
+                            <th class="text-center" style="width: 70%;">Nivel de estudios</th>
+                            <th class="text-center" style="width: 30%;">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sin estudios</td>
+                            <td class="text-center"><?php echo $total_['total'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Primaria</td>
+                            <td class="text-center"><?php echo $total_['total'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Secundaria</td>
+                            <td class="text-center"><?php echo $total_['total']?></td>
+                        </tr>
+                        <tr>
+                            <td>Preparatoria</td>
+                            <td class="text-center"><?php echo $total_['total']?></td>
+                        </tr>
+                        <tr>
+                            <td>Licenciatura</td>
+                            <td class="text-center"><?php echo $total_['total']?></td>
+                        </tr>
+                        <tr>
+                            <td>Especialidad</td>
+                            <td class="text-center"><?php echo $total_['total']?></td>
+                        </tr>
+                        <tr>
+                            <td>Maestría</td>
+                            <td class="text-center"><?php echo $total_['total']?></td>
+                        </tr>
+                        <tr>
+                            <td>Doctorado</td>
+                            <td class="text-center"><?php echo $total_['total']?></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right;"><b>Total</b></td>
+                            <td>
+                                <?php echo $total_['total'] + $total_['total'] + $total_['total'] + $total_['total'] ?>
                             </td>
                         </tr>
                     </tbody>

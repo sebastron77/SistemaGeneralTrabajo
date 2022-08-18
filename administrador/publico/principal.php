@@ -93,15 +93,17 @@
     </nav>
 
     <div class="rectangulo">
-        <div class="row">
-            <h1 style="text-align: center; margin-top: 5%;">Comisión Estatal de los Derechos Humanos Michoacán</h1><br>
-        </div><br><br>
+        <center>
+            <div class="row" style="margin-top: 20px;">
+                <img src="LOGO-CEDH.png" width="35%" alt="logocedh">
+            </div><br><br>
+        </center>
         <div class="row" style="display:inline;">
             <!-- <div class="col"> -->
-                <a href="acuerdos_publico.php" class="boton1">Acuerdos de No Violación</a><br><br>
+            <a href="acuerdos_publico.php" class="boton1">Acuerdos de No Violación</a><br><br>
             <!-- </div> -->
             <!-- <div class="col"> -->
-                <a href="recomendaciones_publico.php" class="boton2">Recomendaciones</a><br><br>
+            <a href="recomendaciones_publico.php" class="boton2">Recomendaciones</a><br><br>
             <!-- </div><br><br><br><br><br><br> -->
         </div>
     </div>

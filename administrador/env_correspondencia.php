@@ -91,15 +91,14 @@ if (isset($_POST["export_data"])) {
                 <table class="datatable table table-bordered table-striped">
                     <thead>
                         <tr style="height: 10px;" class="info">
-                            <th style="width: 5%;">Semáforo</th>
+                            <th style="width: 1%;">Estatus</th>
                             <th style="width: 5%;">Folio</th>
                             <th style="width: 5%;">Fecha en que se turna</th>
                             <th style="width: 3%;">Fecha espera respuesta</th>
                             <th style="width: 7%;">Asunto</th>
                             <th style="width: 5%;">Medio de Envío</th>
-                            <th style="width: 5%;">Área a la que se turna</th>
+                            <th style="width: 5%;">Se turna</th>
                             <th style="width: 2%;" class="text-center">Acciones</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -124,6 +123,7 @@ if (isset($_POST["export_data"])) {
                                 <?php if ($a_correspondencia['fecha_espera_respuesta'] < $creacion) : ?>
                                     <td class="text-center">
                                         <h1><span class="red">r</span>
+                                            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="popover" title="Popover Header" data-bs-content="Some content inside the popover">Toggle popover</button> -->
                                     </td>
                                 <?php endif; ?>
                                 <td><?php echo remove_junk(ucwords($a_correspondencia['folio'])) ?></td>
@@ -142,6 +142,11 @@ if (isset($_POST["export_data"])) {
                                         </a>
                                         <a href="seguimiento_env_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-secondary btn-md" title="Seguimiento" data-toggle="tooltip">
                                             <span class="glyphicon glyphicon-arrow-right"></span>
+                                        </a>
+                                        <a href="pdf2.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-pdf btn-md" title="PDF" data-toggle="tooltip">
+                                            <svg style="width:18px;height:18px" viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
+                                            </svg>
                                         </a>
                                     </div>
                                 </td>

@@ -1025,6 +1025,16 @@ function resguardo_pdf($id)
   $sql .= " WHERE id_asignacion_resguardo = '{$db->escape($nuevo_id_asig_resg)}'";
   return find_by_sql($sql);
 }
+
+function correspondencia_pdf($id)
+{
+  global $db;
+  $sql  = "SELECT *";
+  $sql .= " FROM envio_correspondencia WHERE id='{$db->escape($id)}'";
+  //SELECT * FROM `resguardos` GROUP BY id_asignacion_resguardo DESC
+  return find_by_sql($sql);
+}
+
 /*------------------------------------------------------------------------------------*/
 /* Funcion para buscar la información que aparecerá en el PDF del resguardo vehicular */
 /*------------------------------------------------------------------------------------*/
@@ -2069,6 +2079,31 @@ function find_all_capacitaciones_area($area)
   return $result;
 }
 
+/*----------------------------------------------*/
+/* Funcion que encuentra todas las actuaciones */
+/*----------------------------------------------*/
+function find_all_actuaciones()
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM actuaciones ORDER BY fecha_captura_acta";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
+/*----------------------------------------------*/
+/* Funcion que encuentra todas las actuaciones */
+/*----------------------------------------------*/
+function find_all_actuaciones_area($area)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT * FROM actuaciones WHERE area_creacion = '{$area}' ORDER BY fecha_captura_acta";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
+
 /*----------------------------------------------------------*/
 /* Funcion que encuentra todos los acuerdos de no violacion */
 /*----------------------------------------------------------*/
@@ -2304,6 +2339,17 @@ function find_all_informes_areas($area)
   $result = find_by_sql($sql);
   return $result;
 }
+/*---------------------------------------------------------*/
+/* Funcion que encuentra todas los trabajadores de un área */
+/*---------------------------------------------------------*/
+function find_all_trabajadores_area($area)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT d.id,d.nombre, d.apellidos, a.nombre_area FROM detalles_usuario as d LEFT JOIN cargos as c ON c.id = d.id_cargo LEFT JOIN area as a ON a.id = c.id_area WHERE a.nombre_area = '{$area}' ORDER BY d.nombre ASC";
+  $result = find_by_sql($sql);
+  return $result;
+}
 /*----------------------------------------------*/
 /* Funcion que encuentra todas las consejo */
 /*----------------------------------------------*/
@@ -2473,6 +2519,20 @@ function find_by_id_capacitacion($id)
     return null;
 }
 
+/*----------------------------------------------*/
+/* Funcion que encuentra una capacitación por id */
+/*----------------------------------------------*/
+function find_by_id_actuacion($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT * FROM actuaciones WHERE id='{$db->escape($id)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
 /*------------------------------------------------------------------*/
 /* Funcion para encontrar el ultimo id de folios para despues
    sumarle uno y que el nuevo registro tome ese valor */
@@ -2586,6 +2646,24 @@ function area_usuario($id_usuario)
     return null;
 }
 
+/* ------------------------------------------------------------------------------*/
+/* Función para obtener el grupo de usuario al que pertenece el usuario logueado */
+/* ------------------------------------------------------------------------------*/
+function nombre_usuario($id_usuario)
+{
+  global $db;
+  $id_usuario = (int)$id_usuario;
+
+  $sql = $db->query("SELECT d.nombre, d.apellidos
+                      FROM  detalles_usuario d
+                      LEFT JOIN users u ON u.user_level = d.id
+                      WHERE u.id = '{$db->escape($id_usuario)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
 /* --------------------------------------------------------------------*/
 /* Función para obtener el area a la que pertenece el usuario logueado */
 /* --------------------------------------------------------------------*/
@@ -2601,6 +2679,62 @@ function area_usuario2($id_usuario)
                       LEFT JOIN cargos c ON c.id = d.id_cargo 
                       LEFT JOIN area a ON a.id = c.id_area 
                       WHERE u.id = '{$db->escape($id_usuario)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+
+/* -------------------------------------------------------------------*/
+/* Función para obtener el cargo al que pertenece el usuario logueado */
+/* -------------------------------------------------------------------*/
+function cargo_usuario($id_usuario)
+{
+  global $db;
+  $id_usuario = (int)$id_usuario;
+
+  $sql = $db->query("SELECT c.nombre_cargo
+                      FROM  area g
+                      LEFT JOIN users u ON u.user_level = g.id
+                      LEFT JOIN detalles_usuario d ON u.id_detalle_user = d.id 
+                      LEFT JOIN cargos c ON c.id = d.id_cargo 
+                      LEFT JOIN area a ON a.id = c.id_area 
+                      WHERE u.id = '{$db->escape($id_usuario)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+function cargo_trabajador_pdf($nombre)
+{
+  global $db;
+
+  $sql = $db->query("SELECT c.nombre_cargo
+                      FROM  area g
+                      LEFT JOIN users u ON u.user_level = g.id
+                      LEFT JOIN detalles_usuario d ON u.id_detalle_user = d.id 
+                      LEFT JOIN cargos c ON c.id = d.id_cargo 
+                      LEFT JOIN area a ON a.id = c.id_area 
+                      WHERE d.id = '{$db->escape($nombre)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+function nombre_trabajador_pdf($nombre)
+{
+  global $db;
+
+  $sql = $db->query("SELECT d.nombre, d.apellidos
+                      FROM  area g
+                      LEFT JOIN users u ON u.user_level = g.id
+                      LEFT JOIN detalles_usuario d ON u.id_detalle_user = d.id 
+                      LEFT JOIN cargos c ON c.id = d.id_cargo 
+                      LEFT JOIN area a ON a.id = c.id_area 
+                      WHERE d.id = '{$db->escape($nombre)}' LIMIT 1");
   if ($result = $db->fetch_assoc($sql))
     return $result;
   else
@@ -5596,6 +5730,50 @@ function total_porAutoridad($table){
   $result = find_by_sql($sql);
   return $result;
 }
+
+// ------------------------------------------------------------------------ Contar por nivel de estudios ------------------------------------------------------------------------
+function count_by_sin_est($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(nivel_estudios) AS total FROM " . $db->escape($table) . " WHERE nivel_estudios = 'Sin estudios' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_primaria($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(nivel_estudios) AS total FROM " . $db->escape($table) . " WHERE nivel_estudios = 'Primaria' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+function count_by_secundaria($table, $tipo)
+{
+  global $db;
+  if (tableExists($table)) {
+    $sql    = "SELECT COUNT(nivel_estudios) AS total FROM " . $db->escape($table) . " WHERE nivel_estudios = 'Secundaria' and tipo_solicitud = '{$db->escape($tipo)}'";
+    $result = $db->query($sql);
+    return ($db->fetch_assoc($result));
+  }
+}
+
+// -------------------------------------------------------------- Buscar por autoridad responsable de quejas --------------------------------------------------------------
+
+function find_conagua_by_datesC($start_date, $end_date)
+{
+  global $db;
+  $start_date  = date("Y-m-d", strtotime($start_date));
+  $end_date    = date("Y-m-d", strtotime($end_date));
+  $sql  = $db->query("SELECT SUM(total) as totales FROM (SELECT COUNT(medio_presentacion) AS total FROM orientacion_canalizacion WHERE medio_presentacion = 'Asistente Virtual' AND creacion BETWEEN '{$start_date}' AND '$end_date' AND tipo_solicitud = 2 GROUP BY DATE(creacion),id ORDER BY DATE(creacion) DESC) as total_final");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
 // global $db;
 //   $id = (int)$id;
 //   $sql = $db->query("SELECT COUNT(*) FROM quejas WHERE ticket_id = '{$db->escape($id)}'");

@@ -11,22 +11,13 @@ $nivel = $user['user_level'];
 $id_user = $user['id'];
 $nivel_user = $user['user_level'];
 $areas = find_all('area');
-// if ($nivel_user <= 2) {
-//     page_require_level(2);
-// }
-// if ($nivel_user == 7) {
-//     page_require_level_exacto(7);
-// }
-// if ($nivel_user == 8) {
-//     page_require_level_exacto(8);
-// }
 
-// if ($nivel_user > 2 && $nivel_user < 7):
-//     redirect('home.php');
-// endif;
-// if ($nivel_user > 8):
-//     redirect('home.php');
-// endif;
+
+$detalle = $user['id'];
+// $id_folio = last_id_folios_general();
+$id_folio = last_id_folios_env_cor();
+$area_user = area_usuario2($id_user);
+$area_creacion = $area_user['nombre_area'];
 ?>
 <?php header('Content-type: text/html; charset=utf-8');
 if (isset($_POST['edit_env_correspondencia'])) {
@@ -40,10 +31,14 @@ if (isset($_POST['edit_env_correspondencia'])) {
         $asunto   = remove_junk(($db->escape($_POST['asunto'])));
         $medio_envio   = remove_junk(($db->escape($_POST['medio_envio'])));
         $se_turna_a_area   = remove_junk(($db->escape($_POST['se_turna_a_area'])));
-        $fecha_en_que_se_turna   = remove_junk(($db->escape($_POST['fecha_en_que_se_turna'])));
+        // $fecha_en_que_se_turna   = remove_junk(($db->escape($_POST['fecha_en_que_se_turna'])));
         $fecha_espera_respuesta   = remove_junk(($db->escape($_POST['fecha_espera_respuesta'])));
         $tipo_tramite   = remove_junk(($db->escape($_POST['tipo_tramite'])));
         $observaciones   = remove_junk(($db->escape($_POST['observaciones'])));
+        $expediente   = remove_junk(($db->escape($_POST['expediente'])));
+        $con_copia_para   = remove_junk(($db->escape($_POST['con_copia_para'])));
+        $cuerpo_oficio   = remove_junk(($db->escape($_POST['cuerpo_oficio'])));
+        $se_turna_a_trabajador   = remove_junk(($db->escape($_POST['se_turna_a_trabajador'])));
 
         $folio_editar = $e_correspondencia['folio'];
         $resultado = str_replace("/", "-", $folio_editar);
@@ -61,10 +56,10 @@ if (isset($_POST['edit_env_correspondencia'])) {
             $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
         }
         if ($name != '') {
-            $sql = "UPDATE envio_correspondencia SET fecha_emision='{$fecha_emision}',asunto='{$asunto}',medio_envio='{$medio_envio}',se_turna_a_area='{$se_turna_a_area}',fecha_en_que_se_turna='{$fecha_en_que_se_turna}',fecha_espera_respuesta='{$fecha_espera_respuesta}',tipo_tramite='{$tipo_tramite}',oficio_enviado='{$name}',observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE envio_correspondencia SET fecha_emision='{$fecha_emision}',asunto='{$asunto}',medio_envio='{$medio_envio}',se_turna_a_area='{$se_turna_a_area}',fecha_espera_respuesta='{$fecha_espera_respuesta}',tipo_tramite='{$tipo_tramite}',observaciones='{$observaciones}',se_turna_a_trabajador='{$se_turna_a_trabajador}',expediente='{$expediente}',con_copia_para='{$con_copia_para}',cuerpo_oficio='{$cuerpo_oficio}' WHERE id='{$db->escape($id)}'";
         }
         if ($name == '') {
-            $sql = "UPDATE envio_correspondencia SET fecha_emision='{$fecha_emision}',asunto='{$asunto}',medio_envio='{$medio_envio}',se_turna_a_area='{$se_turna_a_area}',fecha_en_que_se_turna='{$fecha_en_que_se_turna}',fecha_espera_respuesta='{$fecha_espera_respuesta}',tipo_tramite='{$tipo_tramite}',observaciones='{$observaciones}' WHERE id='{$db->escape($id)}'";
+            $sql = "UPDATE envio_correspondencia SET fecha_emision='{$fecha_emision}',asunto='{$asunto}',medio_envio='{$medio_envio}',se_turna_a_area='{$se_turna_a_area}',fecha_espera_respuesta='{$fecha_espera_respuesta}',tipo_tramite='{$tipo_tramite}',observaciones='{$observaciones}',se_turna_a_trabajador='{$se_turna_a_trabajador}',expediente='{$expediente}',con_copia_para='{$con_copia_para}',cuerpo_oficio='{$cuerpo_oficio}' WHERE id='{$db->escape($id)}'";
         }
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
@@ -98,14 +93,20 @@ include_once('layouts/header.php'); ?>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fecha_emision">Fecha de Emisión</label>
+                            <label for="fecha_emision">Fecha de Emisión de Oficio</label>
                             <input type="date" class="form-control" name="fecha_emision" value="<?php echo remove_junk($e_correspondencia['fecha_emision']); ?>" required>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="asunto">Asunto</label>
-                            <input type="text" class="form-control" name="asunto" value="<?php echo remove_junk($e_correspondencia['asunto']); ?>" required>
+                            <input type="text" class="form-control" name="asunto" maxlength="60" value="<?php echo remove_junk($e_correspondencia['asunto']); ?>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="expediente">Expediente</label>
+                            <input type="text" class="form-control" name="expediente" maxlength="60" value="<?php echo remove_junk($e_correspondencia['expediente']); ?>" required>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -121,24 +122,31 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="se_turna_a_area">Se turna a Área</label>
-                            <select class="form-control" name="se_turna_a_area">
+                            <label for="se_turna_a_area">Área a la que se turna</label>
+                            <select class="form-control" id="se_turna_a_area" name="se_turna_a_area">
                                 <?php foreach ($areas as $area) : ?>
                                     <option <?php if ($area['nombre_area'] === $e_correspondencia['se_turna_a_area']) echo 'selected="selected"'; ?> value="<?php echo $area['nombre_area']; ?>"><?php echo ucwords($area['nombre_area']); ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+                    <?php $trabajadores = find_all_trabajadores_area($area['nombre_area']) ?>
                     <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="se_turna_a_trabajador_editar">Trabajador al que se dirige oficio</label>
+                            <select class="form-control" id="se_turna_a_trabajador_editar" name="se_turna_a_trabajador"></select>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-3">
                         <div class="form-group">
                             <label for="fecha_en_que_se_turna">Fecha en que se turna oficio</label>
                             <input type="date" class="form-control" value="<?php echo remove_junk($e_correspondencia['fecha_en_que_se_turna']); ?>" name="fecha_en_que_se_turna" required>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="fecha_espera_respuesta">Fecha en que se espera respuesta</label>
@@ -155,15 +163,32 @@ include_once('layouts/header.php'); ?>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class="form-group">
                             <label for="oficio_enviado">Oficio enviado</label>
                             <input type="file" accept="application/pdf" class="form-control" name="oficio_enviado" value="<?php echo remove_junk($e_correspondencia['oficio_enviado']); ?>" id="oficio_enviado">
                             <label style="font-size:12px; color:#E3054F;">Archivo Actual: <?php echo remove_junk($e_correspondencia['oficio_enviado']); ?><?php ?></label>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="con_copia_para">C.C.P</label><br>
+                            <select class="form-control" id="con_copia_para" name="con_copia_para">
+                                <?php foreach ($areas as $area) : ?>
+                                    <!-- <option value="<?php echo $area['nombre_area']; ?>"><?php echo ucwords($area['nombre_area']); ?></option> -->
+                                    <option <?php if ($area['nombre_area'] === $e_correspondencia['con_copia_para']) echo 'selected="selected"'; ?> value="<?php echo $area['nombre_area']; ?>"><?php echo ucwords($area['nombre_area']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="cuerpo_oficio">Cuerpo del oficio</label>
+                            <textarea class="form-control" name="cuerpo_oficio" id="cuerpo" cols="15" rows="3" style="white-space: pre-line;"><?php echo remove_junk($e_correspondencia['cuerpo_oficio']); ?></textarea>
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="observaciones">Observaciones</label>

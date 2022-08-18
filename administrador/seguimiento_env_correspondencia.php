@@ -134,7 +134,13 @@ include_once('layouts/header.php'); ?>
                             <label for="observaciones">Observaciones</label>
                             <textarea class="form-control" value="<?php echo remove_junk($e_correspondencia['observaciones']); ?>" name="observaciones" id="observaciones" cols="10" rows="3" readonly><?php echo remove_junk($e_correspondencia['observaciones']); ?></textarea>
                         </div>
-                    </div>                    
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="area_creacion">Área que turnó el oficio</label><br>
+                            <input type="text" class="form-control" name="area_creacion" value="<?php echo remove_junk($e_correspondencia['area_creacion']); ?>" readonly>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- <hr style="margin-top: 5px;height:2px;border-width:0;background-color:#aaaaaa"> -->

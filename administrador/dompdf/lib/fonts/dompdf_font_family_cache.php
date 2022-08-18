@@ -80,4 +80,10 @@
   'glyphicons halflings' => array(
     'normal' => $fontDir . '/glyphicons_halflings_normal_20b3c512510524626508747622a92dc4',
   ),
+  'material icons' => array(
+    'normal' => $fontDir . '/material_icons_normal_4829c67e092deedfdd942c789f9c05a5',
+  ),
+  'questrial' => array(
+    'normal' => $fontDir . '/questrial_normal_2eec9c3608961cbf4946070f667aada1',
+  ),
 ) ?>

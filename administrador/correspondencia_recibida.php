@@ -98,6 +98,7 @@ if (isset($_POST["export_data"])) {
                             <th style="width: 7%;">Asunto</th>
                             <th style="width: 5%;">Medio de Envío</th>
                             <th style="width: 5%;">Área a la que se turna</th>
+                            <th style="width: 5%;">Área que turnó oficio</th>
                             <th style="width: 2%;" class="text-center">Acciones</th>
 
                         </tr>
@@ -132,6 +133,7 @@ if (isset($_POST["export_data"])) {
                                 <td><?php echo remove_junk(ucwords($a_correspondencia['asunto'])) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_correspondencia['medio_envio']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_correspondencia['se_turna_a_area']))) ?></td>
+                                <td><?php echo remove_junk(ucwords(($a_correspondencia['area_creacion']))) ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="ver_info_env_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">

@@ -123,11 +123,11 @@ $quejas = quejas();
                   <a href="add_recomendacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip" title="Agregar una Recomendación">
                     Recomendación
                   </a>
-                  <a target="_blank" href="http://177.229.209.29/quejas/upload/scp/tickets.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-queja btn-sm" data-toggle="tooltip" title="Ver en Sistema de Quejas">
+                  <a target="_blank" href="http://177.229.209.29/quejas/upload/scp/tickets.php?id=<?php echo (int)$queja['ticket_id']; ?>" class="btn btn-queja btn-md" data-toggle="tooltip" title="Ver en Sistema de Quejas">
                     Ver Queja
                   </a>
                   <div class="btn-group">
-                    <a href="edit_queja.php?id=<?php echo (int)$queja['id']; ?>" style="color: black" class="btn btn-warning btn-sm" title="Editar en Libro Electrónico" data-toggle="tooltip">
+                    <a href="edit_queja.php?id=<?php echo (int)$queja['id']; ?>" style="color: black" class="btn btn-warning btn-md" title="Editar en Libro Electrónico" data-toggle="tooltip">
                       Editar
                     </a>
                   </div>

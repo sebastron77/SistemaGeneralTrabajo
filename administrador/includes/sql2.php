@@ -93,7 +93,7 @@ function quejas()
 {
   global $db;
   $sql = "SELECT DISTINCT t.number as Folio_Queja, t.lastupdate as Ultima_Actualizacion, d.subject as Autoridad_Responsable,u.name as Creado_Por,";
-  $sql .= " d.priority as Prioridad, s.firstname as Asignado_Nombre, s.lastname as Asignado_Apellido, st.state, t.status_id, t.isoverdue, t.isanswered, d.ticket_id, d.n_autoridad";
+  $sql .= " d.priority as Prioridad, s.firstname as Asignado_Nombre, s.lastname as Asignado_Apellido, st.state, t.status_id, t.isoverdue, t.isanswered, t.created, d.ticket_id, d.n_autoridad";
   $sql .= " FROM ost_ticket as t";
   $sql .= " LEFT JOIN ost_ticket__cdata as d ON t.ticket_id = d.ticket_id";
   $sql .= " LEFT JOIN ost_staff as s ON t.staff_id = s.staff_id";

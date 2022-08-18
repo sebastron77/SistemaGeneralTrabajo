@@ -19,12 +19,12 @@
   <link rel="stylesheet" href="libs/css/main.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css" />
+  <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.0/css/responsive.bootstrap.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.1/css/buttons.bootstrap.min.css" type="text/css" /> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
   <script src="html2pdf.bundle.min.js"></script>
   <script src="script.js"></script>
@@ -32,6 +32,47 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+
+  <link href="https://harvesthq.github.io/chosen/chosen.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://harvesthq.github.io/chosen/chosen.jquery.js"></script>
+
+
+  <script language="javascript">
+    $(document).ready(function() {
+      $("#se_turna_a_area").change(function() {
+        //$('#cbx_localidad').find('option').remove().end().append(
+        //    '<option value="whatever"></option>').val('whatever');
+
+        $("#se_turna_a_area option:selected").each(function() {
+          nombre_area = $(this).val();
+          $.post("buscar.php", {
+            nombre_area: nombre_area
+          }, function(data) {
+            $("#se_turna_a_trabajador").html(data);
+          })
+        })
+
+      })
+    });
+
+    $(document).ready(function() {
+      $("#se_turna_a_area").change(function() {
+        //$('#cbx_localidad').find('option').remove().end().append(
+        //    '<option value="whatever"></option>').val('whatever');
+
+        $("#se_turna_a_area option:selected").each(function() {
+          nombre_area2 = $(this).val();
+          $.post("buscar2.php", {
+            nombre_area2: nombre_area2
+          }, function(data) {
+            $("#se_turna_a_trabajador_editar").html(data);
+          })
+        })
+
+      })
+    });
+  </script>
 
 </head>
 
