@@ -103,35 +103,6 @@ function find_by_id_atencion($id)
 /*--------------------------------------------------------------*/
 /*  Funcion para encontrar datos por su id en una tabla
 /*--------------------------------------------------------------*/
-/*--------------------------------------------------------------*/
-/*  Funcion para encontrar datos por su id en una tabla
-/*--------------------------------------------------------------*/
-function find_by_id_vehiculo($id)
-{
-  global $db;
-  $sql = array();
-  $sql  = "SELECT v.id,v.nombre_vehiculo,t.tipo_vehiculo,v.marca,v.modelo,v.anio,v.no_serie,v.color,v.placas,v.motor,v.descripcion,";
-  $sql  .= " v.observaciones,v.kilometraje,v.ultimo_servicio,v.proximo_servicio,v.estatus_vehiculo";
-  $sql  .= " FROM vehiculos v";
-  $sql  .= " LEFT JOIN tipo_vehiculo t ON t.id = v.id_tipo_vehiculo";
-  $sql  .= " WHERE v.id='{$db->escape($id)}'";
-  $result = find_by_sql($sql);
-  return $result;
-
-
-  // global $db;
-  // $result = array();
-  // $sql = "SELECT u.id_cargo, c.nombre_cargo ";
-  // $sql .= "FROM detalles_usuario u ";
-  // $sql .= "LEFT JOIN cargos c ";
-  // $sql .= "ON u.id_cargo=c.id WHERE u.id='{$db->escape($id)}'";
-  // $result = find_by_sql($sql);
-  // return $result;
-}
-
-/*--------------------------------------------------------------*/
-/*  Funcion para encontrar datos por su id en una tabla
-/*--------------------------------------------------------------*/
 function find_by_id_detalle($id)
 {
   global $db;
@@ -155,35 +126,6 @@ function find_by_id_queja($id)
     return $result;
   else
     return null;
-}
-
-/*--------------------------------------------------------------*/
-/*  Funcion para encontrar datos por su id en una tabla
-/*--------------------------------------------------------------*/
-function find_by_id_detalle_vehiculo($id)
-{
-  global $db;
-  $result = array();
-  $sql = "SELECT id_vehiculo ";
-  $sql .= "FROM asignaciones_vehiculos ";
-  $sql .= "WHERE id_detalle_usuario='{$db->escape($id)}' ";
-  $result = find_by_sql($sql);
-  return $result;
-}
-/*-----------------------------------------------------------------------------------------*/
-/* Funcion para encontrar todos los resguardos que tengan el mismo id_asignacion_resguardo */
-/*-----------------------------------------------------------------------------------------*/
-function find_by_id_asignacion_resguardo($table, $id)
-{
-  global $db;
-  $id = (int)$id;
-  if (tableExists($table)) {
-    $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE id_asignacion_resguardo='{$db->escape($id)}'");
-    if ($result = $db->fetch_assoc($sql))
-      return $result;
-    else
-      return null;
-  }
 }
 /*---------------------------------------------------------------------------------*/
 /* Funcion para encontrar el cargo de un detalle de usuario (trabajador) por su ID */
@@ -231,28 +173,6 @@ function cargo_default($id)
   $db->query($sql);
   return ($db->affected_rows() >= 1) ? true : false;
 }
-/*----------------------------------------------------------------------------------------------*/
-/* Funcion para cuando se elimina una categoría, poner en el componente que estan Sin categoría */
-/*----------------------------------------------------------------------------------------------*/
-function categoria_default($id)
-{
-  global $db;
-  $sql = "UPDATE componentes SET id_categoria = 1";
-  $sql .= " WHERE id_categoria=" . $db->escape($id);
-  $db->query($sql);
-  return ($db->affected_rows() >= 1) ? true : false;
-}
-/*----------------------------------------------------------------------------------------------*/
-/* Funcion para cuando se elimina un tipo, poner en el vehiculo que estan Sin Tipo */
-/*----------------------------------------------------------------------------------------------*/
-function tipo_vehiculo_default($id)
-{
-  global $db;
-  $sql = "UPDATE vehiculos SET id_tipo_vehiculo = 1";
-  $sql .= " WHERE id_tipo_vehiculo=" . $db->escape($id);
-  $db->query($sql);
-  return ($db->affected_rows() >= 1) ? true : false;
-}
 /*-----------------------------------------------------*/
 /* Funcion para eliminar datos de una tabla, por su ID */
 /*-----------------------------------------------------*/
@@ -280,50 +200,6 @@ function delete_by_folio_queja($table, $folio)
     $db->query($sql);
     return ($db->affected_rows() === 1) ? true : false;
   }
-}
-/*-----------------------------------------------------*/
-/* Funcion para eliminar un reguardo completo */
-/*-----------------------------------------------------*/
-function delete_resguardo($id)
-{
-  global $db;
-  $sql = "DELETE FROM resguardos";
-  $sql .= " WHERE id_asignacion_resguardo=" . $db->escape($id);
-  $db->query($sql);
-  return ($db->affected_rows() > 0) ? true : false;
-}
-/*-----------------------------------------------*/
-/* Funcion para eliminar un reguardo de vehiculo */
-/*-----------------------------------------------*/
-function delete_resguardo_vehiculo($id)
-{
-  global $db;
-  $sql = "DELETE FROM resguardos_vehiculos";
-  $sql .= " WHERE id_asignacion_resguardo=" . $db->escape($id);
-  $db->query($sql);
-  return ($db->affected_rows() > 0) ? true : false;
-}
-/*-----------------------------------------------------*/
-/* Funcion para eliminar una asignacion de un reguardo */
-/*-----------------------------------------------------*/
-function delete_by_id_asignacion_resguardo($id, $id_asig_resg)
-{
-  global $db;
-  $sql = "DELETE FROM resguardos";
-  $sql .= " WHERE id_asignacion=" . $db->escape($id) . " AND id_asignacion_resguardo=" . $db->escape($id_asig_resg);
-  $db->query($sql);
-  return ($db->affected_rows() > 0) ? true : false;
-}
-/*---------------------------------------------------------------*/
-/* Funcion para eliminar una asignacion de un reguardo vehicular */
-/*---------------------------------------------------------------*/
-function delete_by_id_asignacion_resguardo_vehiculo($id, $id_asig_resg)
-{
-  global $db;
-  $sql = "DELETE FROM resguardos_vehiculos";
-  $sql .= " WHERE id_asignacion_vehiculo=" . $db->escape($id) . " AND id_asignacion_resguardo=" . $db->escape($id_asig_resg);
-  $db->query($sql);
-  return ($db->affected_rows() > 0) ? true : false;
 }
 /*------------------------------------------------------*/
 /* Funcion para inactivar datos de una tabla, por su ID */
@@ -367,60 +243,6 @@ function inactivate_by_id_asignacion($table, $id, $campo_estatus)
     return ($db->affected_rows() === 1) ? true : false;
   }
 }
-/*-----------------------------------------------------------------------------*/
-/* Funcion para inactivar las asignaciones de vehiculos de un trabajador que fue inactivado */
-/*-----------------------------------------------------------------------------*/
-function inactivate_by_id_asignacion_vehiculo($table, $id, $campo_estatus)
-{
-  global $db;
-  if (tableExists($table)) {
-    $sql = "UPDATE " . $db->escape($table) . " SET ";
-    $sql .= $db->escape($campo_estatus) . "=0";
-    $sql .= " WHERE id_detalle_usuario=" . $db->escape($id);
-    $db->query($sql);
-    return ($db->affected_rows() === 1) ? true : false;
-  }
-}
-/*----------------------------------------------*/
-/* Funcion para inactivar el resguardo completo */
-/*----------------------------------------------*/
-function inactivate_by_id_resguardo($table, $id, $campo_estatus)
-{
-  global $db;
-  if (tableExists($table)) {
-    $sql = "UPDATE " . $db->escape($table) . " SET ";
-    $sql .= $db->escape($campo_estatus) . "=0";
-    $sql .= " WHERE id_asignacion_resguardo=" . $db->escape($id);
-    $db->query($sql);
-    return ($db->affected_rows() > 0) ? true : false;
-  }
-}
-/*---------------------------------------------------------------------------------*/
-/* Funcion para inactivar todos los resguardos de un trabajador cuando se inactive */
-/*---------------------------------------------------------------------------------*/
-function inactivate_resguardo_trabajador($table, $id, $campo_estatus)
-{
-  global $db;
-
-  global $db;
-  $id = (int)$id;
-  $id_asig = "SELECT id FROM asignaciones WHERE id_detalle_usuario = '{$db->escape($id)}'";
-  $id_buscado = find_by_sql($id_asig);
-
-  foreach ($id_buscado as $id_encontrado) {
-    $id_asig_resg = "SELECT id_asignacion_resguardo FROM resguardos WHERE id_asignacion = '{$db->escape($id_encontrado['id'])}'";
-    $id_buscado2 = find_by_sql($id_asig_resg);
-
-    foreach ($id_buscado2 as $id_encontrado2) {
-      $nuevo_id_asig_resg2 = (int)$id_encontrado2['id_asignacion_resguardo'];
-      $sql2 = "UPDATE " . $db->escape($table) . " SET ";
-      $sql2 .= $db->escape($campo_estatus) . "=0";
-      $sql2 .= " WHERE id_asignacion_resguardo=" . $db->escape($nuevo_id_asig_resg2);
-      $db->query($sql2);
-    }
-  }
-  return ($db->affected_rows() >= 0) ? true : false;
-}
 /*-------------------------------------------------------------------*/
 /* Funcion para inactivar trabajador en funcion del cargo inactivado */
 /*-------------------------------------------------------------------*/
@@ -453,26 +275,6 @@ function inactivate_cargo_user($table, $id, $campo_estatus)
   }
   return ($db->affected_rows() >= 0) ? true : false;
 }
-
-/*-------------------------------------------------------------------*/
-/* Funcion para inactivar asignacion en funcion del cargo inactivado */
-/*-------------------------------------------------------------------*/
-function inactivate_cargo_asignacion($table, $id_cargo, $campo_estatus)
-{
-  global $db;
-  $id_cargo = (int)$id_cargo;
-  $id_detalle = "SELECT id FROM detalles_usuario WHERE id_cargo = '{$db->escape($id_cargo)}'";
-  $id_buscado = find_by_sql($id_detalle);
-
-  foreach ($id_buscado as $id_encontrado) {
-    $sql2 = "UPDATE " . $db->escape($table) . " SET ";
-    $sql2 .= $db->escape($campo_estatus) . "=0";
-    $sql2 .= " WHERE id_detalle_usuario=" . $db->escape($id_encontrado['id']);
-    $db->query($sql2);
-  }
-  return ($db->affected_rows() >= 0) ? true : false;
-}
-
 /*--------------------------------------------------------------*/
 /* Funcion para inactivar cargos en funcion del area inactivada */
 /*--------------------------------------------------------------*/
@@ -529,34 +331,6 @@ function inactivate_area_user($table, $id, $campo_estatus)
   }
   return ($db->affected_rows() >= 0) ? true : false;
 }
-/*-----------------------------------------------------*/
-/* Funcion para inactivar todas las asignaciones de los  
-   trabajadores que pertenecen al area que se inactivo */
-/*-----------------------------------------------------*/
-function inactivate_area_asignacion($table, $id, $campo_estatus)
-{
-  global $db;
-  $id = (int)$id;
-  $id_cargo = "SELECT id FROM cargos WHERE id_area = '{$db->escape($id)}'";
-  $id_buscado = find_by_sql($id_cargo);
-
-  foreach ($id_buscado as $id_encontrado) {
-    $id_detalle = "SELECT id FROM detalles_usuario WHERE id_cargo = '{$db->escape($id_encontrado['id'])}'";
-    $id_buscado2 = find_by_sql($id_detalle);
-
-    foreach ($id_buscado2 as $id_encontrado2) {
-      $nuevo_id_detalle = (int)$id_encontrado2['id'];
-
-      if (tableExists($table)) {
-        $sql2 = "UPDATE " . $db->escape($table) . " SET ";
-        $sql2 .= $db->escape($campo_estatus) . "=0";
-        $sql2 .= " WHERE id_detalle_usuario=" . $db->escape($nuevo_id_detalle);
-        $db->query($sql2);
-      }
-    }
-  }
-  return ($db->affected_rows() >= 0) ? true : false;
-}
 /*---------------------------------*/
 /* Funcion para inactivar un grupo */
 /*---------------------------------*/
@@ -584,20 +358,6 @@ function inactivate_user_group($table, $nivel, $campo_estatus)
   $db->query($sql2);
 
   return ($db->affected_rows() >= 0) ? true : false;
-}
-/*--------------------------------------------------------------------------*/
-/* Funcion para inactivar asignaciones, segun el componente que se inactivo */
-/*--------------------------------------------------------------------------*/
-function inactivate_product_asig($table, $id, $campo_estatus)
-{
-  global $db;
-  if (tableExists($table)) {
-    $sql = "UPDATE " . $db->escape($table) . " SET ";
-    $sql .= $db->escape($campo_estatus) . "=0";
-    $sql .= " WHERE id_componente=" . $db->escape($id);
-    $db->query($sql);
-    return ($db->affected_rows() === 1) ? true : false;
-  }
 }
 /*----------------------------------------------------*/
 /* Funcion para activar datos de una tabla, por su ID */
@@ -627,75 +387,6 @@ function activate_by_id_user($table, $id, $campo_estatus)
     return ($db->affected_rows() === 1) ? true : false;
   }
 }
-/*-----------------------------------------------------------------------------------------*/
-/* Funcion para activar las asignaciones de un trabajador, cuando este se vuelva a activar */
-/*-----------------------------------------------------------------------------------------*/
-function activate_by_id_asignacion($table, $id, $campo_estatus)
-{
-  global $db;
-  if (tableExists($table)) {
-    $sql = "UPDATE " . $db->escape($table) . " SET ";
-    $sql .= $db->escape($campo_estatus) . "=1";
-    $sql .= " WHERE id_detalle_usuario=" . $db->escape($id);
-    $db->query($sql);
-    return ($db->affected_rows() === 1) ? true : false;
-  }
-}
-/*-----------------------------------------------------------------------------------------*/
-/* Funcion para activar las asignaciones de un trabajador, cuando este se vuelva a activar */
-/*-----------------------------------------------------------------------------------------*/
-function activate_by_id_asignacion_vehiculo($table, $id, $campo_estatus)
-{
-  global $db;
-  if (tableExists($table)) {
-    $sql = "UPDATE " . $db->escape($table) . " SET ";
-    $sql .= $db->escape($campo_estatus) . "=1";
-    $sql .= " WHERE id_detalle_usuario=" . $db->escape($id);
-    $db->query($sql);
-    return ($db->affected_rows() === 1) ? true : false;
-  }
-}
-/*------------------------------------------------------------------------------------*/
-/* Funcion para activar las asignaciones de un resguardo, cuando estas sean activadas */
-/*------------------------------------------------------------------------------------*/
-function activate_by_id_resguardo($table, $id, $campo_estatus)
-{
-  global $db;
-  if (tableExists($table)) {
-    $sql = "UPDATE " . $db->escape($table) . " SET ";
-    $sql .= $db->escape($campo_estatus) . "=1";
-    $sql .= " WHERE id_asignacion_resguardo=" . $db->escape($id);
-    $db->query($sql);
-    return ($db->affected_rows() > 0) ? true : false;
-  }
-}
-/*-----------------------------------------------------------------------*/
-/* Funcion para activar los resguardos de un trabajador cuando se active */
-/*-----------------------------------------------------------------------*/
-function activate_resguardo_trabajador($table, $id, $campo_estatus)
-{
-  global $db;
-
-  global $db;
-  $id = (int)$id;
-  $id_asig = "SELECT id FROM asignaciones WHERE id_detalle_usuario = '{$db->escape($id)}'";
-  $id_buscado = find_by_sql($id_asig);
-
-  foreach ($id_buscado as $id_encontrado) {
-    $id_asig_resg = "SELECT id_asignacion_resguardo FROM resguardos WHERE id_asignacion = '{$db->escape($id_encontrado['id'])}'";
-    $id_buscado2 = find_by_sql($id_asig_resg);
-
-    foreach ($id_buscado2 as $id_encontrado2) {
-      $nuevo_id_asig_resg2 = (int)$id_encontrado2['id_asignacion_resguardo'];
-      $sql2 = "UPDATE " . $db->escape($table) . " SET ";
-      $sql2 .= $db->escape($campo_estatus) . "=1";
-      $sql2 .= " WHERE id_asignacion_resguardo=" . $db->escape($nuevo_id_asig_resg2);
-      $db->query($sql2);
-    }
-  }
-  return ($db->affected_rows() >= 0) ? true : false;
-}
-
 /*--------------------------------------------------------------*/
 /* Funcion para activar usuario en funcion del cargo inactivado */
 /*--------------------------------------------------------------*/
@@ -716,7 +407,6 @@ function activate_cargo_user($table, $id, $campo_estatus)
 }
 /*-----------------------------------------------------------------------*/
 /* Funcion para activar detalle de usuario en funcion del cargo activado */
-/*-----------------------------------------------------------------------*/
 function activate_cargo_trabajador($table, $id, $campo_estatus)
 {
   global $db;
@@ -727,24 +417,6 @@ function activate_cargo_trabajador($table, $id, $campo_estatus)
     $db->query($sql);
     return ($db->affected_rows() > 0) ? true : false;
   }
-}
-/*---------------------------------------------------------------*/
-/* Funcion para activar asignacion en funcion del cargo activado */
-/*---------------------------------------------------------------*/
-function activate_cargo_asignacion($table, $id_cargo, $campo_estatus)
-{
-  global $db;
-  $id_cargo = (int)$id_cargo;
-  $id_detalle = "SELECT id FROM detalles_usuario WHERE id_cargo = '{$db->escape($id_cargo)}'";
-  $id_buscado = find_by_sql($id_detalle);
-
-  foreach ($id_buscado as $id_encontrado) {
-    $sql2 = "UPDATE " . $db->escape($table) . " SET ";
-    $sql2 .= $db->escape($campo_estatus) . "=1";
-    $sql2 .= " WHERE id_detalle_usuario=" . $db->escape($id_encontrado['id']);
-    $db->query($sql2);
-  }
-  return ($db->affected_rows() >= 0) ? true : false;
 }
 /*----------------------------------------------------------*/
 /* Funcion para activar cargos en funcion del area activada */
@@ -800,35 +472,6 @@ function activate_area_user($table, $id, $campo_estatus)
   }
   return ($db->affected_rows() >= 0) ? true : false;
 }
-
-/*-----------------------------------------------------*/
-/* Funcion para inactivar todas las asignaciones de los 
-/* trabajadores que pertenecen al area que se inactivo */
-/*-----------------------------------------------------*/
-function activate_area_asignacion($table, $id, $campo_estatus)
-{
-  global $db;
-  $id = (int)$id;
-  $id_cargo = "SELECT id FROM cargos WHERE id_area = '{$db->escape($id)}'";
-  $id_buscado = find_by_sql($id_cargo);
-
-  foreach ($id_buscado as $id_encontrado) {
-    $id_detalle = "SELECT id FROM detalles_usuario WHERE id_cargo = '{$db->escape($id_encontrado['id'])}'";
-    $id_buscado2 = find_by_sql($id_detalle);
-
-    foreach ($id_buscado2 as $id_encontrado2) {
-      $nuevo_id_detalle = (int)$id_encontrado2['id'];
-
-      if (tableExists($table)) {
-        $sql2 = "UPDATE " . $db->escape($table) . " SET ";
-        $sql2 .= $db->escape($campo_estatus) . "=1";
-        $sql2 .= " WHERE id_detalle_usuario=" . $db->escape($nuevo_id_detalle);
-        $db->query($sql2);
-      }
-    }
-  }
-  return ($db->affected_rows() >= 0) ? true : false;
-}
 function activate_grupo($table, $id, $campo_estatus)
 {
   global $db;
@@ -850,156 +493,6 @@ function activate_user_group($id)
   $sql .= " WHERE user_level=" . $db->escape($id);
   $db->query($sql);
   return ($db->affected_rows() > 0) ? true : false;
-}
-/*----------------------------------------------------------------------*/
-/* Funcion para activar asignaciones, segun el componente que se activo */
-/*----------------------------------------------------------------------*/
-function activate_product_asig($table, $id, $campo_estatus)
-{
-  global $db;
-  if (tableExists($table)) {
-    $sql = "UPDATE " . $db->escape($table) . " SET ";
-    $sql .= $db->escape($campo_estatus) . "=1";
-    $sql .= " WHERE id_componente=" . $db->escape($id);
-    $db->query($sql);
-    return ($db->affected_rows() === 1) ? true : false;
-  }
-}
-/*------------------------------------------------------------------*/
-/* Funcion para encontrar el ultimo id de asignacion-resguardo
-   para despues sumarle uno y que el nuevo resguardo tome ese valor */
-/*------------------------------------------------------------------*/
-function last_id_asignacion_resguardo()
-{
-  global $db;
-  $sql = "SELECT * FROM resguardos ORDER BY id_asignacion_resguardo DESC LIMIT 1";
-  $result = find_by_sql($sql);
-  return $result;
-}
-/*------------------------------------------------------------------*/
-/* Funcion para encontrar el ultimo id de asignacion-resguardo
-   para despues sumarle uno y que el nuevo resguardo tome ese valor */
-/*------------------------------------------------------------------*/
-function last_id_asignacion_resguardo_vehiculo()
-{
-  global $db;
-  $sql = "SELECT * FROM resguardos_vehiculos ORDER BY id_asignacion_resguardo DESC LIMIT 1";
-  $result = find_by_sql($sql);
-  return $result;
-}
-/*-----------------------------------------------------------------------------------*/
-/* Funcion para encontrar los resguardos que tengan el mismo id_asignacion_resguardo */
-/*-----------------------------------------------------------------------------------*/
-function find_asignacion_resguardo($id)
-{
-  global $db;
-  $id = (int)$id;
-  $id_asig_resg = "SELECT id_asignacion_resguardo FROM resguardos WHERE id = '{$db->escape($id)}'";
-  $id_buscado = find_by_sql($id_asig_resg);
-
-  foreach ($id_buscado as $id_encontrado) {
-    $nuevo_id_asig_resg = (int)$id_encontrado['id_asignacion_resguardo'];
-  }
-
-  $sql = $db->query("SELECT * FROM resguardos WHERE id_asignacion_resguardo = '{$db->escape($nuevo_id_asig_resg)}'");
-  if ($result = $db->fetch_assoc($sql))
-    return $result;
-  else
-    return null;
-}
-
-/*----------------------------------------------------------*/
-/* Función para ver la información completa de un resguardo */
-/*----------------------------------------------------------*/
-function find_all_asignacion_resguardo($id)
-{
-  global $db;
-  $id = (int)$id;
-  $id_asig_resg = "SELECT id_asignacion_resguardo FROM resguardos WHERE id = '{$db->escape($id)}'";
-  $id_buscado = find_by_sql($id_asig_resg);
-
-  foreach ($id_buscado as $id_encontrado) {
-    $nuevo_id_asig_resg = (int)$id_encontrado['id_asignacion_resguardo'];
-  }
-
-  $sql = "SELECT * FROM resguardos WHERE id_asignacion_resguardo = '{$db->escape($nuevo_id_asig_resg)}'";
-  $result = find_by_sql($sql);
-  return $result;
-}
-
-/*--------------------------------------------------------------------*/
-/* Función para ver la información completa de un resguardo vehicular */
-/*--------------------------------------------------------------------*/
-function find_all_asignacion_resguardo_vehiculo($id)
-{
-  global $db;
-  $id = (int)$id;
-  $id_asig_resg = "SELECT id_asignacion_resguardo FROM resguardos_vehiculos WHERE id = '{$db->escape($id)}'";
-  $id_buscado = find_by_sql($id_asig_resg);
-
-  foreach ($id_buscado as $id_encontrado) {
-    $nuevo_id_asig_resg = (int)$id_encontrado['id_asignacion_resguardo'];
-  }
-
-  $sql = "SELECT * FROM resguardos_vehiculos WHERE id_asignacion_resguardo = '{$db->escape($nuevo_id_asig_resg)}'";
-  $result = find_by_sql($sql);
-  return $result;
-}
-
-/*-----------------------------------------------------------------------------*/
-/* Funcion para encontrar todas las asignaciones que pertenecen a un resguardo */
-/*-----------------------------------------------------------------------------*/
-
-function find_all_mi_asignacion_resguardo($id)
-{
-  global $db;
-  $id = (int)$id;
-
-  $sql = "SELECT id_asignacion FROM resguardos WHERE id_asignacion_resguardo = '{$db->escape($id)}'";
-  $result = find_by_sql($sql);
-  return $result;
-}
-
-/*---------------------------------------------------------------------------------------*/
-/* Funcion para encontrar todas las asignaciones que pertenecen a un resguardo vehicular */
-/*---------------------------------------------------------------------------------------*/
-
-function find_all_mi_asignacion_resguardo_vehiculo($id)
-{
-  global $db;
-  $id = (int)$id;
-
-  $sql = "SELECT id_asignacion_vehiculo FROM resguardos_vehiculos WHERE id_asignacion_resguardo = '{$db->escape($id)}'";
-  $result = find_by_sql($sql);
-  return $result;
-}
-
-/*-------------------------------------------------------------------*/
-/* Funcion para mostrar el trabajador al que se asigno un componente */
-/*-------------------------------------------------------------------*/
-
-function find_nombre_asignacion_resguardo($id)
-{
-  global $db;
-  $id = (int)$id;
-
-  $sql = "SELECT id_detalle_usuario FROM asignaciones WHERE id = '{$db->escape($id)}'";
-  $result = find_by_sql($sql);
-  return $result;
-}
-
-/*-----------------------------------------------------------------*/
-/* Funcion para mostrar el trabajador al que se asigno un vehiculo */
-/*-----------------------------------------------------------------*/
-
-function find_nombre_asignacion_resguardo_vehiculo($id)
-{
-  global $db;
-  $id = (int)$id;
-
-  $sql = "SELECT id_detalle_usuario FROM asignaciones_vehiculos WHERE id = '{$db->escape($id)}'";
-  $result = find_by_sql($sql);
-  return $result;
 }
 /*--------------------------------------------------------------------------*/
 /* Funcion para buscar la información que aparecerá en el PDF del resguardo */
@@ -1032,31 +525,6 @@ function correspondencia_pdf($id)
   $sql  = "SELECT *";
   $sql .= " FROM envio_correspondencia WHERE id='{$db->escape($id)}'";
   //SELECT * FROM `resguardos` GROUP BY id_asignacion_resguardo DESC
-  return find_by_sql($sql);
-}
-
-/*------------------------------------------------------------------------------------*/
-/* Funcion para buscar la información que aparecerá en el PDF del resguardo vehicular */
-/*------------------------------------------------------------------------------------*/
-function resguardo_pdf_vehiculo($id)
-{
-  global $db;
-  $id = (int)$id;
-  $sql1 = "SELECT id_asignacion_resguardo FROM resguardos_vehiculos WHERE id='{$db->escape($id)}'";
-  $id_asig_resg = find_by_sql($sql1);
-
-  foreach ($id_asig_resg as $id_encontrado) {
-    $nuevo_id_asig_resg = (int)$id_encontrado['id_asignacion_resguardo'];
-  }
-  $sql  = "SELECT co.nombre_vehiculo, co.descripcion, a.marca_modelo, a.no_serie, a.placas, a.estatus_asignacion, co.anio, co.motor, co.color,";
-  $sql .= " r.fecha_inicio, r.observaciones, d.nombre, d.apellidos, d.correo, c.nombre_cargo, ar.nombre_area";
-  $sql .= " FROM resguardos_vehiculos r";
-  $sql .= " LEFT JOIN asignaciones_vehiculos a ON r.id_asignacion_vehiculo = a.id";
-  $sql .= " LEFT JOIN vehiculos co ON co.id = a.id_vehiculo";
-  $sql .= " LEFT JOIN detalles_usuario d ON d.id = a.id_detalle_usuario";
-  $sql .= " LEFT JOIN cargos c ON c.id = d.id_cargo";
-  $sql .= " LEFT JOIN area ar ON ar.id = c.id_area";
-  $sql .= " WHERE id_asignacion_resguardo = '{$db->escape($nuevo_id_asig_resg)}'";
   return find_by_sql($sql);
 }
 /*------------------------------------------------------------------------*/
@@ -1131,16 +599,6 @@ function count_by_id_med($table,$tipo)
     $result = $db->query($sql);
     return ($db->fetch_assoc($result));
   }
-}
-/*------------------------------------------------------------------------------*/
-/* Funcion para contar los id_asignacion_resguardo para saber su cantidad total */
-/*------------------------------------------------------------------------------*/
-function count_by_id_asig_resg()
-{
-  global $db;
-  $sql    = "SELECT COUNT(DISTINCT id_asignacion_resguardo) as total FROM resguardos";
-  $result = $db->query($sql);
-  return ($db->fetch_assoc($result));
 }
 /*-----------------------------------*/
 /* Determina si unaa tabla ya existe */
@@ -1381,25 +839,6 @@ function join_product_table()
   $sql  .= " ORDER BY DATE (p.fecha_registro) DESC";
   return find_by_sql($sql);
 }
-/* Funcion para encontrar todos los vehiculos
-   haciendo JOIN con categorias y media */
-/*--------------------------------------------------------------*/
-function join_vehicle_table()
-{
-  global $db;
-  $sql  = " SELECT v.id,v.nombre_vehiculo,t.tipo_vehiculo,v.marca,v.modelo,v.anio,v.no_serie,v.color,v.placas,v.motor,v.descripcion,";
-  $sql  .= " v.observaciones,v.kilometraje,v.media_id,v.ultimo_servicio,v.proximo_servicio,v.estatus_vehiculo,m.nombre_archivo AS image";
-  $sql  .= " FROM vehiculos v";
-  $sql  .= " LEFT JOIN tipo_vehiculo t ON t.id = v.id_tipo_vehiculo";
-  $sql  .= " LEFT JOIN media m ON m.id = v.media_id";
-  $sql  .= " ORDER BY DATE (t.tipo_vehiculo) DESC";
-  return find_by_sql($sql);
-}
-/*--------------------------------------------------------------*/
-/* Funcion para encontrar todos los nombres de producto
-   haciendo un request a ajax.php para hacer la auto sugerencia */
-/*--------------------------------------------------------------*/
-
 /*--------------------------------------------------------------*/
 /* Funcion para encontrar componentes por su nombre */
 /*--------------------------------------------------------------*/
@@ -1411,68 +850,6 @@ function find_product_by_title($product_name)
   $result = find_by_sql($sql);
   return $result;
 }
-
-/*--------------------------------------------------------------*/
-/* Funcion para encontrar auto por su tipo */
-/*--------------------------------------------------------------*/
-function find_vehiculo_by_tipo($tipo)
-{
-  global $db;
-  $t_vehiculo = remove_junk($db->escape($tipo));
-  $sql = "SELECT v.nombre_vehiculo, v.marca, v.modelo, v.placas, t.tipo_vehiculo FROM vehiculos v INNER JOIN tipo_vehiculo t ON v.id_tipo_vehiculo = t.id WHERE t.tipo_vehiculo like '%$t_vehiculo%' LIMIT 5";
-
-  $result = find_by_sql($sql);
-  return $result;
-}
-
-/*--------------------------------------------------------------*/
-/* Encontrar componente por su ID */
-/*--------------------------------------------------------------*/
-
-function find_product_by_id($p_id)
-{
-  global $db;
-  $sql = "SELECT cantidad FROM componentes WHERE id='{$p_id}'";
-  $result = find_by_sql($sql);
-  return $result;
-}
-/*--------------------------------------------------------------*/
-/* Encontrar vehículo por su ID */
-/*--------------------------------------------------------------*/
-
-// function find_vehicle_by_id($p_id)
-// {
-//   global $db;
-//   $sql = "SELECT cantidad FROM componentes WHERE id='{$p_id}'";
-//   $result = find_by_sql($sql);
-//   return $result;
-// }
-
-/*--------------------------------------------------------------*/
-/* Encontrar datos de componente por su ID */
-/*--------------------------------------------------------------*/
-
-function find_product_by_id_completo($p_id)
-{
-  global $db;
-  $sql = "SELECT * FROM componentes WHERE id='{$p_id}' LIMIT 1";
-  $result = find_by_sql($sql);
-  return $result;
-}
-
-/*--------------------------------------------------------------*/
-/* Encontrar el nombre completo de un trabajador */
-/*--------------------------------------------------------------*/
-
-function find_all_nombre($detalle_nombre)
-{
-  global $db;
-  $d_nombre = remove_junk($db->escape($detalle_nombre));
-  $sql = "SELECT nombre, apellidos FROM componentes WHERE nombre_componente like '%$d_nombre%' LIMIT 5";
-  $result = find_by_sql($sql);
-  return $result;
-}
-
 /*--------------------------------------------------------------*/
 /* Funcion para encontrar toda la informacion de los componentes por nombre del mismo
   /* haciendo Request de ajax.php
@@ -1496,176 +873,6 @@ function find_all_product_info_by_title_marca($title, $marca, $modelo)
   $sql  = "SELECT * FROM componentes ";
   $sql .= " WHERE nombre_componente = '{$title}' AND marca = '{$marca}' AND modelo = '{$modelo}'";
   $sql .= " LIMIT 1";
-  return find_by_sql($sql);
-}
-
-/*--------------------------------------------------------------*/
-/* Encontrar todos los vehiculos por nombre de vehiculo, marca
-   modelo y placas*/
-/*--------------------------------------------------------------*/
-
-function find_all_vehicle_info_by_title_marca($tipo_vehiculo, $marca, $modelo, $placas)
-{
-  global $db;
-  $sql  = "SELECT v.id,v.marca,v.modelo,v.no_serie,v.placas,v.descripcion,t.tipo_vehiculo FROM vehiculos v";
-  $sql .= " INNER JOIN tipo_vehiculo t ON v.id_tipo_vehiculo = t.id WHERE t.tipo_vehiculo = '{$tipo_vehiculo}' AND v.marca = '{$marca}'";
-  $sql .= " AND v.modelo = '{$modelo}' AND v.placas = '{$placas}'";
-  $sql .= " LIMIT 1";
-  return find_by_sql($sql);
-}
-/*--------------------------------------------------------------*/
-/* Funcion para ver si el vehiculo esta disponible */
-/*--------------------------------------------------------------*/
-function dispo_vehiculo($id, $placas)
-{
-  global $db;
-  $sql  = "SELECT estatus_vehiculo FROM vehiculos";
-  $sql .= " WHERE id = '{$id}' AND placas = '{$placas}'";
-  $sql .= " LIMIT 1";
-  return find_by_sql($sql);
-}
-
-/*--------------------------------------------------------------*/
-/* Funcion para actualizar a ocupado un vehiculo
-/*--------------------------------------------------------------*/
-function update_estatus_vehiculo($p_id, $placas)
-{
-  global $db;
-  $id  = (int)$p_id;
-  $sql = "UPDATE vehiculos SET estatus_vehiculo=0 WHERE id = '{$id}' AND placas = '{$placas}'";
-  $result = $db->query($sql);
-  return ($db->affected_rows() === 1 ? true : false);
-}
-
-/*--------------------------------------------------------------*/
-/* Funcion para actualizar a disponible un vehiculo
-/*--------------------------------------------------------------*/
-function update_estatus_vehiculo_disponible($p_id, $placas)
-{
-  global $db;
-  $id  = (int)$p_id;
-  $sql = "UPDATE vehiculos SET estatus_vehiculo=1 WHERE id = '{$id}' AND placas = '{$placas}'";
-  $result = $db->query($sql);
-  return ($db->affected_rows() === 1 ? true : false);
-}
-
-
-/*--------------------------------------------------------------*/
-/* Funcion para ver si un vehiculo esta asignado
-/*--------------------------------------------------------------*/
-function vehiculo_asignado($p_id, $placas)
-{
-  global $db;
-  $id  = (int)$p_id;
-  $sql = "SELECT COUNT(id_vehiculo) as total, estatus_asignacion FROM asignaciones_vehiculos WHERE id_vehiculo = '{$id}' AND placas = '{$placas}'";
-  $a = find_by_sql($sql);
-  // foreach($a as $d){
-  //   $d['total'];
-  // }
-  // $res = $d['total'];
-  return $a;
-}
-
-/*--------------------------------------------------------------*/
-/* Funcion para actualizar la cantidad de un producto
-/*--------------------------------------------------------------*/
-function update_product_qty($qty, $p_id)
-{
-  global $db;
-  $qty = (int) $qty;
-  $id  = (int)$p_id;
-  $sql = "UPDATE componentes SET cantidad=cantidad -'{$qty}' WHERE id = '{$id}'";
-  $result = $db->query($sql);
-  return ($db->affected_rows() === 1 ? true : false);
-}
-/*--------------------------------------------------------------*/
-/* Funcion para actualizar la cantidad de un producto
-/*--------------------------------------------------------------*/
-function update_new_product_qty($qty, $p_id)
-{
-  global $db;
-  $qty = (int) $qty;
-  $id  = (int)$p_id;
-  $sql = "UPDATE componentes SET cantidad=cantidad -'{$qty}' WHERE id = '{$id}'";
-  $result = $db->query($sql);
-  return ($db->affected_rows() === 1 ? true : false);
-}
-/*--------------------------------------------------------------*/
-/* Funcion para actualizar la cantidad de un producto
-/*--------------------------------------------------------------*/
-function update_last_product_qty($qty, $p_id)
-{
-  global $db;
-  $qty = (int) $qty;
-  $id  = (int)$p_id;
-  $sql = "UPDATE componentes SET cantidad=cantidad +'{$qty}' WHERE id = '{$id}'";
-  $result = $db->query($sql);
-  return ($db->affected_rows() === 1 ? true : false);
-}
-
-/*--------------------------------------------------------------*/
-/* Funcion para actualizar el trabajador de la asignacion sin 
-   que haya problema cuando el componente asignado tenga 0 en
-   el inventario
-/*--------------------------------------------------------------*/
-function update_trabajador_asignacion($nuevo_detalle, $id_asignacion)
-{
-  global $db;
-  $nuevo_detalle = (int) $nuevo_detalle;
-  $id_asignacion  = (int)$id_asignacion;
-  $sql = "UPDATE asignaciones SET id_detalle_usuario='{$nuevo_detalle}' WHERE id = '{$id_asignacion}'";
-  $result = $db->query($sql);
-  return ($db->affected_rows() === 1 ? true : false);
-}
-/*--------------------------------------------------------------*/
-/* Funcion para actualizar la fecha de la asignacion sin 
-   que haya problema cuando el componente asignado tenga 0 en
-   el inventario
-/*--------------------------------------------------------------*/
-function update_fecha_asignacion($nueva_fecha, $id_asignacion)
-{
-  global $db;
-  $id_asignacion  = (int)$id_asignacion;
-  $sql = "UPDATE asignaciones SET fecha_asignacion='{$nueva_fecha}' WHERE id = '{$id_asignacion}'";
-  $result = $db->query($sql);
-  return ($db->affected_rows() === 1 ? true : false);
-}
-/*--------------------------------------------------------------*/
-/* Encontrar los productos agregados recientemente
-/*--------------------------------------------------------------*/
-function encuentra_agregados_recientes($limit)
-{
-  global $db;
-  $sql   = " SELECT p.id,p.nombre_componente,p.precio_compra,p.media_id,c.nombre_categoria AS categoria,";
-  $sql  .= "m.nombre_archivo AS image FROM componentes p";
-  $sql  .= " LEFT JOIN categorias c ON c.id = p.id_categoria";
-  $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
-  $sql  .= " ORDER BY p.id DESC LIMIT " . $db->escape((int)$limit);
-  return find_by_sql($sql);
-}
-/*--------------------------------------------------------------*/
-/* Encontrar los componentes más asignados
-/*--------------------------------------------------------------*/
-function encuentra_componentes_mas_asignados($limit)
-{
-  global $db;
-  $sql  = "SELECT p.nombre_componente, COUNT(s.id_componente) AS totalAsignado, SUM(s.cantidad) AS totalQty";
-  $sql .= " FROM asignaciones s";
-  $sql .= " LEFT JOIN componentes p ON p.id = s.id_componente ";
-  $sql .= " GROUP BY s.id_componente";
-  $sql .= " ORDER BY SUM(s.cantidad) DESC LIMIT " . $db->escape((int)$limit);
-  return $db->query($sql);
-}
-/*--------------------------------------------------------------*/
-/* Encontrar todas las asignaciones
-/*--------------------------------------------------------------*/
-function find_all_asignaciones()
-{
-  global $db;
-  $sql  = "SELECT s.id,s.cantidad,s.marca_modelo,s.no_serie,s.id_detalle_usuario,p.precio_compra,p.marca,p.modelo,s.fecha_asignacion,p.nombre_componente";
-  $sql .= " FROM asignaciones s";
-  $sql .= " LEFT JOIN componentes p ON s.id_componente = p.id";
-  $sql .= " ORDER BY s.fecha_asignacion DESC";
   return find_by_sql($sql);
 }
 
@@ -1705,124 +912,6 @@ function area_folio_vehiculos($id_detalle)
   else
     return null;
 }
-
-/*--------------------------------------------------------------*/
-/* Busca el folio de un resguardo
-/*--------------------------------------------------------------*/
-function busca_folio($id)
-{
-  global $db;
-  $id_resguardo = (int)$id;
-
-  $sql = $db->query("SELECT folio FROM resguardos WHERE id = '{$id_resguardo}'");
-  if ($result = $db->fetch_assoc($sql))
-    return $result;
-  else
-    return null;
-}
-/*--------------------------------------------------------------*/
-/* Busca el folio de un resguardo vehicular
-/*--------------------------------------------------------------*/
-function busca_folio_vehicular($id)
-{
-  global $db;
-  $id_resguardo = (int)$id;
-
-  $sql = $db->query("SELECT folio FROM resguardos_vehiculos WHERE id = '{$id_resguardo}'");
-  if ($result = $db->fetch_assoc($sql))
-    return $result;
-  else
-    return null;
-}
-
-/*--------------------------------------------------------------*/
-/* Encontrar todas los resguardos de componentes
-/*--------------------------------------------------------------*/
-function find_all_resguardos()
-{
-  global $db;
-  $sql  = "SELECT r.id as idResguardo,r.fecha_inicio,r.fecha_termino,r.observaciones,r.id_asignacion as idAsig,r.folio,r.estatus_resguardo,s.id,r.id_asignacion_resguardo";
-  $sql .= " FROM resguardos r";
-  $sql .= " LEFT JOIN asignaciones s ON s.id = r.id_asignacion GROUP BY id_asignacion_resguardo DESC";
-  //SELECT * FROM `resguardos` GROUP BY id_asignacion_resguardo DESC
-  return find_by_sql($sql);
-}
-
-/*--------------------------------------------------------------*/
-/* Encontrar todas los resguardos vehiculares
-/*--------------------------------------------------------------*/
-function find_all_resguardos_vehiculo()
-{
-  global $db;
-  $sql  = "SELECT r.id as idResguardo,r.fecha_inicio,r.fecha_termino,r.observaciones,r.id_asignacion_vehiculo as idAsig,r.folio,r.estatus_resguardo,s.id,r.id_asignacion_resguardo";
-  $sql .= " FROM resguardos_vehiculos r";
-  $sql .= " LEFT JOIN asignaciones_vehiculos s ON s.id = r.id_asignacion_vehiculo GROUP BY id_asignacion_resguardo DESC";
-  //SELECT * FROM `resguardos` GROUP BY id_asignacion_resguardo DESC
-  return find_by_sql($sql);
-}
-/*--------------------------------------------------------------*/
-/* Esta funcion es para utilizar la barra de busqueda de asignaciones */
-/*--------------------------------------------------------------*/
-function find_all_asignaciones_busqueda()
-{
-  global $db;
-  $sql = "SELECT s.id,s.cantidad,s.marca_modelo,s.descripcion,s.no_serie,s.id_detalle_usuario,s.estatus_asignacion,p.precio_compra as precio,";
-  $sql .= "s.fecha_asignacion,p.nombre_componente, p.marca, p.modelo, p.serie, d.nombre, d.apellidos FROM asignaciones s LEFT JOIN componentes p ON s.id_componente = p.id ";
-  $sql .= "LEFT JOIN detalles_usuario d ON d.id = s.id_detalle_usuario ORDER BY s.fecha_asignacion DESC";
-
-  // $query .= "FROM asignaciones s LEFT JOIN componentes p ON s.id_componente = p.id LEFT JOIN detalles_usuario d ON d.id = s.id_detalle_usuario";
-  // $query .= "WHERE p.nombre_componente LIKE '%".$q."%' OR d.nombre LIKE '%".$q."%' OR d.apellidos LIKE '%".$q."%' ORDER BY s.fecha_asignacion DESC";
-  return find_by_sql($sql);
-}
-/*--------------------------------------------------------------*/
-/* Esta funcion es para utilizar la barra de busqueda de asignaciones vehiculares*/
-/*--------------------------------------------------------------*/
-function find_all_asignaciones_busqueda_vehiculos()
-{
-  global $db;
-  $sql = "SELECT s.id,s.id_vehiculo,s.marca_modelo,s.descripcion,s.no_serie,s.id_detalle_usuario,s.placas,s.estatus_asignacion,t.tipo_vehiculo,v.color,v.motor,";
-  $sql .= "s.fecha_asignacion,v.id_tipo_vehiculo, v.marca, v.modelo, v.no_serie, d.nombre, d.apellidos FROM asignaciones_vehiculos s LEFT JOIN vehiculos v ON s.id_vehiculo = v.id ";
-  $sql .= "LEFT JOIN tipo_vehiculo t ON v.id_tipo_vehiculo = t.id LEFT JOIN detalles_usuario d ON d.id = s.id_detalle_usuario ORDER BY s.fecha_asignacion DESC";
-
-  // $query .= "FROM asignaciones s LEFT JOIN componentes p ON s.id_componente = p.id LEFT JOIN detalles_usuario d ON d.id = s.id_detalle_usuario";
-  // $query .= "WHERE p.nombre_componente LIKE '%".$q."%' OR d.nombre LIKE '%".$q."%' OR d.apellidos LIKE '%".$q."%' ORDER BY s.fecha_asignacion DESC";
-  return find_by_sql($sql);
-}
-/*--------------------------------------------------------------*/
-/* Esta funcion es para utilizar la barra de busqueda de asignaciones */
-/*--------------------------------------------------------------*/
-function find_all_asignaciones_vehiculos()
-{
-  global $db;
-  $sql = "SELECT s.id,v.nombre_vehiculo,s.id_vehiculo,s.marca_modelo,s.descripcion,s.no_serie,s.placas,s.id_detalle_usuario,";
-  $sql .= "s.fecha_asignacion,s.estatus_asignacion,v.id_tipo_vehiculo, v.marca, v.modelo, v.no_serie,v.color,d.nombre, d.apellidos";
-  $sql .= " FROM asignaciones_vehiculos s LEFT JOIN tipo_vehiculo t ON s.id_vehiculo = t.id";
-  $sql .= " LEFT JOIN vehiculos v ON s.id_vehiculo = v.id";
-  $sql .= " LEFT JOIN detalles_usuario d ON d.id = s.id_detalle_usuario";
-  $sql .= " ORDER BY s.fecha_asignacion DESC";
-
-  // $query .= "FROM asignaciones s LEFT JOIN componentes p ON s.id_componente = p.id LEFT JOIN detalles_usuario d ON d.id = s.id_detalle_usuario";
-  // $query .= "WHERE p.nombre_componente LIKE '%".$q."%' OR d.nombre LIKE '%".$q."%' OR d.apellidos LIKE '%".$q."%' ORDER BY s.fecha_asignacion DESC";
-  return find_by_sql($sql);
-}
-/*--------------------------------------------------------------*/
-/* Esta funcion es para utilizar la barra de busqueda de users */
-/*--------------------------------------------------------------*/
-function find_all_users_busqueda($q)
-{
-  global $db;
-  $results = array();
-  $sql = "SELECT u.id,u.id_detalle_user,d.nombre,d.apellidos,u.username,u.user_level,u.status,u.ultimo_login,";
-  $sql .= "g.nombre_grupo ";
-
-  $sql .= "FROM users u ";
-  $sql .= "LEFT JOIN detalles_usuario d ON d.id = u.id_detalle_user ";
-  $sql .= "LEFT JOIN grupo_usuarios g ";
-  $sql .= "ON g.nivel_grupo=u.user_level WHERE d.nombre LIKE '%$q%' OR d.apellidos LIKE '%$q%' OR u.username LIKE '%$q%' ORDER BY d.nombre";
-  $result = find_by_sql($sql);
-  return $result;
-}
-
 /*--------------------------------------------------------------*/
 /* Esta funcion es para utilizar la barra de busqueda de detalles de usuario */
 /*--------------------------------------------------------------*/
@@ -1834,51 +923,6 @@ function find_all_detalles_busqueda($q)
   $sql .= "FROM detalles_usuario d LEFT JOIN cargos c ON c.id = d.id_cargo WHERE d.nombre LIKE '%$q%' OR d.apellidos LIKE '%$q%' OR d.correo LIKE '%$q%' OR c.nombre_cargo LIKE '%$q%' ORDER BY d.nombre";
   $result = find_by_sql($sql);
   return $result;
-}
-
-/*--------------------------------------------------------------*/
-/* Funcion para encontrar todas "mis asignaciones" que tiene un trabajador */
-/*--------------------------------------------------------------*/
-function  misasignacionesBusqueda($id, $q)
-{
-  global $db;
-  $sql = "SELECT s.id,s.cantidad,s.marca_modelo,s.descripcion,s.fecha_asignacion,s.id_componente,p.nombre_componente as componente";
-  $sql .= " FROM asignaciones s LEFT JOIN componentes p ON s.id_componente = p.id ";
-  $sql .= "WHERE id_detalle_usuario = {$id} AND (p.nombre_componente LIKE '%$q%' OR s.marca_modelo LIKE '%$q%')";
-  // $sql .= "LIKE '%$q%' OR d.nombre LIKE '%$q%' OR d.apellidos LIKE '%$q%' ORDER BY s.fecha_asignacion DESC";
-  // $sql  = "SELECT * FROM asignaciones WHERE id_detalle_usuario = {$id} AND  ORDER BY fecha_asignacion DESC";
-  return find_by_sql($sql);
-}
-
-function find_all_products_busqueda($q)
-{
-  global $db;
-  $results = array();
-  $sql  = " SELECT p.id,p.nombre_componente,p.marca, p.modelo,p.serie,p.cantidad,p.descripcion_particular,p.precio_compra,p.media_id,p.fecha_registro,c.nombre_categoria";
-  $sql  .= " AS categorie,m.nombre_archivo AS image";
-  $sql  .= " FROM componentes p";
-  $sql  .= " LEFT JOIN categorias c ON c.id = p.id_categoria";
-  $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
-  $sql .= " WHERE p.nombre_componente LIKE '%$q%' OR p.marca LIKE '%$q%' OR c.nombre_categoria LIKE '%$q%' ORDER BY nombre_componente";
-  $result = find_by_sql($sql);
-  return $result;
-}
-/*function find_all_asignaciones(){
-  global $db;
-  $sql  = "SELECT * FROM asignaciones";
-  return find_by_sql($sql);
-}*/
-/*--------------------------------------------------------------*/
-/* Encontrar asignaciones mas recientes
- /*--------------------------------------------------------------*/
-function encuentra_asignaciones_mas_recientes($limit)
-{
-  global $db;
-  $sql  = "SELECT s.id,s.cantidad,s.marca_modelo,s.fecha_asignacion,p.nombre_componente";
-  $sql .= " FROM asignaciones s";
-  $sql .= " LEFT JOIN componentes p ON s.id_componente = p.id";
-  $sql .= " ORDER BY s.fecha_asignacion DESC LIMIT " . $db->escape((int)$limit);
-  return find_by_sql($sql);
 }
 /*--------------------------------------------------------------*/
 /* Funcion para generar reporte de asignaciones entre fechas
@@ -1959,25 +1003,6 @@ function  misasignaciones($id)
   $sql  = "SELECT * FROM asignaciones WHERE id_detalle_usuario = {$id} ORDER BY fecha_asignacion DESC";
   return find_by_sql($sql);
 }
-/*--------------------------------------------------------------*/
-/* Funcion para encontrar todas las asignaciones vehiculares que tiene un trabajador */
-/*--------------------------------------------------------------*/
-function  misasignaciones_vehiculo($id)
-{
-  global $db;
-  $sql  = "SELECT * FROM asignaciones_vehiculos WHERE id_detalle_usuario = {$id} ORDER BY fecha_asignacion DESC";
-  return find_by_sql($sql);
-}
-/*--------------------------------------------------------------*/
-/* Funcion para encontrar la asignacion que pertenece a un usuario */
-/*--------------------------------------------------------------*/
-function userdetalle($id)
-{
-  global $db;
-  $sql  = "SELECT s.id_detalle_usuario FROM asignaciones s INNER JOIN users u ON s.id_detalle_usuario = u.id_detalle_user WHERE u.id = {$id} LIMIT 1";
-  return find_by_sql($sql);
-}
-
 /*--------------------------------------------------------------*/
 /* Funcion para encontrar el detalle de usuario que le pertenece a un usuario */
 /*--------------------------------------------------------------*/
@@ -2102,8 +1127,6 @@ function find_all_actuaciones_area($area)
   $result = find_by_sql($sql);
   return $result;
 }
-
-
 /*----------------------------------------------------------*/
 /* Funcion que encuentra todos los acuerdos de no violacion */
 /*----------------------------------------------------------*/
@@ -2520,7 +1543,7 @@ function find_by_id_capacitacion($id)
 }
 
 /*----------------------------------------------*/
-/* Funcion que encuentra una capacitación por id */
+/* Funcion que encuentra una actuación por id */
 /*----------------------------------------------*/
 function find_by_id_actuacion($id)
 {
@@ -2531,6 +1554,98 @@ function find_by_id_actuacion($id)
     return $result;
   else
     return null;
+}
+
+/*----------------------------------------------*/
+/* Funcion que encuentra una agenda por id */
+/*----------------------------------------------*/
+function find_by_id_agenda($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT * FROM agendas WHERE id='{$db->escape($id)}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+/*----------------------------------------------*/
+/* Funcion que encuentra una agenda por id */
+/*----------------------------------------------*/
+function find_by_id_agenda_porcentaje($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = $db->query("SELECT porcentaje, descripcion_avance FROM avance_agendas WHERE id_agenda='{$db->escape($id)}' ORDER BY porcentaje DESC LIMIT 1");
+  if ($result = $db->fetch_assoc($sql))
+    return $result;
+  else
+    return null;
+}
+
+/*----------------------------------------------*/
+/* Funcion que encuentra una agenda por id */
+/*----------------------------------------------*/
+function find_by_id_descripcion_porcentaje($id)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = "SELECT id_agenda, porcentaje, descripcion_avance, fecha_hora_creacion FROM avance_agendas WHERE id_agenda='{$db->escape($id)}' ORDER BY id_agenda";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
+/*----------------------------------------------*/
+/* Funcion que encuentra una agenda por id */
+/*----------------------------------------------*/
+function find_by_id_descripcion_porcentaje_area($id,$area)
+{
+  global $db;
+  $id = (int)$id;
+  $sql = "SELECT id_agenda, porcentaje, descripcion_avance, fecha_hora_creacion FROM avance_agendas WHERE id_agenda='{$db->escape($id)}' AND area_creacion='{$db->escape($area)}' ORDER BY id_agenda";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
+
+
+function find_all_area_detalle($area)
+{
+  global $db;
+  $sql = "SELECT d.id, d.nombre, d.apellidos
+  FROM detalles_usuario d
+  LEFT JOIN cargos c ON c.id = d.id_cargo
+  LEFT JOIN area a ON a.id = c.id_area
+  WHERE a.nombre_area = '{$db->escape($area)}'";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
+
+function find_all_agendas()
+{
+  $sql = "SELECT a.id,a.fecha,a.actividad,a.responsable,a.supervisor,a.fecha_limite,a.fecha_entrega,a.entregables,a.observaciones,
+  b.id_agenda,MAX(b.porcentaje) as porcentaje_avance,d.nombre as nombre_responsable,d.apellidos as apellido_responsable,dd.nombre as nombre_supervisor,dd.apellidos as apellido_supervisor
+  FROM agendas a
+  LEFT JOIN avance_agendas b ON a.id = b.id_agenda
+  LEFT JOIN detalles_usuario d ON d.id = a.responsable
+  LEFT JOIN detalles_usuario dd ON dd.id = a.supervisor
+  GROUP BY b.id_agenda";
+  $result = find_by_sql($sql);
+  return $result;
+}
+
+function find_all_agendas_area($area)
+{
+  global $db;
+  $results = array();
+  $sql = "SELECT a.id,a.fecha,a.actividad,a.responsable,a.supervisor,a.fecha_limite,a.fecha_entrega,a.entregables,a.observaciones,b.id_agenda,MAX(b.porcentaje) as porcentaje_avance
+  FROM agendas a
+  LEFT JOIN avance_agendas b ON a.id = b.id_agenda
+  WHERE a.area_creacion = '{$area}' GROUP BY b.id_agenda";
+  $result = find_by_sql($sql);
+  return $result;
 }
 
 /*------------------------------------------------------------------*/
@@ -5774,10 +4889,16 @@ function find_conagua_by_datesC($start_date, $end_date)
     return null;
 }
 
-// global $db;
-//   $id = (int)$id;
-//   $sql = $db->query("SELECT COUNT(*) FROM quejas WHERE ticket_id = '{$db->escape($id)}'");
-//   if ($result = $db->fetch_assoc($sql))
-//     return $result;
-//   else
-//     return 0;
+/*--------------------------------------------------------------*/
+/* Funcion para sacar realacion area-usuario
+/*--------------------------------------------------------------*/
+function find_area_usuario()
+{
+  global $db;
+  $sql  = "SELECT d.nombre, d.apellidos, a.nombre_area ";
+  $sql .= "FROM detalles_usuario d ";
+  $sql .= "LEFT JOIN cargos c ON d.id_cargo = c.id ";
+  $sql .= "LEFT JOIN area a ON a.id = c.id_area ";
+  $sql .= "ORDER BY d.nombre";
+  return $db->query($sql);
+}

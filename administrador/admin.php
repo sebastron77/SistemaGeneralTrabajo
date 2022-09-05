@@ -46,6 +46,8 @@ $c_poa = count_by_id('poa');
 $c_fmedica = count_by_id_med('fichas', 1);
 $c_fpsicologica = count_by_id_med('fichas', 2);
 $c_jornada = count_by_id('jornadas');
+$c_actuacion = count_by_id('actuaciones');
+$c_agenda = count_by_id('agendas');
 ?>
 <?php include_once('layouts/header.php'); ?>
 
@@ -425,7 +427,38 @@ $c_jornada = count_by_id('jornadas');
     </a>
   </div>
 </div>
-
+<div class="row" style="margin-top:5px;">
+  <div class="col-md-3" style="height: 12.5rem;">
+    <a style="color: #333333;" href="jornadas.php">
+      <div class="panel panel-box clearfix">
+        <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
+          <svg style="width:40px;height:62px" viewBox="0 0 24 24">
+            <path fill="white" d="M7 12C9.2 12 11 10.2 11 8S9.2 4 7 4 3 5.8 3 8 4.8 12 7 12M11 20V14.7C9.9 14.3 8.5 14 7 14C3.1 14 0 15.8 0 18V20H11M15 4C13.9 4 13 4.9 13 6V18C13 19.1 13.9 20 15 20H22C23.1 20 24 19.1 24 18V6C24 4.9 23.1 4 22 4H15Z" />
+          </svg>
+        </div>
+        <div class="panel-value pull-right">
+          <h2 style="margin-top: 10%"> <?php echo $c_actuacion['total']; ?> </h2>
+          <p class="text-muted">Actuaciones</p>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="col-md-3" style="height: 12.5rem;">
+    <a style="color: #333333;" href="jornadas.php">
+      <div class="panel panel-box clearfix">
+        <div class="panel-icon pull-left bg-violet" style="display: grid; place-content: center;">
+          <svg style="width:40px;height:62px" viewBox="0 0 24 24">
+            <path fill="white" d="M3,7V5H5V4C5,2.89 5.9,2 7,2H13V9L15.5,7.5L18,9V2H19C20.05,2 21,2.95 21,4V20C21,21.05 20.05,22 19,22H7C5.95,22 5,21.05 5,20V19H3V17H5V13H3V11H5V7H3M7,11H5V13H7V11M7,7V5H5V7H7M7,19V17H5V19H7Z" />
+          </svg>
+        </div>
+        <div class="panel-value pull-right">
+          <h2 style="margin-top: 10%"> <?php echo $c_actuacion['total']; ?> </h2>
+          <p class="text-muted">Agenda de Actividades</p>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
 
 
 <?php include_once('layouts/footer.php'); ?>

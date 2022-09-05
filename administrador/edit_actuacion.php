@@ -98,6 +98,7 @@ if (isset($_POST['edit_actuacion'])) {
         div = document.getElementById('flotante');
         div.style.display = 'none';
     }
+
     function mostrar2() {
         div = document.getElementById('flotante2');
         div.style.display = '';
@@ -107,6 +108,7 @@ if (isset($_POST['edit_actuacion'])) {
         div = document.getElementById('flotante2');
         div.style.display = 'none';
     }
+
     function mostrar3() {
         div = document.getElementById('flotante3');
         div.style.display = '';
@@ -137,7 +139,7 @@ if (isset($_POST['edit_actuacion'])) {
                             <div id="flotante" style=" background-color: #EBEBEB; display:none; border-radius: 8px;">
                                 <div id="close" align="right" style="margin-bottom: -15px;">
                                     <svg onclick="javascript:cerrar();" style="width:24px;height:24px" viewBox="0 0 24 24">
-                                        <path fill="red" d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z"/>
+                                        <path fill="red" d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
                                     </svg>
                                 </div>
                                 Fecha en que fué capturada la actuación.
@@ -153,12 +155,14 @@ if (isset($_POST['edit_actuacion'])) {
                         <div class="form-group">
                             <label for="catalogo">Tipo de actuación</label>
                             <select class="form-control" name="catalogo">
-                                <option value="Acta Circunstancial" <?php if ($e_actuacion['catalogo'] === 'Acta Circunstancial') echo 'selected="selected"'; ?>>Acta Circunstancial</option>
+                                <option value="Acta Circunstanciada" <?php if ($e_actuacion['catalogo'] === 'Acta Circunstanciada') echo 'selected="selected"'; ?>>Acta Circunstanciada</option>
+                                <option value="Acompañamientos" <?php if ($e_actuacion['catalogo'] === 'Acompañamientos') echo 'selected="selected"'; ?>>Acompañamientos</option>
+                                <option value="Solicitud de Información" <?php if ($e_actuacion['catalogo'] === 'Solicitud de Información') echo 'selected="selected"'; ?>>Solicitud de Información</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="form-group">                            
+                        <div class="form-group">
                             <div id="flotante2" style=" background-color: #EBEBEB; display:none; border-radius: 8px;">
                                 <div id="close2" align="right" style="margin-bottom: -15px;">
                                     <svg onclick="javascript:cerrar2();" style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -327,7 +331,7 @@ if (isset($_POST['edit_actuacion'])) {
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                        <div id="flotante3" style=" background-color: #EBEBEB; display:none; border-radius: 8px;">
+                            <div id="flotante3" style=" background-color: #EBEBEB; display:none; border-radius: 8px;">
                                 <div id="close3" align="right" style="margin-bottom: -15px;">
                                     <svg onclick="javascript:cerrar3();" style="width:24px;height:24px" viewBox="0 0 24 24">
                                         <path fill="red" d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />

@@ -114,6 +114,37 @@ if (isset($_POST['add_actuacion'])) {
     }
 }
 ?>
+<script languague="javascript">
+    function mostrar() {
+        div = document.getElementById('flotante');
+        div.style.display = '';
+    }
+
+    function cerrar() {
+        div = document.getElementById('flotante');
+        div.style.display = 'none';
+    }
+
+    function mostrar2() {
+        div = document.getElementById('flotante2');
+        div.style.display = '';
+    }
+
+    function cerrar2() {
+        div = document.getElementById('flotante2');
+        div.style.display = 'none';
+    }
+
+    function mostrar3() {
+        div = document.getElementById('flotante3');
+        div.style.display = '';
+    }
+
+    function cerrar3() {
+        div = document.getElementById('flotante3');
+        div.style.display = 'none';
+    }
+</script>
 <?php header('Content-type: text/html; charset=utf-8');
 include_once('layouts/header.php'); ?>
 <?php echo display_msg($msg); ?>
@@ -130,7 +161,18 @@ include_once('layouts/header.php'); ?>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="fecha_captura_acta">Fecha de captura de actuación</label><br>
+                            <div id="flotante" style=" background-color: #EBEBEB; display:none; border-radius: 8px;">
+                                <div id="close" align="right" style="margin-bottom: -15px;">
+                                    <svg onclick="javascript:cerrar();" style="width:24px;height:24px" viewBox="0 0 24 24">
+                                        <path fill="red" d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
+                                    </svg>
+                                </div>
+                                Fecha en que fué capturada la actuación.
+                            </div>
+                            <label for="fecha_captura_acta">Fecha de captura de actuación</label>
+                            <svg onclick="javascript:mostrar();" style="width:20px;height:20px" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
+                            </svg><br>
                             <input type="date" class="form-control" name="fecha_captura_acta">
                         </div>
                     </div>
@@ -139,13 +181,26 @@ include_once('layouts/header.php'); ?>
                             <label for="catalogo_actas">Tipo de actuación</label>
                             <select class="form-control" name="catalogo_actas">
                                 <option value="">Elige una opción</option>
-                                <option value="Acta Circunstancial">Acta Circunstancial</option>
+                                <option value="Acta Circunstanciada">Acta Circunstanciada</option>
+                                <option value="Acompañamientos">Acompañamientos</option>
+                                <option value="Solicitud de Información">Solicitud de Información</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="autoridades">Autoridad Señalada (Estatal)</label>
+                            <div id="flotante2" style=" background-color: #EBEBEB; display:none; border-radius: 8px;">
+                                <div id="close2" align="right" style="margin-bottom: -15px;">
+                                    <svg onclick="javascript:cerrar2();" style="width:24px;height:24px" viewBox="0 0 24 24">
+                                        <path fill="red" d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
+                                    </svg>
+                                </div>
+                                Catálogo estatal de autoridades señaladas.
+                            </div>
+                            <label for="autoridades">Autoridad señalada (Estatal)</label>
+                            <svg onclick="javascript:mostrar2();" style="width:20px;height:20px" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
+                            </svg><br>
                             <select class="form-control" name="autoridades">
                                 <option value="">Escoge una opción</option>
                                 <option value="Otra">Otra</option>
@@ -303,7 +358,18 @@ include_once('layouts/header.php'); ?>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
+                        <div id="flotante3" style=" background-color: #EBEBEB; display:none; border-radius: 8px;">
+                                <div id="close3" align="right" style="margin-bottom: -15px;">
+                                    <svg onclick="javascript:cerrar3();" style="width:24px;height:24px" viewBox="0 0 24 24">
+                                        <path fill="red" d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
+                                    </svg>
+                                </div>
+                                Catálogo federal de autoridades señaladas.
+                            </div>
                             <label for="autoridades_federales">Autoridad Señalada (Federal)</label>
+                            <svg onclick="javascript:mostrar3();" style="width:20px;height:20px" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
+                            </svg><br>
                             <select class="form-control" name="autoridades_federales">
                                 <option value="">Escoge una opción</option>
                                 <option value="Otra">Otra</option>

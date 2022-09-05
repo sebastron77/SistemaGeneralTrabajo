@@ -57,16 +57,70 @@
     });
 
     $(document).ready(function() {
-      $("#se_turna_a_area").change(function() {
-        //$('#cbx_localidad').find('option').remove().end().append(
+      $("#area_responsable").change(function() {
+        // $('#cbx_localidad').find('option').remove().end().append(
         //    '<option value="whatever"></option>').val('whatever');
 
+        $("#area_responsable option:selected").each(function() {
+          nombre_area = $(this).val();
+          $.post("buscar.php", {
+            nombre_area: nombre_area
+          }, function(data) {
+            $("#responsable").html(data);
+          })
+        })
+
+      })
+    });
+
+    $(document).ready(function() {
+      $("#area_supervisor").change(function() {
+        $("#area_supervisor option:selected").each(function() {
+          nombre_area = $(this).val();
+          $.post("buscar.php", {
+            nombre_area: nombre_area
+          }, function(data) {
+            $("#supervisor").html(data);
+          })
+        })
+
+      })
+    });
+
+    $(document).ready(function() {
+      $("#se_turna_a_area").change(function() {
         $("#se_turna_a_area option:selected").each(function() {
           nombre_area2 = $(this).val();
           $.post("buscar2.php", {
             nombre_area2: nombre_area2
           }, function(data) {
             $("#se_turna_a_trabajador_editar").html(data);
+          })
+        })
+
+      })
+    });
+    $(document).ready(function() {
+      $("#area_responsable").change(function() {
+        $("#area_responsable option:selected").each(function() {
+          nombre_area3 = $(this).val();
+          $.post("buscar3.php", {
+            nombre_area3: nombre_area3
+          }, function(data) {
+            $("#responsable_editar").html(data);
+          })
+        })
+
+      })
+    });
+    $(document).ready(function() {
+      $("#area_supervisor").change(function() {
+        $("#area_supervisor option:selected").each(function() {
+          nombre_area2 = $(this).val();
+          $.post("buscar2.php", {
+            nombre_area2: nombre_area2
+          }, function(data) {
+            $("#supervisor_editar").html(data);
           })
         })
 

@@ -80,7 +80,7 @@ if (isset($_POST["export_data"])) {
                     <span>Correspondencia Interna Recibida</span>
                 </strong>
 
-                <!-- <a href="add_env_correspondencia.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar Correspondencia</a> -->
+                <a href="add_env_correspondencia.php" style="margin-left: 10px" class="btn btn-info pull-right">Agregar Correspondencia</a>
 
                 <form action=" <?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
                     <button style="float: right; margin-top: -20px" type="submit" id="export_data" name='export_data' value="Export to excel" class="btn btn-excel">Exportar a Excel</button>
@@ -98,7 +98,6 @@ if (isset($_POST["export_data"])) {
                             <th style="width: 7%;">Asunto</th>
                             <th style="width: 5%;">Medio de Envío</th>
                             <th style="width: 5%;">Área a la que se turna</th>
-                            <th style="width: 5%;">Área que turnó oficio</th>
                             <th style="width: 2%;" class="text-center">Acciones</th>
 
                         </tr>
@@ -133,15 +132,14 @@ if (isset($_POST["export_data"])) {
                                 <td><?php echo remove_junk(ucwords($a_correspondencia['asunto'])) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_correspondencia['medio_envio']))) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_correspondencia['se_turna_a_area']))) ?></td>
-                                <td><?php echo remove_junk(ucwords(($a_correspondencia['area_creacion']))) ?></td>
                                 <td class="text-center">
                                     <div class="btn-group">
                                         <a href="ver_info_env_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
                                             <i class="glyphicon glyphicon-eye-open"></i>
                                         </a>
-                                        <!-- <a href="edit_env_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
+                                        <a href="edit_env_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-warning btn-md" title="Editar" data-toggle="tooltip">
                                             <span class="glyphicon glyphicon-edit"></span>
-                                        </a> -->
+                                        </a>
                                         <a href="seguimiento_env_correspondencia.php?id=<?php echo (int)$a_correspondencia['id']; ?>" class="btn btn-secondary btn-md" title="Seguimiento" data-toggle="tooltip">
                                             <span class="glyphicon glyphicon-arrow-right"></span>
                                         </a>

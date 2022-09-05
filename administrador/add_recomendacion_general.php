@@ -104,6 +104,18 @@ if (isset($_POST['add_recomendacion_general'])) {
 include_once('layouts/header.php'); ?>
 <?php echo display_msg($msg); ?>
 
+<script languague="javascript">
+    function mostrar() {
+        div = document.getElementById('flotante');
+        div.style.display = '';
+    }
+
+    function cerrar() {
+        div = document.getElementById('flotante');
+        div.style.display = 'none';
+    }
+</script>
+
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -344,7 +356,19 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-4">
                         <div class="form-group">
                             <span>
-                                <label for="recomendacion_adjunto_publico">Adjuntar Recomendación Versión Pública</label>
+                            <div id="flotante" style=" background-color: #EBEBEB; display:none; border-radius: 8px;">
+                                <div id="close" align="right" style="margin-bottom: -15px;">
+                                    <svg onclick="javascript:cerrar();" style="width:24px;height:24px" viewBox="0 0 24 24">
+                                        <path fill="red" d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z" />
+                                    </svg>
+                                </div>
+                                Es la recomendación en su versión pública, la cual verá el público en general.
+                            </div>
+                            <label for="recomendacion_adjunto_publico">Adjuntar Recomendación Versión Pública</label>
+                            <svg onclick="javascript:mostrar();" style="width:20px;height:20px" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
+                            </svg><br>
+                                
                                 <input id="recomendacion_adjunto_publico" type="file" accept="application/pdf" class="form-control" name="recomendacion_adjunto_publico">
                             </span>
                         </div>
