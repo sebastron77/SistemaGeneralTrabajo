@@ -152,7 +152,7 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
-    <div class="col-md-3" style="height: 13.5rem;">
+    <!-- <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: rgb(0,95,255); background: linear-gradient(90deg, rgba(0,95,255,1) 0%, rgba(0,67,133,1) 50%, rgba(0,42,83,1) 100%); display: grid; place-content: center;">
                 <svg style="width:40px;height:73px" viewBox="0 0 24 24">
@@ -163,7 +163,7 @@ $c_cargos          = count_by_id('cargos');
                 <p style="font-size: 15px; margin-top:15%; color:white; line-height: 100%;">Unidad de Gestión de Recursos</p>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: rgb(0,95,255); background: linear-gradient(90deg, rgba(0,95,255,1) 0%, rgba(0,67,133,1) 50%, rgba(0,42,83,1) 100%); display: grid; place-content: center;">
@@ -173,13 +173,16 @@ $c_cargos          = count_by_id('cargos');
             </div>
             <div class="panel-value pull-right">
                 <p style="font-size: 15px; margin-top:5%; color:white; line-height: 100%;">Gestiones Jurisdiccio-<br>nales</p>
+<<<<<<< HEAD
+=======
+                <div style="margin-top:-3%;">
+                    <a style="margin-top:1%" href="add_gestion.php" class="btn btn-success btn-sm">Agregar</a>
+                    <a style="margin-top:1%" href="gestiones.php" class="btn btn-primary btn-sm">Ver</a>
+                </div>
+>>>>>>> 1b6e45897824c0bb5c5191c78632d579e3f961e6
             </div>
         </div>
     </div>
-
-</div>
-
-<div class="row" style="margin-top: 10px;">
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: rgb(0,95,255); background: linear-gradient(90deg, rgba(0,95,255,1) 0%, rgba(0,67,133,1) 50%, rgba(0,42,83,1) 100%); display: grid; place-content: center;">
@@ -198,6 +201,10 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
+</div>
+
+<div class="row" style="margin-top: 10px;">
+    
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: rgb(0,95,255); background: linear-gradient(90deg, rgba(0,95,255,1) 0%, rgba(0,67,133,1) 50%, rgba(0,42,83,1) 100%); display: grid; place-content: center;">
@@ -216,7 +223,7 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
-    <div class="col-md-3" style="height: 13.5rem;">
+    <!-- <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: rgb(0,95,255); background: linear-gradient(90deg, rgba(0,95,255,1) 0%, rgba(0,67,133,1) 50%, rgba(0,42,83,1) 100%); display: grid; place-content: center;">
                 <svg style="width:40px;height:73px" viewBox="0 0 24 24">
@@ -227,7 +234,7 @@ $c_cargos          = count_by_id('cargos');
                 <p style="font-size: 15px; margin-top:5%; color:white;">Plan estratégico Institucional</p>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: rgb(0,95,255); background: linear-gradient(90deg, rgba(0,95,255,1) 0%, rgba(0,67,133,1) 50%, rgba(0,42,83,1) 100%); display: grid; place-content: center;">
@@ -246,8 +253,6 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
-</div><br>
-<div class="row">
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: rgb(0,95,255); background: linear-gradient(90deg, rgba(0,95,255,1) 0%, rgba(0,67,133,1) 50%, rgba(0,42,83,1) 100%); display: grid; place-content: center;">
@@ -280,6 +285,11 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+=======
+</div><br>
+<div class="row">
+>>>>>>> 1b6e45897824c0bb5c5191c78632d579e3f961e6
     <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: rgb(0,95,255); background: linear-gradient(90deg, rgba(0,95,255,1) 0%, rgba(0,67,133,1) 50%, rgba(0,42,83,1) 100%); display: grid; place-content: center;">
