@@ -1,7 +1,7 @@
 <?php
 $page_title = 'Agregar área';
 require_once('includes/load.php');
-
+$areas = find_all('area');
 page_require_level(1);
 ?>
 <?php
@@ -40,8 +40,29 @@ if (isset($_POST['add'])) {
     }
 }
 ?>
+
+
+<style>
+    .login-page2 {
+        width: 350px;
+        height: 500px;
+        margin: 7% auto;
+        padding: 0 20px;
+        background-color: #282A2F;
+        border: 1px solid #000000;
+        border-radius: 15px;
+        box-shadow: 6px 20px 10px rgba(0, 0, 0, 0.082);
+        margin-top: 30px;
+    }
+
+    .login-page2 .text-center {
+        margin-bottom: 10px;
+    }
+</style>
+
+
 <?php include_once('layouts/header.php'); ?>
-<div class="login-page">
+<div class="login-page2">
     <div class="text-center">
         <h3>Agregar nueva área</h3>
     </div>
@@ -54,6 +75,14 @@ if (isset($_POST['add'])) {
         <div class="form-group">
             <label for="abreviatura" class="control-label">Abreviación de nombre del área</label>
             <input type="name" class="form-control" name="abreviatura" required>
+        </div>
+        <div class="form-group">
+            <label for="estatus">Área Padre</label>
+            <select class="form-control" name="estatus">
+                <?php foreach ($areas as $area) : ?>
+                    <option value="<?php echo $area['id']; ?>"><?php echo ucwords($area['nombre_area']); ?></option>
+                <?php endforeach ?>
+            </select>
         </div>
         <div class="form-group">
             <label for="estatus">Estatus</label>

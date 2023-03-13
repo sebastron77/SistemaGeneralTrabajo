@@ -5,7 +5,7 @@ require_once('includes/load.php');
 page_require_level(1);
 ?>
 <?php
-$e_user = find_by_id('users', (int)$_GET['id']);
+$e_user = find_by_id('users', (int)$_GET['id'], 'id_user');
 $groups  = find_all('grupo_usuarios');
 $all_trabajadores = find_all_trabajadores();
 if (!$e_user) {
@@ -23,24 +23,24 @@ if (isset($_POST['update'])) {
   $req_fields = array('detalle','username');
   validate_fields($req_fields);
   if (empty($errors)) {
-    $id = (int)$e_user['id'];
+    $id = (int)$e_user['id_user'];
     //$name = remove_junk((int)$db->escape($_POST['detalle-user']));
     $username = remove_junk($db->escape($_POST['username']));
     $detalle = remove_junk($db->escape($_POST['detalle']));
     $level = remove_junk((int)$db->escape($_POST['level']));
     $status   = remove_junk((int)$db->escape($_POST['status']));
-    $sql = "UPDATE users SET id_detalle_user={$detalle}, username='{$username}', user_level='{$level}', status='{$status}'  WHERE id='{$db->escape($id)}'";
+    $sql = "UPDATE users SET id_detalle_user={$detalle}, username='{$username}', user_level='{$level}', status='{$status}' WHERE id_user='{$db->escape($id)}'";
     $result = $db->query($sql);
     if ($result && $db->affected_rows() === 1) {
       $session->msg('s', "Cuenta Actualizada ");
-      redirect('edit_user.php?id=' . (int)$e_user['id'], false);
+      redirect('edit_user.php?id=' . (int)$e_user['id_user'], false);
     } else {
       $session->msg('d', ' Lo siento no se actualizaron los datos.');
-      redirect('edit_user.php?id=' . (int)$e_user['id'], false);
+      redirect('edit_user.php?id=' . (int)$e_user['id_user'], false);
     }
   } else {
     $session->msg("d", $errors);
-    redirect('edit_user.php?id=' . (int)$e_user['id'], false);
+    redirect('edit_user.php?id=' . (int)$e_user['id_user'], false);
   }
 }
 ?>
@@ -50,21 +50,21 @@ if (isset($_POST['update-pass'])) {
   $req_fields = array('password');
   //validate_fields($req_fields);
   if (empty($errors)) {
-    $id = (int)$e_user['id'];
+    $id = (int)$e_user['id_user'];
     $password = remove_junk($db->escape($_POST['password']));
     $h_pass   = sha1($password);
-    $sql = "UPDATE users SET password='{$h_pass}' WHERE id='{$db->escape($id)}'";
+    $sql = "UPDATE users SET password='{$h_pass}' WHERE id_user='{$db->escape($id)}'";
     $result = $db->query($sql);
     if ($result && $db->affected_rows() === 1) {
       $session->msg('s', "Se ha actualizado la contraseña del usuario. ");
-      redirect('edit_user.php?id=' . (int)$e_user['id'], false);
+      redirect('edit_user.php?id=' . (int)$e_user['id_user'], false);
     } else {
       $session->msg('d', 'No se pudo actualizar la contraseña de usuario..');
-      redirect('edit_user.php?id=' . (int)$e_user['id'], false);
+      redirect('edit_user.php?id=' . (int)$e_user['id_user'], false);
     }
   } else {
     $session->msg("d", $errors);
-    redirect('edit_user.php?id=' . (int)$e_user['id'], false);
+    redirect('edit_user.php?id=' . (int)$e_user['id_user'], false);
   }
 }
 
@@ -81,7 +81,7 @@ if (isset($_POST['update-pass'])) {
         </strong>
       </div>
       <div class="panel-body">
-        <form method="post" action="edit_user.php?id=<?php echo (int)$e_user['id']; ?>" class="clearfix">
+        <form method="post" action="edit_user.php?id=<?php echo (int)$e_user['id_user']; ?>" class="clearfix">
         <div class="form-group">
             <label for="detalle">Trabajador</label>
             <select class="form-control" name="detalle">
@@ -131,7 +131,7 @@ if (isset($_POST['update-pass'])) {
         </strong>
       </div>
       <div class="panel-body">
-        <form action="edit_user.php?id=<?php echo (int)$e_user['id']; ?>" method="post" class="clearfix">
+        <form action="edit_user.php?id=<?php echo (int)$e_user['id_user']; ?>" method="post" class="clearfix">
           <div class="form-group">
             <label for="password" class="control-label">Contraseña</label>
             <input type="password" class="form-control" name="password" placeholder="Ingresa la nueva contraseña" required>

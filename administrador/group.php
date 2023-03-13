@@ -24,9 +24,9 @@ $nivel = $user['user_level'];
         <a href="add_group.php" class="btn btn-info pull-right btn-md"> Agregar grupo</a>
       </div>
       <div class="panel-body">
-        <table class="datatable table table-bordered table-striped">
+        <table class="datatable table table-dark table-bordered table-striped">
           <thead>
-            <tr class="info">
+            <tr class="table-info">
               <th class="text-center" style="width: 50px;">#</th>
               <th>Nombre del grupo</th>
               <th class="text-center" style="width: 20%;">Nivel del grupo</th>
@@ -51,7 +51,7 @@ $nivel = $user['user_level'];
                 </td>
                 <td class="text-center">
                   <div class="btn-group">
-                    <a href="edit_group.php?id=<?php echo (int)$a_group['id']; ?>" class="btn btn-md btn-warning" data-toggle="tooltip" title="Editar">
+                    <a href="edit_group.php?id=<?php echo (int)$a_group['id_grupo_us']; ?>" class="btn btn-md btn-warning" data-toggle="tooltip" title="Editar">
                       <i class="glyphicon glyphicon-pencil"></i>
                     </a>
                     <?php if ($nivel == 1) : ?>

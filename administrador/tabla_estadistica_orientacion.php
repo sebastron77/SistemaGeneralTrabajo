@@ -60,12 +60,12 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 1);
 $total_sin_est = count_by_sin_est('orientacion_canalizacion', 1);
 $total_primaria = count_by_primaria('orientacion_canalizacion', 1);
 $total_secundaria = count_by_secundaria('orientacion_canalizacion', 1);
-// $total_preparatoria = count_by_preparatoria('orientacion_canalizacion', 1);
-// $total_licenciatura = count_by_licenciatura('orientacion_canalizacion', 1);
-// $total_especialidad = count_by_especialidad('orientacion_canalizacion', 1);
-// $total_maestria = count_by_maestria('orientacion_canalizacion', 1);
-// $total_doctorado = count_by_doctorado('orientacion_canalizacion', 1);
-// $total_posdoctorado = count_by_posdoctorado('orientacion_canalizacion', 1);
+$total_preparatoria = count_by_preparatoria('orientacion_canalizacion', 1);
+$total_licenciatura = count_by_licenciatura('orientacion_canalizacion', 1);
+$total_especialidad = count_by_especialidad('orientacion_canalizacion', 1);
+$total_maestria = count_by_maestria('orientacion_canalizacion', 1);
+$total_doctorado = count_by_doctorado('orientacion_canalizacion', 1);
+$total_posdoctorado = count_by_posdoctorado('orientacion_canalizacion', 1);
 
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -86,14 +86,14 @@ $total_secundaria = count_by_secundaria('orientacion_canalizacion', 1);
                 </strong>
             </div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
+                <table class="table table-dark table-bordered table-striped">
                     <a href="estadistica_orientaciones_medioP.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
                     </a>
                     <a href="javascript:abrir()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
                     <br><br>
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th class="text-center" style="width: 70%;">Medio de presentación</th>
                             <th class="text-center" style="width: 30%;">Cantidad</th>
                         </tr>
@@ -148,14 +148,14 @@ $total_secundaria = count_by_secundaria('orientacion_canalizacion', 1);
             </div>
 
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
+                <table class="table table-dark table-bordered table-striped">
                     <a href="estadistica_orientaciones_medioGen.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
                     </a>
                     <a href="javascript:abrir2()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
                     <br><br>
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th class="text-center" style="width: 70%;">Género</th>
                             <th class="text-center" style="width: 30%;">Cantidad</th>
                         </tr>
@@ -194,14 +194,14 @@ $total_secundaria = count_by_secundaria('orientacion_canalizacion', 1);
             </div>
 
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
+                <table class="table table-dark table-bordered table-striped">
                     <a href="estadistica_orientaciones_medioGV.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
                     </a>
                     <a href="javascript:abrir3()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
                     <br><br>
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th class="text-center" style="width: 70%;">Grupo Vulnerable</th>
                             <th class="text-center" style="width: 30%;">Cantidad</th>
                         </tr>
@@ -280,14 +280,14 @@ $total_secundaria = count_by_secundaria('orientacion_canalizacion', 1);
             </div>
 
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
-                    <a href="estadistica_orientaciones_medioGen.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                <table class="table table-dark table-bordered table-striped">
+                    <a href="estadistica_orientaciones_nivelEst.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
                     </a>
                     <a href="javascript:abrir2()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a>
                     <br><br>
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th class="text-center" style="width: 70%;">Nivel de estudios</th>
                             <th class="text-center" style="width: 30%;">Cantidad</th>
                         </tr>
@@ -295,40 +295,46 @@ $total_secundaria = count_by_secundaria('orientacion_canalizacion', 1);
                     <tbody>
                         <tr>
                             <td>Sin estudios</td>
-                            <td class="text-center"><?php echo $total_['total'] ?></td>
+                            <td class="text-center"><?php echo $total_sin_est['total'] ?></td>
                         </tr>
                         <tr>
                             <td>Primaria</td>
-                            <td class="text-center"><?php echo $total_['total'] ?></td>
+                            <td class="text-center"><?php echo $total_primaria['total'] ?></td>
                         </tr>
                         <tr>
                             <td>Secundaria</td>
-                            <td class="text-center"><?php echo $total_['total']?></td>
+                            <td class="text-center"><?php echo $total_secundaria['total']?></td>
                         </tr>
                         <tr>
                             <td>Preparatoria</td>
-                            <td class="text-center"><?php echo $total_['total']?></td>
+                            <td class="text-center"><?php echo $total_preparatoria['total']?></td>
                         </tr>
                         <tr>
                             <td>Licenciatura</td>
-                            <td class="text-center"><?php echo $total_['total']?></td>
+                            <td class="text-center"><?php echo $total_licenciatura['total']?></td>
                         </tr>
                         <tr>
                             <td>Especialidad</td>
-                            <td class="text-center"><?php echo $total_['total']?></td>
+                            <td class="text-center"><?php echo $total_especialidad['total']?></td>
                         </tr>
                         <tr>
                             <td>Maestría</td>
-                            <td class="text-center"><?php echo $total_['total']?></td>
+                            <td class="text-center"><?php echo $total_maestria['total']?></td>
                         </tr>
                         <tr>
                             <td>Doctorado</td>
-                            <td class="text-center"><?php echo $total_['total']?></td>
+                            <td class="text-center"><?php echo $total_doctorado['total']?></td>
+                        </tr>
+                        <tr>
+                            <td>Posdoctorado</td>
+                            <td class="text-center"><?php echo $total_posdoctorado['total']?></td>
                         </tr>
                         <tr>
                             <td style="text-align:right;"><b>Total</b></td>
                             <td>
-                                <?php echo $total_['total'] + $total_['total'] + $total_['total'] + $total_['total'] ?>
+                                <?php echo $total_sin_est['total'] + $total_primaria['total'] + $total_secundaria['total'] + $total_preparatoria['total'] +
+                                 $total_licenciatura['total'] + $total_especialidad['total'] + $total_maestria['total'] +
+                                 $total_doctorado['total'] + $total_posdoctorado['total']?>
                             </td>
                         </tr>
                     </tbody>

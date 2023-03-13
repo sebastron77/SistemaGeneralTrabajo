@@ -32,7 +32,7 @@ $c_cargos          = count_by_id('cargos');
 
 <?php include_once('layouts/header.php'); ?>
 
-<a href="solicitudes.php" class="btn btn-info">Regresar a Áreas</a>
+<a href="solicitudes.php" class="btn btn-info">Regresar a Áreas</a><br><br>
 <h1>Solicitudes Oficialia de Partes</h1>
 
 
@@ -51,7 +51,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:5%; color:#333333; line-height: 100%;">Correspon-<br>dencia</p>
+                <p style="font-size: 15px; margin-top:5%; color:white; line-height: 100%;">Correspon-<br>dencia</p>
                 <div style="margin-top:-5%;">
                     <?php if (($nivel <= 2) || ($nivel == 18)) : ?>
                         <a style="margin-top:5%;" href="add_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
@@ -69,7 +69,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Envío de Correspon-<br>dencia Interna</p>
+                <p style="font-size: 15px; margin-top:2%; color:white; line-height: 100%;">Envío de Correspon-<br>dencia Interna</p>
                 <div style="margin-top:-5%;">
 
                     <a style="margin-top:5%;" href="add_env_correspondencia.php" class="btn btn-success btn-sm">Agregar</a>
@@ -87,7 +87,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 15px; margin-top:2%; color:#333333; line-height: 100%;">Correspon-<br>dencia Interna Recibida</p>
+                <p style="font-size: 15px; margin-top:2%; color:white; line-height: 100%;">Correspon-<br>dencia Interna Recibida</p>
                 <div style="margin-top:-8%;">
                     <a style="margin-top:5%;" href="correspondencia_recibida.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
@@ -102,7 +102,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div class="panel-value pull-right">
-                <p style="font-size: 16px; margin-top:5%; color:#333333;">Informe de Actividades</p>
+                <p style="font-size: 16px; margin-top:5%; color:white;">Informe de Actividades</p>
                 <div style="margin-top:-4%;">
                     <?php //if ($nivel_user <= 2) : 
                     ?>
@@ -113,30 +113,30 @@ $c_cargos          = count_by_id('cargos');
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </div><br>
 <div class="row">
-        <div class="col-md-3" style="height: 13.5rem;">
-            <div class="panel panel-box clearfix">
-                <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
-                    <svg style="width:40px;height:73px" viewBox="0 0 24 24">
-                        <path fill="white" d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H10V19H5V8H19V9H21V5A2,2 0 0,0 19,3M21.7,13.35L20.7,14.35L18.65,12.35L19.65,11.35C19.85,11.14 20.19,11.13 20.42,11.35L21.7,12.63C21.89,12.83 21.89,13.15 21.7,13.35M12,18.94L18.07,12.88L20.12,14.88L14.06,21H12V18.94Z" />
-                    </svg>
-                </div>
-                <div class="panel-value pull-right">
-                    <p style="font-size: 16px; margin-top:5%; color:#333333;">Informe Trimestral/<br>Anual</p>
-                    <div style="margin-top:-10%;">
-                        <?php //if ($nivel_user <= 2) : 
-                        ?>
-                        <a style="margin-top:5%;" href="add_informe.php" class="btn btn-success btn-sm">Agregar</a>
-                        <?php //endif; 
-                        ?>
-                        <a style="margin-top:5%;" href="informes.php" class="btn btn-primary btn-sm">Ver</a>
-                    </div>
+    <div class="col-md-3" style="height: 13.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
+                <svg style="width:40px;height:73px" viewBox="0 0 24 24">
+                    <path fill="white" d="M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H10V19H5V8H19V9H21V5A2,2 0 0,0 19,3M21.7,13.35L20.7,14.35L18.65,12.35L19.65,11.35C19.85,11.14 20.19,11.13 20.42,11.35L21.7,12.63C21.89,12.83 21.89,13.15 21.7,13.35M12,18.94L18.07,12.88L20.12,14.88L14.06,21H12V18.94Z" />
+                </svg>
+            </div>
+            <div class="panel-value pull-right">
+                <p style="font-size: 16px; margin-top:5%; color:white;">Informe Trimestral/<br>Anual</p>
+                <div style="margin-top:-10%;">
+                    <?php //if ($nivel_user <= 2) : 
+                    ?>
+                    <a style="margin-top:5%;" href="add_informe.php" class="btn btn-success btn-sm">Agregar</a>
+                    <?php //endif; 
+                    ?>
+                    <a style="margin-top:5%;" href="informes.php" class="btn btn-primary btn-sm">Ver</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-3" style="height: 13.5rem;">
+    </div>
+    <div class="col-md-3" style="height: 13.5rem;">
         <div class="panel panel-box clearfix">
             <div class="panel-icon pull-left" style="background: #114987; display: grid; place-content: center;">
                 <svg style="width:40px;height:73px" viewBox="0 0 24 24">
@@ -144,7 +144,7 @@ $c_cargos          = count_by_id('cargos');
                 </svg>
             </div>
             <div>
-                <p style="font-size: 13px; margin-top:1%;">Agenda de Proyectos</p>
+                <p style="font-size: 15px; margin-top:1%;">Agenda de Proyectos</p>
                 <div style="margin-top:-3%;">
                     <a style="margin-top:1%" href="add_agenda.php" class="btn btn-success btn-sm">Agregar</a>
                     <a style="margin-top:1%" href="agendas.php" class="btn btn-primary btn-sm">Ver</a>
@@ -152,6 +152,22 @@ $c_cargos          = count_by_id('cargos');
             </div>
         </div>
     </div>
+    <div class="col-md-3" style="height: 13.5rem;">
+        <div class="panel panel-box clearfix">
+            <div class="panel-icon pull-left" style="background: rgb(0,95,255); background: linear-gradient(90deg, rgba(0,95,255,1) 0%, rgba(0,67,133,1) 50%, rgba(0,42,83,1) 100%); display: grid; place-content: center;">
+                <svg style="width:40px;height:73px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M16.75 22.16L14 19.16L15.16 18L16.75 19.59L20.34 16L21.5 17.41L16.75 22.16M3 7V5H5V4C5 2.89 5.9 2 7 2H13V9L15.5 7.5L18 9V2H19C20.05 2 21 2.95 21 4V13.8C20.12 13.29 19.09 13 18 13C14.69 13 12 15.69 12 19C12 20.09 12.29 21.12 12.8 22H7C5.95 22 5 21.05 5 20V19H3V17H5V13H3V11H5V7H3M5 5V7H7V5H5M5 19H7V17H5V19M5 13H7V11H5V13Z" />
+                </svg>
+            </div>
+            <div>
+                <p style="font-size: 14px; margin-top:5%;">Acuerdos y Resoluciones</p>
+                <div style="margin-top:-3%;">
+                    <a style="margin-top:1%" href="add_acuerdo_res.php" class="btn btn-success btn-sm">Agregar</a>
+                    <a style="margin-top:1%" href="acuerdos_res.php" class="btn btn-primary btn-sm">Ver</a>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
 <?php include_once('layouts/footer.php'); ?>

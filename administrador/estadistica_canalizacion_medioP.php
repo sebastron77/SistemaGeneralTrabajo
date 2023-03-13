@@ -37,7 +37,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 2);
   Regresar
 </a><br><br>
 <center>
-  <button id="btnCrearPdf" style="margin-top: -40px;" class="btn btn-pdf btn-md">Guardar en PDF</button>
+  <button id="btnCrearPdf" style="margin-top: -40px; background: #FE2C35; color: white; font-size: 12px;" class="btn btn-pdf btn-md">Guardar en PDF</button>
   <div id="prueba">
     <center>
       <h2 style="margin-top: 10px;">Estadística de Canalizaciones (Por medio de presentación)</h2><br>
@@ -82,7 +82,21 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 2);
                 max: 10000,
                 stepSize: 10
               },
-              responsive: true
+              responsive: true,
+              scales: {
+                y: {
+                  ticks: {
+                    color: '#379CE2',
+                    beginAtZero: true
+                  }
+                },
+                x: {
+                  ticks: {
+                    color: '#379CE2',
+                    beginAtZero: true
+                  }
+                }
+              }
             }
           });
         </script>
@@ -90,7 +104,7 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 2);
       <!-- </div> -->
 
       <!-- <div class="col-md-6" style="width: 420px; height: 250px;"> -->
-      <div style="width:40%; float:right; margin-left: 50px">
+      <div style="width:40%; float:right;">
         <!-- Debemos de tener Canvas en la página -->
         <canvas id="mPresentacionC"></canvas>
 
@@ -107,11 +121,11 @@ $total_cndh = count_by_cndh('orientacion_canalizacion', 2);
         <!-- </div> -->
       </div>
     </div>
-    <div class="row" style="display: flex; justify-content: center; align-items: center;">
-      <div style="width:40%; float:right; margin-left: 50px;  margin-top: 40px">
-        <table class="table table-bordered table-striped">
+    <div class="row" style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+      <div style="width:40%; float:right; margin-left: 50px;">
+        <table class="table table-dark table-bordered table-striped">
           <thead>
-            <tr style="height: 10px;" class="info">
+            <tr style="height: 10px;" class="table-info">
               <th class="text-center" style="width: 70%;">Medio de presentación</th>
               <th class="text-center" style="width: 30%;">Cantidad</th>
             </tr>

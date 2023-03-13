@@ -2,14 +2,22 @@
 $page_title = 'Agregar Canalización';
 require_once('includes/load.php');
 $user = current_user();
-$detalle = $user['id'];
+$detalle = $user['id_user'];
 $id_ori_canal = last_id_oricanal();
 $id_folio = last_id_folios();
 
 $user = current_user();
 $nivel = $user['user_level'];
-$id_user = $user['id'];
+$id_user = $user['id_user'];
 $nivel_user = $user['user_level'];
+$niv_estudios = find_all('cat_escolaridad');
+$ocupaciones = find_all('cat_ocupaciones');
+$grupos_vuln = find_all('cat_grupos_vuln');
+$generos = find_all('cat_genero');
+$autoridades = find_all_autoridades();
+$entidades = find_all('cat_entidad_fed');
+$nacionalidad = find_all('cat_nacionalidades');
+$medios_pres = find_all('cat_medio_pres');
 
 if ($nivel_user <= 2) {
     page_require_level(2);
@@ -18,11 +26,11 @@ if ($nivel_user == 5) {
     page_require_level_exacto(5);
 }
 
-if ($nivel_user > 2 && $nivel_user < 5) :
+if ($nivel_user > 2 && $nivel_user < 5):
     redirect('home.php');
 endif;
 
-if ($nivel_user > 5) :
+if ($nivel_user > 5):
     redirect('home.php');
 endif;
 
@@ -34,27 +42,27 @@ if (isset($_POST['add_canalizacion'])) {
     validate_fields($req_fields);
 
     if (empty($errors)) {
-        $correo   = remove_junk($db->escape($_POST['correo']));
-        $nombre   = remove_junk($db->escape($_POST['nombre']));
-        $nestudios   = remove_junk($db->escape($_POST['nestudios']));
-        $ocupacion   = remove_junk($db->escape($_POST['ocupacion']));
-        $edad   = remove_junk(upper_case($db->escape($_POST['edad'])));
-        $tel   = remove_junk(upper_case($db->escape($_POST['tel'])));
-        $ext   = remove_junk($db->escape($_POST['ext']));
-        $sexo   = remove_junk($db->escape($_POST['sexo']));
-        $calle   = remove_junk($db->escape($_POST['calle']));
-        $colonia   = remove_junk($db->escape($_POST['colonia']));
-        $cpostal   = remove_junk($db->escape($_POST['cpostal']));
-        $municipio   = remove_junk($db->escape($_POST['municipio']));
-        $entidad   = remove_junk($db->escape($_POST['entidad']));
-        $nacionalidad   = remove_junk($db->escape($_POST['nacionalidad']));
-        $medio   = remove_junk($db->escape($_POST['medio']));
-        $grupo_vulnerable   = remove_junk($db->escape($_POST['grupo_vulnerable']));
-        $lengua   = remove_junk($db->escape($_POST['lengua']));
-        $institucion_canaliza   = remove_junk($db->escape($_POST['institucion_canaliza']));
-        $observaciones   = remove_junk($db->escape($_POST['observaciones']));
-        $adjunto   = remove_junk($db->escape($_POST['adjunto']));
-        $adjunto   = remove_junk($db->escape($_POST['adjunto']));
+        $correo = remove_junk($db->escape($_POST['correo']));
+        $nombre = remove_junk($db->escape($_POST['nombre']));
+        $nestudios = remove_junk($db->escape($_POST['nestudios']));
+        $ocupacion = remove_junk($db->escape($_POST['ocupacion']));
+        $edad = remove_junk(upper_case($db->escape($_POST['edad'])));
+        $tel = remove_junk(upper_case($db->escape($_POST['tel'])));
+        $ext = remove_junk($db->escape($_POST['ext']));
+        $sexo = remove_junk($db->escape($_POST['sexo']));
+        $calle = remove_junk($db->escape($_POST['calle']));
+        $colonia = remove_junk($db->escape($_POST['colonia']));
+        $cpostal = remove_junk($db->escape($_POST['cpostal']));
+        $municipio = remove_junk($db->escape($_POST['municipio']));
+        $entidad = remove_junk($db->escape($_POST['entidad']));
+        $nacionalidad = remove_junk($db->escape($_POST['nacionalidad']));
+        $medio = remove_junk($db->escape($_POST['medio']));
+        $grupo_vulnerable = remove_junk($db->escape($_POST['grupo_vulnerable']));
+        $lengua = remove_junk($db->escape($_POST['lengua']));
+        $institucion_canaliza = remove_junk($db->escape($_POST['institucion_canaliza']));
+        $observaciones = remove_junk($db->escape($_POST['observaciones']));
+        $adjunto = remove_junk($db->escape($_POST['adjunto']));
+        $adjunto = remove_junk($db->escape($_POST['adjunto']));
         date_default_timezone_set('America/Mexico_City');
         $creacion = date('Y-m-d');
 
@@ -65,8 +73,8 @@ if (isset($_POST['add_canalizacion'])) {
             $no_folio = sprintf('%04d', 1);
         } else {
             foreach ($id_ori_canal as $nuevo) {
-                $nuevo_id_ori_canal = (int)$nuevo['id'] + 1;
-                $no_folio = sprintf('%04d', (int)$nuevo['id'] + 1);
+                $nuevo_id_ori_canal = (int) $nuevo['id'] + 1;
+                $no_folio = sprintf('%04d', (int) $nuevo['id'] + 1);
             }
         }
 
@@ -75,8 +83,10 @@ if (isset($_POST['add_canalizacion'])) {
             $no_folio1 = sprintf('%04d', 1);
         } else {
             foreach ($id_folio as $nuevo) {
-                $nuevo_id_folio = (int)$nuevo['id'] + 1;
-                $no_folio1 = sprintf('%04d', (int)$nuevo['id'] + 1);
+                //$nuevo_id_folio = (int)$nuevo['id'] + 1;
+                //$no_folio1 = sprintf('%04d', (int)$nuevo['id'] + 1);
+                $nuevo_id_folio = (int) $nuevo['contador'] + 1;
+                $no_folio1 = sprintf('%04d', (int) $nuevo['contador'] + 1);
             }
         }
         //Se crea el número de folio
@@ -96,7 +106,7 @@ if (isset($_POST['add_canalizacion'])) {
         $type = $_FILES['adjunto']['type'];
         $temp = $_FILES['adjunto']['tmp_name'];
 
-        $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
+        $move = move_uploaded_file($temp, $carpeta . "/" . $name);
 
         if ($move && $name != '') {
             $query = "INSERT INTO orientacion_canalizacion (";
@@ -153,13 +163,15 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="correo">Correo Electrónico</label>
-                            <input type="text" class="form-control" name="correo" placeholder="ejemplo@correo.com" required>
+                            <input type="text" class="form-control" name="correo" placeholder="ejemplo@correo.com"
+                                required>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="nombre">Nombre Completo</label>
-                            <input type="text" class="form-control" name="nombre" placeholder="Nombre Completo" required>
+                            <input type="text" class="form-control" name="nombre" placeholder="Nombre Completo"
+                                required>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -167,15 +179,9 @@ include_once('layouts/header.php'); ?>
                             <label for="nestudios">Nivel de Estudios</label>
                             <select class="form-control" name="nestudios">
                                 <option value="">Escoge una opción</option>
-                                <option value="Sin estudios">Sin estudios</option>
-                                <option value="Primaria">Primaria</option>
-                                <option value="Secundaria">Secundaria</option>
-                                <option value="Preparatoria">Preparatoria</option>
-                                <option value="Licenciatura">Licenciatura</option>
-                                <option value="Especialidad">Especialidad</option>
-                                <option value="Maestría">Maestría</option>
-                                <option value="Doctorado">Doctorado</option>
-                                <option value="Pos Doctorado">Pos Doctorado</option>
+                                <?php foreach ($niv_estudios as $estudios): ?>
+                                    <option value="<?php echo $estudios['id_cat_escolaridad']; ?>"><?php echo ucwords($estudios['descripcion']); ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -184,75 +190,9 @@ include_once('layouts/header.php'); ?>
                             <label for="ocupacion">Ocupacion</label>
                             <select class="form-control" name="ocupacion">
                                 <option value="">Escoge una opción</option>
-                                <option value="Otro">Otro</option>
-                                <option value="Agricultor(a)">Agricultor(a)</option>
-                                <option value="Albañil">Albañil</option>
-                                <option value="Ama de Casa">Ama de Casa</option>
-                                <option value="Artista">Artista</option>
-                                <option value="Artesano(a)">Artesano(a)</option>
-                                <option value="Pescador(a)">Pescador(a)</option>
-                                <option value="Camionero(a)">Camionero(a)</option>
-                                <option value="Carpintero(a)">Carpintero(a)</option>
-                                <option value="Cocinero(a)">Cocinero(a)</option>
-                                <option value="Comerciante">Comerciante</option>
-                                <option value="Chofer">Chofer</option>
-                                <option value="Deportista">Deportista</option>
-                                <option value="Empleada doméstica">Empleada doméstica</option>
-                                <option value="Servidor(a) público(a)">Servidor(a) público(a)</option>
-                                <option value="Empleado(a) de negocio">Empleado(a) de negocio</option>
-                                <option value="Empresario(a)">Empresario(a)</option>
-                                <option value="Estilista">Estilista</option>
-                                <option value="Estudiante">Estudiante</option>
-                                <option value="Ganadero(a)">Ganadero(a)</option>
-                                <option value="Intendente">Intendente</option>
-                                <option value="Jornalero(a)">Jornalero(a)</option>
-                                <option value="Jubilado(a)">Jubilado(a)</option>
-                                <option value="Locutor(a)">Locutor(a)</option>
-                                <option value="Profesor(a)">Profesor(a)</option>
-                                <option value="Mecánico(a)">Mecánico(a)</option>
-                                <option value="Migrante">Migrante</option>
-                                <option value="Parroco">Parroco</option>
-                                <option value="Peluquero(a)">Peluquero(a)</option>
-                                <option value="Pensionado(a)">Pensionado(a)</option>
-                                <option value="Periodista">Periodista</option>
-                                <option value="Plomero(a)">Plomero(a)</option>
-                                <option value="Reportero(a)">Reportero(a)</option>
-                                <option value="Servidor(a) sexual">Servidor(a) sexual</option>
-                                <option value="Taxista">Taxista</option>
-                                <option value="Transportista">Transportista</option>
-                                <option value="Interno(a)">Interno(a)</option>
-                                <option value="Franelero">Franelero</option>
-                                <option value="Desempleado">Desempleado</option>
-                                <option value="Contratista">Contratista</option>
-                                <option value="Policia">Policia</option>
-                                <option value="Ninguno">Ninguno</option>
-                                <option value="Litigante">Litigante</option>
-                                <option value="Defensor(a) civil de los derechos humanos">Defensor(a) civil de los derechos humanos</option>
-                                <option value="Profesionista práctica privada">Profesionista práctica privada</option>
-                                <option value="Investigador(a)">Investigador(a)</option>
-                                <option value="Obrero(a)">Obrero(a)</option>
-                                <option value="Enfermera(o) especialista en salud">Enfermera(o) especialista en salud</option>
-                                <option value="Auxiliar en actividades administrativas">Auxiliar en actividades administrativas</option>
-                                <option value="Secretaria(o)">Secretaria(o)</option>
-                                <option value="Cajero(a)">Cajero(a)</option>
-                                <option value="Comerciante en establecimiento">Comerciante en establecimiento</option>
-                                <option value="Comerciante Ambulante">Comerciante Ambulante</option>
-                                <option value="Atención al público">Atención al público</option>
-                                <option value="Empleado(a) del sector público">Empleado(a) del sector público</option>
-                                <option value="Empleado(a) del sector privado">Empleado(a) del sector privado</option>
-                                <option value="Preparación y servicio de alimentos">Preparación y servicio de alimentos</option>
-                                <option value="Cuidados personales y del hogar">Cuidados personales y del hogar</option>
-                                <option value="Servicios de protección y vigilancia">Servicios de protección y vigilancia</option>
-                                <option value="Armada, ejercito y fuerza aérea">Armada, ejercito y fuerza aérea</option>
-                                <option value="Actividades agrícolas y ganaderas">Actividades agrícolas y ganaderas</option>
-                                <option value="Actividades pesqueras, forestales, caza y similares">Actividades pesqueras, forestales, caza y similares</option>
-                                <option value="Operador(a) de maquinaria pesada">Operador(a) de maquinaria pesada</option>
-                                <option value="Extracción y edificador de construcciones">Extracción y edificador de construcciones</option>
-                                <option value="Ensamblador(a)">Ensamblador(a)</option>
-                                <option value="Agente de ventas">Agente de ventas</option>
-                                <option value="Pintor(a)">Pintor(a)</option>
-                                <option value="Trabajador(a) de apoyo para espectaculos">Trabajador(a) de apoyo para espectaculos</option>
-                                <option value="Repartidor(a) de mercancias">Repartidor(a) de mercancias</option>
+                                <?php foreach ($ocupaciones as $ocupacion): ?>
+                                    <option value="<?php echo $ocupacion['id_cat_ocup']; ?>"><?php echo ucwords($ocupacion['descripcion']); ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -261,13 +201,15 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="edad">Edad</label>
-                            <input type="number" min="1" max="120" class="form-control" name="edad" placeholder="Edad" required>
+                            <input type="number" min="1" max="120" class="form-control" name="edad" placeholder="Edad"
+                                required>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="tel">Teléfono</label>
-                            <input type="text" maxlength="10" class="form-control" name="tel" placeholder="Teléfono" required>
+                            <input type="text" maxlength="10" class="form-control" name="tel" placeholder="Teléfono"
+                                required>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -287,19 +229,9 @@ include_once('layouts/header.php'); ?>
                             <label for="grupo_vulnerable">Grupo Vulnerable</label>
                             <select class="form-control" name="grupo_vulnerable">
                                 <option value="">Escoge una opción</option>
-                                <option value="Comunidad LGBTIQ+">Comunidad LGBTIQ+</option>
-                                <option value="Derecho de las mujeres">Derecho de las mujeres</option>
-                                <option value="Niñas, niños y adolescentes">Niñas, niños y adolescentes</option>
-                                <option value="Personas con discapacidad">Personas con discapacidad</option>
-                                <option value="Personas migrantes">Personas migrantes</option>
-                                <option value="Personas que viven con VIH SIDA">Personas que viven con VIH SIDA</option>
-                                <option value="Grupos indígenas">Grupos indígenas</option>
-                                <option value="Periodistas">Periodistas</option>
-                                <option value="Defensores de los derechos humanos">Defensores de los derechos humanos</option>
-                                <option value="Adultos mayores">Adultos mayores</option>
-                                <option value="Internos">Internos</option>
-                                <option value="Otros">Otros</option>
-                                <option value="No Aplica">No Aplica</option>
+                                <?php foreach ($grupos_vuln as $grupo_vuln): ?>
+                                    <option value="<?php echo $grupo_vuln['id_cat_grupo_vuln']; ?>"><?php echo ucwords($grupo_vuln['descripcion']); ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -310,9 +242,9 @@ include_once('layouts/header.php'); ?>
                             <label for="sexo">Género</label>
                             <select class="form-control" name="sexo">
                                 <option value="">Escoge una opción</option>
-                                <option value="M">Mujer</option>
-                                <option value="H">Hombre</option>
-                                <option value="LGBTIQ+">LGBTIQ+</option>
+                                <?php foreach ($generos as $genero): ?>
+                                    <option value="<?php echo $genero['id_cat_gen']; ?>"><?php echo ucwords($genero['descripcion']); ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -331,21 +263,28 @@ include_once('layouts/header.php'); ?>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="cpostal">Código Postal</label>
-                            <input type="text" maxlength="5" class="form-control" name="cpostal" placeholder="Código Postal" required>
+                            <input type="text" maxlength="5" class="form-control" name="cpostal"
+                                placeholder="Código Postal" required>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="institucion_canaliza">Institución que se canaliza</label>
-                            <input type="text" class="form-control" name="institucion_canaliza" required>
+                            <label for="institucion_canaliza">Autoridad señalada</label>
+                            <select class="form-control" name="institucion_canaliza">
+                                <option value="">Escoge una opción</option>
+                                <?php foreach ($autoridades as $autoridad): ?>
+                                    <option value="<?php echo $autoridad['id_cat_aut']; ?>"><?php echo ucwords($autoridad['nombre_autoridad']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="municipio">Municipio/Localidad</label>
-                            <input type="text" class="form-control" name="municipio" placeholder="Municipio/Localidad" required>
+                            <input type="text" class="form-control" name="municipio" placeholder="Municipio/Localidad"
+                                required>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -353,38 +292,9 @@ include_once('layouts/header.php'); ?>
                             <label for="entidad">Entidad</label>
                             <select class="form-control" name="entidad">
                                 <option value="">Escoge una opción</option>
-                                <option value="Aguascalientes">Aguascalientes</option>
-                                <option value="Baja California">Baja California</option>
-                                <option value="Baja California Sur">Baja California Sur</option>
-                                <option value="Campeche">Campeche</option>
-                                <option value="Chiapas">Chiapas</option>
-                                <option value="Chihuahua">Chihuahua</option>
-                                <option value="Ciudad de México">Ciudad de México</option>
-                                <option value="Coahuila">Coahuila</option>
-                                <option value="Colima">Colima</option>
-                                <option value="Durango">Durango</option>                                
-                                <option value="Guanajuato">Guanajuato</option>
-                                <option value="Guerrero">Guerrero</option>
-                                <option value="Hidalgo">Hidalgo</option>
-                                <option value="Jalisco">Jalisco</option>
-                                <option value="Estado de México">Estado de México</option>
-                                <option value="Michoacán">Michoacán</option>
-                                <option value="Morelos">Morelos</option>
-                                <option value="Nayarit">Nayarit</option>
-                                <option value="Nuevo León">Nuevo León</option>
-                                <option value="Oaxaca">Oaxaca</option>
-                                <option value="Puebla">Puebla</option>
-                                <option value="Querétaro">Querétaro</option>
-                                <option value="Quintana Roo">Quintana Roo</option>
-                                <option value="San Luis Potosí">San Luis Potosí</option>
-                                <option value="Sinaloa">Sinaloa</option>
-                                <option value="Sonora">Sonora</option>
-                                <option value="Tabasco">Tabasco</option>
-                                <option value="Tamaulipas">Tamaulipas</option>
-                                <option value="Tlaxcala">Tlaxcala</option>
-                                <option value="Veracruz">Veracruz</option>
-                                <option value="Yucatán">Yucatán</option>
-                                <option value="Zacatecas">Zacatecas</option>
+                                <?php foreach ($entidades as $entidad): ?>
+                                    <option value="<?php echo $entidad['id_cat_ent_fed']; ?>"><?php echo ucwords($entidad['descripcion']); ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -392,8 +302,10 @@ include_once('layouts/header.php'); ?>
                         <div class="form-group">
                             <label for="nacionalidad">Nacionalidad</label>
                             <select class="form-control" name="nacionalidad">
-                                <option value="Mexicana">Mexicana</option>
-                                <option value="Extranjera">Extranjera</option>
+                                <option value="">Escoge una opción</option>
+                                <?php foreach ($nacionalidad as $nacion): ?>
+                                    <option value="<?php echo $nacion['id_cat_nacionalidad']; ?>"><?php echo ucwords($nacion['descripcion']); ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
@@ -404,26 +316,24 @@ include_once('layouts/header.php'); ?>
                             <label for="medio">Medio de presentación</label>
                             <select class="form-control" name="medio">
                                 <option value="">Escoge una opción</option>
-                                <option value="Asesor Virtual">Asesor Virtual</option>
-                                <option value="Asistente Virtual">Asistente Virtual</option>
-                                <option value="Comparecencia">Comparecencia</option>
-                                <option value="Escrito">Escrito</option>
-                                <option value="Vía telefónica">Vía telefónica</option>
-                                <option value="Vía electrónica">Vía electrónica</option>
-                                <option value="Comisión Nacional de los Derechos Humanos">Comisión Nacional de los Derechos Humanos</option>
+                                <?php foreach ($medios_pres as $medio): ?>
+                                    <option value="<?php echo $medio['id_cat_med_pres']; ?>"><?php echo ucwords($medio['descripcion']); ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="adjunto">Subir acta de canalización (si es necesario)</label>
-                            <input type="file" accept="application/pdf" class="form-control" name="adjunto" id="adjunto">
+                            <input type="file" accept="application/pdf" class="form-control" name="adjunto"
+                                id="adjunto">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="observaciones">Observaciones</label><br>
-                            <textarea name="observaciones" class="form-control" id="observaciones" cols="50" rows="2"></textarea>
+                            <textarea name="observaciones" class="form-control" id="observaciones" cols="50"
+                                rows="2"></textarea>
                         </div>
                     </div>
                 </div>
@@ -431,7 +341,8 @@ include_once('layouts/header.php'); ?>
                     <a href="canalizaciones.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar
                     </a>
-                    <button type="submit" name="add_canalizacion" class="btn btn-primary" onclick="return confirm('Tu canalización será guardada, verifica el folio generado para asignarlo de manera correcta a su expediente. Da clic en Aceptar para continuar.');">Guardar</button>
+                    <button type="submit" name="add_canalizacion" class="btn btn-primary"
+                        onclick="return confirm('Tu canalización será guardada, verifica el folio generado para asignarlo de manera correcta a su expediente. Da clic en Aceptar para continuar.');">Guardar</button>
                 </div>
             </form>
         </div>

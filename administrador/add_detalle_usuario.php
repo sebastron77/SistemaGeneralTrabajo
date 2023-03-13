@@ -78,7 +78,7 @@ include_once('layouts/header.php'); ?>
                             <label for="level">Cargo</label>
                             <select class="form-control" name="cargo">
                                 <?php foreach ($cargos as $cargo) : ?>
-                                    <option value="<?php echo $cargo['id']; ?>"><?php echo ucwords($cargo['nombre_cargo']." | ".$cargo['nombre_area']); ?></option>
+                                    <option value="<?php echo $cargo['id_cargos']; ?>"><?php echo ucwords($cargo['nombre_cargo']." | ".$cargo['nombre_area']); ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

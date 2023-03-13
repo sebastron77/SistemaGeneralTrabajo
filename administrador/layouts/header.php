@@ -10,7 +10,7 @@
       echo remove_junk($page_title);
     elseif (!empty($user))
       echo ucfirst($user['username']);
-    else echo "Libro Electrónico";
+    else echo "Sistema General de Quejas";
     ?>
   </title>
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
@@ -126,14 +126,28 @@
 
       })
     });
+    $(document).ready(function() {
+      $("#id_cat_municipios").change(function() {
+
+        $("#id_cat_municipios option:selected").each(function() {
+          id_cat_municipios = $(this).val();
+          $.post("buscar5.php", {
+            id_cat_municipios: id_cat_municipios
+          }, function(data) {
+            $("#localidad").html(data);
+          })
+        })
+
+      })
+    });
   </script>
 
 </head>
 
-<body>
+<body style="background-color: #E3E3E3; color: white;">
   <?php if ($session->isUserLoggedIn(true)) : ?>
     <header id="header">
-      <div class="logo pull-left"> Libro de Registro </div>
+      <div class="logo pull-left"> Sistema General de Quejas </div>
       <div class="header-content">
         <div class="header-date pull-left">
           <strong><?php echo make_date_no_seg(); ?></strong>
@@ -149,7 +163,7 @@
                 <?php endif; ?>
                 <span><?php echo remove_junk(ucfirst($user['username'])); ?> <i class="caret"></i></span>
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" style="background-color: #FFFFFF;">
                 <li>
                   <a href="profile.php?id=<?php echo (int)$user['id']; ?>">
                     <i class="glyphicon glyphicon-user"></i>
@@ -191,7 +205,7 @@
         <!-- Área médica y psicológica -->
         <?php include_once('area_medica.php'); ?>
 
-      <?php elseif ($user['user_level'] === '5') : ?>
+      <?php elseif ($user['user_level'] === '5' || $user['user_level'] === '19' || $user['user_level'] === '20') : ?>
         <!-- Orientación y quejas -->
         <?php include_once('quejas_menu.php'); ?>
 

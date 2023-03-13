@@ -55,7 +55,7 @@ if (isset($_POST['add'])) {
             <label for="level">Área</label>
             <select class="form-control" name="area">
                 <?php foreach ($areas as $area) : ?>
-                    <option value="<?php echo $area['id']; ?>"><?php echo ucwords($area['nombre_area']); ?></option>
+                    <option value="<?php echo $area['id_area']; ?>"><?php echo ucwords($area['nombre_area']); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

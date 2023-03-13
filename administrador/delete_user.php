@@ -5,7 +5,7 @@
 ?>
 <?php
   //$delete_id = delete_by_id('users',(int)$_GET['id']);
-  $delete_id = delete_by_id('users',(int)$_GET['id']);
+  $delete_id = delete_by_id('users',(int)$_GET['id'],'id_user');
   if($delete_id){
       $session->msg("s","Usuario eliminado");
       redirect('users.php');

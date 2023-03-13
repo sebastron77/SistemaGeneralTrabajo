@@ -8,7 +8,7 @@ $all_canalizaciones = find_all_canalizaciones();
 // $user = current_user();
 $user = current_user();
 $nivel = $user['user_level'];
-$id_user = $user['id'];
+$id_user = $user['id_user'];
 $nivel_user = $user['user_level'];
 
 if ($nivel_user <= 2) {
@@ -48,7 +48,7 @@ if (isset($_POST["export_data"])) {
         header('Content-Encoding: UTF-8');
         header('Content-type: application/vnd.ms-excel;charset=UTF-8');
         header("Content-Disposition: attachment; filename=orientaciones.xls");        
-        $filename = "orientaciones.xls";
+        $filename = "canalizaciones.xls";
         $mostrar_columnas = false;
 
         foreach ($orientaciones as $resolucion) {
@@ -93,9 +93,9 @@ if (isset($_POST["export_data"])) {
             <div class="panel-body">
                 <table class="datatable table table-bordered table-striped">
                     <thead>
-                        <tr style="height: 10px;" class="info">
-                            <th style="width: 25%;">Folio</th>
-                            <th style="width: 15%;">Fecha creación</th>
+                        <tr style="height: 10px;" class="table-primary">
+                            <th style="width: 10%;">Folio</th>
+                            <th style="width: 10%;">Fecha creación</th>
                             <!-- <th style="width: 5%;">Tipo</th> -->
                             <th style="width: 5%;">Medio presentación</th>
                             <th style="width: 1%;">Adjunto</th>
@@ -113,25 +113,15 @@ if (isset($_POST["export_data"])) {
                         <?php foreach ($all_canalizaciones as $a_canalizacion) : ?>
                             <tr>
                                 <td><?php echo remove_junk(ucwords($a_canalizacion['folio'])) ?></td>
-                                <!-- <td><?php
-                                    if ($a_canalizacion['tipo_solicitud'] == '1') {
-                                        echo 'Orientación';
-                                    }
-                                    if ($a_canalizacion['tipo_solicitud'] == '2') {
-                                        echo 'Canalización';
-                                    }
-                                    ?>
-                                </td> -->
                                 <?php
                                 $folio_editar = $a_canalizacion['folio'];
                                 $resultado = str_replace("/", "-", $folio_editar);
                                 ?>
                                 <td><?php echo remove_junk(ucwords($a_canalizacion['creacion'])) ?></td>
-                                <td><?php echo remove_junk(ucwords($a_canalizacion['medio_presentacion'])) ?></td>
-                                <td><a target="_blank" style="color: #23296B;" href="uploads/orientacioncanalizacion/canalizacion/<?php echo $resultado . '/' . $a_canalizacion['adjunto']; ?>"><?php echo $a_canalizacion['adjunto']; ?></a></td>
+                                <td><?php echo remove_junk(ucwords($a_canalizacion['med'])) ?></td>
+                                <td><a target="_blank" style="color: #0094FF;" href="uploads/orientacioncanalizacion/canalizacion/<?php echo $resultado . '/' . $a_canalizacion['adjunto']; ?>"><?php echo $a_canalizacion['adjunto']; ?></a></td>
                                 <td><?php echo remove_junk(ucwords($a_canalizacion['correo_electronico'])) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_canalizacion['nombre_completo']))) ?></td>
-                                <!-- <td><?php echo remove_junk(ucwords(($a_canalizacion['ocupacion']))) ?></td> -->
                                 <td><?php echo remove_junk($a_canalizacion['nombre'] . " " . $a_canalizacion['apellidos']) ?></td>
                                 <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
                                     <td class="text-center">

@@ -28,7 +28,7 @@ endif;
 if ($nivel_user > 5 && $nivel_user < 7) :
   redirect('home.php');
 endif;
-if ($nivel_user > 7) :
+if ($nivel_user > 7  && $nivel_user < 19) :
   redirect('home.php');
 endif;
 
@@ -92,16 +92,16 @@ $quejas = quejas();
       </div>
     </div>
     <div class="panel-body">
-      <table class="datatable table table-bordered table-striped">
+      <table class="datatable table table-dark table-bordered table-striped">
         <thead>
-          <tr class="info">
+          <tr class="table-info">
             <th class="text-center" style="width: 2%;">Folio Queja</th>
             <th style="width: 1%;">Última Actualización</th>
             <th style="width: 3%;">Autoridad Responsable</th>
             <th style="width: 3%;">Agraviado</th>
             <th style="width: 1%;">Estatus</th>
             <th style="width: 3%;">Asignado a</th>
-            <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+            <?php if (($nivel <= 2) || ($nivel == 5) || ($nivel == 19)) : ?>
               <th class="text-center" style="width: 25%;">Acciones</th>
             <?php endif; ?>
           </tr>
@@ -115,7 +115,7 @@ $quejas = quejas();
               <td> <?php echo remove_junk(($queja['creada_por'])); ?></td>
               <td class="text-center"> <?php echo remove_junk(($queja['estatus_queja'])); ?> </td>
               <td> <?php echo remove_junk($queja['asignada_a']); ?></td>
-              <?php if (($nivel <= 2) || ($nivel == 5)) : ?>
+              <?php if (($nivel <= 2) || ($nivel == 5) || ($nivel == 19)) : ?>
                 <td class="text-center">
                   <a href="add_acuerdo_no_violacion.php?id=<?php echo (int)$queja['id']; ?>" class="btn btn-success btn-sm" data-toggle="tooltip" title="Agregar un Acuerdo de No Violación">
                     Acuerdo

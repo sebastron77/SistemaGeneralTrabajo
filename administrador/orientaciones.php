@@ -7,7 +7,7 @@ require_once('includes/load.php');
 $all_orientaciones = find_all_orientaciones();
 $user = current_user();
 $nivel = $user['user_level'];
-$id_user = $user['id'];
+$id_user = $user['id_user'];
 $nivel_user = $user['user_level'];
 
 if ($nivel_user <= 2) {
@@ -92,7 +92,7 @@ if (isset($_POST["export_data"])) {
             <div class="panel-body">
                 <table class="datatable table table-bordered table-striped">
                     <thead>
-                        <tr class="info">
+                        <tr class="table-primary">
                             <th width="20%">Folio</th>
                             <th width="15%">Fecha creación</th>
                             <!-- <th style="width: 5%;">Tipo</th> -->
@@ -127,7 +127,7 @@ if (isset($_POST["export_data"])) {
                                 ?>
                                 <td><?php echo remove_junk(ucwords($a_orientacion['creacion'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_orientacion['medio_presentacion'])) ?></td>
-                                <td><a target="_blank" style="color: #23296B;" href="uploads/orientacioncanalizacion/orientacion/<?php echo $resultado . '/' . $a_orientacion['adjunto']; ?>"><?php echo $a_orientacion['adjunto']; ?></a></td>
+                                <td><a target="_blank" style="color: #0094FF;" href="uploads/orientacioncanalizacion/orientacion/<?php echo $resultado . '/' . $a_orientacion['adjunto']; ?>"><?php echo $a_orientacion['adjunto']; ?></a></td>
                                 <td><?php echo remove_junk(ucwords($a_orientacion['correo_electronico'])) ?></td>
                                 <td><?php echo remove_junk(ucwords(($a_orientacion['nombre_completo']))) ?></td>
                                 <!-- <td><?php echo remove_junk(ucwords(($a_orientacion['ocupacion']))) ?></td> -->

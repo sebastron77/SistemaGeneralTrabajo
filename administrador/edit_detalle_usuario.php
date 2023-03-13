@@ -5,7 +5,7 @@ require_once('includes/load.php');
 page_require_level(1);
 ?>
 <?php
-$e_detalle = find_by_id('detalles_usuario', (int)$_GET['id']);
+$e_detalle = find_by_id('detalles_usuario', (int)$_GET['id'], 'id_det_usuario');
 $cargos = find_all('cargos');
 $areas = find_all('area');
 if (!$e_detalle) {
@@ -17,14 +17,12 @@ $nivel = $user['user_level'];
 ?>
 
 <?php
-//mb_internal_encoding("UTF-8");
-//serror_reporting(E_ALL ^ E_NOTICE);
 //Actualiza informacion de los trabajadores
 if (isset($_POST['update'])) {
     $req_fields = array('nombre', 'apellidos', 'sexo', 'curp', 'rfc', 'correo', 'tel-casa', 'tel-cel', 'calle-num', 'colonia', 'municipio', 'estado', 'pais', 'cargo');
     validate_fields($req_fields);
     if (empty($errors)) {
-        $id = (int)$e_detalle['id'];
+        $id = (int)$e_detalle['id_det_usuario'];
         $nombre   = $_POST['nombre'];
         $apellidos   = $_POST['apellidos'];
         $sexo   = remove_junk($db->escape($_POST['sexo']));
@@ -40,20 +38,19 @@ if (isset($_POST['update'])) {
         $pais   = $_POST['pais'];
         $cargo = remove_junk((int)$db->escape($_POST['cargo']));
         $estatus = remove_junk((int)$db->escape($_POST['estatus']));
-        //$name = remove_junk((int)$db->escape($_POST['detalle-user']));
 
-        $sql = "UPDATE detalles_usuario SET nombre='{$nombre}', apellidos='{$apellidos}', sexo='{$sexo}', curp='{$curp}', rfc='{$rfc}', correo='{$correo}', telefono_casa='{$casa}', telefono_celular='{$cel}', calle_numero='{$calle}', colonia='{$colonia}', municipio='{$municipio}', estado='{$estado}', pais='{$pais}', id_cargo={$cargo}, estatus_detalle={$estatus} WHERE id='{$db->escape($id)}'";
+        $sql = "UPDATE detalles_usuario SET nombre='{$nombre}', apellidos='{$apellidos}', sexo='{$sexo}', curp='{$curp}', rfc='{$rfc}', correo='{$correo}', telefono_casa='{$casa}', telefono_celular='{$cel}', calle_numero='{$calle}', colonia='{$colonia}', municipio='{$municipio}', estado='{$estado}', pais='{$pais}', id_cargo={$cargo}, estatus_detalle={$estatus} WHERE id_det_usuario='{$db->escape($id)}'";
         $result = $db->query($sql);
         if ($result && $db->affected_rows() === 1) {
             $session->msg('s', "Información Actualizada ");
-            redirect('edit_detalle_usuario.php?id=' . (int)$e_detalle['id'], false);
+            redirect('edit_detalle_usuario.php?id=' . (int)$e_detalle['id_det_usuario'], false);
         } else {
             $session->msg('d', ' Lo siento no se actualizaron los datos.');
-            redirect('edit_detalle_usuario.php?id=' . (int)$e_detalle['id'], false);
+            redirect('edit_detalle_usuario.php?id=' . (int)$e_detalle['id_det_usuario'], false);
         }
     } else {
         $session->msg("d", $errors);
-        redirect('edit_detalle_usuario.php?id=' . (int)$e_detalle['id'], false);
+        redirect('edit_detalle_usuario.php?id=' . (int)$e_detalle['id_det_usuario'], false);
     }
 }
 ?>
@@ -69,7 +66,7 @@ if (isset($_POST['update'])) {
                 </strong>
             </div>
             <div class="panel-body">
-                <form method="post" action="edit_detalle_usuario.php?id=<?php echo (int)$e_detalle['id']; ?>" class="clearfix">
+                <form method="post" action="edit_detalle_usuario.php?id=<?php echo (int)$e_detalle['id_det_usuario']; ?>" class="clearfix">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -88,9 +85,9 @@ if (isset($_POST['update'])) {
                                 <label for="cargo">Cargo</label>
                                 <select class="form-control" name="cargo">
                                     <?php foreach ($cargos as $cargo) : ?>
-                                        <option <?php if ($cargo['id'] === $e_detalle['id_cargo']) echo 'selected="selected"'; ?> value="<?php echo $cargo['id'];?>">                                                            
+                                        <option <?php if ($cargo['id_cargos'] === $e_detalle['id_cargo']) echo 'selected="selected"'; ?> value="<?php echo $cargo['id_cargos'];?>">                                                            
                                                 <?php foreach ($areas as $area) : ?>
-                                                    <?php if ($area['id'] === $cargo['id_area']) 
+                                                    <?php if ($area['id_area'] === $cargo['id_area']) 
                                                         echo ucwords($cargo['nombre_cargo']) . " - " . ucwords($area['nombre_area']); 
                                                     ?>
                                                 <?php endforeach; ?>
@@ -178,14 +175,13 @@ if (isset($_POST['update'])) {
                                     <select class="form-control" name="estatus">
                                         <option <?php if ($e_detalle['estatus_detalle'] === '1') echo 'selected="selected"'; ?> value="1"> Activo </option>
                                         <option <?php if ($e_detalle['estatus_detalle'] === '0') echo 'selected="selected"'; ?> value="0">Inactivo</option>
-                                        <!-- <option <?php if ($e_group['estatus_area'] === '0') echo 'selected="selected"'; ?> value="0">Inactivo</option> -->
                                     </select>
                                 </div>
                             </div>
                         <?php endif ?>
                     </div>
                     <div class="form-group clearfix">
-                        <a href="ver_info_detalle.php?id=<?php echo (int)$e_detalle['id']; ?>" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
+                        <a href="ver_info_detalle.php?id=<?php echo (int)$e_detalle['id_det_usuario']; ?>" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                             Regresar
                         </a>
                         <button type="submit" name="update" class="btn btn-info">Actualizar</button>

@@ -46,7 +46,7 @@ $total_na = count_by_na('orientacion_canalizacion', 1);
 </a>
 <!-- Debemos de tener Canvas en la página -->
 <center>
-  <button id="btnCrearPdf" style="margin-top: -30px;" class="btn btn-pdf btn-md">Guardar en PDF</button>
+  <button id="btnCrearPdf" style="margin-top: -30px; background: #FE2C35; color: white; font-size: 12px;" class="btn btn-pdf btn-md">Guardar en PDF</button>
   <div id="prueba">
     <center>
       <h2 style="margin-top: 15px;">Estadística de Orientaciones (Por grupo vulnerable)</h2>
@@ -95,7 +95,20 @@ $total_na = count_by_na('orientacion_canalizacion', 1);
                 max: 10000,
                 stepSize: 10
               },
-
+              scales: {
+                y: {
+                  ticks: {
+                    color: '#379CE2',
+                    beginAtZero: true
+                  }
+                },
+                x: {
+                  ticks: {
+                    color: '#379CE2',
+                    beginAtZero: true
+                  }
+                }
+              }
             }
           });
         </script>
@@ -107,9 +120,9 @@ $total_na = count_by_na('orientacion_canalizacion', 1);
     <!-- Debemos de tener Canvas en la página -->
     <div class=" row" style="display: flex; justify-content: center; align-items: center;">
       <div style="width:40%; float:right; margin-left: 50px;  margin-top: 40px">
-        <table class="table table-bordered table-striped">
+        <table class="table table-dark table-bordered table-striped">
           <thead>
-            <tr style="height: 10px;" class="info">
+            <tr style="height: 10px;" class="table-info">
               <th class="text-center" style="width: 70%;">Grupo Vulnerable</th>
               <th class="text-center" style="width: 30%;">Cantidad</th>
             </tr>

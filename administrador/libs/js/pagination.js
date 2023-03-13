@@ -3,11 +3,11 @@ var dataTable = $(".datatable").DataTable({
   language: {
     search: "Buscar:",
     lengthMenu: "Mostrar _MENU_ elementos",
-    info: "Mostrando del _START_ al _END_ de _TOTAL_ elementos en total",
+    info: '<p class="siguiente">Mostrando del _START_ al _END_ de _TOTAL_ elementos en total</p>',
     paginate: {
-      previous: "Anterior",
-      next: "Siguiente",
-      last: "Anterior",
+      previous: '<p class="siguiente">Anterior</p>',
+      next: '<p class="siguiente">Siguiente</p>',
+      last: '<p class="siguiente">Ultimo</p>',
     },
   },
   buttons: [ //Descomentar para que salga el botón de Excel

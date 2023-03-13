@@ -4,7 +4,7 @@ $page_title = 'Orientación';
 require_once('includes/load.php');
 ?>
 <?php
-$e_detalle = find_by_id('orientacion_canalizacion', (int)$_GET['id']);
+$e_detalle = find_by_id_orientacion((int)$_GET['id']);
 //$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
 $user = current_user();
 $nivel = $user['user_level'];
@@ -50,7 +50,7 @@ if ($nivel == 7) {
             <div class="panel-body">
                 <table class="table table-bordered table-striped">
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-primary">
                             <th style="width: 1%;" class="text-center">Folio</th>
                             <th style="width: 3%;" class="text-center">Fecha de Creación</th>
                             <th style="width: 3%;" class="text-center">Medio de presentación</th>
@@ -59,36 +59,32 @@ if ($nivel == 7) {
                             <th style="width: 5%;" class="text-center">Nombre Completo</th>
                             <th style="width: 3%;" class="text-center">Nivel de Estudios</th>
                             <th style="width: 5%;" class="text-center">Ocupación</th>
-
                         </tr>
                     </thead>
                     <tbody>
-
                         <tr>
                             <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['folio'])) ?></td>
                             <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['creacion'])) ?></td>
-                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['medio_presentacion'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['med'])) ?></td>
                             <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['correo_electronico'])) ?></td>
                             <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['nombre_completo']))) ?></td>
-                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['nivel_estudios']))) ?></td>
-                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['ocupacion']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['cesc']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['ocup']))) ?></td>
 
                         </tr>
-
                     </tbody>
                 </table>
                 <table class="table table-bordered table-striped">
                     <thead>
-                        <tr class="info">
+                        <tr class="table-primary">
                             <th style="width: 1%;" class="text-center">Edad</th>
                             <th style="width: 1%;" class="text-center">Telefono</th>
                             <th style="width: 1%;" class="text-center">Extensión</th>
                             <th style="width: 1%;" class="text-center">Género</th>
                             <th style="width: 3%;" class="text-center">Grupo Vulnerable</th>
                             <th style="width: 2%;" class="text-center">Lengua</th>
+                            <th style="width: 5%;" class="text-center">Autoridad señalada como responsable</th>
                             <th style="width: 5%;" class="text-center">Calle-Num.</th>
-                            <th style="width: 5%;" class="text-center">Colonia</th>
-                            <th style="width: 2%;" class="text-center">Código Postal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,18 +92,20 @@ if ($nivel == 7) {
                             <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['edad'])) ?></td>
                             <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['telefono'])) ?></td>
                             <td class="text-center"><?php echo remove_junk($e_detalle['extension']) ?></td>
-                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['sexo'])) ?></td>
-                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['grupo_vulnerable'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['gen'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['grupo'])) ?></td>
                             <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['lengua'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['aut'])) ?></td>
                             <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['calle_numero'])) ?></td>
-                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['colonia']))) ?></td>
-                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['codigo_postal'])) ?></td>
+
                         </tr>
                     </tbody>
                 </table>
                 <table class="table table-bordered table-striped">
                     <thead>
-                        <tr class="info">
+                        <tr class="table-primary">
+                            <th style="width: 5%;" class="text-center">Colonia</th>
+                            <th style="width: 2%;" class="text-center">Código Postal</th>
                             <th style="width: 2%;" class="text-center">Municipio</th>
                             <th style="width: 2%;" class="text-center">Entidad</th>
                             <th style="width: 1%;" class="text-center">Nacionalidad</th>
@@ -117,15 +115,17 @@ if ($nivel == 7) {
                     </thead>
                     <tbody>
                         <tr>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['colonia']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['codigo_postal'])) ?></td>
                             <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['municipio_localidad']))) ?></td>
-                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['entidad']))) ?></td>
-                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['nacionalidad'])) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords(($e_detalle['ent']))) ?></td>
+                            <td class="text-center"><?php echo remove_junk(ucwords($e_detalle['nac'])) ?></td>
                             <td><?php echo remove_junk(ucwords($e_detalle['observaciones'])) ?></td>
                             <?php
                             $folio_editar = $e_detalle['folio'];
                             $resultado = str_replace("/", "-", $folio_editar);
                             ?>
-                            <td class="text-center"><a target="_blank" href="uploads/orientacioncanalizacion/orientacion/<?php echo $resultado . '/' . $e_detalle['adjunto']; ?>"><?php echo $e_detalle['adjunto']; ?></a></td>
+                            <td class="text-center"><a target="_blank" style="color:#0094FF" href="uploads/orientacioncanalizacion/orientacion/<?php echo $resultado . '/' . $e_detalle['adjunto']; ?>"><?php echo $e_detalle['adjunto']; ?></a></td>
                         </tr>
                     </tbody>
                 </table>

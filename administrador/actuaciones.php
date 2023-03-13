@@ -23,7 +23,7 @@ endif;
 if ($nivel_user > 5 && $nivel_user < 7) :
     redirect('home.php');
 endif;
-if ($nivel_user > 7) :
+if ($nivel_user > 7  && $nivel_user < 19) :
     redirect('home.php');
 endif;
 
@@ -95,40 +95,42 @@ if (isset($_POST["export_data"])) {
             </div>
 
             <div class="panel-body">
-                <table class="datatable table table-bordered table-striped">
+                <table class="datatable table table-dark table-bordered table-striped">
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th style="width: 10%;">Folio</th>
                             <th style="width: 10%;">Fecha de captura</th>
                             <th style="width: 5%;">Tipo de actuación</th>
                             <th style="width: 5%;">Descripción</th>
                             <th style="width: 2%;">Autoridades</th>
                             <th style="width: 5%;">Petición</th>
+                            <th style="width: 5%;">Num. Exp. Origen</th>
                             <th style="width: 5%;">Adjunto</th>
                             <!-- <th style="width: 3%;">Constancia</th> -->
                             
-                                <th style="width: 3%;" class="text-center">Acciones</th>
+                            <th style="width: 3%;" class="text-center">Acciones</th>
                             
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($all_actuaciones as $a_actuacion) : ?>
                             <tr>
-                            <td><?php echo remove_junk(ucwords($a_actuacion['folio_actuacion'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_actuacion['folio_actuacion'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_actuacion['fecha_captura_acta'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_actuacion['catalogo'])) ?></td>
                                 <td><?php echo remove_junk(ucwords($a_actuacion['descripcion'])) ?></td>
                                 <?php if($a_actuacion['autoridades'] == ''):?>
-                                    <td><?php echo remove_junk(ucwords($a_actuacion['autoridades_federales'])) ?></td>
+                                    <td><?php echo remove_junk(ucwords($a_actuacion['nombre_autoridad'])) ?></td>
                                 <?php else:?>
-                                    <td><?php echo remove_junk(ucwords($a_actuacion['autoridades'])) ?></td>
+                                    <td><?php echo remove_junk(ucwords($a_actuacion['nombre_autoridad'])) ?></td>
                                 <?php endif?>
                                 <td class="text-center"><?php echo remove_junk(ucwords($a_actuacion['peticion'])) ?></td>
+                                <td><?php echo remove_junk(ucwords($a_actuacion['num_exp_origen'])) ?></td>
                                 <?php
                                 $folio_editar = $a_actuacion['folio_actuacion'];
                                 $resultado = str_replace("/", "-", $folio_editar);
                                 ?>
-                                <td><a target="_blank" style="color: #23296B;" href="uploads/actuaciones/<?php echo $resultado . '/' . $a_actuacion['adjunto']; ?>"><?php echo $a_actuacion['adjunto']; ?></a></td>
+                                <td><a target="_blank" style="color: #0094FF;" href="uploads/actuaciones/<?php echo $resultado . '/' . $a_actuacion['adjunto']; ?>"><?php echo $a_actuacion['adjunto']; ?></a></td>
                                 
                                     <td class="text-center">
                                         <div class="btn-group">
@@ -141,8 +143,7 @@ if (isset($_POST["export_data"])) {
                                             </a> -->
                                             <?php endif; ?>
                                         </div>
-                                    </td>
-                                
+                                    </td>                                
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

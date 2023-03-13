@@ -11,7 +11,7 @@ if ($nivel_user <= 3) {
 }
 if ($nivel_user == 5) {
     page_require_level_exacto(5);
-  }
+}
 if ($nivel_user == 7) {
     page_require_level_exacto(7);
 }
@@ -31,7 +31,7 @@ $all_quejas = total_porAutoridad('quejas');
     Regresar
 </a><br><br>
 <center>
-    <button id="btnCrearPdf" style="margin-top: -40px;" class="btn btn-pdf btn-md">Guardar en PDF</button>
+    <button id="btnCrearPdf" style="margin-top: -40px; background: #FE2C35; color: white; font-size: 12px;" class="btn btn-pdf btn-md">Guardar en PDF</button>
     <div id="prueba">
         <center>
             <h2 style="margin-top: 10px;">Estadística de Quejas (Por autoridad responsable)</h2><br>
@@ -88,7 +88,21 @@ $all_quejas = total_porAutoridad('quejas');
                                     max: 10000,
                                     stepSize: 10
                                 },
-                                responsive: true
+                                responsive: true,
+                                scales: {
+                                    y: {
+                                        ticks: {
+                                            color: '#379CE2',
+                                            beginAtZero: true
+                                        }
+                                    },
+                                    x: {
+                                        ticks: {
+                                            color: '#379CE2',
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
                             }
                         });
                     </script>
@@ -116,9 +130,9 @@ $all_quejas = total_porAutoridad('quejas');
         </div>
         <div class="row" style="display: flex; justify-content: center; align-items: center; margin-left: -30px;">
             <div style="width:50%; float:right; margin-left: 40px;  margin-top: 40px">
-                <table class="table table-bordered table-striped">
+                <table class="table table-dark table-bordered table-striped">
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th class="text-center" style="width: 40%;">Autoridad Responsable</th>
                             <th class="text-center" style="width: 5%;">Cantidad</th>
                         </tr>

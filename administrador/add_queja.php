@@ -1,114 +1,145 @@
 <?php
-// $queja = find_by_id('ost_ticket',(int)$_GET['id']);
-require_once('includes/load2.php');
-$queja = find_by_id_quejas((int)$_GET['id']);
-/* Si se descomenta esta línea causa el error al agregar la queja al Libro Electrónico */
-// if (!$queja) {
-//     $session->msg("d", "Error al agregar.");
-//     redirect('quejas.php');
-// }
-?>
-
-<?php header('Content-type: text/html; charset=utf-8');
 error_reporting(E_ALL ^ E_NOTICE);
+// header('Content-type: text/html; charset=utf-8');
 $page_title = 'Agregar Queja';
 require_once('includes/load.php');
-page_require_level(5);
 $user = current_user();
-$nivel = $user['user_level'];
+$detalle = $user['id_user'];
+$id_queja = last_id_queja();
 $id_folio = last_id_folios();
-$id_user = $user['id'];
-$busca_area = area_usuario($id_user);
-$otro = $busca_area['id'];
-page_require_area(5);
+$nivel = $user['user_level'];
+$nivel_user = $user['user_level'];
+
+$cat_medios_pres = find_all_medio_pres();
+$cat_autoridades = find_all_aut_res();
+$cat_quejosos = find_all_quejosos();
+$cat_agraviados = find_all('cat_agraviados');
+$users = find_all('users');
+$asigna_a = find_all_area_userQ();
+$area = find_all_areas_quejas();
+$cat_estatus_queja = find_all_estatus_queja();
+$cat_municipios = find_all_cat_municipios();
+
+if ($nivel_user <= 2) {
+    page_require_level(2);
+}
+if ($nivel_user == 5) {
+    page_require_level_exacto(5);
+}
+if ($nivel_user == 7) {
+    redirect('home.php');
+}
+if ($nivel_user > 2 && $nivel_user < 5):
+    redirect('home.php');
+endif;
+if ($nivel_user > 5):
+    redirect('home.php');
+endif;
 ?>
 
 <?php header('Content-type: text/html; charset=utf-8');
-// ini_set('display_errors', 1);
 if (isset($_POST['add_queja'])) {
 
-    $req_fields = array('ultima_actualizacion', 'autoridad_responsable', 'creada_por', 'estatus_queja', 'asignada_a');
+    $req_fields = array('fecha_presentacion','id_cat_med_pres','id_cat_aut','id_cat_quejoso','id_cat_agrav','id_user_asignado','id_area_asignada','id_estatus_queja','dom_calle','dom_numero','dom_colonia','descripcion_hechos');
     validate_fields($req_fields);
 
     if (empty($errors)) {
-        // $folio_queja   = remove_junk($db->escape($_POST['folio_queja']));
-        $ultima_actualizacion   = remove_junk($db->escape($_POST['ultima_actualizacion']));
-        $autoridad_responsable   = remove_junk($db->escape($_POST['autoridad_responsable']));
-        $creada_por   = remove_junk($db->escape($_POST['creada_por']));
-        $estatus_queja   = remove_junk($db->escape($_POST['estatus_queja']));
-        $asignada_a   = remove_junk(($db->escape($_POST['asignada_a'])));
-        $ticket_id   = remove_junk(($db->escape($_POST['ticket_id'])));
-        $email = $queja['email'];
-        $name = $queja['name'];
-        $n_estudios = $queja['n_estudios'];
-        $ocupacion = $queja['ocupacion'];
-        $edad = $queja['edad'];
-        $phone = $queja['phone'];
-        $sexo = $queja['sexo'];
-        $direccion = $queja['direccion'];
-        $colonia = $queja['colonia'];
-        $cp = $queja['cp'];
-        $municipio = $queja['municipio'];
-        $entidad = $queja['entidad'];
-        $nacionalidad = $queja['nacionalidad'];
-        $visitaduria = $queja['visitaduria'];
-        $agraviado = $queja['agraviado'];
-        $a_firma = $queja['a_firma'];
-        $h_direccion = $queja['h_direccion'];
-        $h_colonia = $queja['h_colonia'];
-        $h_municipio = $queja['h_municipio'];
-        $h_direccion = $queja['h_direccion'];
+        $fecha_presentacion = remove_junk($db->escape($_POST['fecha_presentacion']));
+        $id_cat_med_pres = remove_junk($db->escape($_POST['id_cat_med_pres']));
+        $id_cat_aut = remove_junk($db->escape($_POST['id_cat_aut']));
+        $id_cat_quejoso = remove_junk($db->escape($_POST['id_cat_quejoso']));
+        $id_cat_agraviado = remove_junk($db->escape($_POST['id_cat_agrav']));
+        $id_user_asignado = remove_junk($db->escape($_POST['id_user_asignado']));
+        $id_area_asignada = remove_junk($db->escape($_POST['id_area_asignada']));
+        $id_estatus_quja = remove_junk($db->escape($_POST['id_estatus_quja']));
+        $dom_calle = remove_junk($db->escape($_POST['dom_calle']));
+        $dom_numero = remove_junk($db->escape($_POST['dom_numero']));
+        $dom_colonia = remove_junk($db->escape($_POST['dom_colonia']));
+        $descripcion_hechos = remove_junk($db->escape($_POST['descripcion_hechos']));
+        $observaciones = remove_junk($db->escape($_POST['observaciones']));
+        $fecha_vencimiento = remove_junk($db->escape($_POST['fecha_vencimiento']));
+        $id_estatus_queja = remove_junk($db->escape($_POST['id_estatus_queja']));
+        $id_cat_mun = remove_junk($db->escape($_POST['id_cat_mun']));
+        date_default_timezone_set('America/Mexico_City');
+        $creacion = date('Y-m-d H:i:s');
+
+        $dbh = new PDO('mysql:host=localhost;dbname=libroquejas2', 'root', '');      
+
+        //Suma el valor del id anterior + 1, para generar ese id para el nuevo resguardo
+        //La variable $no_folio sirve para el numero de folio
+        if (count($id_queja) == 0) {
+            $nuevo_id_queja = 1;
+            $no_folio = sprintf('%04d', 1);
+        } else {
+            foreach ($id_queja as $nuevo) {
+                $nuevo_id_queja = (int) $nuevo['id'] + 1;
+                $no_folio = sprintf('%04d', (int) $nuevo['id'] + 1);
+            }
+        }
 
         if (count($id_folio) == 0) {
             $nuevo_id_folio = 1;
             $no_folio1 = sprintf('%04d', 1);
         } else {
             foreach ($id_folio as $nuevo) {
-                $nuevo_id_folio = (int)$nuevo['id'] + 1;
-                $no_folio1 = sprintf('%04d', (int)$nuevo['id'] + 1);
+                $nuevo_id_folio = (int) $nuevo['contador'] + 1;
+                $no_folio1 = sprintf('%04d', (int) $nuevo['contador'] + 1);
             }
         }
+
         //Se crea el número de folio
         $year = date("Y");
-        // Se crea el folio de capacitacion
+        // Se crea el folio orientacion
         $folio = 'CEDH/' . $no_folio1 . '/' . $year . '-Q';
 
-        // $name = $_FILES['adjunto']['name'];
-        // $size = $_FILES['adjunto']['size'];
-        // $type = $_FILES['adjunto']['type'];
-        // $temp = $_FILES['adjunto']['tmp_name'];
+        $folio_carpeta = 'CEDH-' . $no_folio1 . '-' . $year . '-Q';
+        $carpeta = 'uploads/quejas/' . $folio_carpeta;
 
-        // if (is_dir($carpeta)) {
-        //     $move =  move_uploaded_file($temp, $carpeta . "/" . $name);
-        // }
+        if (!is_dir($carpeta)) {
+            mkdir($carpeta, 0777, true);
+        }
 
-        // if ($name != '') {
-        $query = "INSERT INTO quejas (";
-        $query .= "folio_queja,ultima_actualizacion,autoridad_responsable,creada_por,estatus_queja,asignada_a,ticket_id,email,name,n_estudios,ocupacion,edad,phone,sexo,
-                    direccion,colonia,cp,municipio,entidad,nacionalidad,visitaduria,agraviado,a_firma,h_direccion,h_colonia,h_municipio,h_entidad";
+        $name = $_FILES['adjunto']['name'];
+        $size = $_FILES['adjunto']['size'];
+        $type = $_FILES['adjunto']['type'];
+        $temp = $_FILES['adjunto']['tmp_name'];
+
+        $move = move_uploaded_file($temp, $carpeta . "/" . $name);
+
+
+        $query = "INSERT INTO quejas_dates (";
+        $query .= "folio_queja,fecha_presentacion,id_cat_med_pres,id_cat_aut,observaciones,id_cat_quejoso,id_cat_agraviado,id_user_creador,fecha_creacion,id_user_asignado,id_area_asignada,fecha_vencimiento,
+        id_estatus_queja,archivo,dom_calle,dom_numero,dom_colonia,id_cat_mun,descripcion_hechos";
         $query .= ") VALUES (";
-        $query .= " '{$folio}','{$ultima_actualizacion}','{$autoridad_responsable}','{$creada_por}','{$estatus_queja}','{$asignada_a}','{$ticket_id}','{$email}',
-                    '{$name}','{$n_estudios}','{$ocupacion}','{$edad}','{$phone}','{$sexo}','{$direccion}','{$colonia}','{$cp}','{$municipio}','{$entidad}',
-                    '{$nacionalidad}','{$visitaduria}','{$agraviado}','{$a_firma}','{$h_direccion}','{$h_colonia}','{$h_municipio}','{$h_entidad}'";
+        $query .= " '{$folio}','{$fecha_presentacion}','{$id_cat_med_pres}','{$id_cat_aut}','{$observaciones}','{$id_cat_quejoso}','{$id_cat_agraviado}','{$detalle}','{$creacion}','{$id_user_asignado}',
+        '{$id_area_asignada}','{$fecha_vencimiento}','{$id_estatus_queja}','{$name}','{$dom_calle}','{$dom_numero}','{$dom_colonia}','{$id_cat_mun}','{$descripcion_hechos}'";
         $query .= ")";
 
-        $query2 = "INSERT INTO folios (";
-        $query2 .= "folio, contador";
-        $query2 .= ") VALUES (";
-        $query2 .= " '{$folio}','{$no_folio1}'";
-        $query2 .= ")";
-        // $result = $db->query($query);
+        $query3 = "INSERT INTO folios (";
+        $query3 .= "folio, contador";
+        $query3 .= ") VALUES (";
+        $query3 .= " '{$folio}','{$no_folio1}'";
+        $query3 .= ")";
 
-        if ($db->query($query) && $db->query($query2)) {
-            $session->msg('s', "Queja guardada en la base de datos.");
+	    //------------------BUSCA EL ID INSERTADO------------------
+        $dbh->exec($query);
+        $dbh->exec($query3);
+        $id_insertado = $dbh->lastInsertId();
+
+        $query2 = "INSERT INTO rel_queja_aut(id_cat_aut, id_queja_date) VALUES ({$id_cat_aut}, {$id_insertado})";
+
+        if ($db->query($query2)) {
+            //sucess
+            $session->msg('s', " La queja ha sido agregada con éxito.");
             redirect('quejas.php', false);
         } else {
-            $session->msg('d', 'Lo siento no se guardó la queja.');
-            redirect('quejas.php', false);
+            //failed
+            $session->msg('d', ' No se pudo agregar la queja.');
+            redirect('add_queja.php', false);
         }
     } else {
         $session->msg("d", $errors);
-        redirect('quejas.php', false);
+        redirect('add_queja.php', false);
     }
 }
 ?>
@@ -120,70 +151,160 @@ include_once('layouts/header.php'); ?>
         <div class="panel-heading">
             <strong>
                 <span class="glyphicon glyphicon-th"></span>
-                <span>Agregar queja a Libro Electrónico</span>
+                <span>Agregar Queja</span>
             </strong>
         </div>
         <div class="panel-body">
-            <form method="post" action="add_queja.php">
+            <form method="post" action="add_queja.php" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <label for="ultima_actualizacion">Última Actualización</label>
-                            <input type="text" class="form-control" name="ultima_actualizacion" value="<?php echo remove_junk($queja['Ultima_Actualizacion']); ?>" readonly>
+                            <label for="fecha_presentacion">Fecha de presentación</label>
+                            <input type="datetime-local" class="form-control" name="fecha_presentacion" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="id_cat_med_pres">Medio Presetación</label>
+                            <select class="form-control" name="id_cat_med_pres">
+                                <option value="">Escoge una opción</option>
+                                <?php foreach ($cat_medios_pres as $medio_pres): ?>
+                                    <option value="<?php echo $medio_pres['id_cat_med_pres']; ?>"><?php echo ucwords($medio_pres['descripcion']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="autoridad_responsable">Autoridad Responsable</label>
-                            <input type="text" class="form-control" name="autoridad_responsable" value="<?php echo remove_junk($queja['n_autoridad']); ?>" readonly>
+                            <label for="id_cat_aut">Autoridad Responsable</label>
+                            <select class="form-control" name="id_cat_aut">
+                                <option value="">Escoge una opción</option>
+                                <?php foreach ($cat_autoridades as $autoridades): ?>
+                                    <option value="<?php echo $autoridades['id_cat_aut']; ?>"><?php echo ucwords($autoridades['nombre_autoridad']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label for="creada_por">Agreaviado</label>
-                            <input type="text" class="form-control" name="creada_por" value="<?php echo remove_junk($queja['Creada_Por']); ?>" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="estatus_queja">Estatus Queja</label>
-                            <input type="text" class="form-control" name="estatus_queja" value="<?php if ($queja['isanswered'] == 1) {
-                                                                                                    echo 'Cerrada' . ' ';
-                                                                                                }
-                                                                                                if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 1)) {
-                                                                                                    echo 'Abierta' . ' ';
-                                                                                                }
-                                                                                                if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 0)) {
-                                                                                                    echo 'Pendiente' . ' ';
-                                                                                                }
-                                                                                                if (($queja['isanswered'] == 0) && ($queja['isoverdue'] == 1)) {
-                                                                                                    echo 'No atendido' . ' ';
-                                                                                                }
-                            ?>" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="asignada_a">Asignada a</label>
-                            <input type="text" class="form-control" name="asignada_a" value="<?php echo remove_junk($queja['Asignado_Nombre'] . " " . $queja['Asignado_Apellido']); ?>" readonly>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="ticket_id">Id de Ticket</label>
-                            <input type="text" class="form-control" name="ticket_id" value="<?php echo remove_junk($queja['ticket_id']); ?>" readonly>
+                            <label for="id_cat_quejoso">Quejoso</label>
+                            <select class="form-control" name="id_cat_quejoso">
+                                <option value="">Escoge una opción</option>
+                                <?php foreach ($cat_quejosos as $quejoso): ?>
+                                    <option value="<?php echo $quejoso['id_cat_quejoso']; ?>"><?php echo ucwords($quejoso['nombre'] . " " . $quejoso['paterno'] . " " . $quejoso['materno']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="id_cat_agrav">Agraviado</label>
+                            <select class="form-control" name="id_cat_agrav">
+                                <option value="">Escoge una opción</option>
+                                <?php foreach ($cat_agraviados as $agraviado): ?>
+                                    <option value="<?php echo $agraviado['id_cat_agrav']; ?>"><?php echo ucwords($agraviado['nombre'] . " " . $agraviado['paterno'] . " " . $agraviado['materno']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="id_user_asignado">Se asigna a</label>
+                            <select class="form-control" name="id_user_asignado">
+                                <option value="">Escoge una opción</option>
+                                <?php foreach ($asigna_a as $asigna): ?>
+                                    <option value="<?php echo $asigna['id_det_usuario']; ?>"><?php echo ucwords($asigna['nombre']." ".$asigna['apellidos']); ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="id_area_asignada">Área a la que se asigna</label>
+                            <select class="form-control" name="id_area_asignada">
+                                <option value="">Escoge una opción</option>
+                                <?php foreach ($area as $a): ?>
+                                    <option value="<?php echo $a['id_area']; ?>"><?php echo ucwords($a['nombre_area']); ?></option>
+                                <?php endforeach; ?>                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="id_estatus_queja">Estatus de Queja</label>
+                            <select class="form-control" name="id_estatus_queja">
+                                <option value="">Escoge una opción</option>
+                                <?php foreach ($cat_estatus_queja as $estatus): ?>
+                                    <option value="<?php echo $estatus['id_cat_est_queja']; ?>"><?php echo ucwords($estatus['descripcion']); ?></option>
+                                <?php endforeach; ?>                                
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">                    
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="dom_calle">Calle</label>
+                            <input type="text" class="form-control" name="dom_calle" placeholder="Calle" required>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="dom_numero">Núm. ext/int</label>
+                            <input type="text" class="form-control" name="dom_numero"  required>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="dom_colonia">Colonia</label>
+                            <input type="text" class="form-control" name="dom_colonia" placeholder="Colonia" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="id_cat_mun">Municipio</label>
+                            <select class="form-control" name="id_cat_mun">
+                                <option value="">Escoge una opción</option>
+                                <?php foreach ($cat_municipios as $id_cat_municipio): ?>
+                                    <option value="<?php echo $id_cat_municipio['id_cat_mun']; ?>"><?php echo ucwords($id_cat_municipio['descripcion']); ?></option>
+                                <?php endforeach; ?>                                
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="adjunto">Archivo adjunto (si es necesario)</label>
+                            <input type="file" accept="application/pdf" class="form-control" name="adjunto"
+                                id="adjunto">
+                        </div>
+                    </div>                   
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="descripcion_hechos">Descripción de los hechos</label>
+                            <textarea class="form-control" name="descripcion_hechos" id="descripcion_hechos" cols="30" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="observaciones">Notas Internas</label>
+                            <textarea class="form-control" name="observaciones" id="observaciones" cols="30" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group clearfix">
                     <a href="quejas.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Regresar
                     </a>
-                    <button type="submit" name="add_queja" class="btn btn-primary" onclick="return confirm('Tu queja será guardada, verifica el folio generado para asignarlo de manera correcta a su expediente. Da clic en Aceptar para continuar.');">Guardar</button>
+                    <button style="background: #300285; border-color:#300285;" type="submit" name="add_queja" class="btn btn-primary"
+                        onclick="return confirm('La queja será guardada. Verifica el folio generado por el sistema para que lo asignes de manera correcta a su expediente. Da clic en Aceptar para continuar.');">Guardar</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
 <?php include_once('layouts/footer.php'); ?>

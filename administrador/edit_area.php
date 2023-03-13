@@ -5,7 +5,7 @@ require_once('includes/load.php');
 page_require_level(1);
 ?>
 <?php
-$e_area = find_by_id('area', (int)$_GET['id']);
+$e_area = find_by_id('area', (int)$_GET['id'], 'id_area');
 if (!$e_area) {
     $session->msg("d", "id del área no encontrado.");
     redirect('areas.php');
@@ -23,20 +23,20 @@ if (isset($_POST['update'])) {
 
         $query  = "UPDATE area SET ";
         $query .= "nombre_area='{$name}', abreviatura='{$abreviacion}',estatus_area='{$estatus}'";
-        $query .= "WHERE ID='{$db->escape($e_area['id'])}'";
+        $query .= "WHERE id_area='{$db->escape($e_area['id_area'])}'";
         $result = $db->query($query);
         if ($result && $db->affected_rows() === 1) {
             //sucess
             $session->msg('s', "Área ha actualizada! ");
-            redirect('edit_area.php?id=' . (int)$e_area['id'], false);
+            redirect('edit_area.php?id=' . (int)$e_area['id_area'], false);
         } else {
             //failed
             $session->msg('d', 'Lamentablemente no se ha actualizado el área!');
-            redirect('edit_area.php?id=' . (int)$e_area['id'], false);
+            redirect('edit_area.php?id=' . (int)$e_area['id_area'], false);
         }
     } else {
         $session->msg("d", $errors);
-        redirect('edit_area.php?id=' . (int)$e_area['id'], false);
+        redirect('edit_area.php?id=' . (int)$e_area['id_area'], false);
     }
 }
 ?>
@@ -46,14 +46,14 @@ if (isset($_POST['update'])) {
         <h3>Editar Área</h3>
     </div>
     <?php echo display_msg($msg); ?>
-    <form method="post" action="edit_area.php?id=<?php echo (int)$e_area['id']; ?>" class="clearfix">
+    <form method="post" action="edit_area.php?id=<?php echo (int)$e_area['id_area']; ?>" class="clearfix">
         <div class="form-group">
             <label for="area-name" class="control-label">Nombre del área</label>
             <input type="name" class="form-control" name="area-name" value="<?php echo ucwords($e_area['nombre_area']); ?>">
             <label for="abreviacion" class="control-label">Abreviación del área</label>
             <input type="name" class="form-control" name="abreviacion" value="<?php echo ucwords($e_area['abreviatura']); ?>">
         </div>
-        <?php if ($e_area['id'] != '1'): ?>
+        <?php if ($e_area['id_area'] != '1'): ?>
             <div class="form-group">
                 <label for="estatus">Estatus Área</label>
                 <select class="form-control" name="estatus">

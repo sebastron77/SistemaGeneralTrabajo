@@ -4,9 +4,7 @@ $page_title = 'Datos trabajadores';
 require_once('includes/load.php');
 ?>
 <?php
-// page_require_level(2);
 $all_detalles = find_all_trabajadores();
-//$all_detalles = find_all_detalles_busqueda($_POST['consulta']);
 $user = current_user();
 $nivel = $user['user_level'];
 
@@ -16,7 +14,6 @@ $busca_area = area_usuario($id_usuario);
 $otro = $busca_area['nivel_grupo'];
 
 $nivel_user = $user['user_level'];
-//@$level = find_user_level('users', (int)$_GET['id']);
 
 if ($nivel_user > 2 && $nivel_user < 7):
     redirect('home.php');
@@ -41,29 +38,25 @@ endif;
           <span class="glyphicon glyphicon-th"></span>
           <span>Lista de Trabajadores de la CEDH</span>
         </strong>
-        <?php if ($otro == 1) : ?>
+        <?php if ($otro == 1 || $nivel_user == 1) : ?>
           <a href="add_detalle_usuario.php" class="btn btn-info pull-right">Agregar trabajador</a>
         <?php endif ?>
       </div>
 
       <div class="panel-body">
-        <table class="datatable table table-bordered table-striped">
+        <table class="datatable table table-dark table-bordered table-striped">
           <thead>
-            <tr style="height: 10px;" class="info">
-              <th style="width: 5%;">ID Trabajador</th>
+            <tr style="height: 10px;" class="table-info">
+              <th style="width: 1%;">#</th>
               <!--SE PUEDE AGREGAR UN LINK QUE TE LLEVE A EDITAR EL USUARIO, COMO EN EL PANEL DE CONTROL EN ULTIMAS ASIGNACIONES-->
               <th style="width: 10%;">Nombre(s)</th>
-              <th style="width: 11%;">Apellidos</th>
-              <!-- <th>Sexo</th>
-              <th>CURP</th>
-              <th>RFC</th> -->
-              <th style="width: 15%;">Correo</th>
-              <th style="width: 5%;">Tel. casa</th>
+              <th style="width: 15%;">Apellidos</th>
+              <th style="width: 5%;">Correo</th>
               <th style="width: 5%;">Celular</th>
               <th style="width: 17%;">Área y Cargo</th>
-              <th style="width: 3%;">Estatus</th>
-              <?php if ($otro == 1) : ?>
-                <th style="width: 12%;" class="text-center">Acciones</th>
+              <th style="width: 1%;">Estatus</th>
+              <?php if ($otro == 1 || $nivel_user == 1) : ?>
+                <th style="width: 5%;" class="text-center">Acciones</th>
               <?php endif ?>
             </tr>
           </thead>
@@ -73,11 +66,7 @@ endif;
                 <td><?php echo remove_junk(ucwords($a_detalle['detalleID'])) ?></td>
                 <td><?php echo remove_junk(ucwords($a_detalle['nombre'])) ?></td>
                 <td><?php echo remove_junk(ucwords($a_detalle['apellidos'])) ?></td>
-                <!-- <td><?php echo remove_junk(ucwords($a_detalle['sexo'])) ?></td>
-                <td><?php echo remove_junk(ucwords($a_detalle['curp'])) ?></td>
-                <td><?php echo remove_junk(ucwords($a_detalle['rfc'])) ?></td> -->
                 <td><?php echo remove_junk($a_detalle['correo']) ?></td>
-                <td><?php echo remove_junk(ucwords($a_detalle['telefono_casa'])) ?></td>
                 <td><?php echo remove_junk(ucwords($a_detalle['telefono_celular'])) ?></td>
                 <td><?php echo remove_junk(ucwords($a_detalle['nombre_cargo'])) ?> - <?php echo remove_junk(ucwords($a_detalle['nombre_area'])) ?></td>
                 <td class="text-center">
@@ -87,7 +76,7 @@ endif;
                     <span class="label label-danger"><?php echo "Inactivo"; ?></span>
                   <?php endif; ?>
                 </td>
-                <?php if ($otro == 1) : ?>
+                <?php if ($otro == 1 || $nivel_user == 1) : ?>
                   <td class="text-center">
                     <div class="btn-group">
                       <a href="ver_info_detalle.php?id=<?php echo (int)$a_detalle['detalleID']; ?>" class="btn btn-md btn-info" data-toggle="tooltip" title="Ver información">
@@ -103,9 +92,9 @@ endif;
                             <span class="glyphicon glyphicon-ban-circle"></span>
                           </a>
                         <?php endif; ?>
-                        <a href="delete_detalle_usuario.php?id=<?php echo (int)$a_detalle['detalleID']; ?>" class="btn btn-delete btn-md" title="Eliminar" data-toggle="tooltip" onclick="return confirm('¿Seguro que deseas eliminar este trabajador? También se eliminarán su usuario, asignaciones y resguardos.');">
+                        <!-- <a href="delete_detalle_usuario.php?id=<?php echo (int)$a_detalle['detalleID']; ?>" class="btn btn-delete btn-md" title="Eliminar" data-toggle="tooltip" onclick="return confirm('¿Seguro que deseas eliminar este trabajador? También se eliminarán su usuario, asignaciones y resguardos.');">
                           <span class="glyphicon glyphicon-trash"></span>
-                        </a>
+                        </a> -->
                       <?php endif; ?>
                     </div>
                   </td>

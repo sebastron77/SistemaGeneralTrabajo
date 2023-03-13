@@ -58,9 +58,9 @@ if ($nivel == 7) {
             </div>
 
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
+                <table class="table table-dark table-bordered table-striped">
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th class="text-center" style="width: 1%;">Folio</th>
                             <th class="text-center" style="width: 4%;">Función</th>
                             <th class="text-center" style="width: 3%;">No. Queja</th>
@@ -80,9 +80,9 @@ if ($nivel == 7) {
                         </tr>
                     </tbody>
                 </table>
-                <table class="table table-bordered table-striped">
+                <table class="table table-dark table-bordered table-striped">
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th class="text-center" style="width: 3%;">Escolaridad</th>
                             <th class="text-center" style="width: 10%;">Presuntos Hechos Violatorios</th>
                             <th class="text-center" style="width: 7%;">Autoridad Responsable</th>
@@ -102,9 +102,9 @@ if ($nivel == 7) {
 
                     </tbody>
                 </table>
-                <table class="table table-bordered table-striped">
+                <table class="table table-dark table-bordered table-striped">
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th class="text-center" style="width: 4%;">Grupo Vulnerable</th>
                             <th class="text-center" style="width: 2%">Fecha de Intervención</th>
                             <?php if ($a_ficha['protocolo_estambul'] != '') : ?>

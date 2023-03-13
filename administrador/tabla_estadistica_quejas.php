@@ -236,14 +236,14 @@ $total_visuruapan = count_by_visuruapan('quejas');
                 <!-- <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a> -->
             </div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
+                <table class="table table-dark table-bordered table-striped">
                     <a href="estadistica_quejas_autoridadR.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
                     </a>
                     <!-- <a href="javascript:abrir()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a> -->
                     <br><br>
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th class="text-center" style="width: 40%;">Autoridad Responsable</th>
                             <th class="text-center" style="width: 1%;">Cantidad</th>
                         </tr>
@@ -1052,14 +1052,14 @@ $total_visuruapan = count_by_visuruapan('quejas');
                 <!-- <a href="add_capacitacion.php" class="btn btn-info pull-right">Agregar capacitación</a> -->
             </div>
             <div class="panel-body">
-                <table class="table table-bordered table-striped">
+                <table class="table table-dark table-bordered table-striped">
                     <a href="estadistica_quejas_autoridadR2.php" class="btn btn-md btn-success" data-toggle="tooltip" title="Regresar">
                         Ver en gráfica
                     </a>
                     <!-- <a href="javascript:abrir()" class="btn btn-primary" style="float: right">Gráfica por rango de fechas</a> -->
                     <br><br>
                     <thead>
-                        <tr style="height: 10px;" class="info">
+                        <tr style="height: 10px;" class="table-info">
                             <th class="text-center" style="width: 40%;">Autoridad Responsable</th>
                             <th class="text-center" style="width: 1%;">Cantidad</th>
                         </tr>
